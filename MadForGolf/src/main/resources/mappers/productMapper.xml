@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.madforgolf.mapper.ProductMapper">
+
+
+	<!-- 글쓰기 -->
+	<insert id="create">
+	   insert into mfg_products (title,writer,content) 
+	   values(#{prod_num},#{seller_id},#{detail})	
+	</insert>
+
+	
+	<!-- 상품 목록 조회(all)-->
+	<select id="listAll" resultType="ProductVO">
+		select * from mfg_products
+		where category = #{category}
+	</select>
+	
+	<!-- 상품 목록 조회(성별)-->
+	<select id="listAll2" resultType="ProductVO">
+		select * from mfg_products
+		where category = #{category}
+		and gender = #{gender}
+	</select>
+
+	<!-- 상품 등록 -->
+	<insert id="insert">
+		insert into mfg_products (seller_id, prod_name, prod_img, price, detail, `condition`, category, gender)
+		values (#{seller_id}, #{prod_name}, #{prod_img}, #{price}, #{detail}, #{condition}, #{category}, #{gender})
+	</insert>
+	
+	<resultMap type="com.madforgolf.domain.ProductVO" id="vo">
+		<result property="content" column="content"/>
+	</resultMap>
+	
+	<select id="read" resultType="ProductVO">
+		select * from mfg_products 
+		where prod_num = #{prod_num}
+	</select>
+	
+	<update id="updateReadCnt">
+		update mfg_products 
+		set viewcnt=viewcnt+1 
+		where prod_num = #{prod_num}	
+	</update>
+	
+	<update id="updateBoard">
+	  update mfg_products 
+	  set title=#{title},writer=#{writer},content=#{content} 
+	  where prod_num=#{prod_num}	   
+	</update>
+	
+	<delete id="remove">
+		delete from mfg_products where prod_num=#{prod_num}	
+	</delete>
+	
+	<select id="listPage" resultType="ProductVO">
+	  select * from mfg_products 
+	  order by prod_num desc
+	  limit #{page},10
+	</select>
+	
+	<select id="listPage2" resultType="ProductVO">
+	  select * from mfg_products 
+	  order by prod_num desc 
+	  limit #{page},#{pageSize}
+	</select>
+	
+	<select id="listPage3" resultType="ProductVO">
+	  select * from mfg_products 
+	  order by prod_num desc
+	  limit #{pageStart},#{perPageNum}
+	</select>
+	
+	
+	
+	
+	
+
+</mapper>

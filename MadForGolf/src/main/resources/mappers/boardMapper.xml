@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.madforgolf.mapper.BoardMapper">
+
+
+	<!-- 글내용 -->
+	<select id="getBoard" resultType="com.madforgolf.domain.BoardVO">		
+		select b.board_num, b.board_category, b.user_id, m.user_name, b.title, b.content, b.content_img, b.content_file, b.write_date, b.readcount
+		from mfg_board b join mfg_member m
+		on b.user_id = m.user_id
+		where b.board_num = #{board_num};
+	</select>
+	
+	<!-- 글수정 -->	 
+	<update id="updateBoard">
+	  update mfg_board 
+	  set board_category=#{board_category}, title=#{title},content=#{content},content_img=#{content_img}  
+	  where board_num=#{board_num}	   
+	</update>
+	
+	<!-- 글 조회수 1증가 -->
+	<update id="updateReadCount">
+		update mfg_board
+		set readcount = readcount+1
+		where board_num = #{board_num}
+	</update>
+	
+	<!-- 글삭제 -->
+	<delete id="deleteBoard">
+		delete from mfg_board
+		where board_num=#{board_num}
+	</delete>
+	
+	
+	<insert id="boardWrite">
+		insert into mfg_board(board_category,user_id,title,content) 
+		values(#{board_category},#{user_id},#{title},#{content})
+	</insert>
+
+
+
+	<select id="listBoardAll" resultType="BoardVO" resultMap="vo">
+		select * from mfg_board 
+		where board_num &gt; 0 
+		order by board_num desc
+	</select>
+	
+	
+	<!-- content가 TEXT datetype일 때 아래와 같이 명시 -->
+	<resultMap type="com.madforgolf.domain.BoardVO" id="vo">
+		<result property="content" column="content"/>
+	</resultMap>
+	
+                                
+		
+	<select id="listPage" resultType="BoardVO">
+	  select * from mfg_board
+	  order by board_num desc, write_date desc 
+	  limit #{page},10
+	</select>
+	
+	
+	<select id="listPage2" resultType="BoardVO">
+		select * from mfg_board 
+		order by board_num desc, write_date desc 
+		limit #{page},#{pageSize}
+	</select>
+	
+	
+	
+	<select id="listPage3" resultType="BoardVO">
+		select * from mfg_board 
+		order by board_num desc, write_date desc 
+		limit #{pageStart},#{perPageNum}
+	</select>
+
+</mapper>

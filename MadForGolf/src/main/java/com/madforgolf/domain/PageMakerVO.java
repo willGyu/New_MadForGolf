@@ -1,8 +1,14 @@
 package com.madforgolf.domain;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.madforgolf.domain.PageVO;
 
 public class PageMakerVO {
+	
+	private static final Logger log = LoggerFactory.getLogger(PageMakerVO.class);
+	
 	// 페이징 처리에 관한 모든 동작 관리( 개수 출력 + 하단 페이징 블럭)
 	
 	private int totalCnt;	// 총 글의 수
@@ -28,7 +34,7 @@ public class PageMakerVO {
 	}
 	
 	public void calcData() {
-		System.out.println("페이징 처리 필요값 계산하기");
+		log.info("페이징 처리 필요값 계산하기");
 		
 		endPage = (int)Math.ceil(vo.getPage()/(double)displayPageNum) * displayPageNum;
 		
@@ -47,7 +53,7 @@ public class PageMakerVO {
 		// 다음
 		next = ((endPage * vo.getPerPageNum()) >= totalCnt)?false:true;
 		
-		System.out.println("페이징 처리 필요값 계산하기 완료");
+		log.info("페이징 처리 필요값 계산하기 완료");
 	}
 	
 	public int getTotalCnt() {

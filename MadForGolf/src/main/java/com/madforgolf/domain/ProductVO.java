@@ -1,5 +1,6 @@
 package com.madforgolf.domain;
 
+import java.sql.Date;
 
 public class ProductVO {
 	private int prod_num;
@@ -12,6 +13,7 @@ public class ProductVO {
 	private String category;
 	private int gender;
 	private int like_count;
+	private Date prod_date;
 	
 	public int getProd_num() {
 		return prod_num;
@@ -73,13 +75,20 @@ public class ProductVO {
 	public void setLike_count(int like_count) {
 		this.like_count = like_count;
 	}
+	public Date getProd_date() {
+		return prod_date;
+	}
+	public void setProd_date(Date prod_date) {
+		this.prod_date = prod_date;
+	}
 	
 	@Override
 	public String toString() {
 		return "ProductVO [prod_num=" + prod_num + ", seller_id=" + seller_id + ", prod_name=" + prod_name
 				+ ", prod_img=" + prod_img + ", price=" + price + ", detail=" + detail + ", condition=" + condition
-				+ ", category=" + category + ", gender=" + gender + ", like_count=" + like_count + "]";
+				+ ", category=" + category + ", gender=" + gender + ", like_count=" + like_count + ", prod_date="
+				+ prod_date + "]";
 	}
-	
+
 	
 }

@@ -1,6 +1,7 @@
 package com.madforgolf.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,13 +22,36 @@ public class ProductServiceImpl implements ProductService {
 	@Autowired
 	private ProductDAO dao;
 	
+	
+	
 	@Override
-	public List<ProductVO> getProductListAll(ProductVO vo) throws Exception {
+	public List<ProductVO> getProductListAll(ProductVO vo, PageVO vo2) throws Exception {
 		log.info("getProductListAll() 호출");
 
-		List<ProductVO> productList = dao.listAll(vo);
+		List<ProductVO> productList = dao.listAll(vo, vo2);
 
 		return productList;
+	}
+	
+	@Override
+	public List<ProductVO> getProductListAll2(ProductVO vo, PageVO vo2) throws Exception {
+		log.info("getProductListAll2() 호출");
+		
+		List<ProductVO> productList = dao.listAll2(vo, vo2);
+		
+		return productList;
+	}
+	
+	@Override
+	public Integer getTotalCnt(ProductVO vo) throws Exception {
+		return dao.getTotalCnt(vo);
+	}
+
+
+	
+	@Override
+	public ProductVO productDetail(ProductVO vo) throws Exception {
+		return dao.getProductDetail(vo);
 	}
 	
 	@Override

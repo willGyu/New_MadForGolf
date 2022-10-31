@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
     <!-- JSTL사용  -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
+<%-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -20,180 +20,368 @@
 
     <!-- Core Stylesheet -->
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/style.css">
-  
+   --%>
         <style>
-                #topMenu {           
-                        height: 30px; 
-                        width: 1100px; 
-                        border: solid 6px green;
-                }
-                #topMenu .women{
-                	margin-bottom: 0px;
-                }
-                #topMenu ul li {                    
-                        list-style: none;          
-                        color: white;              
-                        background-color: #2d2d2d;  
-                        float: left;               
-                        line-height: 30px;          
-                        vertical-align: middle;     
-                        text-align: center;         
-                }
-                #topMenu .menuLink {                             
-                        text-decoration:none;                    
-                        color: white;                           
-                        display: block;                           
-                        width: 150px;                             
-                        font-size: 12px;                           
-                        font-weight: bold;                         
-                        font-family: "Trebuchet MS", Dotum, Arial; 
-                }
-                #topMenu .menuLink:hover {            
-                        color: red;                  
-                        background-color: #4d4d4d;    
-                }
-        </style>
+#topMenu {
+	height: 30px;
+	width: 1100px;
+}
 
-</head>
+#topMenu .women {
+	margin-bottom: 0px;
+}
 
-<body>
-    <!-- Preloader -->
-    <div class="preloader d-flex align-items-center justify-content-center">
-        <div class="preloader-circle"></div>
-        <div class="preloader-img">
-            <img src="${pageContext.request.contextPath }/resources/img/core-img/leaf.png" alt="">
-        </div>
-    </div>
+#topMenu ul li {
+	list-style: none;
+	color: #FBF2CF;
+	background-color: #C6EBC5;
+	float: left;
+	line-height: 30px;
+	vertical-align: middle;
+	text-align: center;
+}
 
-    <!-- ##### Header Area Start ##### -->
-    <header class="header-area">
+#topMenu .menuLink {
+	text-decoration: none;
+	color: white;
+	display: block;
+	width: 150px;
+	font-size: 16px;
+	font-weight: bold;
+	font-family: "Trebuchet MS", Dotum, Arial;
+}
 
-        <!-- ***** Top Header Area ***** -->
-        <div class="top-header-area">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="top-header-content d-flex align-items-center justify-content-between">
-                            <!-- Top Header Content -->
-                            <div class="top-header-meta">
-                                <a href="#" data-toggle="tooltip" data-placement="bottom" title="infodeercreative@gmail.com"><i class="fa fa-envelope-o" aria-hidden="true"></i> <span>Email: infodeercreative@gmail.com</span></a>
-                                <a href="#" data-toggle="tooltip" data-placement="bottom" title="+1 234 122 122"><i class="fa fa-phone" aria-hidden="true"></i> <span>Call Us: +1 234 122 122</span></a>
-                            </div>
+#topMenu .menuLink1 {
+	text-decoration: none;
+	color: white;
+	display: block;
+	width: 150px;
+	font-size: 16px;
+	font-weight: bold;
+	font-family: "Trebuchet MS", Dotum, Arial;
+	background-color: #A1C298;
+}
 
-                            <!-- Top Header Content -->
-                            <div class="top-header-meta d-flex">
-                                <!-- Language Dropdown -->
-                                <div class="language-dropdown">
-                                    <div class="dropdown">
-                                        <button class="btn btn-secondary dropdown-toggle mr-30" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Language</button>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" href="#">USA</a>
-                                            <a class="dropdown-item" href="#">UK</a>
-                                            <a class="dropdown-item" href="#">Bangla</a>
-                                            <a class="dropdown-item" href="#">Hindi</a>
-                                            <a class="dropdown-item" href="#">Spanish</a>
-                                            <a class="dropdown-item" href="#">Latin</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Login -->
-                                <div class="login">
-                                    <a href="#"><i class="fa fa-user" aria-hidden="true"></i> <span>Login</span></a>
-                                </div>
-                                <!-- Cart -->
-                                <div class="cart">
-                                    <a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i> <span>Cart <span class="cart-quantity">(1)</span></span></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+#topMenu .menuLink:hover {
+	color: #FBF2CF;
+	background-color: #F8C4B4;
+}
 
-        <!-- ***** Navbar Area ***** -->
-        <div class="alazea-main-menu">
-            <div class="classy-nav-container breakpoint-off">
-                <div class="container">
-                    <!-- Menu -->
-                    <nav class="classy-navbar justify-content-between" id="alazeaNav">
+/* .active2 {
+	color: red !important;
+}
+ */
+/*=======최신순 인기순 마우스오버=================  */
+.date_like:hover {
+	color:#F8C4B4;
+  font-weight: bolder;
+  cursor: pointer;
+}
+/*=======최신순 인기순 마우스오버=================  */
 
-                        <!-- Nav Brand -->
-                        <a href="index.html" class="nav-brand"><img src="${pageContext.request.contextPath }/resources/img/core-img/logo.png" alt=""></a>
+/*===============상품올리기 버튼========================  */
+@import url(https://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700);
 
-                        <!-- Navbar Toggler -->
-                        <div class="classy-navbar-toggler">
-                            <span class="navbarToggler"><span></span><span></span><span></span></span>
-                        </div>
+/*
+.fonts {
+  font-family: 'Josefin Slab', serif;
+}
+*/
 
-                        <!-- Menu -->
-                        <div class="classy-menu">
+body {
+  font-family: 'Josefin Slab', serif;
+  font-size: 20px;
+  line-height: 24px;
+  color: #333;
+  background: #C6EBC5;
+  overflow-y: scroll;
+}
 
-                            <!-- Close Button -->
-                            <div class="classycloseIcon">
-                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
-                            </div>
+p {
+  margin-bottom: 0.5em;
+}
 
-                            <!-- Navbar Start -->
-                            <div class="classynav">
-                                <ul>
-                                    <li><a href="index.html">Home</a></li>
-                                    <li><a href="about.html">About</a></li>
-                                    <li><a href="#">Pages</a>
-                                        <ul class="dropdown">
-                                            <li><a href="${pageContext.request.contextPath }/product/listAll?category=Driver">Driver</a></li>
-                                            <li><a href="${pageContext.request.contextPath }/product/listAll?category=Iron&gender=2">Iron</a></li>
-                                            <li><a href="${pageContext.request.contextPath }/product/listAll?category=Util">Util</a>
-<!--                                                     <li><a href="shop.html">Shop</a></li> -->
-<!--                                                     <li><a href="shop-details.html">Shop Details</a></li> -->
-<!--                                                     <li><a href="cart.html">Shopping Cart</a></li> -->
-<!--                                                     <li><a href="checkout.html">Checkout</a></li> -->
-<!--                                                 </ul> -->
-                                            </li>
-                                            <li><a href="portfolio.html">Portfolio</a>
-                                                <ul class="dropdown">
-                                                    <li><a href="portfolio.html">Portfolio</a></li>
-                                                    <li><a href="single-portfolio.html">Portfolio Details</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="blog.html">Blog</a>
-                                                <ul class="dropdown">
-                                                    <li><a href="blog.html">Blog</a></li>
-                                                    <li><a href="single-post.html">Blog Details</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="contact.html">Contact</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="shop.html">Shop</a></li>
-                                    <li><a href="portfolio.html">Portfolio</a></li>
-                                    <li><a href="contact.html">Contact</a></li>
-                                </ul>
+a,
+a:visited {
+  text-decoration: none;
+  color: #F8C4B4;
+}
 
-                                <!-- Search Icon -->
-                                <div id="searchIcon">
-                                    <i class="fa fa-search" aria-hidden="true"></i>
-                                </div>
+.clear {
+  clear: both;
+}
 
-                            </div>
-                            <!-- Navbar End -->
-                        </div>
-                    </nav>
+.pageTitle {
+  font-size: 2em;
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1em;
+  color: #C6EBC5;
+}
 
-                    <!-- Search Form -->
-                    <div class="search-form">
-                        <form action="#" method="get">
-                            <input type="search" name="search" id="search" placeholder="Type keywords &amp; press enter...">
-                            <button type="submit" class="d-none"></button>
-                        </form>
-                        <!-- Close Icon -->
-                        <div class="closeIcon"><i class="fa fa-times" aria-hidden="true"></i></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-    <!-- ##### Header Area End ##### -->
+.pageSubTitle {
+  margin-bottom: 0.5em;
+  font-size: 1.3em;
+  font-weight: 700;
+  line-height: 1em;
+  color: #222;
+}
+
+.articleTitle {
+  font-size: 1.15em;
+  font-weight: 700;
+  line-height: 1em;
+  color: #222;
+}
+
+.wrapper {
+  width: 600px;
+  margin: 20px auto;
+}
+
+.container {
+  padding-top: 1em;
+  margin-top: 1em;
+  border-top: 
+    solid
+    1px
+    #CCC;
+}
+
+a.button {
+  display: block;
+  position: relative;
+  float: left;
+  width: 120px;
+  padding: 0;
+  margin: 10px 20px 10px 0;
+  font-weight: 600;
+  text-align: center;
+  line-height: 50px;
+  color: #FFF;
+  border-radius: 5px;
+  transition: all 0.2s ;
+}
+
+.btnBlueGreen {
+  background: #C6EBC5;
+}
+
+.btnLightBlue {
+  background: #5DC8CD;
+}
+
+.btnOrange {
+  background: #FFAA40;
+}
+
+.btnPurple {
+  background: #A74982;
+}
+
+/* FADE */
+.btnFade.btnBlueGreen:hover {
+color:white;
+  background: #F8C4B4;
+  font-weight: bolder;
+  cursor: pointer;
+}
+
+.btnFade.btnLightBlue:hover {
+  background: #01939A;
+}
+
+.btnFade.btnOrange:hover {
+  background: #FF8E00;
+}
+
+.btnFade.btnPurple:hover {
+  background: #6D184B;
+}
+
+/* 3D */
+.btnBlueGreen.btnPush {
+  box-shadow: 0px 5px 0px 0px #007144;
+}
+
+.btnLightBlue.btnPush {
+  box-shadow: 0px 5px 0px 0px #1E8185;
+}
+
+.btnOrange.btnPush {
+  box-shadow: 0px 5px 0px 0px #A66615;
+}
+
+.btnPurple.btnPush {
+  box-shadow: 0px 5px 0px 0px #6D184B;
+}
+
+.btnPush:hover {
+  margin-top: 15px;
+  margin-bottom: 5px;
+}
+
+.btnBlueGreen.btnPush:hover {
+  box-shadow: 0px 0px 0px 0px #007144;
+}
+
+.btnLightBlue.btnPush:hover {
+  box-shadow: 0px 0px 0px 0px #1E8185;
+}
+
+.btnOrange.btnPush:hover {
+  box-shadow: 0px 0px 0px 0px #A66615;
+}
+
+.btnPurple.btnPush:hover {
+  box-shadow: 0px 0px 0px 0px #6D184B;
+}
+
+/* BORDER */
+.btnBlueGreen.btnBorder {
+  box-shadow: 0px 0px 0px 0px #C6EBC5;
+}
+
+.btnBlueGreen.btnBorder:hover {
+  box-shadow: 0px 0px 0px 5px #F8C4B4;
+}
+
+.btnLightBlue.btnBorder {
+  box-shadow: 0px 0px 0px 0px #01939A;
+}
+
+.btnLightBlue.btnBorder:hover {
+  box-shadow: 0px 0px 0px 5px #01939A;
+}
+
+.btnOrange.btnBorder {
+  box-shadow: 0px 0px 0px 0px #A66615;
+}
+
+.btnOrange.btnBorder:hover {
+  box-shadow: 0px 0px 0px 5px #A66615;
+}
+
+.btnPurple.btnBorder {
+  box-shadow: 0px 0px 0px 0px #6D184B;
+}
+
+.btnPurple.btnBorder:hover {
+  box-shadow: 0px 0px 0px 5px #6D184B;
+}
+
+/* FLOAT */
+.btnFloat {
+  background: none;
+  box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.5);
+}
+
+.btnFloat:before {
+  content: 'Float';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 120px;
+  height: 50px;
+  border-radius: 5px;
+  transition: all 0.2s ;
+}
+
+.btnBlueGreen.btnFloat:before {
+  background: #F8C4B4;
+}
+
+.btnLightBlue.btnFloat:before {
+  background: #5DC8CD;
+}
+
+.btnOrange.btnFloat:before {
+  background: #FFAA40;
+}
+
+.btnPurple.btnFloat:before {
+  background: #8D336A;
+}
+
+
+.btnFloat:before {
+  box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.4);
+}
+
+.btnFloat:hover:before {
+  
+}
+
+.btnFloat:hover:before {
+  margin-top: -2px;
+  margin-left: 0px;
+  transform: scale(1.1,1.1);
+  -ms-transform: scale(1.1,1.1);
+  -webkit-transform: scale(1.1,1.1);
+  box-shadow: 0px 5px 5px -2px rgba(0, 0, 0, 0.25);
+}
+
+/* SLIDE */
+.btnSlide.btnBlueGreen {
+  background: 0;
+}
+
+.btnSlide .top {
+  position: absolute;
+  top: 0px;
+  left: 0;
+  width: 120px;
+  height: 50px;
+  background: #C6EBC5;
+  z-index: 10;
+  transition: all 0.2s ;
+  border-radius: 5px;
+}
+
+.btnSlide.btnBlueGreen .top {
+  background: #C6EBC5;
+}
+
+.btnSlide.btnLightBlue .top {
+  background: #5DC8CD;
+}
+
+.btnSlide.btnOrange .top {
+  background: #FFAA40;
+}
+
+.btnSlide.btnPurple .top {
+  background: #A74982;
+}
+
+.btnSlide .bottom {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 120px;
+  height: 50px;
+  color: #000;
+  z-index: 5;
+  border-radius: 5px;
+}
+
+.btnSlide:hover .top {
+  top: 40px;
+}
+/*===============상품올리기 버튼========================  */
+
+</style>
+
+<!-- <script type="text/javascript" src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	alert("확인");
+
+	
+});
+</script> -->
+<%@ include file="../include/header.jsp" %>
 
     <!-- ##### Breadcrumb Area Start ##### -->
     <div class="breadcrumb-area">
@@ -202,9 +390,9 @@
             <h2>Shop</h2>
         </div>
 
-        <div class="container">
+        <div class="container" style="margin: auto; width: 100%; ">
             <div class="row">
-                <div class="col-12">
+                <div class="col-12" style="margin: auto; width: 100%; ">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i> Home</a></li>
@@ -217,29 +405,29 @@
     </div>
 	<!-- ##### Breadcrumb Area End ##### -->
 	
-	<!-- 남성용/여성용 성별 구분 상품 카테고리   -->
 
+	<!-- =================================남성용/여성용 성별 구분 상품 카테고리===========================================   -->
 	
-	<div style="border:solid 3px red; text-align: center; margin: auto;">
-	        <nav id="topMenu" style="border: solid 4px blue; margin: auto;">
+	<div style="text-align: center; margin: 0px auto; height: 70px; width: 80%;">
+	        <nav id="topMenu" style="margin: 0px auto;">
                 <ul>
 						<!-- 남성용  -->
-                        <li><a class="menuLink">남성용</a></li>
+                        <li><a class="menuLink1"> Men's </a></li>
                         <li><a class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Driver&gender=1">Driver</a></li>
-                        <li><a class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Driver&gender=1">Iron</a></li>
-                        <li><a class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Driver&gender=1">Util</a></li>
-                        <li><a class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Driver&gender=1">Wedge</a></li>
-                        <li><a class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Driver&gender=1">Putter</a></li>
-                        <li><a class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Driver&gender=1">Etc</a></li>
+                        <li><a class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Iron&gender=1">Iron</a></li>
+                        <li><a class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Utility&gender=1">Utility</a></li>
+                        <li><a class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Wedge&gender=1">Wedge</a></li>
+                        <li><a class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Putter&gender=1">Putter</a></li>
+                        <li><a class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Etc&gender=1">Etc</a></li>
                
                			<!-- 여성용 -->
-               			<li><a class="menuLink">여성용</a></li>
+               			<li><a class="menuLink1"> Women's </a></li>
                         <li><a class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Driver&gender=2">Driver</a></li>
-                        <li><a class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Driver&gender=2">Iron</a></li>
-                        <li><a class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Driver&gender=2">Util</a></li>
-                        <li><a class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Driver&gender=2">Wedge</a></li>
-                        <li><a class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Driver&gender=2">Putter</a></li>
-                        <li><a class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Driver&gender=2">Etc</a></li>
+                        <li><a class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Iron&gender=2">Iron</a></li>
+                        <li><a class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Utility&gender=2">Utility</a></li>
+                        <li><a class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Wedge&gender=2">Wedge</a></li>
+                        <li><a class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Putter&gender=2">Putter</a></li>
+                        <li><a class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Etc&gender=2">Etc</a></li>
                
                
                
@@ -247,675 +435,121 @@
         	</nav>
 
     	</div>
+	<!-- =================================남성용/여성용 성별 구분 상품 카테고리===========================================   -->
 
-<%-- 	
-	<tr>
-		<td>남성용</td>
-		<td><a
-			href="${pageContext.request.contextPath }/product/listAll?category=Driver&gender=1">Driver</a></td>
-		<td><a
-			href="${pageContext.request.contextPath }/product/listAll?category=Iron&gender=1">Iron</a></td>
-		<td><a
-			href="${pageContext.request.contextPath }/product/listAll?category=Util&gender=1">Util</a></td>
-		<td><a
-			href="${pageContext.request.contextPath }/product/listAll?category=Wedge&gender=1">Wedge</a></td>
-		<td><a
-			href="${pageContext.request.contextPath }/product/listAll?category=Putter&gender=1">Putter</a></td>
-		<td><a
-			href="${pageContext.request.contextPath }/product/listAll?category=Etc&gender=1">Etc</a></td>
-	</tr>
-	<br> --%>
-<%-- 	<!-- 남성용  -->
 
-	<!-- 여성용 -->
-	<tr>
-		<td>남성용</td>
-		<td><a
-			href="${pageContext.request.contextPath }/product/listAll?category=Driver&gender=2">Driver</a></td>
-		<td><a
-			href="${pageContext.request.contextPath }/product/listAll?category=Iron&gender=2">Iron</a></td>
-		<td><a
-			href="${pageContext.request.contextPath }/product/listAll?category=Util&gender=2">Util</a></td>
-		<td><a
-			href="${pageContext.request.contextPath }/product/listAll?category=Wedge&gender=2">Wedge</a></td>
-		<td><a
-			href="${pageContext.request.contextPath }/product/listAll?category=Putter&gender=2">Putter</a></td>
-		<td><a
-			href="${pageContext.request.contextPath }/product/listAll?category=Etc&gender=2">Etc</a></td>
-	</tr>
-	<!-- 여성용 --> --%>
-	
-	<!-- 남성용/여성용 성별 구분 상품 카테고리   -->
 	
 	<!-- ##### Shop Area Start ##### -->
-	<section class="shop-page section-padding-0-100">
-        <div class="container">
+	<section class="shop-page section-padding-0-100" style="width: 80%; margin: auto;">
+        <div class="container" style="border: none; margin-top:0px; ">
             <div class="row">
                 <!-- Shop Sorting Data -->
-                <div class="col-12">
-<!--                     <div class="shop-sorting-data d-flex flex-wrap align-items-center justify-content-between"
-                    style="border: solid 5px red;">
-                        Shop Page Count
-                        <div class="shop-page-count">
-                            <p>Showing 1–9 of 72 results</p>
-                        </div>
-                        </div> -->
-                 
-                        <!-- Search by Terms -->
+                <div class="col-12"  style="width: 98%; margin: auto; ">
+
                         
-                        
-                        <div class="search_by_terms">
+                        <div class="search_by_terms" style="float: right;">
 
-								<!-- <select class="custom-select widget-title">
-
-                            <form action="#" method="post" class="form-inline">
-								<input type="button" class="btn alazea-btn w-10" style="width: 100px;" value="상품등록" onclick="location.href='${pageContext.request.contextPath }/product/productInsert'">
-                                <select class="custom-select widget-title">
-
-                                  <option selected>Short by Popularity</option>
-                                  <option value="1">Short by Newest</option>
-                                  <option value="2">Short by Sales</option>
-                                  <option value="3">Short by Ratings</option>
-                                </select> -->
                                 
-                        <div style="border: solid 6px yellow;"><!-- 상품 올리기 div  -->
-						<form role="form" action="/product/regist" method="get">
-
-							<button type="submit" class="btn btn-primary" s>상품올리기</button>
-						</form>
-						</div>
-						
-						<div style="border: solid 5px black;"> <!-- 인기순,최신순 선택바 div  -->
+                        <!-- 인기순,최신순 선택바 div  -->
+						<div style="float: right;"> 
 						<form action="#" method="post" class="form-inline">
-                                <select class="custom-select widget-title">
-                                  <option selected>Show: 9</option>
-                                  <option value="1">12</option>
-                                  <option value="2">18</option>
-                                  <option value="3">24</option>
-                                </select>
+
+                                
+                                <a class="date_like" style="color:#A1C298; font-size: 15px;" href="${pageContext.request.contextPath }/product/listAll?category=${category}&gender=${gender}">최신순</a>
+                 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <a class="date_like" style="color:#A1C298; font-size: 15px;" href="${pageContext.request.contextPath }/product/listLike?category=${category}&gender=${gender}">인기순</a>
+                            
                             </form>
                         </div>    
+                        
+                        
+
                         
                         </div>
                         
                     </div>
                 </div>
             </div>
+            
 
-            <div class="row">
-                <!-- Sidebar Area -->
-<!--                 <div class="col-12 col-md-4 col-lg-3"> -->
-<!--                     <div class="shop-sidebar-area"> -->
-
-<!--                         Shop Widget -->
-<!--                         <div class="shop-widget price mb-50"> -->
-<!--                             <h4 class="widget-title">Prices</h4> -->
-<!--                             <div class="widget-desc"> -->
-<!--                                 <div class="slider-range"> -->
-<!--                                     <div data-min="8" data-max="30" data-unit="$" class="slider-range-price ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-value-min="8" data-value-max="30" data-label-result="Price:"> -->
-<!--                                         <div class="ui-slider-range ui-widget-header ui-corner-all"></div> -->
-<!--                                         <span class="ui-slider-handle ui-state-default ui-corner-all first-handle" tabindex="0"></span> -->
-<!--                                         <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span> -->
-<!--                                     </div> -->
-<!--                                     <div class="range-price">Price: $8 - $30</div> -->
-<!--                                 </div> -->
-<!--                             </div> -->
-<!--                         </div> -->
-
-<!--                         Shop Widget -->
-<!--                         <div class="shop-widget catagory mb-50"> -->
-<!--                             <h4 class="widget-title">Categories</h4> -->
-<!--                             <div class="widget-desc"> -->
-<!--                                 Single Checkbox -->
-<!--                                 <div class="custom-control custom-checkbox d-flex align-items-center mb-2"> -->
-<!--                                     <input type="checkbox" class="custom-control-input" id="customCheck1"> -->
-<!--                                     <label class="custom-control-label" for="customCheck1">All plants <span class="text-muted">(72)</span></label> -->
-<!--                                 </div> -->
-<!--                                 Single Checkbox -->
-<!--                                 <div class="custom-control custom-checkbox d-flex align-items-center mb-2"> -->
-<!--                                     <input type="checkbox" class="custom-control-input" id="customCheck2"> -->
-<!--                                     <label class="custom-control-label" for="customCheck2">Outdoor plants <span class="text-muted">(20)</span></label> -->
-<!--                                 </div> -->
-<!--                                 Single Checkbox -->
-<!--                                 <div class="custom-control custom-checkbox d-flex align-items-center mb-2"> -->
-<!--                                     <input type="checkbox" class="custom-control-input" id="customCheck3"> -->
-<!--                                     <label class="custom-control-label" for="customCheck3">Indoor plants <span class="text-muted">(15)</span></label> -->
-<!--                                 </div> -->
-<!--                                 Single Checkbox -->
-<!--                                 <div class="custom-control custom-checkbox d-flex align-items-center mb-2"> -->
-<!--                                     <input type="checkbox" class="custom-control-input" id="customCheck4"> -->
-<!--                                     <label class="custom-control-label" for="customCheck4">Office Plants <span class="text-muted">(20)</span></label> -->
-<!--                                 </div> -->
-<!--                                 Single Checkbox -->
-<!--                                 <div class="custom-control custom-checkbox d-flex align-items-center mb-2"> -->
-<!--                                     <input type="checkbox" class="custom-control-input" id="customCheck5"> -->
-<!--                                     <label class="custom-control-label" for="customCheck5">Potted <span class="text-muted">(15)</span></label> -->
-<!--                                 </div> -->
-<!--                                 Single Checkbox -->
-<!--                                 <div class="custom-control custom-checkbox d-flex align-items-center mb-2"> -->
-<!--                                     <input type="checkbox" class="custom-control-input" id="customCheck6"> -->
-<!--                                     <label class="custom-control-label" for="customCheck6">Others <span class="text-muted">(2)</span></label> -->
-<!--                                 </div> -->
-<!--                             </div> -->
-<!--                         </div> -->
-
-<!--                         Shop Widget -->
-<!--                         <div class="shop-widget sort-by mb-50"> -->
-<!--                             <h4 class="widget-title">Sort by</h4> -->
-<!--                             <div class="widget-desc"> -->
-<!--                                 Single Checkbox -->
-<!--                                 <div class="custom-control custom-checkbox d-flex align-items-center mb-2"> -->
-<!--                                     <input type="checkbox" class="custom-control-input" id="customCheck7"> -->
-<!--                                     <label class="custom-control-label" for="customCheck7">New arrivals</label> -->
-<!--                                 </div> -->
-<!--                                 Single Checkbox -->
-<!--                                 <div class="custom-control custom-checkbox d-flex align-items-center mb-2"> -->
-<!--                                     <input type="checkbox" class="custom-control-input" id="customCheck8"> -->
-<!--                                     <label class="custom-control-label" for="customCheck8">Alphabetically, A-Z</label> -->
-<!--                                 </div> -->
-<!--                                 Single Checkbox -->
-<!--                                 <div class="custom-control custom-checkbox d-flex align-items-center mb-2"> -->
-<!--                                     <input type="checkbox" class="custom-control-input" id="customCheck9"> -->
-<!--                                     <label class="custom-control-label" for="customCheck9">Alphabetically, Z-A</label> -->
-<!--                                 </div> -->
-<!--                                 Single Checkbox -->
-<!--                                 <div class="custom-control custom-checkbox d-flex align-items-center mb-2"> -->
-<!--                                     <input type="checkbox" class="custom-control-input" id="customCheck10"> -->
-<!--                                     <label class="custom-control-label" for="customCheck10">Price: low to high</label> -->
-<!--                                 </div> -->
-<!--                                 Single Checkbox -->
-<!--                                 <div class="custom-control custom-checkbox d-flex align-items-center"> -->
-<!--                                     <input type="checkbox" class="custom-control-input" id="customCheck11"> -->
-<!--                                     <label class="custom-control-label" for="customCheck11">Price: high to low</label> -->
-<!--                                 </div> -->
-<!--                             </div> -->
-<!--                         </div> -->
-
-<!--                         Shop Widget -->
-<!--                         <div class="shop-widget best-seller mb-50"> -->
-<!--                             <h4 class="widget-title">Best Seller</h4> -->
-<!--                             <div class="widget-desc"> -->
-
-<!--                                 Single Best Seller Products -->
-<!--                                 <div class="single-best-seller-product d-flex align-items-center"> -->
-<!--                                     <div class="product-thumbnail"> -->
-<%--                                         <a href="shop-details.html"><img src="${pageContext.request.contextPath }/resources/img/bg-img/4.jpg" alt=""></a> --%>
-<!--                                     </div> -->
-<!--                                     <div class="product-info"> -->
-<!--                                         <a href="shop-details.html">Cactus Flower</a> -->
-<!--                                         <p>$10.99</p> -->
-<!--                                         <div class="ratings"> -->
-<!--                                             <i class="fa fa-star"></i> -->
-<!--                                             <i class="fa fa-star"></i> -->
-<!--                                             <i class="fa fa-star"></i> -->
-<!--                                             <i class="fa fa-star"></i> -->
-<!--                                             <i class="fa fa-star"></i> -->
-<!--                                         </div> -->
-<!--                                     </div> -->
-<!--                                 </div> -->
-
-<!--                                 Single Best Seller Products -->
-<!--                                 <div class="single-best-seller-product d-flex align-items-center"> -->
-<!--                                     <div class="product-thumbnail"> -->
-<%--                                         <a href="shop-details.html"><img src="${pageContext.request.contextPath }/resources/img/bg-img/5.jpg" alt=""></a> --%>
-<!--                                     </div> -->
-<!--                                     <div class="product-info"> -->
-<!--                                         <a href="shop-details.html">Tulip Flower</a> -->
-<!--                                         <p>$11.99</p> -->
-<!--                                         <div class="ratings"> -->
-<!--                                             <i class="fa fa-star"></i> -->
-<!--                                             <i class="fa fa-star"></i> -->
-<!--                                             <i class="fa fa-star"></i> -->
-<!--                                             <i class="fa fa-star"></i> -->
-<!--                                             <i class="fa fa-star"></i> -->
-<!--                                         </div> -->
-<!--                                     </div> -->
-<!--                                 </div> -->
-
-<!--                                 Single Best Seller Products -->
-<!--                                 <div class="single-best-seller-product d-flex align-items-center"> -->
-<!--                                     <div class="product-thumbnail"> -->
-<%--                                         <a href="shop-details.html"><img src="${pageContext.request.contextPath }/resources/img/bg-img/34.jpg" alt=""></a> --%>
-<!--                                     </div> -->
-<!--                                     <div class="product-info"> -->
-<!--                                         <a href="shop-details.html">Recuerdos Plant</a> -->
-<!--                                         <p>$9.99</p> -->
-<!--                                         <div class="ratings"> -->
-<!--                                             <i class="fa fa-star"></i> -->
-<!--                                             <i class="fa fa-star"></i> -->
-<!--                                             <i class="fa fa-star"></i> -->
-<!--                                             <i class="fa fa-star"></i> -->
-<!--                                             <i class="fa fa-star"></i> -->
-<!--                                         </div> -->
-<!--                                     </div> -->
-<!--                                 </div> -->
-
-<!--                             </div> -->
-<!--                         </div> -->
-<!--                     </div> -->
-<!--                 </div> -->
                 <!-- All Products Area -->
-                <div class="col-12 col-md-8 col-lg-9">
+                <div class="col-12 col-md-8 col-lg-9" style="margin: auto;" id="products">
                     <div class="shop-products-area">
                         <div class="row">
 
-
 							<!-- Single Product Area -->
 							<!-- for문으로 상품 리스트 반복  -->
-
 							<c:forEach var="vo" items="${productList }">
 								<div class="col-12 col-sm-6 col-lg-4">
 									<div class="single-product-area mb-50">
 										<!-- Product Image -->
+
+											<a href="${pageContext.request.contextPath }/product/productDetail?prod_num=${vo.prod_num}"><img src="${pageContext.request.contextPath }/resources/product_img/${vo.prod_img}"></a>
 										<div class="product-img">
-											<a href="${pageContext.request.contextPath }/product/상세페이지">
-											<img src="${pageContext.request.contextPath }/product/${vo.prod_img}"></a>
-												<!-- img태그에 DB이미지 삽입 이렇게 경로 설정 맞나..?   -->
-												<!-- 상품이미지는 productVO에 있음... listAll: pageVO전달, listPage:PageVo전달 우째야할까..? -->
+
 											<!-- Product Tag -->
 											<div class="product-tag">
 												<a href="#">Hot</a>
 											</div>
 											<div class="product-meta d-flex">
-												<a href="#" class="wishlist-btn"><i
-													class="icon_heart_alt"></i></a> <a href="cart.html"
-													class="add-to-cart-btn">Add to cart</a> <a href="#"
-													class="compare-btn"><i class="arrow_left-right_alt"></i></a>
+												<a href="#" class="wishlist-btn"><i class="icon_heart_alt"></i></a>
+												<a href="cart.html" class="add-to-cart-btn">Add to cart</a>
+												<a href="#" class="compare-btn"><i class="arrow_left-right_alt"></i></a>
 											</div>
 										</div>
 										<!-- Product Info -->
 										<div class="product-info mt-15 text-center">
-											<a href="shop-details.html">
+											<a href="${pageContext.request.contextPath }/product/productDetail?prod_num=${vo.prod_num}">
 												<p>${vo.prod_name }</p>
 											</a>
-											<h6>${vo.price }</h6>
+											<h6>${vo.price }원</h6>
 										</div>
 									</div>
 								</div>
 							</c:forEach>
 							<!-- for문으로 상품 리스트 반복  -->
-<%-- 
-							<!-- Single Product Area -->
 
-                            <!-- Single Product Area -->
-                            <div class="col-12 col-sm-6 col-lg-4">
-                                <div class="single-product-area mb-50">
-                                    <!-- Product Image -->
-                                    <div class="product-img">
-                                        <a href="shop-details.html"><img src="${pageContext.request.contextPath }/resources/product_img/driver1.png" alt=""></a>
-                                        <!-- Product Tag -->
-                                        <div class="product-tag">
-                                            <a href="#">Hot</a>
-                                        </div>
-                                        <div class="product-meta d-flex">
-                                            <a href="#" class="wishlist-btn"><i class="icon_heart_alt"></i></a>
-                                            <a href="cart.html" class="add-to-cart-btn">Add to cart</a>
-                                            <a href="#" class="compare-btn"><i class="arrow_left-right_alt"></i></a>
-                                        </div>
-                                    </div>
-                                    <!-- Product Info -->
-                                    <div class="product-info mt-15 text-center">
-                                        <a href="shop-details.html">
-                                            <p>${productList[0].prod_name }</p>
-                                        </a>
-                                        <h6>${productList[0].price }원</h6>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Single Product Area -->
-
-                            <div class="col-12 col-sm-6 col-lg-4">
-                                <div class="single-product-area mb-50">
-                                    <!-- Product Image -->
-                                    <div class="product-img">
-                                        <a href="shop-details.html"><img src="${pageContext.request.contextPath }/resources/img/bg-img/41.png" alt=""></a>
-                                        <div class="product-meta d-flex">
-                                            <a href="#" class="wishlist-btn"><i class="icon_heart_alt"></i></a>
-                                            <a href="cart.html" class="add-to-cart-btn">Add to cart</a>
-                                            <a href="#" class="compare-btn"><i class="arrow_left-right_alt"></i></a>
-                                        </div>
-                                    </div>
-                                    <!-- Product Info -->
-                                    <div class="product-info mt-15 text-center">
-                                        <a href="shop-details.html">
-                                            <p>Cactus Flower</p>
-                                        </a>
-                                        <h6>$10.99</h6>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Single Product Area -->
-                            <div class="col-12 col-sm-6 col-lg-4">
-                                <div class="single-product-area mb-50">
-                                    <!-- Product Image -->
-                                    <div class="product-img">
-                                        <a href="shop-details.html"><img src="${pageContext.request.contextPath }/resources/img/bg-img/42.png" alt=""></a>
-                                        <div class="product-meta d-flex">
-                                            <a href="#" class="wishlist-btn"><i class="icon_heart_alt"></i></a>
-                                            <a href="cart.html" class="add-to-cart-btn">Add to cart</a>
-                                            <a href="#" class="compare-btn"><i class="arrow_left-right_alt"></i></a>
-                                        </div>
-                                    </div>
-                                    <!-- Product Info -->
-                                    <div class="product-info mt-15 text-center">
-                                        <a href="shop-details.html">
-                                            <p>Cactus Flower</p>
-                                        </a>
-                                        <h6>$10.99</h6>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Single Product Area -->
-                            <div class="col-12 col-sm-6 col-lg-4">
-                                <div class="single-product-area mb-50">
-                                    <!-- Product Image -->
-                                    <div class="product-img">
-                                        <a href="shop-details.html"><img src="${pageContext.request.contextPath }/resources/img/bg-img/43.png" alt=""></a>
-                                        <div class="product-meta d-flex">
-                                            <a href="#" class="wishlist-btn"><i class="icon_heart_alt"></i></a>
-                                            <a href="cart.html" class="add-to-cart-btn">Add to cart</a>
-                                            <a href="#" class="compare-btn"><i class="arrow_left-right_alt"></i></a>
-                                        </div>
-                                    </div>
-                                    <!-- Product Info -->
-                                    <div class="product-info mt-15 text-center">
-                                        <a href="shop-details.html">
-                                            <p>Cactus Flower</p>
-                                        </a>
-                                        <h6>$10.99</h6>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Single Product Area -->
-                            <div class="col-12 col-sm-6 col-lg-4">
-                                <div class="single-product-area mb-50">
-                                    <!-- Product Image -->
-                                    <div class="product-img">
-                                        <a href="shop-details.html"><img src="${pageContext.request.contextPath }/resources/img/bg-img/44.png" alt=""></a>
-                                        <div class="product-meta d-flex">
-                                            <a href="#" class="wishlist-btn"><i class="icon_heart_alt"></i></a>
-                                            <a href="cart.html" class="add-to-cart-btn">Add to cart</a>
-                                            <a href="#" class="compare-btn"><i class="arrow_left-right_alt"></i></a>
-                                        </div>
-                                    </div>
-                                    <!-- Product Info -->
-                                    <div class="product-info mt-15 text-center">
-                                        <a href="shop-details.html">
-                                            <p>1</p>
-                                        </a>
-                                        <h6>$10.99</h6>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Single Product Area -->
-                            <div class="col-12 col-sm-6 col-lg-4">
-                                <div class="single-product-area mb-50">
-                                    <!-- Product Image -->
-                                    <div class="product-img">
-                                        <a href="shop-details.html"><img src="${pageContext.request.contextPath }/resources/img/bg-img/45.png" alt=""></a>
-                                        <div class="product-meta d-flex">
-                                            <a href="#" class="wishlist-btn"><i class="icon_heart_alt"></i></a>
-                                            <a href="cart.html" class="add-to-cart-btn">Add to cart</a>
-                                            <a href="#" class="compare-btn"><i class="arrow_left-right_alt"></i></a>
-                                        </div>
-                                    </div>
-                                    <!-- Product Info -->
-                                    <div class="product-info mt-15 text-center">
-                                        <a href="shop-details.html">
-                                            <p>Cactus Flower</p>
-                                        </a>
-                                        <h6>$10.99</h6>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Single Product Area -->
-                            <div class="col-12 col-sm-6 col-lg-4">
-                                <div class="single-product-area mb-50">
-                                    <!-- Product Image -->
-                                    <div class="product-img">
-                                        <a href="shop-details.html"><img src="${pageContext.request.contextPath }/resources/img/bg-img/46.png" alt=""></a>
-                                        <div class="product-meta d-flex">
-                                            <a href="#" class="wishlist-btn"><i class="icon_heart_alt"></i></a>
-                                            <a href="cart.html" class="add-to-cart-btn">Add to cart</a>
-                                            <a href="#" class="compare-btn"><i class="arrow_left-right_alt"></i></a>
-                                        </div>
-                                    </div>
-                                    <!-- Product Info -->
-                                    <div class="product-info mt-15 text-center">
-                                        <a href="shop-details.html">
-                                            <p>Cactus Flower</p>
-                                        </a>
-                                        <h6>$10.99</h6>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Single Product Area -->
-                            <div class="col-12 col-sm-6 col-lg-4">
-                                <div class="single-product-area mb-50">
-                                    <!-- Product Image -->
-                                    <div class="product-img">
-                                        <a href="shop-details.html"><img src="${pageContext.request.contextPath }/resources/img/bg-img/47.png" alt=""></a>
-                                        <!-- Product Tag -->
-                                        <div class="product-tag sale-tag">
-                                            <a href="#">Sale</a>
-                                        </div>
-                                        <div class="product-meta d-flex">
-                                            <a href="#" class="wishlist-btn"><i class="icon_heart_alt"></i></a>
-                                            <a href="cart.html" class="add-to-cart-btn">Add to cart</a>
-                                            <a href="#" class="compare-btn"><i class="arrow_left-right_alt"></i></a>
-                                        </div>
-                                    </div>
-                                    <!-- Product Info -->
-                                    <div class="product-info mt-15 text-center">
-                                        <a href="shop-details.html">
-                                            <p>Cactus Flower</p>
-                                        </a>
-                                        <h6>$10.99</h6>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Single Product Area -->
-                            <div class="col-12 col-sm-6 col-lg-4">
-                                <div class="single-product-area mb-50">
-                                    <!-- Product Image -->
-                                    <div class="product-img">
-                                        <a href="shop-details.html"><img src="${pageContext.request.contextPath }/resources/img/bg-img/48.png" alt=""></a>
-                                        <div class="product-meta d-flex">
-                                            <a href="#" class="wishlist-btn"><i class="icon_heart_alt"></i></a>
-                                            <a href="cart.html" class="add-to-cart-btn">Add to cart</a>
-                                            <a href="#" class="compare-btn"><i class="arrow_left-right_alt"></i></a>
-                                        </div>
-                                    </div>
-                                    <!-- Product Info -->
-                                    <div class="product-info mt-15 text-center">
-                                        <a href="shop-details.html">
-                                            <p>Cactus Flower</p>
-                                        </a>
-                                        <h6>$10.99</h6>
-                                    </div>
-                                </div>
-                            </div>
+                                         <!-- 상품 올리기 div  -->
+                        <div style="float: right; margin-bottom: 60px; width: 100px; margin-left: 950px;">
+<%-- 							<input type="button" title="Button fade blue/green" class="button btnFade btnBlueGreen" value="상품올리기" onclick="location.href='${pageContext.request.contextPath }/product/productInsert'">
+ --%>							    <a title="Button fade blue/green" class="button btnFade btnBlueGreen" onclick="location.href='${pageContext.request.contextPath }/product/productInsert'">상품올리기</a>
+						</div>        
                         </div>
- --%>	
-                    </div>
-        </div>
-<!--===========================페이징 네비바 =====================================================================================  -->
-					<div class="shop-products-area">
+                        
+
+<!-- ======================================== 페이징 네비바 ======================================== -->
 						<!-- Pagination -->
 						<nav aria-label="Page navigation">
-
-
-							<ul class="pagination" style="text-align: center; width: 100%;">
+							<ul class="pagination" style="width: 910px; margin:0px auto;">
 								<c:if test="${pm.prev }">
 									<!-- ${pm.prev }결과가 참(true)일 때 -->
-									<li class="page-item"><a
-										href="listPage?page=${pm.startPage-1 }">&laquo;이전</a></li>
+									<li class="page-item"><a class="page-link" href="listAll?page=${pm.startPage-1 }&category=${category }"><i class="fa fa-angle-left"></i></a></li>
 									<!-- 현재 위치한 페이지 블럭의 첫번째 페이지보다 -1인 페이지로 이동  -->
 								</c:if>
 
-								<c:forEach var="idx" begin="${pm.startPage }"
-									end="${pm.endPage }">
-									<li class="page-item"><a class="page-link"
-										href="listPage?page=1">${pm.vo.page }</a></li>
+								<c:forEach var="idx" begin="${pm.startPage }" end="${pm.endPage }">
+									<li class="page-item" <c:out value="${pm.vo.page == idx?'class=active':'active' }"/> style="text-align: center; margin:0px auto;">
+									<a class="page-link" href="listAll?page=${idx }&category=${category }">${idx }</a></li>
 								</c:forEach>
-
+								
 								<c:if test="${pm.next }">
 									<!-- ${pm.next }결과가 참(true)일 때  -->
-									<li class="page-item"><a
-										href="listPage?page= ${pm.endPage+1 }">다음&raquo;</a></li>
+									<li class="page-item"><a class="page-link" href="listAll?page=${pm.endPage+1 }&category=${category }"><i class="fa fa-angle-right"></i></a></li>
 									<!-- 현재 위치한 페이징 블럭의 마지막 페이지보다 +1인 페이지로 이동  -->
 								</c:if>
 							</ul>
 						</nav>
-					</div>
-<!--===========================페이징 네비바 =====================================================================================  -->
-                </div>
-            </div>
-    </section>
+<!-- ======================================== 페이징 네비바 ======================================== -->
+
+				</div>
+			</div>
+<!-- 		</div> -->
+<!-- 	</div> -->
+</section>
+
     <!-- ##### Shop Area End ##### -->
+<%@ include file="../include/footer.jsp" %>
 
-    <!-- ##### Footer Area Start ##### -->
-    <footer class="footer-area bg-img" style="background-image: url(img/bg-img/3.jpg);">
-        <!-- Main Footer Area -->
-        <div class="main-footer-area">
-            <div class="container">
-                <div class="row">
-
-                    <!-- Single Footer Widget -->
-                    <div class="col-12 col-sm-6 col-lg-3">
-                        <div class="single-footer-widget">
-                            <div class="footer-logo mb-30">
-                                <a href="#"><img src="${pageContext.request.contextPath }/resources/img/core-img/logo.png" alt=""></a>
-                            </div>
-                            <p>Lorem ipsum dolor sit samet, consectetur adipiscing elit. India situs atione mantor</p>
-                            <div class="social-info">
-                                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Single Footer Widget -->
-                    <div class="col-12 col-sm-6 col-lg-3">
-                        <div class="single-footer-widget">
-                            <div class="widget-title">
-                                <h5>QUICK LINK</h5>
-                            </div>
-                            <nav class="widget-nav">
-                                <ul>
-                                    <li><a href="#">Purchase</a></li>
-                                    <li><a href="#">FAQs</a></li>
-                                    <li><a href="#">Payment</a></li>
-                                    <li><a href="#">News</a></li>
-                                    <li><a href="#">Return</a></li>
-                                    <li><a href="#">Advertise</a></li>
-                                    <li><a href="#">Shipping</a></li>
-                                    <li><a href="#">Career</a></li>
-                                    <li><a href="#">Orders</a></li>
-                                    <li><a href="#">Policities</a></li>
-                                </ul>
-                            </nav>
-                        </div>
-                    </div>
-
-                    <!-- Single Footer Widget -->
-                    <div class="col-12 col-sm-6 col-lg-3">
-                        <div class="single-footer-widget">
-                            <div class="widget-title">
-                                <h5>BEST SELLER</h5>
-                            </div>
-
-                            <!-- Single Best Seller Products -->
-                            <div class="single-best-seller-product d-flex align-items-center">
-                                <div class="product-thumbnail">
-                                    <a href="shop-details.html"><img src="${pageContext.request.contextPath }/resources/img/bg-img/4.jpg" alt=""></a>
-                                </div>
-                                <div class="product-info">
-                                    <a href="shop-details.html">Cactus Flower</a>
-                                    <p>$10.99</p>
-                                </div>
-                            </div>
-
-                            <!-- Single Best Seller Products -->
-                            <div class="single-best-seller-product d-flex align-items-center">
-                                <div class="product-thumbnail">
-                                    <a href="shop-details.html"><img src="${pageContext.request.contextPath }/resources/img/bg-img/5.jpg" alt=""></a>
-                                </div>
-                                <div class="product-info">
-                                    <a href="shop-details.html">Tulip Flower</a>
-                                    <p>$11.99</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Single Footer Widget -->
-                    <div class="col-12 col-sm-6 col-lg-3">
-                        <div class="single-footer-widget">
-                            <div class="widget-title">
-                                <h5>CONTACT</h5>
-                            </div>
-
-                            <div class="contact-information">
-                                <p><span>Address:</span> 505 Silk Rd, New York</p>
-                                <p><span>Phone:</span> +1 234 122 122</p>
-                                <p><span>Email:</span> info.deercreative@gmail.com</p>
-                                <p><span>Open hours:</span> Mon - Sun: 8 AM to 9 PM</p>
-                                <p><span>Happy hours:</span> Sat: 2 PM to 4 PM</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Footer Bottom Area -->
-        <div class="footer-bottom-area">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="border-line"></div>
-                    </div>
-                    <!-- Copywrite Text -->
-                    <div class="col-12 col-md-6">
-                        <div class="copywrite-text">
-                            <p>&copy; <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-</p>
-                        </div>
-                    </div>
-                    <!-- Footer Nav -->
-                    <div class="col-12 col-md-6">
-                        <div class="footer-nav">
-                            <nav>
-                                <ul>
-                                    <li><a href="#">Home</a></li>
-                                    <li><a href="#">About</a></li>
-                                    <li><a href="#">Service</a></li>
-                                    <li><a href="#">Portfolio</a></li>
-                                    <li><a href="#">Blog</a></li>
-                                    <li><a href="#">Contact</a></li>
-                                </ul>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!-- ##### Footer Area End ##### -->
 
     <!-- ##### All Javascript Files ##### -->
     <!-- jQuery-2.2.4 js -->

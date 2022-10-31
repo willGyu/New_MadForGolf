@@ -2,6 +2,7 @@ package com.madforgolf.service;
 
 
 import java.util.List;
+import java.util.Map;
 
 import com.madforgolf.domain.BoardVO;
 import com.madforgolf.domain.PageVO;
@@ -9,8 +10,18 @@ import com.madforgolf.domain.ProductVO;
 
 public interface ProductService {
 	
-	// 상품 전체 목록 불러오기
-	public List<ProductVO> getProductListAll(ProductVO vo) throws Exception;
+	// 상품 전체 목록 불러오기(최신순)
+	public List<ProductVO> getProductListAll(ProductVO vo, PageVO vo2) throws Exception;
+	
+	// 상품 전체 목록 불러오기(인기순)
+	public List<ProductVO> getProductListAll2(ProductVO vo, PageVO vo2) throws Exception;
+	
+	// 상품 1개 상세 불러오기
+	public ProductVO productDetail(ProductVO vo) throws Exception;
+	
+	// 상품 전체 개수 불러오기
+	public Integer getTotalCnt(ProductVO vo) throws Exception;
+	
 	
 	// 상품 등록 (Insert)
 	public void productInsert(ProductVO vo) throws Exception;

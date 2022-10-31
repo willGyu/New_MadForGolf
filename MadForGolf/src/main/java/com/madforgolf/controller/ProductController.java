@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -127,7 +128,7 @@ public class ProductController {
 	
 	// 상품 등록 - 등록 (POST)
 	@RequestMapping(value = "/productInsert",method = RequestMethod.POST)
-	public String productInsertPOST(ProductVO vo, @ModelAttribute("file") MultipartFile file) throws Exception{
+	public String productInsertPOST(ProductVO vo, @ModelAttribute("file") MultipartFile file, HttpServletRequest request) throws Exception{
 		log.info("productInsertPOST() 호출");
 		
 		// 전달된 정보 저장
@@ -140,9 +141,13 @@ public class ProductController {
 		log.info("용량(Byte) : " + size);
 
 		// 파일 등록 - 등록되는 파일 경로
-		// (!important) 파일 경로 일치 필요
-		String uploadFolder = "C:\\Users\\ITWILL\\git\\mad4golf_Test12\\src\\main\\webapp\\resources\\product_img";
-		
+		// String uploadFolder = "C:\\Users\\ITWILL\\git\\New_MadForGolf\\src\\main\\webapp\\resources\\product_img";
+		// 경로 직접 입력은 경로 일치 필요
+		// => 메서드로 절대 경로 구하기 -> 경로 일치 필요없음
+		String uploadFolder = request.getServletContext().getRealPath("resources/product_img");
+		// 파일 저장 경로 : D:\workspace_sts6\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\MadForGolf\resources\product_img
+		log.info("파일 저장 경로" + uploadFolder);
+
 		// 파일 등록 - 파일 이름 랜덤 생성(이름 중복 방지)
 		UUID uuid = UUID.randomUUID();
 		log.info("UUID : " + uuid);
@@ -156,7 +161,7 @@ public class ProductController {
 		log.info("확장자명 : " + fileExtension);
 		
 		// 파일 등록
-		java.io.File saveFile = new java.io.File(uploadFolder + "\\" + uniqueName + fileExtension);
+		java.io.File saveFile = new java.io.File(uploadFolder + "/" + uniqueName + fileExtension);
 		try {
 			file.transferTo(saveFile); // 실제 파일 저장메서드(filewriter 작업을 손쉽게 한방에 처리해준다.)
 			log.info("파일 등록 완료!");

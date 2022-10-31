@@ -51,6 +51,9 @@
                         color: red;                  
                         background-color: #4d4d4d;    
                 }
+                .active2 {
+                	color:red !important;
+                }
         </style>
 
 </head>
@@ -707,45 +710,46 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
  --%>	
-                 </div>
-        </div>
-<!--===========================페이징 네비바 =====================================================================================  -->
-<!-- 					<div class="shop-products-area" style="margin:0px auto; border: solid 5px red;"> -->
+                        </div>
+
+<!-- ======================================== 페이징 네비바 ======================================== -->
 						<!-- Pagination -->
 						<nav aria-label="Page navigation">
-
-
-							<!--보험용 <ul class="pagination" style="margin:auto; padding: 0px;"> -->
-							<ul class="pagination">
+							<ul class="pagination" style="width: 910px; margin:0px auto;">
 								<c:if test="${pm.prev }">
 									<!-- ${pm.prev }결과가 참(true)일 때 -->
-									<li class="page-item"><a href="listAll?page=${pm.startPage-1 }&category=${productList.category }">&laquo;이전</a></li>
+									<li class="page-item"><a class="page-link" href="listAll?page=${pm.startPage-1 }&category=${category }"><i class="fa fa-angle-left"></i></a></li>
+<%-- 									<li class="page-link"><a href="listAll?page=${pm.startPage-1 }&category=${category }">&laquo;이전</a></li> --%>
 									<!-- 현재 위치한 페이지 블럭의 첫번째 페이지보다 -1인 페이지로 이동  -->
 								</c:if>
 
 								<c:forEach var="idx" begin="${pm.startPage }" end="${pm.endPage }">
-									<li <c:out value="${pm.vo.page == idx? 'class=active':'' }"/> class="page-item">
+									<li class="page-item" <c:out value="${pm.vo.page == idx?'class=active':'active' }"/> style="text-align: center; margin:0px auto;">
 <%-- 									<a class="page-link" href="listAll?page=1">${pm.vo.page }</a></li> --%>
 									<a class="page-link" href="listAll?page=${idx }&category=${category }">${idx }</a></li>
 								</c:forEach>
+								
 								<c:if test="${pm.next }">
 									<!-- ${pm.next }결과가 참(true)일 때  -->
-									<li class="page-item"><a href="listAll?page= ${pm.endPage+1 }&category=${category }">다음&raquo;</a></li>
+									<li class="page-item"><a class="page-link" href="listAll?page=${pm.endPage+1 }&category=${category }"><i class="fa fa-angle-right"></i></a></li>
+<%-- 									<li class="page-link"><a href="listAll?page=${pm.endPage+1 }&category=${category }">다음&raquo;</a></li> --%>
 									<!-- 현재 위치한 페이징 블럭의 마지막 페이지보다 +1인 페이지로 이동  -->
 								</c:if>
 							</ul>
 						</nav>
-<!-- 					</div> -->
-<!--===========================페이징 네비바 =====================================================================================  -->
-                </div>
-<!--             </div>
- 일단 주석 갈겨-->    </section>
+<!-- ======================================== 페이징 네비바 ======================================== -->
+
+				</div>
+			</div>
+<!-- 		</div> -->
+<!-- 	</div> -->
+</section>
+
     <!-- ##### Shop Area End ##### -->
 
     <!-- ##### Footer Area Start ##### -->
-    <footer class="footer-area bg-img" style="background-image: url(img/bg-img/3.jpg);">
+    <footer class="footer-area bg-img" style="background-image: url(${pageContext.request.contextPath }/resources/img/bg-img/3.jpg);">
         <!-- Main Footer Area -->
         <div class="main-footer-area">
             <div class="container">

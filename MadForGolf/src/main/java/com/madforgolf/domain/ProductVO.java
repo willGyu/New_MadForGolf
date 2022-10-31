@@ -15,6 +15,13 @@ public class ProductVO {
 	private int like_count;
 	private Date prod_date;
 	
+	public int getProduct_num() {
+		return prod_num;
+	}
+	public void setProduct_num(int prod_num) {
+		this.prod_num = prod_num;
+	}
+	
 	public int getProd_num() {
 		return prod_num;
 	}

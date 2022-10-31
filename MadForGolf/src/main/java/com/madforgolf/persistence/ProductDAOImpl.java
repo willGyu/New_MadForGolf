@@ -116,12 +116,12 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 
 	@Override
-	public BoardVO getBoard(Integer bno) throws Exception {
+	public ProductVO getBoard(Integer prod_num) throws Exception {
 		log.info("getBoard(Integer bno) 호출");
 		
-		BoardVO vo = sqlSession.selectOne(NAMESPACE + ".read",bno);
 		
-		return vo;
+		
+		return sqlSession.selectOne(NAMESPACE + ".read",prod_num);
 		
 		//return sqlSession.selectOne(NAMESPACE + ".read",bno); 
 	}
@@ -137,7 +137,7 @@ public class ProductDAOImpl implements ProductDAO {
 
 	
 	@Override
-	public Integer updateBoard(BoardVO vo) throws Exception {
+	public Integer updateBoard(ProductVO vo) throws Exception {
 		log.info(" updateBoard(BoardVO vo) 호출 ");
 		
 		int cnt = sqlSession.update(NAMESPACE + ".updateBoard",vo);		
@@ -146,10 +146,10 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 
 	@Override
-	public Integer deleteBoard(Integer bno) throws Exception {
+	public Integer deleteBoard(Integer prod_num) throws Exception {
 		log.info(" deleteBoard(bno) 호출 ");
 		
-		return sqlSession.delete(NAMESPACE + ".remove",bno);
+		return sqlSession.delete(NAMESPACE + ".remove",prod_num);
 	}
 
 	

@@ -15,6 +15,7 @@ public class ProductVO {
 	private int like_count;
 	private Date prod_date;
 	
+	
 	public int getProduct_num() {
 		return prod_num;
 	}

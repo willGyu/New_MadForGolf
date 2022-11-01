@@ -56,7 +56,7 @@ public class ProductController {
 		// 서비스 - 글전체 목록 가져오는 메서드
 		List<ProductVO> productList = service.getProductListAll(vo, vo2);
 		log.info("상품 개수 : " + productList.size() + "개");
-
+		
 		// 상품을 카테고리로 분류하기 위해 category 변수명으로 변수를 view로 넘겨줌
 		model.addAttribute("category", vo.getCategory());
 		model.addAttribute("gender", vo.getGender());
@@ -253,34 +253,36 @@ public class ProductController {
 
 		// 서비스 - 게시판 글 정보를 가져오는 메서드
 		// 연결된 뷰에 정보 전달(Model객체)
-		model.addAttribute("prod_num", service.getBoard(vo.getProd_num()));
+		model.addAttribute("vo", service.getBoard(vo.getProd_num()));
 
 		// 페이지 이동(출력) /board/modify
 	}
 
 	// 상품작성 수정하기 - POST(수정할데이터 처리)
 	@RequestMapping(value = "/modify", method = RequestMethod.POST)
-	public String modifyProductPOST(ProductVO vo, RedirectAttributes rttr) throws Exception {
+	public String modifyProductPOST(
+			ProductVO vo,RedirectAttributes rttr,@RequestParam("category") String category) throws Exception {
 		log.info(" modifyPOST() 호출 ");
 		// 한글처리(생략)
 		// 전달정보 저장(수정할 정보) VO
-		log.info("@@수정할정보@@" + vo);
+		log.info("@@수정할정보@@"+vo);
 
-		// 서비스 - 글 수정메서드
-		int cnt = service.updateBoard(vo);
-
-		// 수정성공시 /listAll 페이지 이동
-		if (cnt == 1) {
-			rttr.addFlashAttribute("msg", "MODOK");
-
-//			return "redirect:/board/listAll";
-			return "redirect:/product/listAll";
-		} else {
-			// 예외처리
-			// new NullPointerException();
-			return "/board/modify?=" + vo.getProduct_num();
-		}
 		
+		  // 서비스 - 글 수정메서드 
+		int cnt = service.updateBoard(vo);
+		  
+		  // 수정성공시 /listAll 페이지 이동 
+		if (cnt == 1) { rttr.addFlashAttribute("msg","MODOK");
+		  
+		  // return "redirect:/board/listAll"; 
+		return "redirect:/product/listAll?category="+category+"&page=1"; 
+		} else { 
+			// 예외처리 
+			//new NullPointerException();
+		  return "/board/modify?=" + vo.getProduct_num(); 
+		  
+		}
+
 
 	}
 
@@ -291,22 +293,19 @@ public class ProductController {
 
 		// 전달정보 저장(bno)
 		log.info("prod_num : " + prod_num);
+		log.info("category:"+category);
 
 		// 서비스 - 글삭제 동작 (bno)
 		int result = service.deleteBoard(prod_num);
 
 		if (result == 1) {
 			rttr.addFlashAttribute("msg", "DELOK");
-			vo.setCategory(category);
-			vo2.setPage(1);
+
 		}
-		
-		
-		
-		
+
 		// 글 리스트 페이지 이동
 //		return "redirect:/board/listAll";
-		return "redirect:/product/listAll";
+		return "redirect:/product/listAll?category="+category+"&page=1";
 	}
 
 	// http://localhost:8080/board/regist

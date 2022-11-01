@@ -98,6 +98,7 @@
                                 <!-- Wishlist & Compare -->
                                 <div class="wishlist-compare d-flex flex-wrap align-items-center">
                                     <a href="#" class="wishlist-btn ml-15"><i class="icon_heart_alt"></i></a>
+                                    <input type="hidden" id="prod_img" value="${product.prod_img }">
                                     <input type="button" id="button" value="채팅하기" onclick="">
                                 </div>
                                     <input type="submit" name="addtocart" value="구매하기" class="btn alazea-btn ml-15">

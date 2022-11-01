@@ -119,7 +119,7 @@ public class ProductDAOImpl implements ProductDAO {
 	public ProductVO getBoard(Integer prod_num) throws Exception {
 		log.info("getBoard(Integer bno) 호출");
 		
-		
+
 		
 		return sqlSession.selectOne(NAMESPACE + ".read",prod_num);
 		
@@ -148,6 +148,13 @@ public class ProductDAOImpl implements ProductDAO {
 	@Override
 	public Integer deleteBoard(Integer prod_num) throws Exception {
 		log.info(" deleteBoard(bno) 호출 ");
+
+		/*
+		 * Map<String, Object> removeObj = new HashMap<String, Object>();
+		 * removeObj.put("prod_num", prod_num);
+		 * 
+		 * log.info("@@@@@@@@@@@@@@@@@removeOnj"+removeObj);
+		 */
 		
 		return sqlSession.delete(NAMESPACE + ".remove",prod_num);
 	}

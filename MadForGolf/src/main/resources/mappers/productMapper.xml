@@ -82,14 +82,16 @@
 	<!-- 상품 수정 GET  -->
 	<select id="read" resultType="ProductVO">
 		select * from mfg_products 
-		where prod_num = #{prod_num}
+		where prod_num = #{prod_num} 
 	</select>
 	
 	<!-- 상품 수정 POST -->
 	<update id="updateBoard">
-	  update mfg_products 
-	  set prod_name=#{prod_name},price=#{price},detail=#{ detail},condition =#{condition},gender=#{gender},category=#{category},prod_img=#{prod_img}   
+<!-- 	  update mfg_products 
+	  set prod_name=#{prod_name},price=#{price},detail=#{detail},'condition' =#{condition},gender=#{gender},category=#{category},prod_img=#{prod_img} 
 	  where prod_num=#{prod_num}	    
+	   -->
+	  update mfg_products set prod_name=#{prod_name},price=#{price},detail=#{detail},prod_img=#{prod_img} where prod_num=#{prod_num}	
 	</update>
 	
 	<update id="updateReadCnt">
@@ -100,7 +102,7 @@
 	
 	
 	<delete id="remove">
-		delete from mfg_products where prod_num=#{prod_num}	
+		delete from mfg_products where prod_num=#{prod_num} 
 	</delete>
 	
 <!-- 	<select id="listPage" resultType="ProductVO">

@@ -98,6 +98,17 @@
 			alert("상품 등록이 완료되었습니다.");
 		});
 	});
+	
+	function readURL(input) {
+		if(input.files && input.files[0]) {
+			var reader = new FileReader();
+			reader.onload = function(e) { document.getElementById('preview').src = e.target.result; };
+			reader.readAsDataURL(input.files[0]);
+		} else {
+			document.getElementById('preview').src = "";
+		}
+	}
+	
 </script>
 
 
@@ -271,7 +282,7 @@
             <div class="row justify-content-between">
             	<div class="checkout_details_area clearfix">
                 	<h5>상품등록</h5>
-                    <form action="${pageContext.request.contextPath }/product/productInsert" method="post" id="form">
+                    <form action="${pageContext.request.contextPath }/product/productInsert" method="post" id="form" enctype="multipart/form-data">
                     	<!-- 로그인 기능 구현 시 value 값 수정 필요 ${loginID } -->
                     	<input type="hidden" value="itwill01" name="seller_id">
                         <div class="row">
@@ -279,12 +290,12 @@
                             	<label for="country">Category</label>
                                 <select class="custom-select d-block w-100" id="category" name="category">
                                 	<option value="" selected="selected" disabled="disabled">카테고리</option>
-                                	<option value="드라이버">드라이버</option>
-                                	<option value="아이언">아이언</option>
-                                    <option value="유틸">유틸</option>
-                                    <option value="웨지">웨지</option>
-                                    <option value="버터">버터</option>
-                                    <option value="기타">기타</option>
+                                	<option value="Driver">드라이버</option>
+                                	<option value="Iron">아이언</option>
+                                    <option value="Utility">유틸리티</option>
+                                    <option value="Wedge">웨지</option>
+                                    <option value="Putter">퍼터</option>
+                                    <option value="Etc">기타</option>
                                 </select>
                             </div>
                             <div class="col-md-6 mb-4">
@@ -314,7 +325,8 @@
                             </div>
                             <div class="col-12 mb-4">
                                 <label for="company">Image</label>
-                                <input type="file" class="form-control" id="prod_img" name="prod_img">
+                                <input type="file" class="form-control" id="prod_img" name="file" onchange="readURL(this);">
+                                <img id="preview"/>
                             </div>
 							<div style="margin:0px auto;">
 								<div class="checkout-btn mt-30" >
@@ -329,6 +341,7 @@
         </div>
     </div>
     <!-- ##### Checkout Area End ##### -->
+
 
     <!-- ##### Footer Area Start ##### -->
     <footer class="footer-area bg-img" style="background-image: url(${pageContext.request.contextPath }/resources/img/bg-img/3.jpg);">

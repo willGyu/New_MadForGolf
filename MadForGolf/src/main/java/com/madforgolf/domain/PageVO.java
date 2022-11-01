@@ -1,8 +1,6 @@
 package com.madforgolf.domain;
 
-
-
-//페이징 처리에 필요한 정보를 관리하는 객체
+// 페이징 처리에 필요한 정보를 관리하는 객체
 public class PageVO {
 	private int page;		// 페이지
 	private int perPageNum; // 페이지 크기
@@ -10,7 +8,7 @@ public class PageVO {
 	public PageVO() {
 		// 페이징 처리의 정보가 없을 때(기본값)
 		this.page = 1;
-		this.perPageNum = 10;
+		this.perPageNum = 6;
 	}
 
 	public int getPage() {
@@ -32,8 +30,8 @@ public class PageVO {
 
 	public void setPerPageNum(int perPageNum) {
 		// 한번에 보여줄 글의 수
-		if(perPageNum < 10 || perPageNum > 100) {
-			this.perPageNum = 10;
+		if(perPageNum < 6 || perPageNum > 100) {
+			this.perPageNum = 6;
 			return;
 		}
 		this.perPageNum = perPageNum;

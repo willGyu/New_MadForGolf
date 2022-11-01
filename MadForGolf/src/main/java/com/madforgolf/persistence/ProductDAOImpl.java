@@ -27,17 +27,30 @@ public class ProductDAOImpl implements ProductDAO {
 	private static final String NAMESPACE = "com.madforgolf.mapper.ProductMapper";
 
 	@Override
-	public List<ProductVO> listAll(ProductVO vo) throws Exception {
+	public List<ProductVO> listAll(ProductVO vo, PageVO vo2) throws Exception {
 		log.info("listAll() 호출");
+		
+		Map<String, Object> productObj = new HashMap<String, Object>();		
+
+		productObj.put("category", vo.getCategory());
+		productObj.put("gender", vo.getGender());
+		productObj.put("pageStart", vo2.getPageStart());
+		productObj.put("perPageNum", vo2.getPerPageNum());
+				
+		log.info(productObj.get("category")+"");
+		log.info(productObj.get("gender")+"");
+		log.info(productObj.get("pageStart")+"");
+		log.info(productObj.get("perPageNum")+"");
+		
 		
 		// DB - 모든정보 가져오기(SQL/mapper 호출)
 		List<ProductVO> productList;
 		
 		if(vo.getGender() == 0) { //성별없음:0 남자:1 여자:2
-			productList = sqlSession.selectList(NAMESPACE + ".listAll", vo);
+			productList = sqlSession.selectList(NAMESPACE + ".listAll", productObj);
 			log.info("Mapper - listAll 호출");
 		} else {
-			productList = sqlSession.selectList(NAMESPACE + ".listAll2", vo);			
+			productList = sqlSession.selectList(NAMESPACE + ".listAll2", productObj);
 			log.info("Mapper - listAll2 호출");
 		}
 		
@@ -46,6 +59,50 @@ public class ProductDAOImpl implements ProductDAO {
 		return productList;
 	}
 	
+	@Override
+	public List<ProductVO> listAll2(ProductVO vo, PageVO vo2) throws Exception {
+		log.info("listAll2() 호출");
+		
+		Map<String, Object> productObj = new HashMap<String, Object>();		
+		productObj.put("category", vo.getCategory());
+		productObj.put("gender", vo.getGender());
+		productObj.put("pageStart", vo2.getPageStart());
+		productObj.put("perPageNum", vo2.getPerPageNum());
+		
+		log.info(productObj.get("category")+"");
+		log.info(productObj.get("gender")+"");
+		log.info(productObj.get("pageStart")+"");
+		log.info(productObj.get("perPageNum")+"");
+		
+		// DB - 모든정보 가져오기(SQL/mapper 호출)
+		List<ProductVO> productList;
+		
+		if(vo.getGender() == 0) { //성별없음:0 남자:1 여자:2
+			productList = sqlSession.selectList(NAMESPACE + ".listLike", productObj);
+			log.info("Mapper - listLike 호출");
+		} else {
+			productList = sqlSession.selectList(NAMESPACE + ".listLike2", productObj);
+			log.info("Mapper - listLike2 호출");
+		}
+		
+		log.info("상품 개수 : "+ productList.size() + "개");
+		
+		return productList;
+	}
+	
+	@Override
+	public Integer getTotalCnt(ProductVO vo) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + ".getTotalCnt",vo);
+	}
+	
+	@Override
+	public ProductVO getProductDetail(ProductVO vo) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + ".getProductDetail", vo);
+	}
+
+
+
+
 	@Override
 	public void insertProduct(ProductVO vo) throws Exception{
 		log.info("insertProduct(vo) 호출");
@@ -59,12 +116,12 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 
 	@Override
-	public BoardVO getBoard(Integer bno) throws Exception {
+	public ProductVO getBoard(Integer prod_num) throws Exception {
 		log.info("getBoard(Integer bno) 호출");
 		
-		BoardVO vo = sqlSession.selectOne(NAMESPACE + ".read",bno);
 		
-		return vo;
+		
+		return sqlSession.selectOne(NAMESPACE + ".read",prod_num);
 		
 		//return sqlSession.selectOne(NAMESPACE + ".read",bno); 
 	}
@@ -80,7 +137,7 @@ public class ProductDAOImpl implements ProductDAO {
 
 	
 	@Override
-	public Integer updateBoard(BoardVO vo) throws Exception {
+	public Integer updateBoard(ProductVO vo) throws Exception {
 		log.info(" updateBoard(BoardVO vo) 호출 ");
 		
 		int cnt = sqlSession.update(NAMESPACE + ".updateBoard",vo);		
@@ -89,10 +146,10 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 
 	@Override
-	public Integer deleteBoard(Integer bno) throws Exception {
+	public Integer deleteBoard(Integer prod_num) throws Exception {
 		log.info(" deleteBoard(bno) 호출 ");
 		
-		return sqlSession.delete(NAMESPACE + ".remove",bno);
+		return sqlSession.delete(NAMESPACE + ".remove",prod_num);
 	}
 
 	

@@ -68,16 +68,16 @@
                                     	<img class="d-block w-100" src="${pageContext.request.contextPath }/resources/product_img/${product.prod_img }" alt="1" style="width: 445px; height: 445px;">
                                     </div>
                                     <div class="carousel-item">
-                                        <img class="d-block w-100" src="${pageContext.request.contextPath }/resources/product_img/${product.prod_img }" alt="1" style="width: 445px; height: 445px;">
+                                        <img class="d-block w-100" src="${pageContext.request.contextPath }/resources/product_img/${product.prod_img2 }" alt="1" style="width: 445px; height: 445px;">
                                     </div>
                                     <div class="carousel-item">
-                                        <img class="d-block w-100" src="${pageContext.request.contextPath }/resources/product_img/${product.prod_img }" alt="1" style="width: 445px; height: 445px;">
+                                        <img class="d-block w-100" src="${pageContext.request.contextPath }/resources/product_img/${product.prod_img3 }" alt="1" style="width: 445px; height: 445px;">
                                     </div>
                                 </div>
                                 <ol class="carousel-indicators">
                                     <li class="active" data-target="#product_details_slider" data-slide-to="0" style="background-image: url(${pageContext.request.contextPath }/resources/product_img/${product.prod_img });"></li>
-                                    <li data-target="#product_details_slider" data-slide-to="1" style="background-image: url(${pageContext.request.contextPath }/resources/product_img/${product.prod_img });"></li>
-                                    <li data-target="#product_details_slider" data-slide-to="2" style="background-image: url(${pageContext.request.contextPath }/resources/product_img/${product.prod_img });"></li>
+                                    <li data-target="#product_details_slider" data-slide-to="1" style="background-image: url(${pageContext.request.contextPath }/resources/product_img/${product.prod_img2 });"></li>
+                                    <li data-target="#product_details_slider" data-slide-to="2" style="background-image: url(${pageContext.request.contextPath }/resources/product_img/${product.prod_img3 });"></li>
                                 </ol>
                             </div>
                         </div>

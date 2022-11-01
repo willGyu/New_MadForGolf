@@ -212,7 +212,7 @@
                 <div class="col-12">
                     <!-- Section Heading -->
                     <div class="section-heading text-center">
-                        <h2>OUR SERVICES</h2>
+                        <h2>OUR SERVICES ${loginVO.user_id }</h2>
                         <p>We provide the perfect service for you.</p>
                     </div>
                 </div>

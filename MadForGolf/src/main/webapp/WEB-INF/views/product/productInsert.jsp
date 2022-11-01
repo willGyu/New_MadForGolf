@@ -47,17 +47,35 @@
 	border-color: #70C745;
 	cursor: pointer;
 }
+
+#button2 {
+	color: #767676;
+	width: 100px; height: 30px;
+	font-weight: bold;
+	margin-left: 30px;
+}
+
+#button2:hover {
+	background-color: white;
+	color: #70C745;
+	border-color: #70C745;
+	cursor: pointer;
+}
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 
-var cnt = 1;
+var cnt = 2;
 
 function addFile(){
+	// alert("클릭");
+	if(cnt < 4) {
 	// 버튼 클릭시 동작 -> 파일입력창 추가
-	alert("클릭");
-	$('#div_file').append("<br><input type='file' name='file" + cnt + "'>");
-	cnt++;
+		$('#div_file').append("<br><input type='file' class='form-control' id='prod_img" + cnt + "' name='file" + cnt + "'>");
+		cnt++;
+	} else {
+		alert("사진 추가는 2개까지만 가능합니다.")
+	}
 }
 
 	$(document).ready(function(){
@@ -98,10 +116,22 @@ function addFile(){
 				alert("상품 성별을 선택해주세요.");
 				return false;
 			}
-			// 상품이미지 제어
+			// 상품이미지1 제어
 			if($('#prod_img').val()==""){
 				alert('상품이미지를 넣어주세요.');
 				$('#prod_img').focus();
+				return false;
+			}
+			// 상품이미지2 제어
+			if($('#prod_img2').val()==""){
+				alert('두번째 상품이미지를 넣어주세요.');
+				$('#prod_img2').focus();
+				return false;
+			}
+			// 상품이미지3 제어
+			if($('#prod_img3').val()==""){
+				alert('세번째 상품이미지를 넣어주세요.');
+				$('#prod_img3').focus();
 				return false;
 			}
 			
@@ -334,13 +364,11 @@ function addFile(){
                             	<input type="radio" class="custom-control-input2" id="gender2" style="margin-left: 20px;" name="gender" value="2">&nbsp;여
                             </div>
                             <div class="col-12 mb-4">
-                                <label for="company">Image</label>
-                                <input type="file" class="form-control" id="prod_img" name="file" onchange="readURL(this);">
-                                <img id="preview"/>
-                            </div>
-                            <div class="col-12 mb-4">
-                            	<input type="button" value="파일 업로드 추가" onclick="addFile();"><br>
+                                <label for="company">Image</label><input type="button" id="button2" value="사진 추가" onclick="addFile();">
+                                <input type="file" class="form-control" id="prod_img" name="file1" onchange="readURL(this);">
+                                
 								<div id="div_file"><!-- <input type="file" name="file"> --></div>
+                                <img id="preview"/>
                             </div>
 							<div style="margin:0px auto;">
 								<div class="checkout-btn mt-30" >

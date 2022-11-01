@@ -16,7 +16,6 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -252,13 +251,9 @@ public class ProductController {
 //	} // 상품 등록 - 등록 (POST)
 
 	
-	
-	
-	
-	
-	
+	// 상품 등록 - 등록 (POST)
 	@RequestMapping(value = "/productInsert", method = RequestMethod.POST)
-	public String fileUploadPOST(MultipartHttpServletRequest multi, ProductVO vo, HttpServletRequest request) throws Exception {
+	public String productInsertPOST(MultipartHttpServletRequest multi, ProductVO vo, HttpServletRequest request) throws Exception {
 		log.info("productInsertPOST() 호출");
 		
 		// log.info("multi : " + multi);
@@ -313,47 +308,68 @@ public class ProductController {
 			MultipartFile mFile = multi.getFile(fileName); // 업로드된 파일정보를 가져오기
 			String oFileName = mFile.getOriginalFilename();
 			log.info("oFileName : " + oFileName);
+			
+			// 파일 등록 - 파일 이름 랜덤 생성(이름 중복 방지)
+			UUID uuid = UUID.randomUUID();
+			log.info("UUID : " + uuid);
+			String[] uuids = uuid.toString().split("-");
+			String uniqueName = uuids[0];
+			log.info("생성된 고유문자열 : " + uniqueName);
+	
+			// 파일 등록 - 확장자명 만들기
+			String fileExtension = oFileName.substring(oFileName.lastIndexOf("."), oFileName.length());
+			log.info("확장자명 : " + fileExtension);
+			
+			// 파일 등록 - 고유한 이름 만들기
+			String uFileName = uniqueName + fileExtension;
+			log.info("고유한 이름 : " + uFileName);
+			
 			switch(fileName) {
-				case "file1" : vo.setProd_img(oFileName); break;
-				case "file2" : vo.setProd_img2(oFileName); break;
-				case "file3" : vo.setProd_img3(oFileName); break;
+				case "file1" : vo.setProd_img(uFileName); break;
+				case "file2" : vo.setProd_img2(uFileName); break;
+				case "file3" : vo.setProd_img3(uFileName); break;
 			}
 			log.info("image1 : " + vo.getProd_img());
 			log.info("image2 : " + vo.getProd_img2());
 			log.info("image3 : " + vo.getProd_img3());
 			
 			// 업로드 될 파일의 이름들을 저장
-			fileList.add(oFileName);
+			fileList.add(uFileName);
 			log.info("fileList" + fileList);
 			
 			// 파일 업로드
 			// 파일 생성
-			//File file = new File("C:\\spring\\"+ oFileName);
-			//log.info(request.getServletContext().getRealPath("resources/product_img") + "/" + oFileName);
+			String uploadFolder = request.getServletContext().getRealPath("resources/product_img");
+			File file = new File(uploadFolder + "\\" + uFileName);
+			log.info(request.getServletContext().getRealPath("resources/product_img") + "/" + uFileName);
+			// 파일 저장 경로 : D:\workspace_sts6\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\MadForGolf\resources\product_img
 			
-//			if(mFile.getSize() != 0) { // 첨부파일이 있을 때
+			if(mFile.getSize() != 0) { // 첨부파일이 있을 때				
+//				// 선생님이 가르쳐 준 것 : 0 byte로 파일이 업로드되어 주석 처리
 //				file.createNewFile(); // 첨부파일 업로드(파일생성)
 //				log.info("파일 업로드 성공");
-//				
-//			}
+				
+				// 임시방편(됨!)
+				try {
+					mFile.transferTo(file); // 실제 파일 저장메서드(filewriter 작업을 손쉽게 한방에 처리해준다.)
+					log.info("파일 업로드 성공");
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			} // if
 			
-			
+		} // while
+		
+		if(vo.getProd_img2() == null) {
+			vo.setProd_img2(vo.getProd_img());
+		}
+		if(vo.getProd_img3() == null) {
+			vo.setProd_img3(vo.getProd_img());
 		}
 		
 		log.info("첨부파일 처리 끝");
 		return fileList;
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	} // 상품 등록 - 등록 (POST)
 	
 	
 	// 상품작성 수정하기 - GET (기존의 정보 조회 출력+수정할 정보 입력)

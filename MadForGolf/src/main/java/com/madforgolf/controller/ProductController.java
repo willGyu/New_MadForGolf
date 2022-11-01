@@ -59,11 +59,14 @@ public class ProductController {
 
 		// 상품을 카테고리로 분류하기 위해 category 변수명으로 변수를 view로 넘겨줌
 		model.addAttribute("category", vo.getCategory());
+		model.addAttribute("gender", vo.getGender());
+
 		// 출력되는 상품 리스트를 어트리뷰트에 담아서 view로 보냄
 		model.addAttribute("productList", productList);
 
 		// 세션객체 - isUpdate 정보전달
 		session.setAttribute("isUpdate", false);
+		
 
 		// ==================================================== 페이징 처리
 		// ====================================================
@@ -277,12 +280,13 @@ public class ProductController {
 			// new NullPointerException();
 			return "/board/modify?=" + vo.getProduct_num();
 		}
+		
 
 	}
 
 	// 상품작성 삭제 - POST
 	@RequestMapping(value = "/remove", method = RequestMethod.GET)
-	public String removeProductPOST(@RequestParam("prod_num") int prod_num, RedirectAttributes rttr) throws Exception {
+	public String removeProductPOST(@RequestParam("prod_num") int prod_num,@RequestParam("category") String category,ProductVO vo,PageVO vo2,RedirectAttributes rttr,Model model) throws Exception {
 		log.info(" removeProductPOST() 호출 ");
 
 		// 전달정보 저장(bno)
@@ -293,8 +297,13 @@ public class ProductController {
 
 		if (result == 1) {
 			rttr.addFlashAttribute("msg", "DELOK");
+			vo.setCategory(category);
+			vo2.setPage(1);
 		}
-
+		
+		
+		
+		
 		// 글 리스트 페이지 이동
 //		return "redirect:/board/listAll";
 		return "redirect:/product/listAll";

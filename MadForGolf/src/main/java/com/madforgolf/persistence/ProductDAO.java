@@ -23,6 +23,7 @@ public interface ProductDAO {
 	public ProductVO getProductDetail(ProductVO vo) throws Exception;
 	
 	
+	
 	// 상품 등록 - insertProduct(vo)
 	public void insertProduct(ProductVO vo) throws Exception;
 	

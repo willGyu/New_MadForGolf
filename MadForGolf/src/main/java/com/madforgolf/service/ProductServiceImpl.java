@@ -61,6 +61,7 @@ public class ProductServiceImpl implements ProductService {
 		dao.insertProduct(vo);
 	}
 
+	
 	@Override
 	public ProductVO getBoard(Integer prod_num) throws Exception {
 		log.info("getBoard(Integer prod_num) 호출 ");

@@ -342,6 +342,7 @@
     </div>
     <!-- ##### Checkout Area End ##### -->
 
+
     <!-- ##### Footer Area Start ##### -->
     <footer class="footer-area bg-img" style="background-image: url(${pageContext.request.contextPath }/resources/img/bg-img/3.jpg);">
         <!-- Main Footer Area -->

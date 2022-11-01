@@ -23,6 +23,7 @@ public interface ProductService {
 	public Integer getTotalCnt(ProductVO vo) throws Exception;
 	
 	
+	
 	// 상품 등록 (Insert)
 	public void productInsert(ProductVO vo) throws Exception;
 	

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.madforgolf.domain.BoardVO;
 import com.madforgolf.domain.PageVO;
+import com.madforgolf.domain.ReplyVO;
 import com.madforgolf.persistence.BoardDAO;
 
 @Service
@@ -47,15 +48,15 @@ public class BoardServiceImpl implements BoardService{
 	}
 	
 	//목록
-	@Override
-	public List<BoardVO> listAll() throws Exception {
+//	@Override
+//	public List<BoardVO> listAll() throws Exception {
 		// TODO Auto-generated method stub
-		return null;
-	}
+//		return null;
+//	}
 	
 	//------------------------------------------------------------------------
 	
-	
+	//글작성
 	@Override
 	public void boardWrite(BoardVO vo) throws Exception {
 		log.info(" 2. service - boardWrite(vo) ");
@@ -68,20 +69,20 @@ public class BoardServiceImpl implements BoardService{
 	
 	
 	
-	@Override
-	public List<BoardVO> listBoardAll() throws Exception {
-		log.info(" 2. service - getBoardListAll() ");
-		
-		List<BoardVO> boardList = dao.listBoardAll();
-		
-		return boardList;
-	}
+//	@Override
+//	public List<BoardVO> listBoardAll() throws Exception {
+//		log.info(" 2. service - getBoardListAll() ");
+//		
+//		List<BoardVO> boardList = dao.listBoardAll();
+//		
+//		return boardList;
+//	}
 	
 
 	//------------------------------------------------------------------------
 	
 	
-	
+	//리스트(페이징 처리)
 	@Override
 	public List<BoardVO> listPage(PageVO vo) throws Exception {
 		log.info(" 2. service - listPage(vo) ");
@@ -90,6 +91,53 @@ public class BoardServiceImpl implements BoardService{
 	}
 	
 	
+
+
+	//------------------------------------------------------------------------
+	
+	
+	//리스트 - 카테고리별(페이징 처리)
+	@Override
+	public List<BoardVO> listCategory(PageVO vo, String board_category) throws Exception {
+		
+		log.info(" 2. service - listCategory(vo,board_category) ");
+		
+		
+		
+		return dao.listCategory(vo,board_category);
+	}
 	
 
+	//------------------------------------------------------------------------
+	
+	
+	//댓글
+	@Override
+	public void insertReply(ReplyVO vo) throws Exception {
+		dao.insertReply(vo);
+	}
+
+	@Override
+	public List<ReplyVO> getReply(Integer board_num, PageVO vo) throws Exception {
+		log.info("getReply(board_num, vo) 호출");
+		return dao.getReply(board_num, vo);
+	}
+
+	@Override
+	public Integer deleteReply(Integer reply_num) throws Exception {
+		return dao.deleteReply(reply_num);
+	}
+
+	@Override
+	public Integer updateReply(ReplyVO vo) throws Exception {
+		return dao.updateReply(vo);
+	}
+
+	@Override
+	public Integer replyCnt(Integer board_num) throws Exception {
+		return dao.replyCnt(board_num);
+	}
+
 }
+
+

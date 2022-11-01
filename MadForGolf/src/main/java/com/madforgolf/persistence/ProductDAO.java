@@ -8,6 +8,8 @@ import com.madforgolf.domain.PageVO;
 import com.madforgolf.domain.ProductVO;
 
 public interface ProductDAO {
+	//메인(index.jsp)상품 목록 - 최신순(성별/카테고리 구분없음)
+	public List<ProductVO> listMain(ProductVO vo) throws Exception;
 	
 	// 상품 전체 목록 - listAll() 최신순
 	public List<ProductVO> listAll(ProductVO vo, PageVO vo2) throws Exception;

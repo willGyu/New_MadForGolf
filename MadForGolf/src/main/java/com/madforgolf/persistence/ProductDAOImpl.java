@@ -19,12 +19,24 @@ public class ProductDAOImpl implements ProductDAO {
 
 	private static final Logger log 
 	    = LoggerFactory.getLogger(ProductDAOImpl.class);
+
 	
 	// SqlSession객체 주입(DI)
 	@Autowired
 	private SqlSession sqlSession;
 
 	private static final String NAMESPACE = "com.madforgolf.mapper.ProductMapper";
+	
+	@Override
+	public List<ProductVO> listMain(ProductVO vo) throws Exception {
+		log.info("listMain()호출");
+		
+		List<ProductVO> productList;
+		
+		productList = sqlSession.selectList(NAMESPACE+".listMain",vo);
+		
+		return productList;
+	}
 
 	@Override
 	public List<ProductVO> listAll(ProductVO vo, PageVO vo2) throws Exception {

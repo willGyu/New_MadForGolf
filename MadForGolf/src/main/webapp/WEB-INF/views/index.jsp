@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<%@ include file="./include/header.jsp" %>
+<%@ include file="./include/header.jsp"%>
 
 
 
-    <!-- ##### Hero Area Start ##### -->
-    <section class="hero-area">
+<!-- ##### Hero Area Start ##### -->
+    <section class="hero-area" style="margin-bottom: 100px;">
         <div class="hero-post-slides owl-carousel">
 
             <!-- Single Hero Post -->
@@ -55,6 +56,61 @@
     </section>
     <!-- ##### Hero Area End ##### -->
 
+<!--============================메인화면 상품리스트 Area==========================  -->
+                    <div class="section-heading text-center">
+                        <h2>최신상품</h2>
+                        <p>실시간으로 업데이트되는 골프용품을 바로 즐겨보세요.</p>
+                    </div>
+
+	
+	<!-- ##### Shop Area Start ##### -->
+	<section class="shop-page section-padding-0-100" style="width: 80%; margin: auto;">
+
+            
+                <!-- All Products Area -->
+                <div class="col-12 col-md-8 col-lg-9" style="margin: auto;" id="products">
+                    <div class="shop-products-area">
+                        <div class="row">
+							<!-- Single Product Area -->
+							<!-- for문으로 상품 리스트 반복  -->
+							<c:forEach var="vo" items="${productList }" begin="1" end="6">
+								<div class="col-12 col-sm-6 col-lg-4">
+									<div class="single-product-area mb-50">
+										<!-- Product Image -->
+										<div class="product-img">
+											<a href="${pageContext.request.contextPath }/product/productDetail?prod_num=${vo.prod_num}"><img src="${pageContext.request.contextPath }/resources/product_img/${vo.prod_img}"></a>
+											<!-- Product Tag -->
+											<div class="product-tag">
+												<a href="#">Hot</a>
+											</div>
+											<div class="product-meta d-flex">
+												<a href="#" class="wishlist-btn"><i class="icon_heart_alt"></i></a>
+												<a href="cart.html" class="add-to-cart-btn">Add to cart</a>
+												<a href="#" class="compare-btn"><i class="arrow_left-right_alt"></i></a>
+											</div>
+										</div>
+										<!-- Product Info -->
+										<div class="product-info mt-15 text-center">
+											<a href="${pageContext.request.contextPath }/product/productDetail?prod_num=${vo.prod_num}">
+												<p>${vo.prod_name }</p>
+											</a>
+											<h6>${vo.price }원</h6>
+										</div>
+									</div>
+								</div>
+							</c:forEach>
+							<!-- for문으로 상품 리스트 반복  -->
+
+
+				</div>
+			</div>
+			</div>
+<!-- 		</div> -->
+<!-- 	</div> -->
+</section>
+
+
+<!--============================메인화면 상품리스트 Area==========================  -->
     <!-- ##### Service Area Start ##### -->
     <section class="our-services-area bg-gray section-padding-100-0">
         <div class="container">

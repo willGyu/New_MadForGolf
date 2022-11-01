@@ -22,6 +22,15 @@ public class ProductServiceImpl implements ProductService {
 	@Autowired
 	private ProductDAO dao;
 	
+	@Override
+	public List<ProductVO> listMain(ProductVO vo) throws Exception {
+		log.info("Service:listMain()호출");
+		
+		List<ProductVO> productList = dao.listMain(vo);
+		
+		return productList;
+	}
+	
 	
 	
 	@Override

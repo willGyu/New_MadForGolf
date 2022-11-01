@@ -307,7 +307,37 @@ public class ProductController {
 //		return "redirect:/board/listAll";
 		return "redirect:/product/listAll?category="+category+"&page=1";
 	}
+	
+//=========================메인화면 상품리스트=================================	
+	// http://localhost:8080/product 
+		// 상품 리스트 - 조회 (GET)
+		@RequestMapping(value = "/index", method = RequestMethod.GET)
+		public void listMainGET(ProductVO vo,Model model, HttpSession session) throws Exception {
+			log.info("listMainGET() 호출");
 
+
+			// 서비스 - 글전체 목록 가져오는 메서드
+			List<ProductVO> productList = service.listMain(vo);
+			log.info("상품 개수 : " + productList.size() + "개");
+			
+			// 출력되는 상품 리스트를 어트리뷰트에 담아서 view로 보냄
+			model.addAttribute("productList", productList);
+
+			// 세션객체 - isUpdate 정보전달
+			session.setAttribute("isUpdate", false);
+			
+
+
+
+			log.info("/index -> index.jsp");
+
+		} // 상품 리스트 - 조회 (GET)
+	
+	
+	
+	
+
+//=========================메인화면 상품리스트=================================	
 	// http://localhost:8080/board/regist
 	// 글쓰기 - GET
 	@RequestMapping(value = "/regist", method = RequestMethod.GET)

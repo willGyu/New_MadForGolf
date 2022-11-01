@@ -35,13 +35,12 @@
         </div>
     </div>
     <!-- ##### Breadcrumb Area End ##### -->
-
 ${sessionScope.user_id}
-<%-- 		<c:if test="${!(empty sessionScope.loginID) }"> --%>
+		<c:if test="${!(empty sessionScope.user_id) }">
         <div class="col-12">
         	<button class="btn alazea-btn mt-15" onclick="location.href='${pageContext.request.contextPath }/board/insertBoard'">글쓰기</button>
         </div>
-<%-- 		</c:if> --%>
+		</c:if>
 
 
    		<!-- category 클릭 시 말머리별 게시글 리스트만 뜨도록 구현 -->

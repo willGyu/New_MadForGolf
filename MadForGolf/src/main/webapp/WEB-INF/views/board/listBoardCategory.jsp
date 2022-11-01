@@ -7,6 +7,12 @@
 <!-- header -->
 <jsp:include page="../include/header.jsp" />
 <!-- header -->
+   ${sessionScope.user_id}
+		<c:if test="${!(empty sessionScope.user_id) }">
+        <div class="col-12">
+        	<button class="btn alazea-btn mt-15" onclick="location.href='${pageContext.request.contextPath }/board/insertBoard'">글쓰기</button>
+        </div>
+		</c:if>
    
    
      <!-- ##### Breadcrumb Area Start ##### -->

@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.madforgolf.domain.BoardVO;
+import com.madforgolf.domain.MemberVO;
 import com.madforgolf.domain.PageMakerVO;
 import com.madforgolf.domain.PageVO;
 import com.madforgolf.domain.ReplyVO;
@@ -274,36 +275,43 @@ public class BoardController {
 	
 	//게시판 리스트(페이징 처리) - GET
 	@RequestMapping(value = "/listBoardAll", method = RequestMethod.GET)
-	public String listBoardAllGET(Model model,PageVO vo,HttpServletRequest request,HttpSession session) throws Exception{
+	public String listBoardAllGET(Model model,PageVO vo,HttpSession session) throws Exception{
 		log.info(" 1. controller - listBoardAllGET ");
 		
-		session = request.getSession();
+		MemberVO memberVO = (MemberVO)session.getAttribute("loginVO");
+		log.info("############"+memberVO);
+		String user_id = memberVO.getUser_id();
 		
-		log.info("#####################session : "+session);
+		log.info("############"+user_id);
 		
-		String user_id_real = (String)session.getAttribute("user_id");
-		String user_id = "난 다은쓰";
+//
+//		// 로그인 여부 확인
+//		if(user_id != null) {
+//			// 성공 -> 메인페이지 이동, 로그인정보를 저장(세션)
+//			
+//			//JSP(view)에서 session 정보를 가져와서 사용
+//			session.setAttribute("user_id", user_id);
+//			model.addAttribute("boardList", service.listPage(vo));
+//			
+//			//페이징 처리 하단부 정보 저장
+//			PageMakerVO pm = new PageMakerVO();
+//			pm.setVo(vo);
+//			pm.setTotalCnt(385);
+//			
+//			log.info("################################### vo : "+ vo + "pm" + pm);
+//			
+//			model.addAttribute("pm", pm);
+//			
+//			
+			return"/board/listBoardAll";
+//			//뷰 페이지에서 접근이 자유롭기에 따로 세션 정보를 보내지 않아도 됨
+//
+//		}else {
+//			// 실패 -> 로그인페이지 이동
+//			return "redirect:/member/login";
+//			
+//		}
 		
-		log.info("#####################user_id_real : "+user_id_real);
-		log.info("#####################user_id : "+user_id);
-
-		
-		session.setAttribute("user_id", user_id);
-		
-		log.info("#####################session : "+session);
-
-		model.addAttribute("boardList", service.listPage(vo));
-		
-		//페이징 처리 하단부 정보 저장
-		PageMakerVO pm = new PageMakerVO();
-		pm.setVo(vo);
-		pm.setTotalCnt(385);
-		
-		log.info("################################### vo : "+ vo + "pm" + pm);
-		
-		model.addAttribute("pm", pm);
-		
-		return"/board/listBoardAll";
 	}
 	
 	
@@ -316,10 +324,16 @@ public class BoardController {
 	
 	//게시판 리스트(말머리) - GET
 	@RequestMapping(value = "/listBoardCategory", method = RequestMethod.GET)
-	public String listBoardCategory(Model model,PageVO vo,@RequestParam("board_category") String board_category) throws Exception{
+	public String listBoardCategory(Model model,PageVO vo,@RequestParam("board_category") String board_category,HttpServletRequest request,HttpSession session) throws Exception{
 		log.info(" 1. controller - listBoardCategory() ");
 		
 //		log.info("##############board_category"+board_category);
+		
+		session = request.getSession();
+		MemberVO memberVO = (MemberVO)session.getAttribute("loginVO");
+		
+		String user_id = memberVO.getUser_id();
+		session.setAttribute("user_id", user_id);
 		
 		model.addAttribute("boardList", service.listCategory(vo,board_category));
 		

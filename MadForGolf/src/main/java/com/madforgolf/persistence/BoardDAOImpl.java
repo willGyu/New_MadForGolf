@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import com.madforgolf.domain.BoardVO;
 import com.madforgolf.domain.PageVO;
+import com.madforgolf.domain.ReplyVO;
 
 @Repository
 public class BoardDAOImpl implements BoardDAO{
@@ -28,6 +29,25 @@ public class BoardDAOImpl implements BoardDAO{
 	
 	 
 	/////////////////////////////////////////////////////////////////////////////
+	
+	
+	@Override
+	public void boardWrite(BoardVO vo) throws Exception{
+		log.info(" 3. DAO - insertBoard(vo) ");
+		
+		int result = sqlSession.insert(NAMESPACE+".boardWrite", vo);
+		
+		if(result > 0) {
+			log.info(" 4. DB - 글 삽입 완료 ");
+		}
+		
+	}
+	
+
+	//----------------------------------------------------------------------
+	
+	
+	
 	
 	//글내용
 	@Override
@@ -53,52 +73,30 @@ public class BoardDAOImpl implements BoardDAO{
 		return sqlSession.delete(NAMESPACE+".deleteBoard", board_num);
 	}
 	
+
+	
+	//----------------------------------------------------------------------
+
+	
+	
 	//목록
-	@Override
-	public List<BoardVO> listAll() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	@Override
+//	public List<BoardVO> listAll() throws Exception {
+//		return null;
+//	}
+	
 
+//	@Override
+//	public List<BoardVO> listBoardAll() throws Exception {
+//		log.info(" 3. DAO - listBoardAll() " );
+//		
+//		List<BoardVO> boardListAll = sqlSession.selectList(NAMESPACE + ".listBoardAll");
+//		
+//		return boardListAll;
+//	}
 	
 	
 	//----------------------------------------------------------------------
-	
-	
-	
-	@Override
-	public void boardWrite(BoardVO vo) throws Exception{
-		log.info(" 3. DAO - insertBoard(vo) ");
-		
-		int result = sqlSession.insert(NAMESPACE+".boardWrite", vo);
-		
-		if(result > 0) {
-			log.info(" 4. DB - 글 삽입 완료 ");
-		}
-		
-	}
-	
-	
-	
-	
-	//----------------------------------------------------------------------
-
-	
-	@Override
-	public List<BoardVO> listBoardAll() throws Exception {
-		log.info(" 3. DAO - listBoardAll() " );
-		
-		List<BoardVO> boardListAll = sqlSession.selectList(NAMESPACE + ".listBoardAll");
-		
-		return boardListAll;
-	}
-	
-	
-	//----------------------------------------------------------------------
-
-	
-	
-
 
 	
 	@Override
@@ -142,4 +140,107 @@ public class BoardDAOImpl implements BoardDAO{
 		
 		return sqlSession.selectList(NAMESPACE+".listPage3",vo);
 	}
+	
+	
+
+
+	//----------------------------------------------------------------------
+
+	
+	@Override
+	public List<BoardVO> listCategory(PageVO vo, String board_category) throws Exception {
+		
+		log.info(" 3. DAO - listCategory(vo, board_category) 호출 ");
+
+		int page = vo.getPage();
+		int perPageNum = vo.getPerPageNum();
+		
+		
+		Map<String, Object> categoryObj = new HashMap<String, Object>();
+		categoryObj.put("page", page);
+		categoryObj.put("perPageNum", perPageNum);
+		categoryObj.put("board_category", board_category);
+		
+//		log.info(categoryObj.toString());
+		
+		return sqlSession.selectList(NAMESPACE+".listCategory",categoryObj);
+	}
+	
+	
+	
+
+	//-------------------------------------------------------------------------
+	
+	
+	
+	
+	//댓글
+	@Override
+	public void insertReply(ReplyVO vo) throws Exception {
+		log.info("ReplyDAO 호출");
+		sqlSession.insert(NAMESPACE+".insertReply", vo);
+	}
+	
+
+
+	//-------------------------------------------------------------------------
+	
+	
+	
+
+	@Override
+	public List<ReplyVO> getReply(Integer board_num, PageVO pageVO) throws Exception {
+		//int page = vo.getPage();
+		//int perPageNum = vo.getPerPageNum();
+		log.info("getReply(board_num, vo) 호출");
+		Map<String, Object> replyObj = new HashMap<String, Object>();
+		replyObj.put("board_num", board_num);
+		replyObj.put("pageVO", pageVO);
+		//replyObj.put("page", page);
+		//replyObj.put("perPageNum", perPageNum);
+		log.info("getReply(board_num, vo) 성공");
+		
+		List<ReplyVO> list = sqlSession.selectList(NAMESPACE+".listReply", replyObj);
+		log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + list);
+		
+		return list;
+	}
+
+
+
+	//-------------------------------------------------------------------------
+	
+	
+	
+
+	@Override
+	public Integer deleteReply(Integer reply_num) throws Exception {
+		return sqlSession.delete(NAMESPACE+".deleteReply", reply_num);
+	}
+
+
+
+	//-------------------------------------------------------------------------
+	
+	
+	
+
+	@Override
+	public Integer updateReply(ReplyVO vo) throws Exception {
+		return sqlSession.update(NAMESPACE+".updateReply", vo);
+	}
+
+
+
+	//-------------------------------------------------------------------------
+	
+	
+	
+
+	@Override
+	public Integer replyCnt(Integer board_num) throws Exception {
+		return sqlSession.selectOne(NAMESPACE+".replyCnt", board_num);
+	}
+	
+	
 }

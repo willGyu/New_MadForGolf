@@ -117,7 +117,6 @@
 			<scope>test</scope>
 		</dependency> 
 		
-		<!-- 외부 라이브러리 -->
 		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
 		<dependency>
 		    <groupId>mysql</groupId>

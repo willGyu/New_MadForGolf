@@ -7,12 +7,17 @@
 <!-- header -->
 <jsp:include page="../include/header.jsp" />
 <!-- header -->
+
+<style>
+
+
+</style>
    
    
      <!-- ##### Breadcrumb Area Start ##### -->
     <div class="breadcrumb-area">
         <!-- Top Breadcrumb Area -->
-        <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(${pageContext.request.contextPath }/resources/img/bg-img/24.jpg);">
+        <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(${pageContext.request.contextPath }/resources/img/bg-img/bg-img (9).jpg);">
             <h2>Community</h2>
         </div>
 
@@ -21,7 +26,7 @@
                 <div class="col-12">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i> Home</a></li>
+                            <li class="breadcrumb-item"><a href="/"><i class="fa fa-home"></i> Home</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Community</li>
                         </ol>
                     </nav>
@@ -31,12 +36,12 @@
     </div>
     <!-- ##### Breadcrumb Area End ##### -->
 
-
+${sessionScope.user_id}
 <%-- 		<c:if test="${!(empty sessionScope.loginID) }"> --%>
         <div class="col-12">
         	<button class="btn alazea-btn mt-15" onclick="location.href='${pageContext.request.contextPath }/board/insertBoard'">글쓰기</button>
         </div>
-<%-- 	</c:if> --%>
+<%-- 		</c:if> --%>
 
 
    		<!-- category 클릭 시 말머리별 게시글 리스트만 뜨도록 구현 -->

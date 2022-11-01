@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -273,12 +274,24 @@ public class BoardController {
 	
 	//게시판 리스트(페이징 처리) - GET
 	@RequestMapping(value = "/listBoardAll", method = RequestMethod.GET)
-	public String listBoardAllGET(Model model,PageVO vo) throws Exception{
+	public String listBoardAllGET(Model model,PageVO vo,HttpServletRequest request,HttpSession session) throws Exception{
 		log.info(" 1. controller - listBoardAllGET ");
 		
-//		vo.setPage(2);
-//		vo.setPerPageNum(30);
+		session = request.getSession();
 		
+		log.info("#####################session : "+session);
+		
+		String user_id_real = (String)session.getAttribute("user_id");
+		String user_id = "난 다은쓰";
+		
+		log.info("#####################user_id_real : "+user_id_real);
+		log.info("#####################user_id : "+user_id);
+
+		
+		session.setAttribute("user_id", user_id);
+		
+		log.info("#####################session : "+session);
+
 		model.addAttribute("boardList", service.listPage(vo));
 		
 		//페이징 처리 하단부 정보 저장

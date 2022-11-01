@@ -2,8 +2,9 @@
     pageEncoding="UTF-8"%>
     <!-- JSTL사용  -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ include file="../include/header.jsp" %>
 
-        <style>
+<style type="text/css">
 #topMenu {
 	height: 30px;
 	width: 1100px;
@@ -16,7 +17,6 @@
 #topMenu ul li {
 	list-style: none;
 	color: #FBF2CF;
-	background-color: #C6EBC5;
 	float: left;
 	line-height: 30px;
 	vertical-align: middle;
@@ -31,6 +31,7 @@
 	font-size: 16px;
 	font-weight: bold;
 	font-family: "Trebuchet MS", Dotum, Arial;
+	background-color: #C6EBC5;
 }
 
 #topMenu .menuLink1 {
@@ -55,29 +56,29 @@
  */
 /*=======최신순 인기순 마우스오버=================  */
 .date_like:hover {
-	color:#F8C4B4;
+	color:#F8C4B4 !important;
   font-weight: bolder;
   cursor: pointer;
 }
 /*=======최신순 인기순 마우스오버=================  */
 
 /*===============상품올리기 버튼========================  */
-@import url(https://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700);
+@import url(https://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700); */
 
-/*
+
 .fonts {
   font-family: 'Josefin Slab', serif;
 }
-*/
 
-body {
-  font-family: 'Josefin Slab', serif;
-  font-size: 20px;
-  line-height: 24px;
-  color: #333;
-  background: #C6EBC5;
-  overflow-y: scroll;
-}
+
+/* body {
+	font-family: 'Josefin Slab', serif;
+	font-size: 20px;
+	line-height: 24px;
+	color: #333;
+	background: #C6EBC5;
+	overflow-y: scroll;
+} */
 
 p {
   margin-bottom: 0.5em;
@@ -121,14 +122,14 @@ a:visited {
   margin: 20px auto;
 }
 
-.container {
+/* .container {
   padding-top: 1em;
   margin-top: 1em;
   border-top: 
     solid
     1px
     #CCC;
-}
+} */
 
 a.button {
   display: block;
@@ -363,7 +364,7 @@ $(document).ready(function(){
 	
 });
 </script> -->
-<%@ include file="../include/header.jsp" %>
+
 
     <!-- ##### Breadcrumb Area Start ##### -->
     <div class="breadcrumb-area">
@@ -394,22 +395,22 @@ $(document).ready(function(){
 	        <nav id="topMenu" style="margin: 0px auto;">
                 <ul>
 						<!-- 남성용  -->
-                        <li><a class="menuLink1"> Men's </a></li>
+                        <li><a class="menuLink1" style="border-top-left-radius: 5px;"> Men's </a></li>
                         <li><a class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Driver&gender=1">Driver</a></li>
                         <li><a class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Iron&gender=1">Iron</a></li>
                         <li><a class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Utility&gender=1">Utility</a></li>
                         <li><a class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Wedge&gender=1">Wedge</a></li>
                         <li><a class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Putter&gender=1">Putter</a></li>
-                        <li><a class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Etc&gender=1">Etc</a></li>
+                        <li><a class="menuLink" style="border-top-right-radius: 5px;" href="${pageContext.request.contextPath }/product/listAll?category=Etc&gender=1">Etc</a></li>
                
                			<!-- 여성용 -->
-               			<li><a class="menuLink1"> Women's </a></li>
+               			<li><a class="menuLink1" style="border-bottom-left-radius: 5px;"> Women's </a></li>
                         <li><a class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Driver&gender=2">Driver</a></li>
                         <li><a class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Iron&gender=2">Iron</a></li>
                         <li><a class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Utility&gender=2">Utility</a></li>
                         <li><a class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Wedge&gender=2">Wedge</a></li>
                         <li><a class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Putter&gender=2">Putter</a></li>
-                        <li><a class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Etc&gender=2">Etc</a></li>
+                        <li><a class="menuLink" style="border-bottom-right-radius: 5px;" href="${pageContext.request.contextPath }/product/listAll?category=Etc&gender=2">Etc</a></li>
                
                
                
@@ -466,9 +467,8 @@ $(document).ready(function(){
 									<div class="single-product-area mb-50">
 										<!-- Product Image -->
 
-											<a href="${pageContext.request.contextPath }/product/productDetail?prod_num=${vo.prod_num}"><img src="${pageContext.request.contextPath }/resources/product_img/${vo.prod_img}"></a>
 										<div class="product-img">
-
+											<a href="${pageContext.request.contextPath }/product/productDetail?prod_num=${vo.prod_num}"><img src="${pageContext.request.contextPath }/resources/product_img/${vo.prod_img}"></a>
 											<!-- Product Tag -->
 											<div class="product-tag">
 												<a href="#">Hot</a>
@@ -531,19 +531,3 @@ $(document).ready(function(){
 
     <!-- ##### Shop Area End ##### -->
 <%@ include file="../include/footer.jsp" %>
-
-
-    <!-- ##### All Javascript Files ##### -->
-    <!-- jQuery-2.2.4 js -->
-    <script src="${pageContext.request.contextPath }/resources/js/jquery/jquery-2.2.4.min.js"></script>
-    <!-- Popper js -->
-    <script src="${pageContext.request.contextPath }/resources/js/bootstrap/popper.min.js"></script>
-    <!-- Bootstrap js -->
-    <script src="${pageContext.request.contextPath }/resources/js/bootstrap/bootstrap.min.js"></script>
-    <!-- All Plugins js -->
-    <script src="${pageContext.request.contextPath }/resources/js/plugins/plugins.js"></script>
-    <!-- Active js -->
-    <script src="${pageContext.request.contextPath }/resources/js/active.js"></script>
-</body>
-
-</html>

@@ -243,14 +243,14 @@ public class ProductController {
 
 	// 상품작성 수정하기 - GET (기존의 정보 조회 출력+수정할 정보 입력)
 	@RequestMapping(value = "/modify", method = RequestMethod.GET)
-	public void modifyProductGET(@RequestParam("prod_num") int prod_num,ProductVO vo,Model model) throws Exception {
+	public void modifyProductGET(/*@RequestParam("prod_num") int prod_num,*/ProductVO vo,Model model) throws Exception {
 		// 전달정보 저장(bno)
-		log.info("@@@ prod_num: " +prod_num);
-
+		log.info("@@@ prod_num: " +vo.getProd_num());
+		log.info("@@@@@@@@@@@@@@@"+service.getBoard(vo.getProd_num()));
 
 		// 서비스 - 게시판 글 정보를 가져오는 메서드
 		// 연결된 뷰에 정보 전달(Model객체)
-		model.addAttribute("prod_num", service.getBoard(prod_num));
+		model.addAttribute("prod_num", service.getBoard(vo.getProd_num()));
 
 		// 페이지 이동(출력) /board/modify
 	}
@@ -281,7 +281,7 @@ public class ProductController {
 	}
 
 	// 상품작성 삭제 - POST
-	@RequestMapping(value = "/remove", method = RequestMethod.POST)
+	@RequestMapping(value = "/remove", method = RequestMethod.GET)
 	public String removeProductPOST(@RequestParam("prod_num") int prod_num, RedirectAttributes rttr) throws Exception {
 		log.info(" removeProductPOST() 호출 ");
 
@@ -297,7 +297,7 @@ public class ProductController {
 
 		// 글 리스트 페이지 이동
 //		return "redirect:/board/listAll";
-		return "redirect:/board/listAll";
+		return "redirect:/product/listAll";
 	}
 
 	// http://localhost:8080/board/regist

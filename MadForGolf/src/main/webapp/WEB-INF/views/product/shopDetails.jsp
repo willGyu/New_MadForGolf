@@ -22,6 +22,12 @@
 }
 </style>
 
+<script type="text/javascript" src="https://asset.talkplus.io/talkplus-js-0.2.17.js"></script>
+<script type="text/javascript">
+	var client = new TalkPlus.Client({appId: '6d4f7ab2-f06e-4978-8282-8fc150e43cd0'});
+</script>
+
+
     <!-- ##### Breadcrumb Area Start ##### -->
     <div class="breadcrumb-area">
         <!-- Top Breadcrumb Area -->
@@ -45,6 +51,9 @@
     </div>
     <!-- ##### Breadcrumb Area End ##### -->
 
+
+
+
     <!-- ##### Single Product Details Area Start ##### -->
     <section class="single_product_details_area mb-50">
         <div class="produts-details--content mb-50">
@@ -56,30 +65,20 @@
                             <div id="product_details_slider" class="carousel slide" data-ride="carousel">
                                 <div class="carousel-inner">
                                     <div class="carousel-item active">
-                                        <a class="product-img" href="${pageContext.request.contextPath }/resources/product_img/${product.prod_img }" title="Product Image">
-                                        <img src="${pageContext.request.contextPath }/resources/product_img/${product.prod_img }" alt="1" style="height: 440px; width: 308px; margin-left: 80px;">
-                                    </a>
+                                    	<img class="d-block w-100" src="${pageContext.request.contextPath }/resources/product_img/${product.prod_img }" alt="1" style="width: 445px; height: 445px;">
                                     </div>
-                                    <!-- 이미지 여러개 넣을 시 주석 풀고 사용 -->
-<!--                                     <div class="carousel-item"> -->
-<%--                                         <a class="product-img" href="${pageContext.request.contextPath }/resources/img/bg-img/49.jpg" title="Product Image"> --%>
-<%--                                         <img class="d-block w-100" src="${pageContext.request.contextPath }/resources/img/bg-img/49.jpg" alt="1"> --%>
-<!--                                     </a> -->
-<!--                                     </div> -->
-<!--                                     <div class="carousel-item"> -->
-<%--                                         <a class="product-img" href="${pageContext.request.contextPath }/resources/img/bg-img/49.jpg" title="Product Image"> --%>
-<%--                                         <img class="d-block w-100" src="${pageContext.request.contextPath }/resources/img/bg-img/49.jpg" alt="1"> --%>
-<!--                                     </a> -->
-<!--                                     </div> -->
+                                    <div class="carousel-item">
+                                        <img class="d-block w-100" src="${pageContext.request.contextPath }/resources/product_img/${product.prod_img }" alt="1" style="width: 445px; height: 445px;">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img class="d-block w-100" src="${pageContext.request.contextPath }/resources/product_img/${product.prod_img }" alt="1" style="width: 445px; height: 445px;">
+                                    </div>
                                 </div>
-<!--                                 <ol class="carousel-indicators"> -->
-<%--                                     <li class="active" data-target="#product_details_slider" data-slide-to="0" style="background-image: url(${pageContext.request.contextPath }/resources/img/bg-img/49.jpg);"> --%>
-<!--                                     </li> -->
-<%--                                     <li data-target="#product_details_slider" data-slide-to="1" style="background-image: url(${pageContext.request.contextPath }/resources/img/bg-img/49.jpg);"> --%>
-<!--                                     </li> -->
-<%--                                     <li data-target="#product_details_slider" data-slide-to="2" style="background-image: url(${pageContext.request.contextPath }/resources/img/bg-img/49.jpg);"> --%>
-<!--                                     </li> -->
-<!--                                 </ol> -->
+                                <ol class="carousel-indicators">
+                                    <li class="active" data-target="#product_details_slider" data-slide-to="0" style="background-image: url(${pageContext.request.contextPath }/resources/product_img/${product.prod_img });"></li>
+                                    <li data-target="#product_details_slider" data-slide-to="1" style="background-image: url(${pageContext.request.contextPath }/resources/product_img/${product.prod_img });"></li>
+                                    <li data-target="#product_details_slider" data-slide-to="2" style="background-image: url(${pageContext.request.contextPath }/resources/product_img/${product.prod_img });"></li>
+                                </ol>
                             </div>
                         </div>
                     </div>
@@ -108,6 +107,7 @@
                                 <p><span>Condition:</span> <span>${product.condition }</span></p>
                                 <p><span>Gender:</span> <span><c:if test="${product.gender eq 1}">남</c:if><c:if test="${product.gender eq 2}">여</c:if></span></p>
                                 <p><span>Category:</span> <span>${product.category }</span></p>
+                                <p><span>Seller:</span> <span><a href="${pageContext.request.contextPath }/product/seller">${product.seller_id }</a></span></p>
                                 <p>
                                     <span>Share on:</span>
                                     <span>

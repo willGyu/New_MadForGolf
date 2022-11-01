@@ -1,7 +1,13 @@
 package com.madforgolf.controller;
 
+import java.io.File;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.inject.Inject;
@@ -18,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.madforgolf.domain.BoardVO;
@@ -191,59 +198,164 @@ public class ProductController {
 	} // 상품등록 페이지 - 이동 (GET)
 
 	// 상품 등록 - 등록 (POST)
+//	@RequestMapping(value = "/productInsert", method = RequestMethod.POST)
+//	public String productInsertPOST(ProductVO vo, @ModelAttribute("file") MultipartFile file,
+//			HttpServletRequest request) throws Exception {
+//		log.info("productInsertPOST() 호출");
+//
+//		// 전달된 정보 저장
+//		log.info("상품 정보 : " + vo);
+//
+//		// 파일 개요
+//		String fileRealName = file.getOriginalFilename();
+//		long size = file.getSize();
+//		log.info("파일명 : " + fileRealName);
+//		log.info("용량(Byte) : " + size);
+//
+//		// 파일 등록 - 등록되는 파일 경로
+//		// String uploadFolder =
+//		// "C:\\Users\\ITWILL\\git\\New_MadForGolf\\src\\main\\webapp\\resources\\product_img";
+//		// 경로 직접 입력은 경로 일치 필요
+//		// => 메서드로 절대 경로 구하기 -> 경로 일치 필요없음
+//		String uploadFolder = request.getServletContext().getRealPath("resources/product_img");
+//		// 파일 저장 경로 :
+//		// D:\workspace_sts6\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\MadForGolf\resources\product_img
+//		log.info("파일 저장 경로" + uploadFolder);
+//
+//		// 파일 등록 - 파일 이름 랜덤 생성(이름 중복 방지)
+//		UUID uuid = UUID.randomUUID();
+//		log.info("UUID : " + uuid);
+//		String[] uuids = uuid.toString().split("-");
+//		String uniqueName = uuids[0];
+//
+//		// 파일 등록 - 확장자명 만들기
+//		String fileExtension = fileRealName.substring(fileRealName.lastIndexOf("."), fileRealName.length());
+//
+//		log.info("생성된 고유문자열 : " + uniqueName);
+//		log.info("확장자명 : " + fileExtension);
+//
+//		// 파일 등록
+//		java.io.File saveFile = new java.io.File(uploadFolder + "/" + uniqueName + fileExtension);
+//		try {
+//			file.transferTo(saveFile); // 실제 파일 저장메서드(filewriter 작업을 손쉽게 한방에 처리해준다.)
+//			log.info("파일 등록 완료!");
+//		} catch (Exception e) {
+//			log.info(e.getMessage());
+//		}
+//
+//		// 서비스 - DB에 상품 등록
+//		vo.setProd_img(uniqueName + fileExtension);
+//		service.productInsert(vo);
+//
+//		// 페이지 이동(리스트) 화면,주소 모두 변경
+//		return "redirect:/";
+//	} // 상품 등록 - 등록 (POST)
+
+	
+	
+	
+	
+	
+	
 	@RequestMapping(value = "/productInsert", method = RequestMethod.POST)
-	public String productInsertPOST(ProductVO vo, @ModelAttribute("file") MultipartFile file,
-			HttpServletRequest request) throws Exception {
+	public String fileUploadPOST(MultipartHttpServletRequest multi, ProductVO vo, HttpServletRequest request) throws Exception {
 		log.info("productInsertPOST() 호출");
+		
+		// log.info("multi : " + multi);
 
-		// 전달된 정보 저장
-		log.info("상품 정보 : " + vo);
-
-		// 파일 개요
-		String fileRealName = file.getOriginalFilename();
-		long size = file.getSize();
-		log.info("파일명 : " + fileRealName);
-		log.info("용량(Byte) : " + size);
-
-		// 파일 등록 - 등록되는 파일 경로
-		// String uploadFolder =
-		// "C:\\Users\\ITWILL\\git\\New_MadForGolf\\src\\main\\webapp\\resources\\product_img";
-		// 경로 직접 입력은 경로 일치 필요
-		// => 메서드로 절대 경로 구하기 -> 경로 일치 필요없음
-		String uploadFolder = request.getServletContext().getRealPath("resources/product_img");
-		// 파일 저장 경로 :
-		// D:\workspace_sts6\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\MadForGolf\resources\product_img
-		log.info("파일 저장 경로" + uploadFolder);
-
-		// 파일 등록 - 파일 이름 랜덤 생성(이름 중복 방지)
-		UUID uuid = UUID.randomUUID();
-		log.info("UUID : " + uuid);
-		String[] uuids = uuid.toString().split("-");
-		String uniqueName = uuids[0];
-
-		// 파일 등록 - 확장자명 만들기
-		String fileExtension = fileRealName.substring(fileRealName.lastIndexOf("."), fileRealName.length());
-
-		log.info("생성된 고유문자열 : " + uniqueName);
-		log.info("확장자명 : " + fileExtension);
-
-		// 파일 등록
-		java.io.File saveFile = new java.io.File(uploadFolder + "/" + uniqueName + fileExtension);
-		try {
-			file.transferTo(saveFile); // 실제 파일 저장메서드(filewriter 작업을 손쉽게 한방에 처리해준다.)
-			log.info("파일 등록 완료!");
-		} catch (Exception e) {
-			log.info(e.getMessage());
+		// 파일의 정보를 저장하는 MAP
+		Map map = new HashMap();
+		
+		Enumeration enu = multi.getParameterNames(); // 파일정보 x
+		// log.info("enu : " + enu);
+		
+		while(enu.hasMoreElements()) {
+			String name = (String)enu.nextElement();
+			// log.info("name : " + name);
+			String value = multi.getParameter(name);
+			map.put(name, value);
 		}
-
-		// 서비스 - DB에 상품 등록
-		vo.setProd_img(uniqueName + fileExtension);
+		
+		// 굳이 이렇게 해야하나...
+		log.info("map : " + map);
+		vo.setSeller_id((String)map.get("seller_id"));
+		vo.setProd_name((String)map.get("prod_name"));
+		vo.setPrice(Integer.parseInt((String)map.get("price")));
+		vo.setDetail((String)map.get("detail"));
+		vo.setCondition((String)map.get("condition"));
+		vo.setCategory((String)map.get("category"));
+		vo.setGender(Integer.parseInt((String)map.get("gender")));
+		// 전달정보(파라미터값)을 MAP에 저장 끝
+		
+		// 업로드 파일 처리
+		fileProcess(multi, vo, request);
+		
 		service.productInsert(vo);
-
-		// 페이지 이동(리스트) 화면,주소 모두 변경
+		
 		return "redirect:/";
-	} // 상품 등록 - 등록 (POST)
-
+	}
+	
+	// 전달된 파일 처리 전용 메서드
+	public List<String> fileProcess(MultipartHttpServletRequest multi, ProductVO vo, HttpServletRequest request) throws Exception {
+		log.info("첨부파일 처리 시작");
+		
+		// 파일정보를 저장하는 리스트(리턴)
+		List<String> fileList = new ArrayList<String>();
+		
+		// 전달된 파일정보를 받아서 처리
+		Iterator<String> fileNames = multi.getFileNames();
+		// log.info("fileNames : " + fileNames);
+		
+		while(fileNames.hasNext()) {
+			String fileName = fileNames.next(); // 파일의 파라미터명
+			log.info("fileName : " + fileName);
+			
+			MultipartFile mFile = multi.getFile(fileName); // 업로드된 파일정보를 가져오기
+			String oFileName = mFile.getOriginalFilename();
+			log.info("oFileName : " + oFileName);
+			switch(fileName) {
+				case "file1" : vo.setProd_img(oFileName); break;
+				case "file2" : vo.setProd_img2(oFileName); break;
+				case "file3" : vo.setProd_img3(oFileName); break;
+			}
+			log.info("image1 : " + vo.getProd_img());
+			log.info("image2 : " + vo.getProd_img2());
+			log.info("image3 : " + vo.getProd_img3());
+			
+			// 업로드 될 파일의 이름들을 저장
+			fileList.add(oFileName);
+			log.info("fileList" + fileList);
+			
+			// 파일 업로드
+			// 파일 생성
+			//File file = new File("C:\\spring\\"+ oFileName);
+			//log.info(request.getServletContext().getRealPath("resources/product_img") + "/" + oFileName);
+			
+//			if(mFile.getSize() != 0) { // 첨부파일이 있을 때
+//				file.createNewFile(); // 첨부파일 업로드(파일생성)
+//				log.info("파일 업로드 성공");
+//				
+//			}
+			
+			
+		}
+		
+		log.info("첨부파일 처리 끝");
+		return fileList;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	// 상품작성 수정하기 - GET (기존의 정보 조회 출력+수정할 정보 입력)
 	@RequestMapping(value = "/modify", method = RequestMethod.GET)
 	public void modifyProductGET(/*@RequestParam("prod_num") int prod_num,*/ProductVO vo,Model model) throws Exception {
@@ -308,6 +420,21 @@ public class ProductController {
 //		return "redirect:/board/listAll";
 		return "redirect:/product/listAll";
 	}
+	
+	
+	// 채팅하기 테스트
+	@RequestMapping(value = "/test", method = RequestMethod.GET)
+	public void test() {
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 
 	// http://localhost:8080/board/regist
 	// 글쓰기 - GET

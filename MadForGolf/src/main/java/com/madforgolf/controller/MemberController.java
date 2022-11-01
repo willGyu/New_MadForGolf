@@ -307,52 +307,53 @@ public class MemberController {
 			
 			// 가상주소 http://localhost:8080/member/update
 			// => /WEB-INF/views/member/update.jsp
-//			@RequestMapping(value = "/member/update", method = RequestMethod.GET)
-//			public String update(HttpSession session, Model model) {
-//				// 세션값 가져오기
-//				String id=(String)session.getAttribute("loginID");
-//				// 수정할 정보 가지고 감.
-//				MemberVO vo = service.getMember(id);
-//				model.addAttribute("vo",vo);
-//				
-//				// 가상주소 변경없이 jsp 이동
-//			//  /WEB-INF/views/member/update.jsp
-//				return "member/update";
-//			}
-//			
-//			
-//			// 가상주소 http://localhost:8080/member/updatePro
-//			// 수정처리 메시지 "MemberController updatePro()"
-//			// 가상주소 redirect:/main/main 이동
-//			@RequestMapping(value = "/member/updatePro", method = RequestMethod.POST)
-//			public String updatePro(MemberVO vo) {
-//				System.out.println("MemberController updatePro()");
-//				// loginMember 비밀번호 일치 여부 확인
-//				MemberVO vo2 = service.loginMember(vo);
-//				// 아이디 비밀번호 일치 => 수정처리 => /main/main 이동
-//				// 아이디 비밀번호  틀림  => msg.jsp  뒤로이동
-//				if(vo2!=null) {
-//					// 아이디 비밀번호 일치
-//					//수정처리
-//					int result = service.updateMember(vo);
-//					// 메인 페이지로 이동
-//					// 주소가 변경되면서 가상주소 이동
-////					response.sendRedirect() 
-//					return "redirect:/main/main";
-//				}else {
-//					// 아이디 비밀번호 틀림
-//				//  /WEB-INF/views/member/msg.jsp
-//					return "member/msg";
-//				}
-//			}
-//			
-//			@RequestMapping(value = "/member/list", method = RequestMethod.GET)
-//			public String list() {
-//				
-//				// 가상주소 변경없이 jsp 이동
-//			//  /WEB-INF/views/member/list.jsp
-//				return "member/list";
-//			}
+			@RequestMapping(value = "/member/update", method = RequestMethod.GET)
+			public String update(HttpSession session, Model model) {
+				// 세션값 가져오기
+				String id=(String)session.getAttribute("loginID");
+				// 수정할 정보 가지고 감.
+				MemberVO vo = service.getMember(id);
+				log.info(vo+"");
+				model.addAttribute("vo", vo);
+				
+				// 가상주소 변경없이 jsp 이동
+			//  /WEB-INF/views/member/update.jsp
+				return "member/update";
+			}
+			
+			
+			// 가상주소 http://localhost:8080/member/updatePro
+			// 수정처리 메시지 "MemberController updatePro()"
+			// 가상주소 redirect:/main/main 이동
+			@RequestMapping(value = "/member/updatePro", method = RequestMethod.POST)
+			public String updatePro(MemberVO vo) {
+				System.out.println("MemberController updatePro()");
+				// loginMember 비밀번호 일치 여부 확인
+				MemberVO vo2 = service.loginMember(vo);
+				// 아이디 비밀번호 일치 => 수정처리 => /main/main 이동
+				// 아이디 비밀번호  틀림  => msg.jsp  뒤로이동
+				if(vo2!=null) {
+					// 아이디 비밀번호 일치
+					//수정처리
+					int result = service.updateMember(vo);
+					// 메인 페이지로 이동
+					// 주소가 변경되면서 가상주소 이동
+//					response.sendRedirect() 
+					return "redirect:/main/main";
+				}else {
+					// 아이디 비밀번호 틀림
+				//  /WEB-INF/views/member/msg.jsp
+					return "member/msg";
+				}
+			}
+			
+			@RequestMapping(value = "/member/list", method = RequestMethod.GET)
+			public String list() {
+				
+				// 가상주소 변경없이 jsp 이동
+			//  /WEB-INF/views/member/list.jsp
+				return "member/list";
+			}
 		
 			// ------------------------ 현섭씨 끝 (회원 정보 수정) ------------------------
 			

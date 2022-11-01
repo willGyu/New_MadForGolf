@@ -71,8 +71,8 @@
 	
 	<!-- 상품 등록 -->
 	<insert id="insert">
-		insert into mfg_products (seller_id, prod_name, prod_img, price, detail, `condition`, category, gender)
-		values (#{seller_id}, #{prod_name}, #{prod_img}, #{price}, #{detail}, #{condition}, #{category}, #{gender})
+		insert into mfg_products (seller_id, prod_name, prod_img, price, detail, `condition`, category, gender, prod_img2, prod_img3)
+		values (#{seller_id}, #{prod_name}, #{prod_img}, #{price}, #{detail}, #{condition}, #{category}, #{gender}, #{prod_img2}, #{prod_img3})
 	</insert>
 	
 	<resultMap type="com.madforgolf.domain.ProductVO" id="vo">

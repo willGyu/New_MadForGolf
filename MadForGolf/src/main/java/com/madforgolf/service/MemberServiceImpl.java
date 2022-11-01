@@ -72,24 +72,24 @@ public class MemberServiceImpl implements MemberService{
 		//메서드 호출
 		return dao.getMember(id);
 	}
-//	
-//	@Override
-//	public Integer updateMember(MemberVO uvo) {
-//		//메서드 호출
-//		return dao.updateMember(uvo);
-//	}
-//
-//	@Override
-//	public MemberVO loginMember(MemberVO vo) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	public MemberVO loginMember(String userid, String userpw) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
+	
+	@Override
+	public Integer updateMember(MemberVO uvo) {
+		//메서드 호출
+		return dao.updateMember(uvo);
+	}
+
+	@Override
+	public MemberVO loginMember(MemberVO vo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public MemberVO loginMember(String userid, String userpw) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 	

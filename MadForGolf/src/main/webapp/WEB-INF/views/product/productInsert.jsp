@@ -50,6 +50,16 @@
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
+
+var cnt = 1;
+
+function addFile(){
+	// 버튼 클릭시 동작 -> 파일입력창 추가
+	alert("클릭");
+	$('#div_file').append("<br><input type='file' name='file" + cnt + "'>");
+	cnt++;
+}
+
 	$(document).ready(function(){
 		// alert("확인");
 		$('#form').submit(function(){
@@ -327,6 +337,10 @@
                                 <label for="company">Image</label>
                                 <input type="file" class="form-control" id="prod_img" name="file" onchange="readURL(this);">
                                 <img id="preview"/>
+                            </div>
+                            <div class="col-12 mb-4">
+                            	<input type="button" value="파일 업로드 추가" onclick="addFile();"><br>
+								<div id="div_file"><!-- <input type="file" name="file"> --></div>
                             </div>
 							<div style="margin:0px auto;">
 								<div class="checkout-btn mt-30" >

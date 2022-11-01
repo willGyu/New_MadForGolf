@@ -28,11 +28,11 @@ public interface MemberService {
 	public MemberVO getMember(String id);
 	
 	// 회원 정보 수정
-//	public Integer updateMember(MemberVO uvo);
-//	
-//	public MemberVO loginMember(MemberVO vo);
-//	
-//	public MemberVO loginMember(String userid, String userpw);
+	public Integer updateMember(MemberVO uvo);
+	
+	public MemberVO loginMember(MemberVO vo);
+	
+	public MemberVO loginMember(String userid, String userpw);
 	
 		
 	// ---------------------------------------------------------------

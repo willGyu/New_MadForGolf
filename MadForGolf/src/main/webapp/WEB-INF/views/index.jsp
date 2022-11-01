@@ -4,7 +4,6 @@
 <%@ include file="./include/header.jsp" %>
 
 
-
     <!-- ##### Hero Area Start ##### -->
     <section class="hero-area">
         <div class="hero-post-slides owl-carousel">
@@ -29,7 +28,6 @@
                     </div>
                 </div>
             </div>
-
             <!-- Single Hero Post -->
             <div class="single-hero-post bg-overlay">
                 <!-- Post Image -->
@@ -54,7 +52,7 @@
         </div>
     </section>
     <!-- ##### Hero Area End ##### -->
-
+<a href="${pageContext.request.contextPath }/product/test">채팅테스트</a>
     <!-- ##### Service Area Start ##### -->
     <section class="our-services-area bg-gray section-padding-100-0">
         <div class="container">

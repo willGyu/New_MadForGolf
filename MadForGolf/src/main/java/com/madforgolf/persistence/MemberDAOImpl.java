@@ -92,19 +92,19 @@ public class MemberDAOImpl implements MemberDAO {
 	
 	
 	
-//		@Override
-//		public Integer updateMember(MemberVO uvo){
-//			
-//			log.info(" 테스트 -> updateMember(MemberVO uvo) 호출 ");
-//			
-//			int result = sqlSession.update(NAMESPACE+".updateMember",uvo);
-//			
-//			log.info(" 회원 정보 수정 완료 ");
-//			// result => 0 (수정x),1 (수정o)	
-//			log.info(" updateMember -> 테스트 호출 ");
-//			
-//			return result;
-//		}
+		@Override
+		public Integer updateMember(MemberVO uvo){
+			
+			log.info(" 테스트 -> updateMember(MemberVO uvo) 호출 ");
+			
+			int result = sqlSession.update(NAMESPACE+".updateMember",uvo);
+			
+			log.info(" 회원 정보 수정 완료 ");
+			// result => 0 (수정x),1 (수정o)	
+			log.info(" updateMember -> 테스트 호출 ");
+			
+			return result;
+		}
 		
 		
 
@@ -116,8 +116,8 @@ public class MemberDAOImpl implements MemberDAO {
 
 	@Override
 	public MemberVO getMember(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return sqlSession.selectOne(NAMESPACE+".updateMember", id);
 	}
 	
 	

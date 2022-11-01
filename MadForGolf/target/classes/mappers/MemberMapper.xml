@@ -17,10 +17,58 @@
 		where user_id =#{user_id}
 	</select>
 	
+	
+	<!-- 전화번호 중복 체크 -->
+	<select id="phoneCheck" resultType="int">
+		select count(*) from mfg_member
+		where user_phone =#{user_phone}
+	</select>
+	
+	
+	
 	<!-- 로그인 -->
-	<select id="login" resultType="com.madforgolf.domain.MemberVO">
+	<select id="login" resultType="MemberVO">
 		select * from mfg_member
 		where user_id=#{user_id} and user_pw=#{user_pw}	
 	</select>
-
+	
+	
+	
+	
+	<!-- 아이디 찾기 -->
+	<select id="findId" resultType="MemberVO">
+		select user_id
+		from mfg_member
+		where user_name=#{user_name} and user_phone=#{user_phone}
+	</select>
+	
+	<!-- 비밀번호 찾기 -->
+	<select id="findPw" resultType="MemberVO">
+		select user_pw
+		from mfg_member
+		where user_id=#{user_id} and user_phone=#{user_phone}
+	</select>
+	
+	<!-- 비밀번호 변경 -->
+	<update id="updatePw">
+		update mfg_member
+		set user_pw=#{user_pw}
+		where user_id=#{user_id}
+	</update>
+	
+	
+	
+	<!-- 회원정보 수정 -->
+	<update id="updateMember">
+		update mfg_member set user_name=#{user_name}, user_phone=#{user_phone}, user_pw=#{user_pw} 
+		where user_name=#{user_name} and user_pw=#{user_pw}
+	</update>
+	
+	
+	
+	<!-- 회원 탈퇴 -->
+	<delete id="deleteMember">
+		delete from mfg_member
+		where user_id=#{user_id} and user_pw=#{user_pw}
+	</delete>
 </mapper>

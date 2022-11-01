@@ -39,7 +39,7 @@ public interface MemberDAO {
 		public MemberVO getMember(String id);
 		
 		// 회원정보 수정
-//		public Integer updateMember(MemberVO uvo);
+		public Integer updateMember(MemberVO uvo);
 		
 		// 회원 탈퇴
 //		public void deleteMember(MemberVO dvo) throws Exception;

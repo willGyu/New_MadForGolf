@@ -4,6 +4,12 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.madforgolf.mapper.BoardMapper">
+	
+	
+	<insert id="boardWrite">
+		insert into mfg_board(board_category,user_id,title,content,content_img,content_file) 
+		values(#{board_category},#{user_id},#{title},#{content},#{content_img},#{content_file})
+	</insert>
 
 
 	<!-- 글내용 -->
@@ -33,13 +39,6 @@
 		delete from mfg_board
 		where board_num=#{board_num}
 	</delete>
-	
-	
-	<insert id="boardWrite">
-		insert into mfg_board(board_category,user_id,title,content) 
-		values(#{board_category},#{user_id},#{title},#{content})
-	</insert>
-
 
 
 	<select id="listBoardAll" resultType="BoardVO" resultMap="vo">
@@ -75,6 +74,53 @@
 		select * from mfg_board 
 		order by board_num desc, write_date desc 
 		limit #{pageStart},#{perPageNum}
+	</select>
+	
+	
+	
+	<select id="listCategory" resultType="BoardVO">
+		select * from mfg_board 
+		where board_category = #{board_category} 
+		order by board_num desc, write_date desc 
+		limit #{page},#{perPageNum}
+	</select>
+
+
+
+	<!-- 댓글쓰기 -->
+	<insert id="insertReply">
+		insert into mfg_reply(board_num,user_id,reply_content,reply_updatedate) 
+		values(#{board_num},#{user_id},#{reply_content},now()) 
+	</insert>
+	
+	<!-- 댓글출력 -->
+	<select id="listReply" resultType="com.madforgolf.domain.ReplyVO">
+		select r.reply_num, r.board_num, r.reply_content, r.user_id, m.user_name, r.reply_date, r.reply_updatedate
+		from mfg_reply r join mfg_member m 
+		on r.user_id = m.user_id 
+		where board_num = #{board_num} 
+		order by reply_num desc, reply_date desc 
+		limit #{pageVO.pageStart},#{pageVO.perPageNum}
+	</select>
+	
+	<!-- 댓글삭제 -->
+	<delete id="deleteReply">
+		delete from mfg_reply 
+		where reply_num = #{reply_num} 
+	</delete>
+	
+	<!-- 댓글수정 -->
+	<update id="updateReply">
+		update mfg_reply
+	 	set reply_content=#{reply_content}, reply_updatedate=now()  
+	 	where reply_num=#{reply_num}	
+	</update>
+	
+	<!-- 댓글 수 -->
+	<select id="replyCnt" resultType="Integer">
+		select count(*) 
+		from mfg_reply 
+		where board_num = #{board_num} 
 	</select>
 
 </mapper>

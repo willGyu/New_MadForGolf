@@ -94,8 +94,8 @@
                                     <li><a href="/product/listAll">Shop(Deal)</a>
                                         <ul class="dropdown">
                                             <li><a href="${pageContext.request.contextPath }/product/listAll?category=Driver">Driver</a></li>
-                                            <li><a href="${pageContext.request.contextPath }/product/listAll?category=Iron&gender=2">Iron</a></li>
-                                            <li><a href="${pageContext.request.contextPath }/product/listAll?category=Util">Util</a></li>
+                                            <li><a href="${pageContext.request.contextPath }/product/listAll?category=Iron">Iron</a></li>
+                                            <li><a href="${pageContext.request.contextPath }/product/listAll?category=Utility">Util</a></li>
                                             <li><a href="${pageContext.request.contextPath }/product/listAll?page=1&category=Wedge">Wedge</a></li>
 											<li><a href="${pageContext.request.contextPath }/product/listAll?page=1&category=Putter">Putter</a></li>
 											<li><a href="${pageContext.request.contextPath }/product/listAll?page=1&category=Etc">Etc</a>

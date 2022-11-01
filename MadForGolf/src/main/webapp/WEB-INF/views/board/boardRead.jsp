@@ -2,188 +2,32 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="description" content="">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<!-- header -->
+<jsp:include page="../include/header.jsp" />
+<!-- header -->
 
-    <!-- Title -->
-    <title>Alazea - Gardening &amp; Landscaping HTML Template</title>
-
-    <!-- Favicon -->
-    <link rel="icon" href="${pageContext.request.contextPath }/resources/img/core-img/favicon.ico">
-
-    <!-- Core Stylesheet -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/style.css">
-
-</head>
-
-<body>
-    <!-- Preloader -->
-    <div class="preloader d-flex align-items-center justify-content-center">
-        <div class="preloader-circle"></div>
-        <div class="preloader-img">
-            <img src="${pageContext.request.contextPath }/resources/img/core-img/leaf.png" alt="">
-        </div>
-    </div>
-
-    <!-- ##### Header Area Start ##### -->
-    <header class="header-area">
-
-        <!-- ***** Top Header Area ***** -->
-        <div class="top-header-area">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="top-header-content d-flex align-items-center justify-content-between">
-                            <!-- Top Header Content -->
-                            <div class="top-header-meta">
-                                <a href="#" data-toggle="tooltip" data-placement="bottom" title="infodeercreative@gmail.com"><i class="fa fa-envelope-o" aria-hidden="true"></i> <span>Email: infodeercreative@gmail.com</span></a>
-                                <a href="#" data-toggle="tooltip" data-placement="bottom" title="+1 234 122 122"><i class="fa fa-phone" aria-hidden="true"></i> <span>Call Us: +1 234 122 122</span></a>
-                            </div>
-
-                            <!-- Top Header Content -->
-                            <div class="top-header-meta d-flex">
-                                <!-- Language Dropdown -->
-                                <div class="language-dropdown">
-                                    <div class="dropdown">
-                                        <button class="btn btn-secondary dropdown-toggle mr-30" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Language</button>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" href="#">USA</a>
-                                            <a class="dropdown-item" href="#">UK</a>
-                                            <a class="dropdown-item" href="#">Bangla</a>
-                                            <a class="dropdown-item" href="#">Hindi</a>
-                                            <a class="dropdown-item" href="#">Spanish</a>
-                                            <a class="dropdown-item" href="#">Latin</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Login -->
-                                <div class="login">
-                                    <a href="#"><i class="fa fa-user" aria-hidden="true"></i> <span>Login</span></a>
-                                </div>
-                                <!-- Cart -->
-                                <div class="cart">
-                                    <a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i> <span>Cart <span class="cart-quantity">(1)</span></span></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ***** Navbar Area ***** -->
-        <div class="alazea-main-menu">
-            <div class="classy-nav-container breakpoint-off">
-                <div class="container">
-                    <!-- Menu -->
-                    <nav class="classy-navbar justify-content-between" id="alazeaNav">
-
-                        <!-- Nav Brand -->
-                        <a href="index.html" class="nav-brand"><img src="${pageContext.request.contextPath }/resources/img/core-img/logo.png" alt=""></a>
-
-                        <!-- Navbar Toggler -->
-                        <div class="classy-navbar-toggler">
-                            <span class="navbarToggler"><span></span><span></span><span></span></span>
-                        </div>
-
-                        <!-- Menu -->
-                        <div class="classy-menu">
-
-                            <!-- Close Button -->
-                            <div class="classycloseIcon">
-                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
-                            </div>
-
-                            <!-- Navbar Start -->
-                            <div class="classynav">
-                                <ul>
-                                    <li><a href="index.html">Home</a></li>
-                                    <li><a href="about.html">About</a></li>
-                                    <li><a href="#">Pages</a>
-                                        <ul class="dropdown">
-                                            <li><a href="index.html">Home</a></li>
-                                            <li><a href="about.html">About</a></li>
-                                            <li><a href="shop.html">Shop</a>
-                                                <ul class="dropdown">
-                                                    <li><a href="shop.html">Shop</a></li>
-                                                    <li><a href="shop-details.html">Shop Details</a></li>
-                                                    <li><a href="cart.html">Shopping Cart</a></li>
-                                                    <li><a href="checkout.html">Checkout</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="portfolio.html">Portfolio</a>
-                                                <ul class="dropdown">
-                                                    <li><a href="portfolio.html">Portfolio</a></li>
-                                                    <li><a href="single-portfolio.html">Portfolio Details</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="blog.html">Blog</a>
-                                                <ul class="dropdown">
-                                                    <li><a href="blog.html">Blog</a></li>
-                                                    <li><a href="single-post.html">Blog Details</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="contact.html">Contact</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="shop.html">Shop</a></li>
-                                    <li><a href="portfolio.html">Portfolio</a></li>
-                                    <li><a href="contact.html">Contact</a></li>
-                                </ul>
-
-                                <!-- Search Icon -->
-                                <div id="searchIcon">
-                                    <i class="fa fa-search" aria-hidden="true"></i>
-                                </div>
-
-                            </div>
-                            <!-- Navbar End -->
-                        </div>
-                    </nav>
-
-                    <!-- Search Form -->
-                    <div class="search-form">
-                        <form action="#" method="get">
-                            <input type="search" name="search" id="search" placeholder="Type keywords &amp; press enter...">
-                            <button type="submit" class="d-none"></button>
-                        </form>
-                        <!-- Close Icon -->
-                        <div class="closeIcon"><i class="fa fa-times" aria-hidden="true"></i></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-    <!-- ##### Header Area End ##### -->
-
-    <!-- ##### Breadcrumb Area Start ##### -->
+<!-- ##### Breadcrumb Area Start ##### -->
     <div class="breadcrumb-area">
-        <!-- Top Breadcrumb Area -->
+        
         <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(${pageContext.request.contextPath }/resources/img/bg-img/24.jpg);">
-            <h2>Contact US</h2>
+            <h2>COMMUNITY</h2>
         </div>
-
         <div class="container">
             <div class="row">
                 <div class="col-12">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i> Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Contact</li>
+                            <li class="breadcrumb-item active" aria-current="page">Community</li>
+                            <li class="breadcrumb-item active" aria-current="page">Content</li>
                         </ol>
                     </nav>
                 </div>
             </div>
         </div>
     </div>
-    <!-- ##### Breadcrumb Area End ##### -->
+<!-- ##### Breadcrumb Area End ##### -->
 
 			<!-- 글 시작@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ --> 
  			<div class="col-12 col-lg-5">
@@ -194,32 +38,32 @@
                     </div> 
                     
                     <!-- 수정, 삭제 시 필요한 글번호 저장 -->
-					<form role="form" method="post">
+					<form role="form" method="post" id="boardContent">
 						<input type="hidden" name="board_num" value="${vo.board_num }">
 					</form>
                     
-                    ${vo }
+                    
                     <!-- Contact Form Area -->
                     <div class="contact-form-area mb-100">
                             <div class="row">
                             	<div class="col-12 col-md-6">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" name="board_num" id="contact-name" placeholder="글번호" value="${vo.board_num }">
+                                        <input type="text" class="form-control" name="board_num" id="contact-name" placeholder="글번호" value="${vo.board_num }" readonly>
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6">
                                     <div class="form-group">
-                                        <input type="email" class="form-control" name="board_category" id="contact-email" placeholder="카테고리" value="${vo.board_category }">
+                                        <input type="email" class="form-control" name="board_category" id="contact-email" placeholder="카테고리" value="${vo.board_category }" readonly>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" name="title" id="contact-subject" placeholder="Subject" value="${vo.title }">
+                                        <input type="text" class="form-control" name="title" id="contact-subject" placeholder="Subject" value="${vo.title }" readonly>
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" name="user_name" id="contact-name" placeholder="글쓴이" value="${vo.user_name }">
+                                        <input type="text" class="form-control" name="user_name" id="contact-name" placeholder="글쓴이" value="${vo.user_name }" readonly>
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6">
@@ -230,13 +74,68 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <textarea class="form-control" name="content" id="message" cols="30" rows="10" placeholder="글내용">${vo.content }</textarea>
+                                        <textarea class="form-control" name="content" id="message" cols="30" rows="10" placeholder="글내용" readonly>${vo.content }</textarea>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <button type="submit" class="btn alazea-btn mt-15" id="updateBoard">수정</button>
                                     <button type="submit" class="btn alazea-btn mt-15" id="deleteBoard">삭제</button>
                                     <button type="submit" class="btn alazea-btn mt-15" id="listAll">목록</button>
+                                </div>
+                                <br>
+                                
+                                
+                                <!-- 댓글 쓰기 -->
+                                <div class="col-12">
+                                <div class="form-group">
+                                <form action="/board/insertReply" method="post">
+<%--                                 	<input type="hidden" name="user_id" value="${sessionScope.loginID }"> --%>
+                                	<input type="hidden" name="user_id" value="itwill01">
+                                	<input type="hidden" name="board_num" value="${vo.board_num }">
+                                    <textarea class="form-control" name="reply_content" id="insertReplyContent" cols="30" rows="10" placeholder="댓글을 입력하세요"></textarea>
+                               		<input type="submit" class="btn alazea-btn mt-15" id="insertReply" value="댓글쓰기">
+                                </form>
+                                </div>
+                                </div>
+                                <br>
+                                <br>
+                                <br>
+                                <hr>
+                                
+                                <!-- 댓글 리스트 -->
+                                <div class="col-12">
+                                <div class="form-group" id="replyList">
+                                <c:forEach var="replyVO" items="${replyVO }">
+                                    <div id="edit_div${replyVO.reply_num }">
+                               		<form role="form" method="post" id="boardReply">
+                                	
+                                	<input type="hidden" name="board_num" value="${vo.board_num }">
+                                    <input type="hidden" name="reply_num" value="${replyVO.reply_num }">
+                                    ${replyVO.user_name } &nbsp;&nbsp;&nbsp; <fmt:formatDate pattern="yy-MM-dd HH:mm" value="${replyVO.reply_updatedate }"/>
+                                    <textarea class="form-control" name="reply_content" id="edit_acontent" cols="30" rows="10" placeholder="글내용" readonly>${replyVO.reply_content }</textarea>
+                               		</form>
+                                    
+                                    <button type="button" class="btn alazea-btn mt-15" id="deleteReply" onclick="deleteReply(${replyVO.reply_num })">삭제</button>
+                                    <input type="button" class="btn alazea-btn mt-15" id="updateFormReply" onclick="updateReplyFun(${vo.board_num },${replyVO.reply_num },'${replyVO.reply_content }');" value="수정">
+                                	</div>
+                                </c:forEach>
+                                
+                                <nav aria-label="Page navigation">
+                            		<ul class="pagination">
+                            		<c:if test="${pm.prev }">
+                                		<li class="page-item"><a class="page-link" href="boardRead?board_num=${vo.board_num }&page=${pm.startPage-1 }"><i class="fa fa-angle-left"></i></a></li>
+                           			</c:if>
+                            		<c:forEach var="idx" begin="${pm.startPage }" end="${pm.endPage }">
+                                		<li class="page-item"><a class="page-link" href="boardRead?board_num=${vo.board_num }&page=${idx }">${idx }</a></li>
+									</c:forEach>
+									<c:if test="${pm.next }">
+                                		<li class="page-item"><a class="page-link" href="boardRead?board_num=${vo.board_num }&page=${pm.endPage+1 }"><i class="fa fa-angle-right"></i></a></li>
+                            		</c:if>
+                            		</ul>
+                        		</nav>
+                                
+                                
+                                </div>
                                 </div>
                                 
                                 <!-- 로그인 정보가 없으면 수정 삭제 못보게... -->
@@ -252,154 +151,67 @@
                 </div>
 			<!-- 글 끝@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ --> 
 
-    <!-- ##### Footer Area Start ##### -->
-    <footer class="footer-area bg-img" style="background-image: url(${pageContext.request.contextPath }/resources/img/bg-img/3.jpg);">
-        <!-- Main Footer Area -->
-        <div class="main-footer-area">
-            <div class="container">
-                <div class="row">
+ 
 
-                    <!-- Single Footer Widget -->
-                    <div class="col-12 col-sm-6 col-lg-3">
-                        <div class="single-footer-widget">
-                            <div class="footer-logo mb-30">
-                                <a href="#"><img src="${pageContext.request.contextPath }/resources/img/core-img/logo.png" alt=""></a>
-                            </div>
-                            <p>Lorem ipsum dolor sit samet, consectetur adipiscing elit. India situs atione mantor</p>
-                            <div class="social-info">
-                                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                                <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Single Footer Widget -->
-                    <div class="col-12 col-sm-6 col-lg-3">
-                        <div class="single-footer-widget">
-                            <div class="widget-title">
-                                <h5>QUICK LINK</h5>
-                            </div>
-                            <nav class="widget-nav">
-                                <ul>
-                                    <li><a href="#">Purchase</a></li>
-                                    <li><a href="#">FAQs</a></li>
-                                    <li><a href="#">Payment</a></li>
-                                    <li><a href="#">News</a></li>
-                                    <li><a href="#">Return</a></li>
-                                    <li><a href="#">Advertise</a></li>
-                                    <li><a href="#">Shipping</a></li>
-                                    <li><a href="#">Career</a></li>
-                                    <li><a href="#">Orders</a></li>
-                                    <li><a href="#">Policities</a></li>
-                                </ul>
-                            </nav>
-                        </div>
-                    </div>
-
-                    <!-- Single Footer Widget -->
-                    <div class="col-12 col-sm-6 col-lg-3">
-                        <div class="single-footer-widget">
-                            <div class="widget-title">
-                                <h5>BEST SELLER</h5>
-                            </div>
-
-                            <!-- Single Best Seller Products -->
-                            <div class="single-best-seller-product d-flex align-items-center">
-                                <div class="product-thumbnail">
-                                    <a href="shop-details.html"><img src="${pageContext.request.contextPath }/resources/img/bg-img/4.jpg" alt=""></a>
-                                </div>
-                                <div class="product-info">
-                                    <a href="shop-details.html">Cactus Flower</a>
-                                    <p>$10.99</p>
-                                </div>
-                            </div>
-
-                            <!-- Single Best Seller Products -->
-                            <div class="single-best-seller-product d-flex align-items-center">
-                                <div class="product-thumbnail">
-                                    <a href="shop-details.html"><img src="${pageContext.request.contextPath }/resources/img/bg-img/5.jpg" alt=""></a>
-                                </div>
-                                <div class="product-info">
-                                    <a href="shop-details.html">Tulip Flower</a>
-                                    <p>$11.99</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Single Footer Widget -->
-                    <div class="col-12 col-sm-6 col-lg-3">
-                        <div class="single-footer-widget">
-                            <div class="widget-title">
-                                <h5>CONTACT</h5>
-                            </div>
-
-                            <div class="contact-information">
-                                <p><span>Address:</span> 505 Silk Rd, New York</p>
-                                <p><span>Phone:</span> +1 234 122 122</p>
-                                <p><span>Email:</span> info.deercreative@gmail.com</p>
-                                <p><span>Open hours:</span> Mon - Sun: 8 AM to 9 PM</p>
-                                <p><span>Happy hours:</span> Sat: 2 PM to 4 PM</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Footer Bottom Area -->
-        <div class="footer-bottom-area">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="border-line"></div>
-                    </div>
-                    <!-- Copywrite Text -->
-                    <div class="col-12 col-md-6">
-                        <div class="copywrite-text">
-                            <p>&copy; <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-</p>
-                        </div>
-                    </div>
-                    <!-- Footer Nav -->
-                    <div class="col-12 col-md-6">
-                        <div class="footer-nav">
-                            <nav>
-                                <ul>
-                                    <li><a href="#">Home</a></li>
-                                    <li><a href="#">About</a></li>
-                                    <li><a href="#">Service</a></li>
-                                    <li><a href="#">Portfolio</a></li>
-                                    <li><a href="#">Blog</a></li>
-                                    <li><a href="#">Contact</a></li>
-                                </ul>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!-- ##### Footer Area End ##### -->
-
-
-
-
-
-<!-- jQuery-2.2.4 js -->
-<script src="${pageContext.request.contextPath }/resources/js/jquery/jquery-2.2.4.min.js"></script>
+<!-- <!-- jQuery-2.2.4 js -->
+<!-- <script  src="http://code.jquery.com/jquery-3.6.0.min.js"></script> --> 
 <script type="text/javascript">
+
+	$("#insertReply").click(function(){
+		if($('#insertReplyContent').val() == ""){
+			alert('내용을 입력하세요!');
+			return false;
+		}
+	});
+
+	function updateReplyFun(board_num,reply_num,reply_content){
+		//alert("함수실행 "+ board_num+",,"+reply_num+",,"+reply_content);
+		
+ 		 var commentsView = "";
+ 		// var buttonView = "";
+		
+ 		 
+ 		commentsView += '<form action="/board/updateReply" method="post" id="boardReply">';
+ 		 
+		commentsView += '<input type="hidden" name="board_num" value="'+board_num+'">';
+		commentsView += '<textarea class="form-control" name="reply_content" id="message'+reply_num+'" cols="30" rows="10" placeholder="글내용">';
+		commentsView += reply_content;
+		commentsView += '</textarea>';
+		commentsView += '<input type="hidden" name="reply_num" value="'+reply_num+'">';
+		
+		
+		commentsView += '<input type="submit" class="btn alazea-btn mt-15" id="updateReply" value="완료~">'
+ 		commentsView += '</form>';
+ 		
+ 		
+// 		buttonView += '완료'
+// 		buttonView += '</button>'
+		
+        
+		
+		$('#edit_div' + reply_num).replaceWith(commentsView);
+		//$('#edit_button' + reply_num).replaceWith(buttonView);
+		$('#message'+reply_num).focus();
+	}
+	
+	
+	function deleteReply(reply_num){
+		var fr2 = $('#boardReply');
+		//alert('삭제버튼 클릭');
+		
+		//fr 속성 바꾸기 action, method
+		fr2.attr("action", "/board/deleteReply");
+		fr2.attr("method", "get");
+		fr2.submit();
+	}
+
+	
 	$(document).ready(function(){
 		//alert('제이쿼리 실행!!');
 		
 		//글번호 정보를 포함하는 폼태그
 		//변수에 담기
-		var fr = $('form[role="form"]');
+		var fr = $('#boardContent');
 		
 		//수정하기
 		$("#updateBoard").click(function(){
@@ -425,44 +237,45 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 			
 		});
 		
-		
-		
-		
 		//목록으로 이동하기
 		$("#listAll").click(function(){
-			location.href="/board/listPage";
+			location.href="/board/listBoardAll";
 		});
 		
-		//
 		
+
 		
 	});
+	
+	
+	
+/* 	//alert(${msg});
+	var result = "${msg}";
+	
+	
+	if(result == "INSERTOK"){
+		alert('댓글 쓰기 완료!');
+	}
+	if(result == "UPDATEOK"){
+		alert('댓글 수정 완료!');
+	}
+	if(result == "DELETEOK"){
+		alert('댓글 삭제 완료!');
+	}
+ */
+	
+	
+	
+	
+	
 </script>
 
 
 
 
+<!-- 푸터들어가는 곳 -->
+<jsp:include page="../include/footer.jsp" />
+<!-- 푸터들어가는 곳 -->
 
 
 
-
-
-
-
-
-
-
-
-
-    <!-- ##### All Javascript Files ##### -->
-    <!-- Popper js -->
-    <script src="${pageContext.request.contextPath }/resources/js/bootstrap/popper.min.js"></script>
-    <!-- Bootstrap js -->
-    <script src="${pageContext.request.contextPath }/resources/js/bootstrap/bootstrap.min.js"></script>
-    <!-- All Plugins js -->
-    <script src="${pageContext.request.contextPath }/resources/js/plugins/plugins.js"></script>
-    <!-- Active js -->
-    <script src="${pageContext.request.contextPath }/resources/js/active.js"></script>
-</body>
-
-</html>

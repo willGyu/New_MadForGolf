@@ -88,39 +88,48 @@ public class MemberDAOImpl implements MemberDAO {
 				
 		}
 		
+		
+		@Override
+		public MemberVO getMember(String id) {
+
+			log.info(" getMember(String id) 호출 ");
+			log.info(" mapper-sql 구문 호출 동작 ");
+			
+			String userid=id;
+						
+			MemberVO resultVO 
+			   = sqlSession.selectOne(NAMESPACE+".getMember", userid);
+			
+			log.info(resultVO+"");
+						   
+			return resultVO;
+		}
+
+		@Override
+		public Integer updateMember(MemberVO uvo) {
+			
+			log.info(" 테스트 -> updateMember(MemberVO uvo) 호출 ");
+			
+			int result = sqlSession.update(NAMESPACE+".updateMember",uvo);
+			
+			log.info(" 회원 정보 수정 완료 ");
+			// result => 0 (수정x),1 (수정o)
+			log.info("@@@@@@@@@@"+ result+"");
+			log.info(" updateMember -> 테스트 호출 ");
+			
+			return result;
+		}
 	
 	
-	
-	
-//		@Override
-//		public Integer updateMember(MemberVO uvo){
-//			
-//			log.info(" 테스트 -> updateMember(MemberVO uvo) 호출 ");
-//			
-//			int result = sqlSession.update(NAMESPACE+".updateMember",uvo);
-//			
-//			log.info(" 회원 정보 수정 완료 ");
-//			// result => 0 (수정x),1 (수정o)	
-//			log.info(" updateMember -> 테스트 호출 ");
-//			
-//			return result;
-//		}
+		@Override
+		public MemberVO loginMember(MemberVO vo) {
+			
+			return sqlSession.selectOne(NAMESPACE+".login", vo);
+		}
 		
 		
-
-	@Override
-	public List<MemberVO> getMemberList() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public MemberVO getMember(String id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	
-	
+
 	// 은주 시작
 	
 	// 아이디 찾기
@@ -149,16 +158,31 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 
+	
+
+
 	// 회원 탈퇴	
-//	@Override
-//	public void deleteMember(MemberVO dvo) throws Exception {
-//		// mapper - sql 호출
-//		log.info("회원탈퇴 dao 호출");
-//		
-//		log.info("dao에서 테스트"+dvo);
-//		
-//		sqlSession.delete(NAMESPACE+".deleteMember", dvo);
-//	}
+	@Override
+	public void deleteMember(MemberVO dvo) throws Exception {
+		// mapper - sql 호출
+		log.info("회원탈퇴 dao 호출");
+		
+		log.info("dao에서 테스트"+dvo);
+		
+		sqlSession.delete(NAMESPACE+".deleteMember", dvo);
+	}
+
+	@Override
+	public List<MemberVO> getMemberList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+
+	
+
 }
 		
 

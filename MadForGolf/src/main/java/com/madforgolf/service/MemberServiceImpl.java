@@ -61,43 +61,28 @@ public class MemberServiceImpl implements MemberService{
 	public MemberVO login(String user_id, String user_pw) throws Exception {
 		return null;
 	}
-	
-	
-	
-	
-	
-	
+		
 	@Override
 	public MemberVO getMember(String id) {
 		//메서드 호출
 		return dao.getMember(id);
 	}
-//	
-//	@Override
-//	public Integer updateMember(MemberVO uvo) {
-//		//메서드 호출
-//		return dao.updateMember(uvo);
-//	}
-//
-//	@Override
-//	public MemberVO loginMember(MemberVO vo) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	public MemberVO loginMember(String userid, String userpw) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
+
+	@Override
+	public Integer updateMember(MemberVO uvo) {
+		//메서드 호출
+		return dao.updateMember(uvo);
+	}
+
 	
 	
-	
-	
-	
-	
-	
-	
+	@Override
+	public MemberVO loginMember(MemberVO vo) {
+		// TODO Auto-generated method stub
+		return dao.loginMember(vo);
+	}
+
+				
 	// 아이디 찾기
 	@Override
 	public MemberVO findId(MemberVO vo) throws Exception {
@@ -106,33 +91,56 @@ public class MemberServiceImpl implements MemberService{
 		return dao.findId(vo);
 	}
 	
-	// 비밀번호 찾기
+//	// 비밀번호 찾기
 //	@Override
 //	public MemberVO findPw(MemberVO vo) throws Exception {
 //		log.info("findPw(MemberVO vo) 호출");
 //		
 //		return dao.findPw(vo);
 //	}
+//	
+//	// 비밀번호 변경
+//	@Override
+//	public MemberVO updatePw(MemberVO vo) throws Exception {
+//		log.info("updatePw(MemberVO vo)");
+//		
+//		log.info(" serviceImpl @@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+vo);
+//		return dao.updatePw(vo);
+//	}
+//
+//	@Override
+//	public MemberVO findPw(MemberVO vo) throws Exception {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+
 	
-	// 비밀번호 변경
-	@Override
-	public MemberVO updatePw(MemberVO vo) throws Exception {
-		log.info("updatePw(MemberVO vo)");
-		
-		log.info(" serviceImpl @@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+vo);
-		return dao.updatePw(vo);
-	}
 
 
 	// 회원 탈퇴
-//	@Override
-//	public void deleteMember(String user_id) throws Exception {
-//		log.info("deleteMember(MemberVO dvo) 호출");
-//		
-//		log.info("@@@@@@@@@@@ serviceImpl"+user_id);
-//		
+	@Override
+	public void deleteMember(String user_id) throws Exception {
+		log.info("deleteMember(MemberVO dvo) 호출");
+		
+		log.info("@@@@@@@@@@@ serviceImpl"+user_id);
+		
 //		return dao.deleteMember(user_id);
-//	}
+	}
+
+	@Override
+	public MemberVO findPw(MemberVO vo) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public MemberVO updatePw(MemberVO vo) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+	
 }
 
 	

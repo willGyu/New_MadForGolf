@@ -17,23 +17,22 @@ public interface MemberService {
 	public int phoneCheck(MemberVO vo) throws Exception;
 	
 	
-	
 	// 로그인 
 	public MemberVO login(MemberVO vo) throws Exception;
 	
 	// 로그인2 
 	public MemberVO login(String user_id,String user_pw) throws Exception;
 	
-	// 회원 정보 가져오기
+		
+	// 회원정보 조회
 	public MemberVO getMember(String id);
+		
+	// 회원정보 수정
+	public Integer updateMember(MemberVO uvo);
 	
-	// 회원 정보 수정
-//	public Integer updateMember(MemberVO uvo);
-//	
-//	public MemberVO loginMember(MemberVO vo);
-//	
-//	public MemberVO loginMember(String userid, String userpw);
+	public MemberVO loginMember(MemberVO vo);
 	
+		
 		
 	// ---------------------------------------------------------------
 	
@@ -43,13 +42,14 @@ public interface MemberService {
 	public MemberVO findId(MemberVO vo) throws Exception;
 	
 	// 비밀번호 찾기
-//	public MemberVO findPw(MemberVO vo) throws Exception;
+	public MemberVO findPw(MemberVO vo) throws Exception;
 	
 	// 비밀번호 수정
 	public MemberVO updatePw(MemberVO vo) throws Exception;
 	
 	// 회원 탈퇴
-//	public void deleteMember(String user_id) throws Exception;
+	public void deleteMember(String user_id) throws Exception;
+	
 }
 
 	

@@ -58,6 +58,9 @@
 								<c:if test="${loginVO != null }">
                                     <a href="${pageContext.request.contextPath }/member/logout"><i class="fa fa-user" aria-hidden="true"></i> <span>Logout</span></a>
 								</c:if>
+								<c:if test="${loginVO != null }">
+                                    <a href="${pageContext.request.contextPath }/member/update"><i class="fa fa-user" aria-hidden="true"></i> <span>Update</span></a>
+								</c:if>
                                 </div>
                                 <!-- Cart -->
                                 <div class="cart">

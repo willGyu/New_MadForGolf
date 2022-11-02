@@ -8,7 +8,7 @@
 </head>
 <body>
 <script type="text/javascript">
-	alert("입력하신 정보는 틀립니다.");
+	alert("비밀번호가 일치하지 않습니다.");
 	history.back();
 </script>
 </body>

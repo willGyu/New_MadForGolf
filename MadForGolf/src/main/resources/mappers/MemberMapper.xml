@@ -56,16 +56,19 @@
 		where user_id=#{user_id}
 	</update>
 	
-	
+	<!-- 회원정보 가져오기 -->
+	<select id="getMember" resultType="MemberVO">
+	  select * 
+	  from mfg_member
+	  where user_id=#{user_id}	
+	</select>
 	
 	<!-- 회원정보 수정 -->
 	<update id="updateMember">
 		update mfg_member set user_name=#{user_name}, user_phone=#{user_phone}, user_pw=#{user_pw} 
-		where user_name=#{user_name} and user_pw=#{user_pw}
+		where user_id=#{user_id} and user_pw=#{user_pw}
 	</update>
-	
-	
-	
+			
 	<!-- 회원 탈퇴 -->
 	<delete id="deleteMember">
 		delete from mfg_member

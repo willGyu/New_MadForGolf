@@ -50,9 +50,9 @@
 
 #button2 {
 	color: #767676;
-	width: 100px; height: 30px;
+	width: 150px; height: 30px;
 	font-weight: bold;
-	margin-left: 30px;
+	margin: 10px 30px 10px 0px;
 }
 
 #button2:hover {
@@ -71,10 +71,24 @@ function addFile(){
 	// alert("클릭");
 	if(cnt < 4) {
 	// 버튼 클릭시 동작 -> 파일입력창 추가
-		$('#div_file').append("<br><input type='file' class='form-control' id='prod_img" + cnt + "' name='file" + cnt + "'>");
+		$('#div_file').append("<input type='file' class='form-control' id='prod_img" + cnt + "' name='file" + cnt + "'>");
 		cnt++;
 	} else {
 		alert("사진 추가는 2개까지만 가능합니다.")
+	}
+}
+
+function delFile(){
+	// alert("클릭");
+	if(cnt == 3) {
+	// 버튼 클릭시 동작 -> 파일입력창 삭제
+		$('#prod_img2').remove();
+		cnt--;
+	} else if(cnt == 4){
+		$('#prod_img3').remove();
+		cnt--;
+	} else {
+		alert("1개의 사진은 필수입니다.")
 	}
 }
 
@@ -364,11 +378,12 @@ function addFile(){
                             	<input type="radio" class="custom-control-input2" id="gender2" style="margin-left: 20px;" name="gender" value="2">&nbsp;여
                             </div>
                             <div class="col-12 mb-4">
-                                <label for="company">Image</label><input type="button" id="button2" value="사진 추가" onclick="addFile();">
+                                <label for="company">Image</label>
                                 <input type="file" class="form-control" id="prod_img" name="file1" onchange="readURL(this);">
-                                
+                                <img id="preview"/><br>
+                                <input type="button" id="button2" value="첨부사진 추가" onclick="addFile();">
+                                <input type="button" id="button2" value="첨부사진 삭제" onclick="delFile();">
 								<div id="div_file"><!-- <input type="file" name="file"> --></div>
-                                <img id="preview"/>
                             </div>
 							<div style="margin:0px auto;">
 								<div class="checkout-btn mt-30" >

@@ -266,8 +266,9 @@ public class ProductController {
 		
 		while(enu.hasMoreElements()) {
 			String name = (String)enu.nextElement();
-			// log.info("name : " + name);
+			log.info("name : " + name);
 			String value = multi.getParameter(name);
+			log.info("value : " + value);
 			map.put(name, value);
 		}
 		
@@ -338,24 +339,21 @@ public class ProductController {
 			log.info("fileList" + fileList);
 			
 			// 파일 업로드
-			// 파일 생성
-			String uploadFolder = request.getServletContext().getRealPath("resources/product_img");
-			File file = new File(uploadFolder + "\\" + uFileName);
-			log.info(request.getServletContext().getRealPath("resources/product_img") + "/" + uFileName);
+			String uploadFolder1 = "C:\\Users\\ITWILL\\git\\New_MadForGolf\\MadForGolf\\src\\main\\webapp\\resources\\product_img";
+			// 속도가 느려 초반에 엑박뜸 and 경로 일치 필요 => but, 깃허브 연동 o
+			String uploadFolder2 = request.getServletContext().getRealPath("resources/product_img");
+			// 메서드를 통한 경로 => 속도가 빠름, 경로 일치 불필요 => but, 깃허브 연동 x
 			// 파일 저장 경로 : D:\workspace_sts6\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\MadForGolf\resources\product_img
+			// => 둘 다 필요
 			
+			// 파일 생성
+			File file1 = new File(uploadFolder1 + "\\" + uFileName);
+			File file2 = new File(uploadFolder2 + "\\" + uFileName);
+						
 			if(mFile.getSize() != 0) { // 첨부파일이 있을 때				
-//				// 선생님이 가르쳐 준 것 : 0 byte로 파일이 업로드되어 주석 처리
-//				file.createNewFile(); // 첨부파일 업로드(파일생성)
-//				log.info("파일 업로드 성공");
-				
-				// 임시방편(됨!)
-				try {
-					mFile.transferTo(file); // 실제 파일 저장메서드(filewriter 작업을 손쉽게 한방에 처리해준다.)
-					log.info("파일 업로드 성공");
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+				mFile.transferTo(file1); // 첨부파일로 전달된 정보를 파일로 전달
+				mFile.transferTo(file2); // 첨부파일로 전달된 정보를 파일로 전달
+				log.info("파일 업로드 성공");
 			} // if
 			
 		} // while

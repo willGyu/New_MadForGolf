@@ -64,49 +64,55 @@
 
 	
 	<!-- ##### Shop Area Start ##### -->
-	<section class="shop-page section-padding-0-100" style="width: 80%; margin: auto;">
+<section class="shop-page section-padding-0-100"
+	style="width: 80%; margin: auto;">
 
-            
-                <!-- All Products Area -->
-                <div class="col-12 col-md-8 col-lg-9" style="margin: auto;" id="products">
-                    <div class="shop-products-area">
-                        <div class="row">
-							<!-- Single Product Area -->
-							<!-- for문으로 상품 리스트 반복  -->
-							<c:forEach var="vo" items="${productList }" begin="1" end="6">
-								<div class="col-12 col-sm-6 col-lg-4">
-									<div class="single-product-area mb-50">
-										<!-- Product Image -->
-										<div class="product-img">
-											<a href="${pageContext.request.contextPath }/product/productDetail?prod_num=${vo.prod_num}"><img src="${pageContext.request.contextPath }/resources/product_img/${vo.prod_img}"></a>
-											<!-- Product Tag -->
-											<div class="product-tag">
-												<a href="#">Hot</a>
-											</div>
-											<div class="product-meta d-flex">
-												<a href="#" class="wishlist-btn"><i class="icon_heart_alt"></i></a>
-												<a href="cart.html" class="add-to-cart-btn">Add to cart</a>
-												<a href="#" class="compare-btn"><i class="arrow_left-right_alt"></i></a>
-											</div>
-										</div>
-										<!-- Product Info -->
-										<div class="product-info mt-15 text-center">
-											<a href="${pageContext.request.contextPath }/product/productDetail?prod_num=${vo.prod_num}">
-												<p>${vo.prod_name }</p>
-											</a>
-											<h6>${vo.price }원</h6>
-										</div>
-									</div>
+
+	<!-- All Products Area -->
+	<div class="col-12 col-md-8 col-lg-9" style="margin: auto;"
+		id="products">
+		<div class="shop-products-area">
+			<div class="row">
+				<!-- Single Product Area -->
+				<!-- for문으로 상품 리스트 반복  -->
+				<c:forEach var="vo" items="${productList }" begin="1" end="6">
+					<div class="col-12 col-sm-6 col-lg-4">
+						<div class="single-product-area mb-50">
+							<!-- Product Image -->
+							<div class="product-img">
+								<a href="${pageContext.request.contextPath }/product/productDetail?prod_num=${vo.prod_num}">
+									<img src="${pageContext.request.contextPath }/resources/product_img/${vo.prod_img}">
+								</a>
+								<!-- Product Tag -->
+								<div class="product-tag">
+									<a href="#">Hot</a>
 								</div>
-							</c:forEach>
-							<!-- for문으로 상품 리스트 반복  -->
+								<div class="product-meta d-flex">
+									<a href="#" class="wishlist-btn"><i class="icon_heart_alt"></i></a>
+									<a href="cart.html" class="add-to-cart-btn">Add to cart</a> <a
+										href="#" class="compare-btn"><i
+										class="arrow_left-right_alt"></i></a>
+								</div>
+							</div>
+							<!-- Product Info -->
+							<div class="product-info mt-15 text-center">
+								<a href="${pageContext.request.contextPath }/product/productDetail?prod_num=${vo.prod_num}">
+									<p>${vo.prod_name }</p>
+
+								</a>
+								<h6>${vo.price }원</h6>
+							</div>
+						</div>
+					</div>
+				</c:forEach>
+				<!-- for문으로 상품 리스트 반복  -->
 
 
-				</div>
 			</div>
-			</div>
-<!-- 		</div> -->
-<!-- 	</div> -->
+		</div>
+	</div>
+	<!-- 		</div> -->
+	<!-- 	</div> -->
 </section>
 
 

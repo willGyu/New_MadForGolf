@@ -468,7 +468,8 @@ $(document).ready(function(){
 										<!-- Product Image -->
 
 										<div class="product-img">
-											<a href="${pageContext.request.contextPath }/product/productDetail?prod_num=${vo.prod_num}"><img src="${pageContext.request.contextPath }/resources/product_img/${vo.prod_img}"></a>
+											<a href="${pageContext.request.contextPath }/product/productDetail?prod_num=${vo.prod_num}">
+											<img src="${pageContext.request.contextPath }/resources/product_img/${vo.prod_img}"></a>
 											<!-- Product Tag -->
 											<div class="product-tag">
 												<a href="#">Hot</a>

@@ -46,6 +46,7 @@ public class HomeController {
 	  
 	  model.addAttribute("serverTime", formattedDate );
 	  
+	  //------------------------------------------------------------------
 		// 서비스 - 글전체 목록 가져오는 메서드
 		List<ProductVO> productList = service.listMain(vo);
 		log.info("상품 개수 : " + productList.size() + "개");
@@ -58,6 +59,7 @@ public class HomeController {
 		  
 		
 		  return "index";
+	  //------------------------------------------------------------------
 		 
 	  }
 	  

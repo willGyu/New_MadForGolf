@@ -22,6 +22,75 @@
 }
 </style>
 
+
+<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.0.0/kakao.min.js"
+  integrity="sha384-PFHeU/4gvSH8kpvhrigAPfZGBDPs372JceJq3jAXce11bVA6rMvGWzvP4fMQuBGL" crossorigin="anonymous"></script>
+<script>
+  Kakao.init('8bac8b97f338b46658e0afc74127913e'); // 사용하려는 앱의 JavaScript 키 입력
+</script>
+
+
+
+<script>
+  function shareMessage() {
+    Kakao.Share.sendDefault({
+      objectType: 'feed',
+      content: {
+        title: '딸기 치즈 케익',
+        description: '#케익 #딸기 #삼평동 #카페 #분위기 #소개팅',
+        imageUrl:
+          'http://k.kakaocdn.net/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png',
+        link: {
+          mobileWebUrl: 'https://developers.kakao.com',
+          webUrl: 'https://developers.kakao.com',
+        },
+      },
+      social: {
+        likeCount: 286,
+        commentCount: 45,
+        sharedCount: 845,
+      },
+      buttons: [
+        {
+          title: '웹으로 보기',
+          link: {
+            mobileWebUrl: 'https://developers.kakao.com',
+            webUrl: 'https://developers.kakao.com',
+          },
+        },
+        {
+          title: '앱으로 보기',
+          link: {
+            mobileWebUrl: 'https://developers.kakao.com',
+            webUrl: 'https://developers.kakao.com',
+          },
+        },
+      ],
+    });
+  }
+</script>
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+//=================찜하기 버튼 클릭 시 alert창 
+	$(document).ready(function() {
+		$('#like_heart').click(function() {
+			var result = confirm('상품을 찜하시겠습니까?');
+
+			if (result) {
+				//yes
+				location.href='/';
+				//찜 리스트 페이지 생성 후 -> 찜리스트 페이지 이동으로 변경 
+			} else { 
+				//no
+			}
+		});
+	});
+//==================찜하기 버튼 클릭 시 alert창 
+</script>
+
+
+
     <!-- ##### Breadcrumb Area Start ##### -->
     <div class="breadcrumb-area">
         <!-- Top Breadcrumb Area -->
@@ -97,8 +166,9 @@
                                 <form class="cart clearfix d-flex align-items-center" method="post">
                                 <!-- Wishlist & Compare -->
                                 <div class="wishlist-compare d-flex flex-wrap align-items-center">
-                                    <a href="#" class="wishlist-btn ml-15"><i class="icon_heart_alt"></i></a>
+                                    <a href="#" class="wishlist-btn ml-15"><i id="like_heart" class="icon_heart_alt"></i></a>
                                     <input type="hidden" id="prod_img" value="${product.prod_img }">
+                                    <input type="button" id="btn" value="카톡링크">
                                     <input type="button" id="button" value="채팅하기" onclick="">
                                 </div>
                                     <input type="submit" name="addtocart" value="구매하기" class="btn alazea-btn ml-15">

@@ -22,13 +22,12 @@
 }
 </style>
 
-
 <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.0.0/kakao.min.js"
   integrity="sha384-PFHeU/4gvSH8kpvhrigAPfZGBDPs372JceJq3jAXce11bVA6rMvGWzvP4fMQuBGL" crossorigin="anonymous"></script>
+  
 <script>
   Kakao.init('8bac8b97f338b46658e0afc74127913e'); // 사용하려는 앱의 JavaScript 키 입력
 </script>
-
 
 
 <script>
@@ -36,19 +35,20 @@
     Kakao.Share.sendDefault({
       objectType: 'feed',
       content: {
-        title: '딸기 치즈 케익',
-        description: '#케익 #딸기 #삼평동 #카페 #분위기 #소개팅',
-        imageUrl:
-          'http://k.kakaocdn.net/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png',
+        title: '${product.prod_name}',
+        description: '${product.detail}',
+        imageUrl: 'https://cdn.pixabay.com/photo/2017/01/07/17/25/golfer-1960998_960_720.jpg',
+        //대표 이미지 주소 넣을 예정 -> 상품별 이미지 불러오기 어려브..
         link: {
-          mobileWebUrl: 'https://developers.kakao.com',
-          webUrl: 'https://developers.kakao.com',
+          mobileWebUrl: 'http://localhost:8088/',
+          webUrl: 'http://localhost:8088/',
+          //http://itwillbs7.cafe24.com/MadForGolf 
+          //최종 호스팅하고 주소 넣을 예정 
         },
       },
       social: {
-        likeCount: 286,
-        commentCount: 45,
-        sharedCount: 845,
+        likeCount: ${product.like_count},
+        //int만 넣을 수 있는듯한데 파라미터로 불러와서 안꺼내짐..방법을 찾아보자..
       },
       buttons: [
         {
@@ -168,7 +168,8 @@
                                 <div class="wishlist-compare d-flex flex-wrap align-items-center">
                                     <a href="#" class="wishlist-btn ml-15"><i id="like_heart" class="icon_heart_alt"></i></a>
                                     <input type="hidden" id="prod_img" value="${product.prod_img }">
-                                    <input type="button" id="btn" value="카톡링크">
+                                    <input type="hidden" id="like_count" value="${product.like_count }">
+                                    
                                     <input type="button" id="button" value="채팅하기" onclick="">
                                 </div>
                                     <input type="submit" name="addtocart" value="구매하기" class="btn alazea-btn ml-15">
@@ -182,10 +183,7 @@
                                 <p>
                                     <span>Share on:</span>
                                     <span>
-                                    <a href="#"><i class="fa fa-facebook"></i></a>
-                                    <a href="#"><i class="fa fa-twitter"></i></a>
-                                    <a href="#"><i class="fa fa-pinterest"></i></a>
-                                    <a href="#"><i class="fa fa-google-plus"></i></a>
+                                    <a href="#"><i class="fa fa-facebook" onclick="shareMessage();"></i></a>
                                 </span>
                                 </p>
                             </div>

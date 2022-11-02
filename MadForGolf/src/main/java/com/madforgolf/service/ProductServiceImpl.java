@@ -81,10 +81,10 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public Integer updateBoard(ProductVO vo) throws Exception {
-		log.info(" updateBoard(vo) ");
+	public Integer updateProduct(ProductVO vo) throws Exception {
+		log.info("updateProduct(ProductVO vo) 호출");
 		
-		int cnt = dao.updateBoard(vo);
+		int cnt = dao.updateProduct(vo);
 		
 		return cnt;
 	}

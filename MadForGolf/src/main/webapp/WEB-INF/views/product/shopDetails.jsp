@@ -107,7 +107,7 @@
                                 <p><span>Condition:</span> <span>${product.condition }</span></p>
                                 <p><span>Gender:</span> <span><c:if test="${product.gender eq 1}">남</c:if><c:if test="${product.gender eq 2}">여</c:if></span></p>
                                 <p><span>Category:</span> <span>${product.category }</span></p>
-                                <p><span>Seller:</span> <span><a href="${pageContext.request.contextPath }/product/seller">${product.seller_id }</a></span></p>
+                                <p><span>Seller:</span> <span><a href="${pageContext.request.contextPath }/product/seller?prod_num=${product.prod_num }">${product.seller_id }</a></span></p>
                                 <p>
                                     <span>Share on:</span>
                                     <span>

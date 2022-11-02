@@ -116,24 +116,24 @@ function delFile(){
 				alert("상품 성별을 선택해주세요.");
 				return false;
 			}
-			// 상품이미지1 제어
-			if($('#prod_img').val()==""){
-				alert('상품이미지를 넣어주세요.');
-				$('#prod_img').focus();
-				return false;
-			}
-			// 상품이미지2 제어
-			if($('#prod_img2').val()==""){
-				alert('두번째 상품이미지를 넣어주세요.');
-				$('#prod_img2').focus();
-				return false;
-			}
-			// 상품이미지3 제어
-			if($('#prod_img3').val()==""){
-				alert('세번째 상품이미지를 넣어주세요.');
-				$('#prod_img3').focus();
-				return false;
-			}
+// 			// 상품이미지1 제어
+// 			if($('#prod_img').val()==""){
+// 				alert('상품이미지를 넣어주세요.');
+// 				$('#prod_img').focus();
+// 				return false;
+// 			}
+// 			// 상품이미지2 제어
+// 			if($('#prod_img2').val()==""){
+// 				alert('두번째 상품이미지를 넣어주세요.');
+// 				$('#prod_img2').focus();
+// 				return false;
+// 			}
+// 			// 상품이미지3 제어
+// 			if($('#prod_img3').val()==""){
+// 				alert('세번째 상품이미지를 넣어주세요.');
+// 				$('#prod_img3').focus();
+// 				return false;
+// 			}
 			
 			alert("등록된 상품정보 수정이 완료되었습니다.");
 		});
@@ -192,6 +192,7 @@ function delFile(){
                     <form action="${pageContext.request.contextPath }/product/modify" method="post" id="form" enctype="multipart/form-data">
                     	<!-- 로그인 기능 구현 시 value 값 수정 필요 ${loginVO.user_id } -->
                     	<input type="hidden" value="itwill01" name="seller_id">
+                    	<input type="hidden" value="${product.prod_num }" name="prod_num">
                         <div class="row">
                         	<div class="col-md-6 mb-4" id="category">
                             	<label for="country">Category</label>

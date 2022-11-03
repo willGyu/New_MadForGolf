@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -18,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.madforgolf.domain.BoardVO;
+import com.madforgolf.domain.MemberVO;
 import com.madforgolf.domain.PageMakerVO;
 import com.madforgolf.domain.PageVO;
 import com.madforgolf.domain.ReplyVO;
@@ -161,12 +163,12 @@ public class BoardController {
 
 		// 세션으로 넘어온 값 확인
 		log.info("############################isUpdate : " + session.getAttribute("isUpdate"));
-		//boolean isUpdate = (boolean) session.getAttribute("isUpdate");
-		//if (!isUpdate) {
+		boolean isUpdate = (boolean) session.getAttribute("isUpdate");
+		if (!isUpdate) {
 			service.updateReadCount(board_num);
-		//	log.info("조회수 1증가!!!띠용");
-		//	session.setAttribute("isUpdate", true);
-		//}
+			log.info("조회수 1증가!!!띠용");
+			session.setAttribute("isUpdate", true);
+		}
 		//	vo.setPage(2);
 		//	vo.setPerPageNum(5);
 
@@ -180,10 +182,13 @@ public class BoardController {
 		PageMakerVO pm = new PageMakerVO();
 		pm.setVo(vo);
 		pm.setTotalCnt(service.replyCnt(board_num));
+		if(service.replyCnt(board_num) == 0) {
+			model.addAttribute("msg", "NO");
+		}
 				
-		log.info("################################### 뭐임 : "+ service.getReply(board_num, vo));		
+		//log.info("################################### 뭐임 : "+ service.getReply(board_num, vo));		
 		log.info("################################### 댓글수 : "+ service.replyCnt(board_num));		
-		log.info("################################### vo : "+ vo + "pm" + pm);		
+		//log.info("################################### vo : "+ vo + "pm" + pm);		
 		model.addAttribute("pm", pm);
 	}
 	
@@ -271,26 +276,29 @@ public class BoardController {
 	
 	
 	
+	
+	
 	//게시판 리스트(페이징 처리) - GET
 	@RequestMapping(value = "/listBoardAll", method = RequestMethod.GET)
-	public String listBoardAllGET(Model model,PageVO vo) throws Exception{
+	public String listBoardAllGET(Model model,PageVO vo,HttpSession session) throws Exception{
 		log.info(" 1. controller - listBoardAllGET ");
 		
-//		vo.setPage(2);
-//		vo.setPerPageNum(30);
+		String user_id = (String)session.getAttribute("user_id");
+		log.info("############"+user_id);
 		
+		session.setAttribute("user_id", user_id);
 		model.addAttribute("boardList", service.listPage(vo));
+		
 		
 		//페이징 처리 하단부 정보 저장
 		PageMakerVO pm = new PageMakerVO();
 		pm.setVo(vo);
 		pm.setTotalCnt(385);
-		
-		log.info("################################### vo : "+ vo + "pm" + pm);
-		
 		model.addAttribute("pm", pm);
 		
-		return"/board/listBoardAll";
+		session.setAttribute("isUpdate", false); //조회수 때문에 주는 것
+			
+		return "/board/listBoardAll";
 	}
 	
 	
@@ -303,10 +311,18 @@ public class BoardController {
 	
 	//게시판 리스트(말머리) - GET
 	@RequestMapping(value = "/listBoardCategory", method = RequestMethod.GET)
-	public String listBoardCategory(Model model,PageVO vo,@RequestParam("board_category") String board_category) throws Exception{
+	public String listBoardCategory(Model model,PageVO vo,@RequestParam("board_category") String board_category,HttpServletRequest request,HttpSession session) throws Exception{
 		log.info(" 1. controller - listBoardCategory() ");
 		
 //		log.info("##############board_category"+board_category);
+		
+		session = request.getSession();
+//		log.info(session.getAttribute("user_id")+"지금오류찾는중@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+//		log.info(session.getAttribute("MemberVO")+"지금오류찾는중@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+		//MemberVO memberVO = (MemberVO)session.getAttribute("MemberVO");
+		
+		//String user_id = memberVO.getUser_id();
+		//session.setAttribute("user_id", user_id);
 		
 		model.addAttribute("boardList", service.listCategory(vo,board_category));
 		
@@ -317,6 +333,7 @@ public class BoardController {
 		
 //		log.info("################################### vo : "+ vo);
 //		log.info("################################### pm :" + pm);
+		
 		
 		model.addAttribute("pm", pm);
 		

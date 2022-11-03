@@ -77,6 +77,7 @@ function shareMessage() {
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
+		//alert('안녕');
 /*         var like_count = ${product.like_count};
         const like = parseInt(like_count);
 		
@@ -96,9 +97,75 @@ function shareMessage() {
 		});
 //==================찜하기 버튼 클릭 시 alert창 
 
+//============================================거래전/거래후:채팅하기/결제하기 비활성화,컬럼값 변경 
+
+//loginID == sellerID일때만 버튼 '#deal'버튼 보이도록 
+
+     var dealState = ${product.dealState}; 
+     var state = parseInt(dealState); 
+     
+	state = 0;//거래상태 디폴트 : 거래전 
+	
+	$('#deal').click(function(){
+		//alert('안녕2');
+		
+	if(state == 0){ //거래전 -> 거래후 변경하고 싶을 때 
+		//alert('안녕33');
+//---------------------------1.버튼비활성화----------------------------------
+		const target1 = document.getElementById('button'); //채팅하기 버튼 
+		target1.disabled = 'disabled'; //버튼 비활성화 
+		const target2 = document.getElementById('addtocart'); //결제하기 버튼 
+		target2.disabled = 'disabled'; //버튼 비활성화 
+		//(마이페이지에서 할때는 버튼 비활성화는 script로 따로 빼야할듯..)
+//---------------------------1.버튼비활성화----------------------------------
+
+//---------------------------2.버튼문구변경-----------------------------------
+		const btnElement = document.getElementById('deal');
+		btnElement.value = "거래후"; //버튼 value바꿈 
+//---------------------------2.버튼문구변경-----------------------------------
+
+//---------------------------3.변수값 변경------------------------------------
+		state =1; //거래후로 값 변경 
+//---------------------------3.변수값 변경------------------------------------
+		
+	//$('#state').append(state); -> state 값 변환 확인용
+		
+	}else if(state == 1){ //거래후-> 거래전 변경하고 싶을 때 
+		//alert('안녕44');
+	
+//---------------------------1.버튼비활성화----------------------------------
+		const target1 = document.getElementById('button');//채팅하기
+		target1.disabled = false; //버튼 비활성화 
+		const target2 = document.getElementById('addtocart');//결제하기
+		target2.disabled = false; //버튼 비활성화 
+		//(마이페이지에서 할때는 버튼 비활성화는 script로 따로 빼야할듯..)
+//---------------------------1.버튼비활성화----------------------------------
+
+//---------------------------2.버튼문구변경-----------------------------------
+		const btnElement = document.getElementById('deal');
+		btnElement.value = "거래전"; //버튼 value바꿈 
+//---------------------------2.버튼문구변경-----------------------------------
+
+//---------------------------3.변수값 변경------------------------------------
+		state = 0; //거래전으로 값 변경 
+//---------------------------3.변수값 변경------------------------------------
+		
+	//$('#state').append(state); -> state 값 변환 확인용
+	}
+
+		
+	});
+	
+	
+});
+//============================================거래전/거래후:채팅하기/결제하기 비활성화,컬럼값 변경 
+
+
+
+
 //==================거래 전 버튼 클릭시, 채팅하기 구매하기 버튼 비활성화
         
-		$('#deal').click(function(){
+/* 		$('#deal').click(function(){
 			const target1 = document.getElementById('button');
 			target1.disabled = true;
 			
@@ -107,19 +174,21 @@ function shareMessage() {
 		});
 			  
 
-	});
+	}); */
 //==================거래 전 버튼 클릭시, 채팅하기 구매하기 버튼 비활성화
 
 
 
 //==================거래전 버튼 -> 거래후 변경
-function changeBtnName()  {
+/* function changeBtnName()  {
   const btnElement = document.getElementById('deal');
   
   btnElement.value = "거래후"; //버튼 value바꿈 
   
-}
+} */
 //==================거래전 버튼 -> 거래후 변경 
+
+
 
 </script>
 
@@ -194,6 +263,16 @@ function changeBtnName()  {
                             <div class="short_overview">
                                 <p>${product.detail }</p>
                             </div>
+                            		<input type="hidden" value="${product.dealState }">
+                            		<div id="state">
+                            			
+                            		</div>
+
+
+						<c:if test="${product.seller_id == product.user_id}">
+<!-- 							<button id="btn-delete" class="btn btn-danger">삭제</button>
+ -->						<input type="button" id="deal" value="거래전" onclick="changeBtnName();">
+						</c:if>
 
                             <div class="cart--area d-flex flex-wrap align-items-center">
                                 <!-- Add to Cart Form -->
@@ -207,7 +286,7 @@ function changeBtnName()  {
                                     <input type="button" id="button" value="채팅하기" onclick="">
 <!--                                     <input type="button" id="deal" value="거래전" onclick="changeBtnName();">
  -->                                </div>
-                                    <input type="submit" name="addtocart" value="구매하기" class="btn alazea-btn ml-15">
+                                    <input type="submit" id="addtocart" name="addtocart" value="구매하기" class="btn alazea-btn ml-15">
                                 </form>
                             </div>
 

@@ -17,6 +17,29 @@ public class ProductVO {
 	private String prod_img2;
 	private String prod_img3;
 	
+	//거래 상태 추가 함 
+	private int dealState;
+	
+	public int getDealState() {
+		return dealState;
+	}
+	public void setDealState(int dealState) {
+		this.dealState = dealState;
+	}
+	//거래 상태 추가 함 
+	
+	//상품상세 페이지에서 거래전/후 버튼 테스트한다고 user_id만듦~~(나중에 마이페이지에서 버튼 만들면 MemberVO user_id쓰면 될듯..
+	private String user_id;
+	
+	public String getUser_id() {
+		return user_id;
+	}
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
+	}	
+	//상품상세 페이지에서 거래전/후 버튼 테스트한다고 user_id만듦~~
+	
+	
 	public int getProduct_num() {
 		return prod_num;
 	}
@@ -102,13 +125,34 @@ public class ProductVO {
 	public void setProd_img3(String prod_img3) {
 		this.prod_img3 = prod_img3;
 	}
+	/* 
+	 * @Override public String toString() { return "ProductVO [prod_num=" + prod_num
+	 * + ", seller_id=" + seller_id + ", prod_name=" + prod_name + ", prod_img=" +
+	 * prod_img + ", price=" + price + ", detail=" + detail + ", condition=" +
+	 * condition + ", category=" + category + ", gender=" + gender + ", like_count="
+	 * + like_count + ", prod_date=" + prod_date + ", prod_img2=" + prod_img2 +
+	 * ", prod_img3=" + prod_img3 + "]"; }
+	 */
+	//dealState,user_id 추가로 toString 재정의 
 	@Override
 	public String toString() {
 		return "ProductVO [prod_num=" + prod_num + ", seller_id=" + seller_id + ", prod_name=" + prod_name
 				+ ", prod_img=" + prod_img + ", price=" + price + ", detail=" + detail + ", condition=" + condition
 				+ ", category=" + category + ", gender=" + gender + ", like_count=" + like_count + ", prod_date="
-				+ prod_date + ", prod_img2=" + prod_img2 + ", prod_img3=" + prod_img3 + "]";
+				+ prod_date + ", prod_img2=" + prod_img2 + ", prod_img3=" + prod_img3 + ", dealState=" + dealState
+				+ ", user_id=" + user_id + ", getDealState()=" + getDealState() + ", getUser_id()=" + getUser_id()
+				+ ", getProduct_num()=" + getProduct_num() + ", getProd_num()=" + getProd_num() + ", getSeller_id()="
+				+ getSeller_id() + ", getProd_name()=" + getProd_name() + ", getProd_img()=" + getProd_img()
+				+ ", getPrice()=" + getPrice() + ", getDetail()=" + getDetail() + ", getCondition()=" + getCondition()
+				+ ", getCategory()=" + getCategory() + ", getGender()=" + getGender() + ", getLike_count()="
+				+ getLike_count() + ", getProd_date()=" + getProd_date() + ", getProd_img2()=" + getProd_img2()
+				+ ", getProd_img3()=" + getProd_img3() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
+				+ ", toString()=" + super.toString() + "]";
 	}
+	
+	
+	
+	
 
 	
 }

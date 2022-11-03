@@ -81,24 +81,27 @@
 		values (#{seller_id}, #{prod_name}, #{prod_img}, #{price}, #{detail}, #{condition}, #{category}, #{gender})
 	</insert>
 	
-	<resultMap type="com.madforgolf.domain.ProductVO" id="vo">
-		<result property="content" column="content"/>
-	</resultMap>
-	
 	<!-- 상품 수정 GET  -->
 	<select id="read" resultType="ProductVO">
 		select * from mfg_products 
 		where prod_num = #{prod_num} 
 	</select>
 	
-	<!-- 상품 수정 POST -->
-	<update id="updateBoard">
-<!-- 	  update mfg_products 
-	  set prod_name=#{prod_name},price=#{price},detail=#{detail},'condition' =#{condition},gender=#{gender},category=#{category},prod_img=#{prod_img} 
-	  where prod_num=#{prod_num}	    
-	   -->
-	  update mfg_products set prod_name=#{prod_name},price=#{price},detail=#{detail},prod_img=#{prod_img} where prod_num=#{prod_num}	
+		
+	<!-- 상품 수정 POST-->
+	<update id="update">
+	  update mfg_products 
+	  set prod_name=#{prod_name},price=#{price},detail=#{detail},`condition`=#{condition},category=#{category},gender=#{gender},prod_img=#{prod_img},prod_img2=#{prod_img2},prod_img3=#{prod_img3}
+	  where prod_num = #{prod_num}	    
 	</update>
+	
+	
+	
+	<resultMap type="com.madforgolf.domain.ProductVO" id="vo">
+		<result property="content" column="content"/>
+	</resultMap>
+	
+
 	
 	<update id="updateReadCnt">
 		update mfg_products 

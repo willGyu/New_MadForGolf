@@ -50,10 +50,6 @@
 	background-color: #F8C4B4;
 }
 
-/* .active2 {
-	color: red !important;
-}
- */
 /*=======최신순 인기순 마우스오버=================  */
 .date_like:hover {
 	color:#F8C4B4 !important;
@@ -70,7 +66,7 @@
   font-family: 'Josefin Slab', serif;
 }
 
-
+/* 헤더도 연동되기 때문에 주석 */
 /* body {
 	font-family: 'Josefin Slab', serif;
 	font-size: 20px;
@@ -122,6 +118,7 @@ a:visited {
   margin: 20px auto;
 }
 
+/* 헤더가 깨지기 때문에 주석 */
 /* .container {
   padding-top: 1em;
   margin-top: 1em;
@@ -356,16 +353,6 @@ color:white;
 
 </style>
 
-<!-- <script type="text/javascript" src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){
-	alert("확인");
-
-	
-});
-</script> -->
-
-
     <!-- ##### Breadcrumb Area Start ##### -->
     <div class="breadcrumb-area">
         <!-- Top Breadcrumb Area -->
@@ -388,39 +375,31 @@ $(document).ready(function(){
     </div>
 	<!-- ##### Breadcrumb Area End ##### -->
 	
-
-	<!-- =================================남성용/여성용 성별 구분 상품 카테고리===========================================   -->
-	
+	<!-- =================================남성용/여성용 성별 구분 상품 카테고리=========================================== -->
 	<div style="text-align: center; margin: 0px auto; height: 70px; width: 80%;">
-	        <nav id="topMenu" style="margin: 0px auto;">
-                <ul>
-						<!-- 남성용  -->
-                        <li><a class="menuLink1" style="border-top-left-radius: 5px;"> Men's </a></li>
-                        <li><a class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Driver&gender=1">Driver</a></li>
-                        <li><a class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Iron&gender=1">Iron</a></li>
-                        <li><a class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Utility&gender=1">Utility</a></li>
-                        <li><a class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Wedge&gender=1">Wedge</a></li>
-                        <li><a class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Putter&gender=1">Putter</a></li>
-                        <li><a class="menuLink" style="border-top-right-radius: 5px;" href="${pageContext.request.contextPath }/product/listAll?category=Etc&gender=1">Etc</a></li>
+		<nav id="topMenu" style="margin: 0px auto;">
+        	<ul>
+				<!-- 남성용  -->
+                <li><a class="menuLink1" style="border-top-left-radius: 5px;"> Men's </a></li>
+                <li><a class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Driver&gender=1">Driver</a></li>
+                <li><a class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Iron&gender=1">Iron</a></li>
+                <li><a class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Utility&gender=1">Utility</a></li>
+                <li><a class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Wedge&gender=1">Wedge</a></li>
+                <li><a class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Putter&gender=1">Putter</a></li>
+                <li><a class="menuLink" style="border-top-right-radius: 5px;" href="${pageContext.request.contextPath }/product/listAll?category=Etc&gender=1">Etc</a></li>
                
-               			<!-- 여성용 -->
-               			<li><a class="menuLink1" style="border-bottom-left-radius: 5px;"> Women's </a></li>
-                        <li><a class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Driver&gender=2">Driver</a></li>
-                        <li><a class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Iron&gender=2">Iron</a></li>
-                        <li><a class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Utility&gender=2">Utility</a></li>
-                        <li><a class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Wedge&gender=2">Wedge</a></li>
-                        <li><a class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Putter&gender=2">Putter</a></li>
-                        <li><a class="menuLink" style="border-bottom-right-radius: 5px;" href="${pageContext.request.contextPath }/product/listAll?category=Etc&gender=2">Etc</a></li>
-               
-               
-               
-                </ul>
-        	</nav>
-
-    	</div>
+               	<!-- 여성용 -->
+               	<li><a class="menuLink1" style="border-bottom-left-radius: 5px;"> Women's </a></li>
+                <li><a class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Driver&gender=2">Driver</a></li>
+                <li><a class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Iron&gender=2">Iron</a></li>
+                <li><a class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Utility&gender=2">Utility</a></li>
+                <li><a class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Wedge&gender=2">Wedge</a></li>
+                <li><a class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Putter&gender=2">Putter</a></li>
+                <li><a class="menuLink" style="border-bottom-right-radius: 5px;" href="${pageContext.request.contextPath }/product/listAll?category=Etc&gender=2">Etc</a></li>
+			</ul>
+        </nav>
+   	</div>
 	<!-- =================================남성용/여성용 성별 구분 상품 카테고리===========================================   -->
-
-
 	
 	<!-- ##### Shop Area Start ##### -->
 	<section class="shop-page section-padding-0-100" style="width: 80%; margin: auto;">
@@ -428,107 +407,83 @@ $(document).ready(function(){
             <div class="row">
                 <!-- Shop Sorting Data -->
                 <div class="col-12"  style="width: 98%; margin: auto; ">
-
-                        
-                        <div class="search_by_terms" style="float: right;">
-
-                                
-                        <!-- 인기순,최신순 선택바 div  -->
+					<div class="search_by_terms" style="float: right;">
+						<!-- 인기순,최신순 선택바 div  -->
 						<div style="float: right;"> 
-						<form action="#" method="post" class="form-inline">
-
-                                
+							<form action="#" method="post" class="form-inline">
                                 <a class="date_like" style="color:#A1C298; font-size: 15px;" href="${pageContext.request.contextPath }/product/listAll?category=${category}&gender=${gender}">최신순</a>
                  				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <a class="date_like" style="color:#A1C298; font-size: 15px;" href="${pageContext.request.contextPath }/product/listLike?category=${category}&gender=${gender}">인기순</a>
-                            
                             </form>
                         </div>    
-                        
-                        
-
-                        
-                        </div>
-                        
-                    </div>
-                </div>
-            </div>
-            
-
-                <!-- All Products Area -->
-                <div class="col-12 col-md-8 col-lg-9" style="margin: auto;" id="products">
-                    <div class="shop-products-area">
-                        <div class="row">
-
-							<!-- Single Product Area -->
-							<!-- for문으로 상품 리스트 반복  -->
-							<c:forEach var="vo" items="${productList }">
-								<div class="col-12 col-sm-6 col-lg-4">
-									<div class="single-product-area mb-50">
-										<!-- Product Image -->
-
-										<div class="product-img">
-											<a href="${pageContext.request.contextPath }/product/productDetail?prod_num=${vo.prod_num}">
-											<img src="${pageContext.request.contextPath }/resources/product_img/${vo.prod_img}"></a>
-											<!-- Product Tag -->
-											<div class="product-tag">
-												<a href="#">Hot</a>
-											</div>
-											<div class="product-meta d-flex">
-												<a href="#" class="wishlist-btn"><i class="icon_heart_alt"></i></a>
-												<a href="cart.html" class="add-to-cart-btn">Add to cart</a>
-												<a href="#" class="compare-btn"><i class="arrow_left-right_alt"></i></a>
-											</div>
-										</div>
-										<!-- Product Info -->
-										<div class="product-info mt-15 text-center">
-											<a href="${pageContext.request.contextPath }/product/productDetail?prod_num=${vo.prod_num}">
-												<p>${vo.prod_name }</p>
-											</a>
-											<h6>${vo.price }원</h6>
-										</div>
-									</div>
-								</div>
-							</c:forEach>
-							<!-- for문으로 상품 리스트 반복  -->
-
-                                         <!-- 상품 올리기 div  -->
-                        <div style="float: right; margin-bottom: 60px; width: 100px; margin-left: 950px;">
-<%-- 							<input type="button" title="Button fade blue/green" class="button btnFade btnBlueGreen" value="상품올리기" onclick="location.href='${pageContext.request.contextPath }/product/productInsert'">
- --%>							    <a title="Button fade blue/green" class="button btnFade btnBlueGreen" onclick="location.href='${pageContext.request.contextPath }/product/productInsert'">상품올리기</a>
-						</div>        
-                        </div>
-                     
-                        
-
-<!-- ======================================== 페이징 네비바 ======================================== -->
-						<!-- Pagination -->
-						<nav aria-label="Page navigation">
-							<ul class="pagination" style="width: 910px; margin:0px auto;">
-								<c:if test="${pm.prev }">
-									<!-- ${pm.prev }결과가 참(true)일 때 -->
-									<li class="page-item"><a class="page-link" href="listAll?page=${pm.startPage-1 }&category=${category }"><i class="fa fa-angle-left"></i></a></li>
-									<!-- 현재 위치한 페이지 블럭의 첫번째 페이지보다 -1인 페이지로 이동  -->
-								</c:if>
-
-								<c:forEach var="idx" begin="${pm.startPage }" end="${pm.endPage }">
-									<li class="page-item" <c:out value="${pm.vo.page == idx?'class=active':'active' }"/> style="text-align: center; margin:0px auto;">
-									<a class="page-link" href="listAll?page=${idx }&category=${category }">${idx }</a></li>
-								</c:forEach>
-								
-								<c:if test="${pm.next }">
-									<!-- ${pm.next }결과가 참(true)일 때  -->
-									<li class="page-item"><a class="page-link" href="listAll?page=${pm.endPage+1 }&category=${category }"><i class="fa fa-angle-right"></i></a></li>
-									<!-- 현재 위치한 페이징 블럭의 마지막 페이지보다 +1인 페이지로 이동  -->
-								</c:if>
-							</ul>
-						</nav>
-<!-- ======================================== 페이징 네비바 ======================================== -->
-
+					</div>
 				</div>
 			</div>
-<!-- 		</div> -->
+		</div>
+		
+        <!-- All Products Area -->
+        <div class="col-12 col-md-8 col-lg-9" style="margin: auto;" id="products">
+        	<div class="row" style="width: 910px; margin: 0px auto;">
+				<!-- Single Product Area -->
+				<!-- for문으로 상품 리스트 반복  -->
+				<c:forEach var="vo" items="${productList }">
+					<div class="col-12 col-sm-6 col-lg-4">
+						<div class="single-product-area mb-50">
+							<!-- Product Image -->
+							<div class="product-img">
+								<a href="${pageContext.request.contextPath }/product/productDetail?prod_num=${vo.prod_num}"><img src="${pageContext.request.contextPath }/resources/product_img/${vo.prod_img}"></a>
+								<!-- Product Tag -->
+								<div class="product-tag">
+									<a href="#">Hot</a>
+								</div>
+								<div class="product-meta d-flex">
+									<a href="#" class="wishlist-btn"><i class="icon_heart_alt"></i></a>
+									<a href="cart.html" class="add-to-cart-btn">Add to cart</a>
+									<a href="#" class="compare-btn"><i class="arrow_left-right_alt"></i></a>
+								</div>
+							</div>
+							<!-- Product Info -->
+							<div class="product-info mt-15 text-center">
+								<a href="${pageContext.request.contextPath }/product/productDetail?prod_num=${vo.prod_num}">
+									<p>${vo.prod_name }</p>
+								</a>
+								<h6>${vo.price }원</h6>
+							</div>
+						</div>
+					</div>
+				</c:forEach>
+				<!-- for문으로 상품 리스트 반복  -->
+				<!-- 상품 올리기 div  -->
+                   <div style="float: right; margin-bottom: 60px; width: 100px; margin-left: 835px;">
+<%-- 				<input type="button" title="Button fade blue/green" class="button btnFade btnBlueGreen" value="상품올리기" onclick="location.href='${pageContext.request.contextPath }/product/productInsert'"> --%>
+				    <a title="Button fade blue/green" class="button btnFade btnBlueGreen" onclick="location.href='${pageContext.request.contextPath }/product/productInsert'">상품올리기</a>
+				</div>        
+			</div>
+<!-- ======================================== 페이징 네비바 ======================================== -->
+			<!-- Pagination -->
+			<nav aria-label="Page navigation">
+				<ul class="pagination">
+					<c:if test="${pm.prev }">
+						<!-- ${pm.prev }결과가 참(true)일 때 -->
+						<li class="page-item"><a class="page-link" href="listAll?page=${pm.startPage-1 }&category=${category }"><i class="fa fa-angle-left"></i></a></li>
+						<!-- 현재 위치한 페이지 블럭의 첫번째 페이지보다 -1인 페이지로 이동  -->
+							</c:if>
+								<c:forEach var="idx" begin="${pm.startPage }" end="${pm.endPage }">
+								<li class="page-item" <c:out value="${pm.vo.page == idx?'class=active':'active' }"/>>
+								<a class="page-link" href="listAll?page=${idx }&category=${category }">${idx }</a></li>
+							</c:forEach>
+							
+							<c:if test="${pm.next }">
+								<!-- ${pm.next }결과가 참(true)일 때  -->
+								<li class="page-item"><a class="page-link" href="listAll?page=${pm.endPage+1 }&category=${category }"><i class="fa fa-angle-right"></i></a></li>
+								<!-- 현재 위치한 페이징 블럭의 마지막 페이지보다 +1인 페이지로 이동  -->
+							</c:if>
+						</ul>
+					</nav>
+<!-- ======================================== 페이징 네비바 ======================================== -->
+			</div>
 <!-- 	</div> -->
+<!-- </div> -->
 </section>
 
     <!-- ##### Shop Area End ##### -->

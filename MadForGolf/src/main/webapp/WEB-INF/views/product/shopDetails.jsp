@@ -205,8 +205,8 @@ function changeBtnName()  {
                                     <input type="hidden" id="like_count" value="${product.like_count }">
                                     
                                     <input type="button" id="button" value="채팅하기" onclick="">
-                                    <input type="button" id="deal" value="거래전" onclick="changeBtnName();">
-                                </div>
+<!--                                     <input type="button" id="deal" value="거래전" onclick="changeBtnName();">
+ -->                                </div>
                                     <input type="submit" name="addtocart" value="구매하기" class="btn alazea-btn ml-15">
                                 </form>
                             </div>

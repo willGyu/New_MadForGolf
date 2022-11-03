@@ -126,6 +126,16 @@ public class ProductDAOImpl implements ProductDAO {
 		if(result > 0)
 			log.info("상품 등록 완료!");
 	}
+	
+	@Override
+	public Integer updateProduct(ProductVO vo) throws Exception {
+		log.info("updateProduct(ProductVO vo) 호출");
+		
+		int cnt = sqlSession.update(NAMESPACE + ".update", vo);		
+		
+		return cnt;
+	}
+	
 
 	@Override
 	public ProductVO getBoard(Integer prod_num) throws Exception {
@@ -145,16 +155,6 @@ public class ProductDAOImpl implements ProductDAO {
 		// SQL - mapper 쿼리구문 호출
 		sqlSession.update(NAMESPACE + ".updateReadCnt",bno);
 		
-	}
-
-	
-	@Override
-	public Integer updateBoard(ProductVO vo) throws Exception {
-		log.info(" updateBoard(BoardVO vo) 호출 ");
-		
-		int cnt = sqlSession.update(NAMESPACE + ".updateBoard",vo);		
-		
-		return cnt;
 	}
 
 	@Override

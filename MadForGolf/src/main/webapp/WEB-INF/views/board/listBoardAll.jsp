@@ -9,6 +9,117 @@
 <!-- header -->
    
    
+<style>
+.container_box{
+/* 	border: 5px solid black; */
+
+}
+.writeBtn_box{
+/* 	border: 5px solid red; */
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: right;	
+	width: 100%;
+	margin-bottom: 10px;
+}
+
+.writeBtn{
+	width: 100px;
+	height : 40px;
+	border-radius: 3px;
+	color: white;
+	text-align: center;
+	padding: 10px;
+	background-color : #C6EBC5;
+}
+
+.writeBtn:hover{
+	background-color : #FA7070;
+	color: white;
+	
+
+}
+
+.category_list{
+/* 	border: 5px solid green; */
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: center;	
+}
+
+.category_btn{
+	width: 100px;
+	height : 40px;
+	color: white;
+	text-align: center;
+	padding: 10px;
+	background-color : #C6EBC5;
+
+}
+
+.category_btn:NTH-OF-TYPE(1){
+	border-radius: 5px 0 0 5px; 
+
+}
+
+.category_btn:NTH-OF-TYPE(5){
+	border-radius: 0 5px 5px 0;
+
+}
+
+.category_btn:hover{
+	background-color : #91C788;
+	color: white;
+
+}
+
+.category_btn div{
+ 	font-size: 15px;
+ 	font-weight: bold;
+}
+
+
+.table_box{
+/* 		border: 5px solid yellow; */
+		margin-top: 10px;
+}
+
+.page_box{
+/* 	border: 5px solid blue; */
+	margin-bottom: 20px;
+}
+
+#page-link_real:hover{
+	background-color: #C6EBC5;
+	boder-color: #C6EBC5;
+}
+
+
+@media only screen and (max-width: 767px){
+	.pagination{
+/* 			border: 5px solid blue; */
+		
+	}
+	
+	.page-item{
+/* 			border: 5px solid red; */
+	
+	}
+	#page-link_real{
+/* 			border: 5px solid yellow; */
+			font-size: 15px;
+			width: 30px;
+			height: 30px;
+			padding: 0px;
+			margin: 0 5px;
+			border-radius: 3px;
+			
+	
+	}
+		
+}
+</style>
+   
      <!-- ##### Breadcrumb Area Start ##### -->
     <div class="breadcrumb-area">
         <!-- Top Breadcrumb Area -->
@@ -21,7 +132,7 @@
                 <div class="col-12">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i> Home</a></li>
+                            <li class="breadcrumb-item"><a href="/"><i class="fa fa-home"></i> Home</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Community</li>
                         </ol>
                     </nav>
@@ -31,61 +142,71 @@
     </div>
     <!-- ##### Breadcrumb Area End ##### -->
 
-
-<%-- 		<c:if test="${!(empty sessionScope.loginID) }"> --%>
-        <div class="col-12">
-        	<button class="btn alazea-btn mt-15" onclick="location.href='${pageContext.request.contextPath }/board/insertBoard'">글쓰기</button>
-        </div>
-<%-- 	</c:if> --%>
+<div class="container container_box">
 
 
-   		<!-- category 클릭 시 말머리별 게시글 리스트만 뜨도록 구현 -->
-	 	<div class="category_list">
-	 		<a class="btn alazea-btn mt-15" href="listBoardAll">전체</a>
-	 		<a class="btn alazea-btn mt-15" href="listBoardCategory?board_category=질문">질문</a>
-	 		<a class="btn alazea-btn mt-15" href="listBoardCategory?board_category=신고">신고</a>
-	 		<a class="btn alazea-btn mt-15" href="listBoardCategory?board_category=친목">친목</a>
-	 		<a class="btn alazea-btn mt-15" href="listBoardCategory?board_category=정보">정보</a>
-		</div>
+	
+
+  	<!-- category 클릭 시 말머리별 게시글 리스트만 뜨도록 구현 -->
+ 	<div class="category_list">
+ 		<a class="category_btn" href="listBoardAll"><div>전체</div></a>
+ 		<a class="category_btn" href="listBoardCategory?board_category=질문"><div>질문</div></a>
+ 		<a class="category_btn" href="listBoardCategory?board_category=신고"><div>신고</div></a>
+ 		<a class="category_btn" href="listBoardCategory?board_category=친목"><div>친목</div></a>
+ 		<a class="category_btn" href="listBoardCategory?board_category=정보"><div>정보</div></a>
+	</div>
    
    
   <!--  #####  게시글 리스트 시작   ##### --> 
-
-<table class="table">
-	<tbody>
+	<div class="table_box">
 	
-		<tr>
-			<th>No</th>
-			<th>Category</th>
-			<th>Title</th>
-			<th>Writer</th>
-			<th>Date</th>
-			<th>Count</th>
-		</tr>
+		<table class="table">
+			<tbody>
+			
+				<tr>
+					<th>No</th>
+					<th>Category</th>
+					<th>Title</th>
+					<th>Writer</th>
+					<th>Date</th>
+					<th>Count</th>
+				</tr>
+		
+			<c:forEach var="vo" items="${boardList }">
+				<tr>
+					<td>${vo.board_num }</td>
+					<td class="category all">${vo.board_category }</td>
+					<td>
+						<a href="/board/boardRead?board_num=${vo.board_num}">${vo.title }</a></td>
+					<td>조인해오기</td>
+					<td>
+						<fmt:formatDate value="${vo.write_date }" pattern="yy-MM-dd HH:mm"/>
+					</td>
+					<td>${vo.readcount}</td>
+				</tr>
+			</c:forEach>
+			</tbody>
+		</table>
+	</div>	
+	
+	
 
-	<c:forEach var="vo" items="${boardList }">
-		<tr>
-			<td>${vo.board_num }</td>
-			<td class="category all">${vo.board_category }</td>
-			<td>
-				<a href="/board/boardRead?board_num=${vo.board_num}">${vo.title }</a></td>
-			<td>조인해오기</td>
-			<td>
-				<fmt:formatDate value="${vo.write_date }" pattern="yy-MM-dd HH:mm"/>
-			</td>
-			<td>${vo.readcount}</td>
-		</tr>
-	</c:forEach>
-	</tbody>
-</table>
-
+<%-- 	${sessionScope.user_id} --%>
+	<c:if test="${!(empty sessionScope.user_id) }">
+        <div class="col-12 writeBtn_box">
+        	<a class="writeBtn" href="/board/insertBoard">글쓰기</a>
+        </div>
+	</c:if>
+	
 	<!-- ##### 페이징 처리 시작  ##### -->
+	<div class="page_box">
+	
 	<nav aria-label="Page navigation">
     	<ul class="pagination">
     	
     		<c:if test="${pm.prev}">
 	        	<li class="page-item">
-	        		<a class="page-link" href="listBoardAll?page=${pm.startPage-1}">
+	        		<a class="page-link" id="page-link_real" href="listBoardAll?page=${pm.startPage-1}">
         				<i class="fa fa-angle-left"></i>
        				</a>
      			</li>
@@ -93,20 +214,21 @@
 	        
 	        <c:forEach var="idx" begin="${pm.startPage }" end="${pm.endPage }">
 	        	<li class="page-item" ${pm.vo.page == idx ? 'class=active' : '' }>
-	        		<a class="page-link" href="listBoardAll?page=${idx}">${idx}</a>
+	        		<a class="page-link" id="page-link_real" href="listBoardAll?page=${idx}">${idx}</a>
         		</li>
 	        </c:forEach>
 	        
 	        <c:if test="${pm.next}">
 	        	<li class="page-item">
-	        		<a class="page-link" href="listBoardAll?page=${pm.endPage+1 }">
+	        		<a class="page-link" id="page-link_real" href="listBoardAll?page=${pm.endPage+1 }">
 	        			<i class="fa fa-angle-right"></i>
         			</a>
        			</li>
       		</c:if>
 	    </ul>
 	</nav>
-	
+	</div>
+</div>
 	<!-- #####  페이징 처리 종료 #####  -->
 
 <!-- ##### 게시글 목록 종료 ##### -->

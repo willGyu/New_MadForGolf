@@ -1,6 +1,7 @@
 package com.madforgolf.persistence;
 
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.madforgolf.domain.MemberVO;
@@ -15,7 +16,7 @@ public interface MemberDAO {
 		//아이디 중복 체크 
 		public int idCheck(MemberVO vo) throws Exception;
 		
-		//휴대번호 중복 체크   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@    1029 서하 추가
+		//휴대번호 중복 체크
 		public int phoneCheck(MemberVO vo) throws Exception;
 		
 		// 로그인 동작
@@ -29,7 +30,7 @@ public interface MemberDAO {
 		public MemberVO findId(MemberVO vo) throws Exception;
 		
 		// 비밀번호 찾기
-//		public MemberVO findPw(MemberVO vo) throws Exception;
+		public MemberVO findPw(MemberVO vo) throws Exception;
 		
 		// 비밀번호 변경
 		public MemberVO updatePw(MemberVO vo) throws Exception;
@@ -37,15 +38,30 @@ public interface MemberDAO {
 		
 		// 회원정보 조회
 		public MemberVO getMember(String id);
-		
+				
 		// 회원정보 수정
-//		public Integer updateMember(MemberVO uvo);
+		public Integer updateMember(MemberVO uvo);
+		
 		
 		// 회원 탈퇴
-//		public void deleteMember(MemberVO dvo) throws Exception;
+		public void deleteMember(MemberVO dvo) throws Exception;
+		
+		// 비밀번호 체크
+		public int pwCheck(MemberVO vo) throws Exception;
 		
 		// 회원목록 리스트 조회
 		public List<MemberVO> getMemberList();
+		
+		// 로그인 정보 받아오기 (회원정보수정)
+		public MemberVO loginMember(MemberVO vo);
+		
+		
+		//카카오로그인 정보 저장
+//		public void kakaoInert(HashMap<String, Object> userInfo) ;
+//		
+//				
+//		//위도 경도 저장
+//		public void lalong(HashMap<String, String> paramMap);
 		
 	
 }

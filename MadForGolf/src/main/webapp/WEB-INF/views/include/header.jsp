@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 
@@ -23,12 +24,8 @@
 </head>
 
 <body>
-
-	<%
-	String loginid = null;
-	if(null != session.getAttribute("loginId"))
-		loginid = (String)session.getAttribute("loginId");
-	%>
+	
+	
 
     <!-- ##### Header Area Start ##### -->
     <header class="header-area">
@@ -41,20 +38,55 @@
                         <div class="top-header-content d-flex align-items-center justify-content-between">
                             <!-- Top Header Content -->
                             <div class="top-header-meta">
-                                <a href="#" data-placement="bottom" title="MadForGolf@gmail.com"><i class="fa fa-envelope-o" aria-hidden="true"></i> <span>Email: MadForGolf@gmail.com</span></a>
-                                <a href="#" data-placement="bottom" title="051-803-0909"><i class="fa fa-phone" aria-hidden="true"></i> <span>Call Us: 051-803-0909</span></a>
+                                <a href="#" data-placement="bottom" title=""><i class="fa fa-envelope-o" aria-hidden="true"></i> <span>Email: MadForGolf@gmail.com</span></a>
+                                <a href="#" data-placement="bottom" title=""><i class="fa fa-phone" aria-hidden="true"></i> <span>Call Us: 051-803-0909</span></a>
                             </div>
-
-
-                            <!-- Top Header Content -->
+		
+							<!-- Top Header Content -->
                             <div class="top-header-meta d-flex">
-                                 <div class="language-dropdown">
-                              
+                            
                             <!-- Login -->
                             <div class="login">
-                                    <a href="/member/login"><i class="fa fa-user" aria-hidden="true"></i> <span>Login</span></a>
-                                    <a href="/member/insert"><i class="fa fa-shopping-cart" aria-hidden="true"></i> <span>Join <span class="cart-quantity"></span></span></a>
-                            </div>	
+								 <ul class="util">
+								 <c:if test="${loginVO == null }">
+							        <!-- 로그인 X - 회원가입 -->
+							        <div class="login">
+                               		<a href="/member/insert"><i class="fa fa-user" aria-hidden="true"></i> <span>Join</span></a>
+                           		</c:if>			
+							       
+							    <c:if test="${loginVO == null }">
+							    	<!-- 로그인 X - 로그인 -->
+						          	<a href="/member/login"><i class="fa fa-user" aria-hidden="true"></i> <span>Login</span></a>
+							    </c:if>	
+							</div>
+							    	
+									
+									
+							<c:if test="${loginVO != null }">
+								<!-- 로그인 O - 마이페이지 -->
+							    <!-- 로그인 O - 'OO'님 환영합니다. -->
+							    <div class="login">
+									<b id="user_id" >${loginVO.user_name }</b>님 환영합니다.
+							        <a href="/member/mypage"><i class="fa fa-user" aria-hidden="true"></i> <span>마이페이지</span></a>
+							</c:if>
+							        
+							        
+							<c:if test="${loginVO != null }">
+							    <!-- 로그인 O - 거래목록 -->
+							    <a href="#"><i class="fa fa-user" aria-hidden="true"></i> <span>거래목록</span></a>
+							</c:if>
+							        
+							<c:if test="${loginVO != null }">
+								<!-- 로그인 O - 로그아웃 -->
+						        <a href="/member/logout"><i class="fa fa-user" aria-hidden="true"></i> <span>로그아웃</span></a>         
+							</c:if>
+							        
+							        
+						</div>												       
+		    		</ul>	
+
+               </div>
+                            
                            
                         </div>
                     </div>

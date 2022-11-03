@@ -38,7 +38,7 @@
 <%
 	//세션영역에 있는 로그인 아이디 정보를 가져오기
 	String id =	(String)session.getAttribute("user_id");
-	if(id == null){
+	if(id == null){ 
 		// 로그인을 안했다
 		%>
 		<script type="text/javascript">

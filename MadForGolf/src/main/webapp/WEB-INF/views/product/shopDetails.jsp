@@ -31,8 +31,13 @@
 
 
 <script>
-  function shareMessage() {
-    Kakao.Share.sendDefault({
+function shareMessage() {
+/*     var like_count = ${product.like_count}; */
+/*     const like = parseInt(like_count); */
+   
+	const like = parseInt(${product.like_count}); //like_count int로 변환해야 나와서 바꿈 
+    
+	Kakao.Share.sendDefault({
       objectType: 'feed',
       content: {
         title: '${product.prod_name}',
@@ -47,8 +52,7 @@
         },
       },
       social: {
-        likeCount: ${product.like_count},
-        //int만 넣을 수 있는듯한데 파라미터로 불러와서 안꺼내짐..방법을 찾아보자..
+        likeCount: like,
       },
       buttons: [
         {
@@ -72,8 +76,13 @@
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
-//=================찜하기 버튼 클릭 시 alert창 
 	$(document).ready(function() {
+/*         var like_count = ${product.like_count};
+        const like = parseInt(like_count);
+		
+        alert(like); //parsrInt시, int변환 값 넘어오는지 확인용 */
+        
+//=================찜하기 버튼 클릭 시 alert창 
 		$('#like_heart').click(function() {
 			var result = confirm('상품을 찜하시겠습니까?');
 
@@ -85,8 +94,33 @@
 				//no
 			}
 		});
-	});
 //==================찜하기 버튼 클릭 시 alert창 
+
+//==================거래 전 버튼 클릭시, 채팅하기 구매하기 버튼 비활성화
+        
+		$('#deal').click(function(){
+			const target1 = document.getElementById('button');
+			target1.disabled = true;
+			
+			const target2 = document.getElementById('addtocart');
+			target2.disabled = true; //input type submit이라 안먹는 듯....샹 ....ㅠㅠ 찾아보자 
+		});
+			  
+
+	});
+//==================거래 전 버튼 클릭시, 채팅하기 구매하기 버튼 비활성화
+
+
+
+//==================거래전 버튼 -> 거래후 변경
+function changeBtnName()  {
+  const btnElement = document.getElementById('deal');
+  
+  btnElement.value = "거래후"; //버튼 value바꿈 
+  
+}
+//==================거래전 버튼 -> 거래후 변경 
+
 </script>
 
 
@@ -171,6 +205,7 @@
                                     <input type="hidden" id="like_count" value="${product.like_count }">
                                     
                                     <input type="button" id="button" value="채팅하기" onclick="">
+                                    <input type="button" id="deal" value="거래전" onclick="changeBtnName();">
                                 </div>
                                     <input type="submit" name="addtocart" value="구매하기" class="btn alazea-btn ml-15">
                                 </form>
@@ -183,7 +218,8 @@
                                 <p>
                                     <span>Share on:</span>
                                     <span>
-                                    <a href="#"><i class="fa fa-facebook" onclick="shareMessage();"></i></a>
+                                   <!--  <a href="#"><i class="fa fa-facebook" onclick="shareMessage();"></i></a> -->
+                                    <a href="#" onclick="shareMessage();"><img style="width: 17px; height: 17x;" src="${pageContext.request.contextPath }/resources/product_img/kakao.png"></a>
                                 </span>
                                 </p>
                             </div>

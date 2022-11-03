@@ -104,7 +104,11 @@ public class ProductDAOImpl implements ProductDAO {
 	
 	@Override
 	public Integer getTotalCnt(ProductVO vo) throws Exception {
-		return sqlSession.selectOne(NAMESPACE + ".getTotalCnt",vo);
+		if(vo.getGender() == 0) {
+			return sqlSession.selectOne(NAMESPACE + ".getTotalCnt", vo);
+		} else {
+			return sqlSession.selectOne(NAMESPACE + ".getTotalCnt2", vo);
+		}
 	}
 	
 	@Override

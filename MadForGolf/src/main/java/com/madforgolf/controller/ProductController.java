@@ -508,9 +508,9 @@ public class ProductController {
 							break;
 						}
 						case "file3" : {
-							File oldDeleteFile1 = new File(uploadFolder1 + "\\" + oldfile2);
+							File oldDeleteFile1 = new File(uploadFolder1 + "\\" + oldfile3);
 							oldDeleteFile1.delete();
-							File oldDeleteFile2 = new File(uploadFolder2 + "\\" + oldfile2);
+							File oldDeleteFile2 = new File(uploadFolder2 + "\\" + oldfile3);
 							oldDeleteFile2.delete();
 							vo.setProd_img3(uFileName);
 							break;
@@ -525,11 +525,11 @@ public class ProductController {
 					log.info("fileList" + fileList);
 					
 					// 파일 생성
-					File file1 = new File(uploadFolder1 + "\\" + uFileName); // 학원에서 사용할 때 주석 풀면 됩니다.
+					//File file1 = new File(uploadFolder1 + "\\" + uFileName); // 학원에서 사용할 때 주석 풀면 됩니다.
 					File file2 = new File(uploadFolder2 + "\\" + uFileName);
 					
 					if(mFile.getSize() != 0) { // 첨부파일이 있을 때				
-						mFile.transferTo(file1); // 첨부파일로 전달된 정보를 파일로 전달  // 학원에서 사용할 때 주석 풀면 됩니다.
+						//mFile.transferTo(file1); // 첨부파일로 전달된 정보를 파일로 전달  // 학원에서 사용할 때 주석 풀면 됩니다.
 						mFile.transferTo(file2); 
 						log.info("파일 업로드 성공");
 					} // if

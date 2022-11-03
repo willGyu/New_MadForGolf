@@ -9,6 +9,8 @@ import com.madforgolf.domain.PageVO;
 import com.madforgolf.domain.ProductVO;
 
 public interface ProductService {
+	//메인(index.jsp)상품 목록 - 최신순(성별/카테고리 구분없음)
+	public List<ProductVO> listMain(ProductVO vo) throws Exception;
 	
 	// 상품 전체 목록 불러오기(최신순)
 	public List<ProductVO> getProductListAll(ProductVO vo, PageVO vo2) throws Exception;
@@ -22,10 +24,14 @@ public interface ProductService {
 	// 상품 전체 개수 불러오기
 	public Integer getTotalCnt(ProductVO vo) throws Exception;
 	
-	
-	
 	// 상품 등록 (Insert)
 	public void productInsert(ProductVO vo) throws Exception;
+	
+	// 상품정보 수정하기 (Update)
+	public Integer updateProduct(ProductVO vo) throws Exception;
+	
+	// 글 삭제하기
+	public Integer deleteBoard(Integer prod_num) throws Exception;
 	
 	// 상품수정 1개정보 불러오기
 	public ProductVO getBoard(Integer prod_num) throws Exception;
@@ -33,14 +39,10 @@ public interface ProductService {
 	// 글 조회수 1증가
 	public void updateReadCount(Integer bno) throws Exception;
 	
-	// 글 수정하기
-	public Integer updateBoard(ProductVO vo) throws Exception;
-	
-	// 글 삭제하기
-	public Integer deleteBoard(Integer prod_num) throws Exception;
 	
 	// 글 리스트 가져오기(페이징처리)
 	public List<ProductVO> listPage(PageVO vo) throws Exception;
+	
 	
 	
 

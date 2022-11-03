@@ -19,12 +19,24 @@ public class ProductDAOImpl implements ProductDAO {
 
 	private static final Logger log 
 	    = LoggerFactory.getLogger(ProductDAOImpl.class);
+
 	
 	// SqlSession객체 주입(DI)
 	@Autowired
 	private SqlSession sqlSession;
 
 	private static final String NAMESPACE = "com.madforgolf.mapper.ProductMapper";
+	
+	@Override
+	public List<ProductVO> listMain(ProductVO vo) throws Exception {
+		log.info("listMain()호출");
+		
+		List<ProductVO> productList;
+		
+		productList = sqlSession.selectList(NAMESPACE+".listMain",vo);
+		
+		return productList;
+	}
 
 	@Override
 	public List<ProductVO> listAll(ProductVO vo, PageVO vo2) throws Exception {
@@ -114,12 +126,22 @@ public class ProductDAOImpl implements ProductDAO {
 		if(result > 0)
 			log.info("상품 등록 완료!");
 	}
+	
+	@Override
+	public Integer updateProduct(ProductVO vo) throws Exception {
+		log.info("updateProduct(ProductVO vo) 호출");
+		
+		int cnt = sqlSession.update(NAMESPACE + ".update", vo);		
+		
+		return cnt;
+	}
+	
 
 	@Override
 	public ProductVO getBoard(Integer prod_num) throws Exception {
 		log.info("getBoard(Integer bno) 호출");
 		
-		
+
 		
 		return sqlSession.selectOne(NAMESPACE + ".read",prod_num);
 		
@@ -135,19 +157,16 @@ public class ProductDAOImpl implements ProductDAO {
 		
 	}
 
-	
-	@Override
-	public Integer updateBoard(ProductVO vo) throws Exception {
-		log.info(" updateBoard(BoardVO vo) 호출 ");
-		
-		int cnt = sqlSession.update(NAMESPACE + ".updateBoard",vo);		
-		
-		return cnt;
-	}
-
 	@Override
 	public Integer deleteBoard(Integer prod_num) throws Exception {
 		log.info(" deleteBoard(bno) 호출 ");
+
+		/*
+		 * Map<String, Object> removeObj = new HashMap<String, Object>();
+		 * removeObj.put("prod_num", prod_num);
+		 * 
+		 * log.info("@@@@@@@@@@@@@@@@@removeOnj"+removeObj);
+		 */
 		
 		return sqlSession.delete(NAMESPACE + ".remove",prod_num);
 	}

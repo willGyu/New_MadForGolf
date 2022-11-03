@@ -14,6 +14,8 @@ public class ProductVO {
 	private int gender;
 	private int like_count;
 	private Date prod_date;
+	private String prod_img2;
+	private String prod_img3;
 	
 	public int getProduct_num() {
 		return prod_num;
@@ -88,13 +90,24 @@ public class ProductVO {
 	public void setProd_date(Date prod_date) {
 		this.prod_date = prod_date;
 	}
-	
+	public String getProd_img2() {
+		return prod_img2;
+	}
+	public void setProd_img2(String prod_img2) {
+		this.prod_img2 = prod_img2;
+	}
+	public String getProd_img3() {
+		return prod_img3;
+	}
+	public void setProd_img3(String prod_img3) {
+		this.prod_img3 = prod_img3;
+	}
 	@Override
 	public String toString() {
 		return "ProductVO [prod_num=" + prod_num + ", seller_id=" + seller_id + ", prod_name=" + prod_name
 				+ ", prod_img=" + prod_img + ", price=" + price + ", detail=" + detail + ", condition=" + condition
 				+ ", category=" + category + ", gender=" + gender + ", like_count=" + like_count + ", prod_date="
-				+ prod_date + "]";
+				+ prod_date + ", prod_img2=" + prod_img2 + ", prod_img3=" + prod_img3 + "]";
 	}
 
 	

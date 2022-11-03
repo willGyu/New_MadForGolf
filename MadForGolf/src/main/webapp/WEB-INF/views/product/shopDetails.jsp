@@ -22,107 +22,10 @@
 }
 </style>
 
-<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.0.0/kakao.min.js"
-  integrity="sha384-PFHeU/4gvSH8kpvhrigAPfZGBDPs372JceJq3jAXce11bVA6rMvGWzvP4fMQuBGL" crossorigin="anonymous"></script>
-  
-<script>
-  Kakao.init('8bac8b97f338b46658e0afc74127913e'); // 사용하려는 앱의 JavaScript 키 입력
-</script>
-
-
-<script>
-function shareMessage() {
-/*     var like_count = ${product.like_count}; */
-/*     const like = parseInt(like_count); */
-   
-	const like = parseInt(${product.like_count}); //like_count int로 변환해야 나와서 바꿈 
-    
-	Kakao.Share.sendDefault({
-      objectType: 'feed',
-      content: {
-        title: '${product.prod_name}',
-        description: '${product.detail}',
-        imageUrl: 'https://cdn.pixabay.com/photo/2017/01/07/17/25/golfer-1960998_960_720.jpg',
-        //대표 이미지 주소 넣을 예정 -> 상품별 이미지 불러오기 어려브..
-        link: {
-          mobileWebUrl: 'http://localhost:8088/',
-          webUrl: 'http://localhost:8088/',
-          //http://itwillbs7.cafe24.com/MadForGolf 
-          //최종 호스팅하고 주소 넣을 예정 
-        },
-      },
-      social: {
-        likeCount: like,
-      },
-      buttons: [
-        {
-          title: '웹으로 보기',
-          link: {
-            mobileWebUrl: 'https://developers.kakao.com',
-            webUrl: 'https://developers.kakao.com',
-          },
-        },
-        {
-          title: '앱으로 보기',
-          link: {
-            mobileWebUrl: 'https://developers.kakao.com',
-            webUrl: 'https://developers.kakao.com',
-          },
-        },
-      ],
-    });
-  }
-</script>
-
-<script type="text/javascript" src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="https://asset.talkplus.io/talkplus-js-0.2.17.js"></script>
 <script type="text/javascript">
-	$(document).ready(function() {
-/*         var like_count = ${product.like_count};
-        const like = parseInt(like_count);
-		
-        alert(like); //parsrInt시, int변환 값 넘어오는지 확인용 */
-        
-//=================찜하기 버튼 클릭 시 alert창 
-		$('#like_heart').click(function() {
-			var result = confirm('상품을 찜하시겠습니까?');
-
-			if (result) {
-				//yes
-				location.href='/';
-				//찜 리스트 페이지 생성 후 -> 찜리스트 페이지 이동으로 변경 
-			} else { 
-				//no
-			}
-		});
-//==================찜하기 버튼 클릭 시 alert창 
-
-//==================거래 전 버튼 클릭시, 채팅하기 구매하기 버튼 비활성화
-        
-		$('#deal').click(function(){
-			const target1 = document.getElementById('button');
-			target1.disabled = true;
-			
-			const target2 = document.getElementById('addtocart');
-			target2.disabled = true; //input type submit이라 안먹는 듯....샹 ....ㅠㅠ 찾아보자 
-		});
-			  
-
-	});
-//==================거래 전 버튼 클릭시, 채팅하기 구매하기 버튼 비활성화
-
-
-
-//==================거래전 버튼 -> 거래후 변경
-function changeBtnName()  {
-  const btnElement = document.getElementById('deal');
-  
-  btnElement.value = "거래후"; //버튼 value바꿈 
-  
-}
-//==================거래전 버튼 -> 거래후 변경 
-
+	var client = new TalkPlus.Client({appId: '6d4f7ab2-f06e-4978-8282-8fc150e43cd0'});
 </script>
-
 
 
     <!-- ##### Breadcrumb Area Start ##### -->
@@ -148,6 +51,9 @@ function changeBtnName()  {
     </div>
     <!-- ##### Breadcrumb Area End ##### -->
 
+
+
+
     <!-- ##### Single Product Details Area Start ##### -->
     <section class="single_product_details_area mb-50">
         <div class="produts-details--content mb-50">
@@ -159,30 +65,20 @@ function changeBtnName()  {
                             <div id="product_details_slider" class="carousel slide" data-ride="carousel">
                                 <div class="carousel-inner">
                                     <div class="carousel-item active">
-                                        <a class="product-img" href="${pageContext.request.contextPath }/resources/product_img/${product.prod_img }" title="Product Image">
-                                        <img src="${pageContext.request.contextPath }/resources/product_img/${product.prod_img }" alt="1" style="height: 440px; width: 308px; margin-left: 80px;">
-                                    </a>
+                                    	<img class="d-block w-100" src="${pageContext.request.contextPath }/resources/product_img/${product.prod_img }" alt="1" style="width: 445px; height: 445px;">
                                     </div>
-                                    <!-- 이미지 여러개 넣을 시 주석 풀고 사용 -->
-<!--                                     <div class="carousel-item"> -->
-<%--                                         <a class="product-img" href="${pageContext.request.contextPath }/resources/img/bg-img/49.jpg" title="Product Image"> --%>
-<%--                                         <img class="d-block w-100" src="${pageContext.request.contextPath }/resources/img/bg-img/49.jpg" alt="1"> --%>
-<!--                                     </a> -->
-<!--                                     </div> -->
-<!--                                     <div class="carousel-item"> -->
-<%--                                         <a class="product-img" href="${pageContext.request.contextPath }/resources/img/bg-img/49.jpg" title="Product Image"> --%>
-<%--                                         <img class="d-block w-100" src="${pageContext.request.contextPath }/resources/img/bg-img/49.jpg" alt="1"> --%>
-<!--                                     </a> -->
-<!--                                     </div> -->
+                                    <div class="carousel-item">
+                                        <img class="d-block w-100" src="${pageContext.request.contextPath }/resources/product_img/${product.prod_img2 }" alt="1" style="width: 445px; height: 445px;">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img class="d-block w-100" src="${pageContext.request.contextPath }/resources/product_img/${product.prod_img3 }" alt="1" style="width: 445px; height: 445px;">
+                                    </div>
                                 </div>
-<!--                                 <ol class="carousel-indicators"> -->
-<%--                                     <li class="active" data-target="#product_details_slider" data-slide-to="0" style="background-image: url(${pageContext.request.contextPath }/resources/img/bg-img/49.jpg);"> --%>
-<!--                                     </li> -->
-<%--                                     <li data-target="#product_details_slider" data-slide-to="1" style="background-image: url(${pageContext.request.contextPath }/resources/img/bg-img/49.jpg);"> --%>
-<!--                                     </li> -->
-<%--                                     <li data-target="#product_details_slider" data-slide-to="2" style="background-image: url(${pageContext.request.contextPath }/resources/img/bg-img/49.jpg);"> --%>
-<!--                                     </li> -->
-<!--                                 </ol> -->
+                                <ol class="carousel-indicators">
+                                    <li class="active" data-target="#product_details_slider" data-slide-to="0" style="background-image: url(${pageContext.request.contextPath }/resources/product_img/${product.prod_img });"></li>
+                                    <li data-target="#product_details_slider" data-slide-to="1" style="background-image: url(${pageContext.request.contextPath }/resources/product_img/${product.prod_img2 });"></li>
+                                    <li data-target="#product_details_slider" data-slide-to="2" style="background-image: url(${pageContext.request.contextPath }/resources/product_img/${product.prod_img3 });"></li>
+                                </ol>
                             </div>
                         </div>
                     </div>
@@ -200,13 +96,9 @@ function changeBtnName()  {
                                 <form class="cart clearfix d-flex align-items-center" method="post">
                                 <!-- Wishlist & Compare -->
                                 <div class="wishlist-compare d-flex flex-wrap align-items-center">
-                                    <a href="#" class="wishlist-btn ml-15"><i id="like_heart" class="icon_heart_alt"></i></a>
-                                    <input type="hidden" id="prod_img" value="${product.prod_img }">
-                                    <input type="hidden" id="like_count" value="${product.like_count }">
-                                    
+                                    <a href="#" class="wishlist-btn ml-15"><i class="icon_heart_alt"></i></a>
                                     <input type="button" id="button" value="채팅하기" onclick="">
-<!--                                     <input type="button" id="deal" value="거래전" onclick="changeBtnName();">
- -->                                </div>
+                                </div>
                                     <input type="submit" name="addtocart" value="구매하기" class="btn alazea-btn ml-15">
                                 </form>
                             </div>
@@ -215,11 +107,14 @@ function changeBtnName()  {
                                 <p><span>Condition:</span> <span>${product.condition }</span></p>
                                 <p><span>Gender:</span> <span><c:if test="${product.gender eq 1}">남</c:if><c:if test="${product.gender eq 2}">여</c:if></span></p>
                                 <p><span>Category:</span> <span>${product.category }</span></p>
+                                <p><span>Seller:</span> <span><a href="${pageContext.request.contextPath }/product/seller?prod_num=${product.prod_num }">${product.seller_id }</a></span></p>
                                 <p>
                                     <span>Share on:</span>
                                     <span>
-                                   <!--  <a href="#"><i class="fa fa-facebook" onclick="shareMessage();"></i></a> -->
-                                    <a href="#" onclick="shareMessage();"><img style="width: 17px; height: 17x;" src="${pageContext.request.contextPath }/resources/product_img/kakao.png"></a>
+                                    <a href="#"><i class="fa fa-facebook"></i></a>
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                    <a href="#"><i class="fa fa-pinterest"></i></a>
+                                    <a href="#"><i class="fa fa-google-plus"></i></a>
                                 </span>
                                 </p>
                             </div>

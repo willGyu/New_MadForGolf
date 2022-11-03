@@ -2,7 +2,19 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp" %>
 
+<script>
+	
+	function hide_numbers(s){
+	var result = "";
+	var sLength = s.length;
+	for(var i = 0; i < sLength; i++){
+		result += i < sLength - 4 ? "*" : s.charAt(i);
+	}
+	return result;
+}
 
+
+</script>
 
 
 		
@@ -35,98 +47,100 @@
             <div class="row justify-content-between">
                 <div class="col-12 col-lg-7">
                     <div class="checkout_details_area clearfix">
-                        <h5>Billing Details</h5>
-                        
-                        ${sellerInfo}
+                        <h5>Product currently on Sale</h5>
+                                               
                         
                         <input type="hidden" name="prodNum" id="prodNum" value=" ${sellerInfo.prod_num}">
                         <input type="hidden" name="home" id="home" value="${pageContext.request.contextPath}" >
                               <img src="${pageContext.request.contextPath}/resources/product_img/${sellerInfo.prod_img}" 
-                              style="width:150px  ; height: auto">
+                              style="width:150px  ; height: auto"> <br>
                         
+                         <%-- ${sellerInfo} --%>
+                        
+                        <form action="#" method="post">
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <label for="seller_Id">SellerID *</label>
+                                    <input type="text" class="form-control" id="sellerId" name="sellerId" value="${sellerInfo.user_id}" required>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <label for="seller_name">Seller Name *</label>
+                                    <input type="text" class="form-control" id="seller_name" name="seller_name" value="${sellerInfo.user_name}" required>
+                                </div>
+                                <div class="col-12 mb-4">
+                                    <label for="">Seller Contanct Number *</label>
+                                    <input type="hidden" class="form-control" id="seller_phone" name="seller_phone" value="${sellerInfo.user_phone}">
+                                    <input type="tel" class="realphoneN" id="realphoneN" name="realphoneN" value="${ hide_number}">
+                                </div>
+                                <div class="col-12 mb-4">
+                                    <label for="sellerRegdate">판매자 가입한 날짜 *</label>
+                                    <input type="datetime" class="sellerRegdate" id="sellerRegdate" name="sellerRegdate" value="${sellerInfo.reg_date}">
+                                </div>
+                                <div class="col-12 mb-4">
+                                    <label for="sellerScore">Sales Score</label>
+                                    <input type="text" class="sellerScore" id="sellerScore" name="sellerScore" value="${sellerInfo.score}">
+                                </div>
+                                <div class="col-12 mb-4">
+                                    <label for="sellerLocation">Seller Location *</label>
+                                    <input type="text" class="sellerLocation" id="sellerLocation" id="sellerLocation" value="">
+                                </div>
+<!--                                 <div class="col-md-6 mb-4"> -->
+<!--                                     <label for="city">Town/City *</label> -->
+<!--                                     <input type="text" class="form-control" id="city" value=""> -->
+<!--                                 </div> -->
+<!--                                 <div class="col-md-6 mb-4"> -->
+<!--                                     <label for="state">State/Province *</label> -->
+<!--                                     <input type="text" class="form-control" id="state" value=""> -->
+<!--                                 </div> -->
+<!--                                 <div class="col-md-6 mb-4"> -->
+<!--                                     <label for="country">Country</label> -->
+<!--                                     <select class="custom-select d-block w-100" id="country"> -->
+<!--                                         <option value="usa">United States</option> -->
+<!--                                         <option value="uk">United Kingdom</option> -->
+<!--                                         <option value="ger">Germany</option> -->
+<!--                                         <option value="fra">France</option> -->
+<!--                                         <option value="ind">India</option> -->
+<!--                                         <option value="aus">Australia</option> -->
+<!--                                         <option value="bra">Brazil</option> -->
+<!--                                         <option value="cana">Canada</option> -->
+<!--                                     </select> -->
+<!--                                 </div> -->
+<!--                                 <div class="col-md-6 mb-4"> -->
+<!--                                     <label for="postcode">Postcode/Zip</label> -->
+<!--                                     <input type="text" class="form-control" id="postcode" value=""> -->
+<!--                                 </div> -->
+<!--                                 <div class="col-md-12 mb-4"> -->
+<!--                                     <label for="order-notes">Order Notes</label> -->
+<!--                                     <textarea class="form-control" id="order-notes" cols="30" rows="10" placeholder="Notes about your order, e.g. special notes for delivery."></textarea> -->
+<!--                                 </div> -->
+<!--                                 <div class="col-12"> -->
+<!--                                     <div class="d-flex align-items-center"> -->
+<!--                                         Single Checkbox -->
+<!--                                         <div class="custom-control custom-checkbox d-flex align-items-center mr-30"> -->
+<!--                                             <input type="checkbox" class="custom-control-input" id="customCheck1"> -->
+<!--                                             <label class="custom-control-label" for="customCheck1">Ship to a different address?</label> -->
+<!--                                         </div> -->
+<!--                                         Single Checkbox -->
+<!--                                         <div class="custom-control custom-checkbox d-flex align-items-center"> -->
+<!--                                             <input type="checkbox" class="custom-control-input" id="customCheck2"> -->
+<!--                                             <label class="custom-control-label" for="customCheck2">Create an account?</label> -->
+<!--                                         </div> -->
+<!--                                     </div> -->
+<!--                                 </div> -->
+                            </div>
+                        </form>
+                    </div>
+                </div>
                         
                         <h2>리뷰 출력란</h2>
-                        <div id="sellerReviewList" >
-                        
+                        	
+                        	<div id="sellerReviewList" >
+                        	
                         </div>
                         
                         
                         
                          <h2>리뷰 출력란 끝</h2>
-                        
-                        <form action="#" method="post">
-                            <div class="row">
-                                <div class="col-md-6 mb-4">
-                                    <label for="first_name">First Name *</label>
-                                    <input type="text" class="form-control" id="first_name" value="" required>
-                                </div>
-                                <div class="col-md-6 mb-4">
-                                    <label for="last_name">Last Name *</label>
-                                    <input type="text" class="form-control" id="last_name" value="" required>
-                                </div>
-                                <div class="col-12 mb-4">
-                                    <label for="email_address">Email Address *</label>
-                                    <input type="email" class="form-control" id="email_address" value="">
-                                </div>
-                                <div class="col-12 mb-4">
-                                    <label for="phone_number">Phone Number *</label>
-                                    <input type="number" class="form-control" id="phone_number" min="0" value="">
-                                </div>
-                                <div class="col-12 mb-4">
-                                    <label for="company">Company Name</label>
-                                    <input type="text" class="form-control" id="company" value="">
-                                </div>
-                                <div class="col-12 mb-4">
-                                    <label for="company">Address *</label>
-                                    <input type="text" class="form-control" id="address" value="">
-                                </div>
-                                <div class="col-md-6 mb-4">
-                                    <label for="city">Town/City *</label>
-                                    <input type="text" class="form-control" id="city" value="">
-                                </div>
-                                <div class="col-md-6 mb-4">
-                                    <label for="state">State/Province *</label>
-                                    <input type="text" class="form-control" id="state" value="">
-                                </div>
-                                <div class="col-md-6 mb-4">
-                                    <label for="country">Country</label>
-                                    <select class="custom-select d-block w-100" id="country">
-                                        <option value="usa">United States</option>
-                                        <option value="uk">United Kingdom</option>
-                                        <option value="ger">Germany</option>
-                                        <option value="fra">France</option>
-                                        <option value="ind">India</option>
-                                        <option value="aus">Australia</option>
-                                        <option value="bra">Brazil</option>
-                                        <option value="cana">Canada</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-6 mb-4">
-                                    <label for="postcode">Postcode/Zip</label>
-                                    <input type="text" class="form-control" id="postcode" value="">
-                                </div>
-                                <div class="col-md-12 mb-4">
-                                    <label for="order-notes">Order Notes</label>
-                                    <textarea class="form-control" id="order-notes" cols="30" rows="10" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
-                                </div>
-                                <div class="col-12">
-                                    <div class="d-flex align-items-center">
-                                        <!-- Single Checkbox -->
-                                        <div class="custom-control custom-checkbox d-flex align-items-center mr-30">
-                                            <input type="checkbox" class="custom-control-input" id="customCheck1">
-                                            <label class="custom-control-label" for="customCheck1">Ship to a different address?</label>
-                                        </div>
-                                        <!-- Single Checkbox -->
-                                        <div class="custom-control custom-checkbox d-flex align-items-center">
-                                            <input type="checkbox" class="custom-control-input" id="customCheck2">
-                                            <label class="custom-control-label" for="customCheck2">Create an account?</label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
 
                 <div class="col-12 col-lg-4">
                     <div class="checkout-content">

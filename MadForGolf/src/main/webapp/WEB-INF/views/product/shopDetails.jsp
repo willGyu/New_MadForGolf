@@ -36,6 +36,8 @@ function shareMessage() {
 /*     const like = parseInt(like_count); */
    
 	const like = parseInt(${product.like_count}); //like_count int로 변환해야 나와서 바꿈 
+	
+	//alert(like);
     
 	Kakao.Share.sendDefault({
       objectType: 'feed',
@@ -105,14 +107,15 @@ function shareMessage() {
 
 		     var dealState = ${product.dealState}; 
 		     var state = parseInt(dealState); 
+
 		     
 			state = 0;//거래상태 디폴트 : 거래전 
 			
 			$('#deal').click(function(){
-				alert('안녕2');
+				//alert('안녕2');
 				
 			if(state == 0){ //거래전 -> 거래후 변경하고 싶을 때 
-				alert('안녕33');
+				//alert('안녕33');
 		//---------------------------1.버튼비활성화----------------------------------
 				const target1 = document.getElementById('button'); //채팅하기 버튼 
 				target1.disabled = 'disabled'; //버튼 비활성화 
@@ -124,6 +127,10 @@ function shareMessage() {
 		//---------------------------2.버튼문구변경-----------------------------------
 				const btnElement = document.getElementById('deal');
 				btnElement.value = "거래중"; //버튼 value바꿈 
+				
+				
+				const btnElement1 = document.getElementById('highlight');
+				btnElement1.value = "거래중"; //상품명 옆 거래전/거래중 표시문구  버튼
 		//---------------------------2.버튼문구변경-----------------------------------
 
 		//---------------------------3.변수값 변경------------------------------------
@@ -133,7 +140,7 @@ function shareMessage() {
 			//$('#state').append(state); -> state 값 변환 확인용
 				
 			}else if(state == 1){ //거래후-> 거래전 변경하고 싶을 때 
-				alert('안녕44');
+				//alert('안녕44');
 			
 		//---------------------------1.버튼비활성화----------------------------------
 				const target1 = document.getElementById('button');//채팅하기
@@ -146,14 +153,18 @@ function shareMessage() {
 		//---------------------------2.버튼문구변경-----------------------------------
 				const btnElement = document.getElementById('deal');
 				btnElement.value = "거래전"; //버튼 value바꿈 
+				
+				const btnElement1 = document.getElementById('highlight');
+				btnElement1.value = "거래전"; //상품명 옆 거래전/거래중 표시문구  버튼
 		//---------------------------2.버튼문구변경-----------------------------------
 
 		//---------------------------3.변수값 변경------------------------------------
 				state = 0; //거래전으로 값 변경 
 		//---------------------------3.변수값 변경------------------------------------
 				
-			//$('#state').append(state); -> state 값 변환 확인용
+			//$('#state').append(state); //-> state 값 변환 확인용
 			}
+
 
 				
 			});
@@ -221,7 +232,7 @@ function shareMessage() {
             <div class="container">
                 <div class="row justify-content-between">
 
-                    <div class="col-12 col-md-6 col-lg-5">
+<%--                     <div class="col-12 col-md-6 col-lg-5">
                         <div class="single_product_thumb">
                             <div id="product_details_slider" class="carousel slide" data-ride="carousel">
                                 <div class="carousel-inner">
@@ -232,47 +243,80 @@ function shareMessage() {
                                     </div>
                                     <!-- 이미지 여러개 넣을 시 주석 풀고 사용 -->
 <!--                                     <div class="carousel-item"> -->
-<%--                                         <a class="product-img" href="${pageContext.request.contextPath }/resources/img/bg-img/49.jpg" title="Product Image"> --%>
-<%--                                         <img class="d-block w-100" src="${pageContext.request.contextPath }/resources/img/bg-img/49.jpg" alt="1"> --%>
+                                        <a class="product-img" href="${pageContext.request.contextPath }/resources/img/bg-img/49.jpg" title="Product Image">
+                                        <img class="d-block w-100" src="${pageContext.request.contextPath }/resources/img/bg-img/49.jpg" alt="1">
 <!--                                     </a> -->
 <!--                                     </div> -->
 <!--                                     <div class="carousel-item"> -->
-<%--                                         <a class="product-img" href="${pageContext.request.contextPath }/resources/img/bg-img/49.jpg" title="Product Image"> --%>
-<%--                                         <img class="d-block w-100" src="${pageContext.request.contextPath }/resources/img/bg-img/49.jpg" alt="1"> --%>
+                                        <a class="product-img" href="${pageContext.request.contextPath }/resources/img/bg-img/49.jpg" title="Product Image">
+                                        <img class="d-block w-100" src="${pageContext.request.contextPath }/resources/img/bg-img/49.jpg" alt="1">
 <!--                                     </a> -->
 <!--                                     </div> -->
                                 </div>
 <!--                                 <ol class="carousel-indicators"> -->
-<%--                                     <li class="active" data-target="#product_details_slider" data-slide-to="0" style="background-image: url(${pageContext.request.contextPath }/resources/img/bg-img/49.jpg);"> --%>
+                                    <li class="active" data-target="#product_details_slider" data-slide-to="0" style="background-image: url(${pageContext.request.contextPath }/resources/img/bg-img/49.jpg);">
 <!--                                     </li> -->
-<%--                                     <li data-target="#product_details_slider" data-slide-to="1" style="background-image: url(${pageContext.request.contextPath }/resources/img/bg-img/49.jpg);"> --%>
+                                    <li data-target="#product_details_slider" data-slide-to="1" style="background-image: url(${pageContext.request.contextPath }/resources/img/bg-img/49.jpg);">
 <!--                                     </li> -->
-<%--                                     <li data-target="#product_details_slider" data-slide-to="2" style="background-image: url(${pageContext.request.contextPath }/resources/img/bg-img/49.jpg);"> --%>
+                                    <li data-target="#product_details_slider" data-slide-to="2" style="background-image: url(${pageContext.request.contextPath }/resources/img/bg-img/49.jpg);">
 <!--                                     </li> -->
 <!--                                 </ol> -->
                             </div>
                         </div>
+                    </div> --%>
+                    
+                    
+                    
+                    <div class="col-12 col-md-6 col-lg-5">
+                        <div class="single_product_thumb">
+                            <div id="product_details_slider" class="carousel slide" data-ride="carousel">
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                    	<img class="d-block w-100" src="${pageContext.request.contextPath }/resources/product_img/${product.prod_img }" alt="1" style="width: 445px; height: 445px;">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img class="d-block w-100" src="${pageContext.request.contextPath }/resources/product_img/${product.prod_img2 }" alt="1" style="width: 445px; height: 445px;">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img class="d-block w-100" src="${pageContext.request.contextPath }/resources/product_img/${product.prod_img3 }" alt="1" style="width: 445px; height: 445px;">
+                                    </div>
+                                </div>
+                                <ol class="carousel-indicators">
+                                    <li class="active" data-target="#product_details_slider" data-slide-to="0" style="background-image: url(${pageContext.request.contextPath }/resources/product_img/${product.prod_img });"></li>
+                                    <li data-target="#product_details_slider" data-slide-to="1" style="background-image: url(${pageContext.request.contextPath }/resources/product_img/${product.prod_img2 });"></li>
+                                    <li data-target="#product_details_slider" data-slide-to="2" style="background-image: url(${pageContext.request.contextPath }/resources/product_img/${product.prod_img3 });"></li>
+                                </ol>
+                            </div>
+                        </div>
                     </div>
                     
-
 					<!-- 판매자 아이디 = 세션 로그인 아이디 같을 시에만 거래전버튼 활성화 -->
 					<div>
+						<!--나중에 마이페이지에 버튼 옮길 때, 마이페이지에도 productVO값 전달하고 세션 user_id랑 비교하기  -->
 						<c:if test="${product.seller_id == user_id }">
 						<input type="button" id="deal" value="거래전" onclick="changeBtnName();">
 						</c:if>
 					</div>
 					<!-- 판매자 아이디 = 세션 로그인 아이디 같을 시에만 거래전버튼 활성화 -->
+
 					
 					
                     <div class="col-12 col-md-6">
                         <div class="single_product_desc" style="width: 410px;">
-                            <h4 class="title">${product.prod_name }</h4>
+                            <h4 class="title">${product.prod_name }
+                            
+                            <!-- 상품명 옆에 거래전/거래중 표시 문구 버튼   -->
+                            <input type="button" id="highlight" value="거래전"
+                            style="border: none; background-color: #FA7070; font-size: small; font-weight: bold;"></h4>
+                            <!-- 상품명 옆에 거래전/거래중 표시 문구 버튼   -->
+                            
                             <h4 class="price"><fmt:formatNumber value="${product.price }"/>원</h4>
                             <div class="short_overview">
                                 <p>${product.detail }</p>
                                 
 
                             </div>
+   
 
                             <div class="cart--area d-flex flex-wrap align-items-center">
                                 <!-- Add to Cart Form -->

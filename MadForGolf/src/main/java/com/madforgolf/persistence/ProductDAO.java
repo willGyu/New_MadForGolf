@@ -44,5 +44,6 @@ public interface ProductDAO {
 	
 	// 글 전체목록 - listPage(pageVO)
 	public List<ProductVO> listPage(PageVO vo) throws Exception;
+
 	
 }

@@ -67,6 +67,9 @@ public class ProductController {
 		// 상품을 카테고리로 분류하기 위해 category 변수명으로 변수를 view로 넘겨줌
 		model.addAttribute("category", vo.getCategory());
 		model.addAttribute("gender", vo.getGender());
+		
+		// 지역인증 되면, model로 위도/경도 넘기기 + header카테고리 주소값에도 위도경도 추가 + shop성별 카테고리에도 위도경도 추가 
+
 
 		// 출력되는 상품 리스트를 어트리뷰트에 담아서 view로 보냄
 		model.addAttribute("productList", productList);
@@ -344,7 +347,7 @@ public class ProductController {
 			log.info("fileList" + fileList);
 			
 			// 파일 업로드
-			String uploadFolder1 = "C:\\Users\\ITWILL\\git\\New_MadForGolf\\MadForGolf\\src\\main\\webapp\\resources\\product_img";
+			String uploadFolder1 = "C:\\Users\\ITWILL\\git\\New_MadForGolf\\MadForGolf11\\src\\main\\webapp\\resources\\product_img";
 			// 속도가 느려 초반에 엑박뜸 and 경로 일치 필요 => but, 깃허브 연동 o
 			String uploadFolder2 = request.getServletContext().getRealPath("resources/product_img");
 			// 메서드를 통한 경로 => 속도가 빠름, 경로 일치 불필요 => but, 깃허브 연동 x
@@ -468,7 +471,7 @@ public class ProductController {
 				
 				if(!oFileName.equals("")) {
 					// 파일 업로드 경로
-					String uploadFolder1 = "C:\\Users\\ITWILL\\git\\New_MadForGolf1\\MadForGolf\\src\\main\\webapp\\resources\\product_img";
+					String uploadFolder1 = "C:\\Users\\ITWILL\\git\\New_MadForGolf1\\MadForGolf11\\src\\main\\webapp\\resources\\product_img";
 					// 속도가 느려 초반에 엑박뜸 and 경로 일치 필요 => but, 깃허브 연동 o
 					String uploadFolder2 = request.getServletContext().getRealPath("resources/product_img");
 					// 메서드를 통한 경로 => 속도가 빠름, 경로 일치 불필요 => but, 깃허브 연동 x
@@ -508,9 +511,9 @@ public class ProductController {
 							break;
 						}
 						case "file3" : {
-							File oldDeleteFile1 = new File(uploadFolder1 + "\\" + oldfile2);
+							File oldDeleteFile1 = new File(uploadFolder1 + "\\" + oldfile3);
 							oldDeleteFile1.delete();
-							File oldDeleteFile2 = new File(uploadFolder2 + "\\" + oldfile2);
+							File oldDeleteFile2 = new File(uploadFolder2 + "\\" + oldfile3);
 							oldDeleteFile2.delete();
 							vo.setProd_img3(uFileName);
 							break;
@@ -592,6 +595,38 @@ public class ProductController {
 	
 
 //=========================메인화면 상품리스트=================================
+		
+
+//-------------------------상품 판매관리/구매관리---------------------------------
+		
+		
+		//게시판 리스트(페이징 처리) - GET
+		@RequestMapping(value = "/listBoardAll", method = RequestMethod.GET)
+		public String listBoardAllGET(Model model,PageVO vo,HttpSession session) throws Exception{
+			log.info(" 1. controller - listBoardAllGET ");
+			
+			String user_id = (String)session.getAttribute("user_id");
+			log.info("############"+user_id);
+			
+			session.setAttribute("user_id", user_id);
+			model.addAttribute("SellProductList", service.listPage(vo));//판매내역 먼저 띄우기 
+			
+			
+			//페이징 처리 하단부 정보 저장
+			PageMakerVO pm = new PageMakerVO();
+			pm.setVo(vo);
+			pm.setTotalCnt(512);
+			model.addAttribute("pm", pm);
+			
+			session.setAttribute("isUpdate", false); //조회수 때문에 주는 것
+				
+			return "/product/productList";
+		}
+		
+//-------------------------상품 판매관리/구매관리---------------------------------
+		
+		
+		
 		
 
 		

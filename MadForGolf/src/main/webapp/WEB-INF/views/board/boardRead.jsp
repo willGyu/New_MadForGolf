@@ -6,6 +6,187 @@
 <jsp:include page="../include/header.jsp" />
 <!-- header -->
 
+<style>
+.container_box{
+/*  	border: 5px solid black; */
+	background-color: #f9f9f9;
+}
+
+.content_inner_box{
+
+}
+
+.post-content{
+/* 	border: 5px solid red; */
+	margin-top: 20px;
+}
+
+.board_head{
+/* 	border: 5px solid yellow; */
+/* 	background-color: #FBF2CF; */
+	padding: 30px;
+}
+.board_category{
+/* 	border: 5px solid blue; */
+	color:#52734D;
+	font-weight: bold;
+}
+.post-title{
+/* 	border: 5px solid red; */
+	margin : 20px 0;
+	font-weight: bold;
+}
+.post-meta{
+/* 	border: 5px solid black; */
+	border-top : 1px solid #b7b7b7; 
+	padding-top : 10px;
+	margin-bottom: 20px;
+}
+.post-meta a{
+	font-size: 20px;
+}
+
+.content_box{
+/*  	border: 5px solid gray;  */
+	padding: 30px;
+	height: 500px;
+	background-color: white;
+}
+
+
+.content_inner_box{
+/* 	border: 5px solid blue; */
+	width: 100%;
+	font-weight: bold;
+	color: black;
+}
+
+.alazea-portfolio-filter{
+/* 	border: 5px solid yellow; */
+
+}
+
+.board_btn_box{
+/*  	border: 5px solid black; */
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: center;	
+	width: 100%;
+	margin-bottom: 10px;
+}
+
+
+.board_btn{
+/* 	border: 5px solid blue; */
+	width : 140px;
+	height: 50px;
+	margin : 10px 20px;
+	background-color: #91C788;
+	border: 0;
+	color: white;
+	font-size: 17px;
+	font-weight: bold;
+
+}
+
+.board_btn:hover{
+	background-color : #FA7070;
+	color: white;
+}
+
+.comment_area{
+/* 	border: 5px solid green; */
+	padding: 30px;
+
+}
+
+.comment_title{
+ 	font-size: 30px;
+}
+.comment_meta_name{
+	font-size: 17px;
+	font-weight: bold;
+	padding-right: 20px;
+	color: #b7b7b7;
+}
+.comment-wrapper{
+	border-bottom: 1px dashed #b7b7b7;
+	padding-bottom: 20px;
+}
+.comment_text{
+	background-color: white;
+	padding: 40px;
+	margin-bottom: 30px;
+}
+
+
+
+.leave-comment-area{
+/* 	border: 5px solid blue; */
+	padding: 30px;
+	
+
+}
+comment-head{
+
+}
+
+.comment_meta{
+/* 	border: 5px solid blue; */
+	display: flex;
+ 	flex-flow: row nowrap;
+ 	justify-content: flex-start;
+ 	padding-left: 5px;
+ 	
+ } 
+ 
+.comment_meta div{
+	margin-right: 10px
+}
+
+.comment_control{
+/* 	border: 5px solid red; */
+	display: flex;
+ 	flex-flow: row nowrap;
+ 	justify-content: flex-end;
+}
+
+.comment_control a{
+	color: #b7b7b7;
+}
+
+.comment_content{
+/* 	border: 5px solid yellow; */
+	padding-left: 5px;
+	color: #52734D;
+	font-weight: bold;
+	
+}
+.form-control{
+	resize: none;
+}
+#updateFormReply, #deleteReply{
+	font-size: 12px;
+	color: #b7b7b7;
+	width: 47px;
+	height: 20px;
+	margin: 0 5px;
+	padding: 0 10px;
+	background-color: #f9f9f9;
+	border-radius: 3px;
+	
+}
+#page-link_real:hover{
+	background-color: #C6EBC5;
+	border: 1px solid #C6EBC5;
+	
+}
+
+
+
+</style>
+
+
 <!-- ##### Breadcrumb Area Start ##### -->
 <div class="breadcrumb-area">
 
@@ -19,10 +200,9 @@
 			<div class="col-12">
 				<nav aria-label="breadcrumb">
 					<ol class="breadcrumb">
-						<li class="breadcrumb-item"><a href="#"><i
-								class="fa fa-home"></i> Home</a></li>
-						<li class="breadcrumb-item active" aria-current="page">Community</li>
-						<li class="breadcrumb-item active" aria-current="page">Content</li>
+						<li class="breadcrumb-item"><a href="/"><i class="fa fa-home"></i> Home</a></li>
+						<li class="breadcrumb-item"><a href="/board/listBoardAll">Community</a></li>
+						<li class="breadcrumb-item active" aria-current="page">Single Comunity Post</li>
 					</ol>
 				</nav>
 			</div>
@@ -54,52 +234,44 @@
 
 <!-- ##### Blog Content Area Start ##### -->
 <section class="blog-content-area section-padding-0-100">
-	<div class="container">
-		<div class="row justify-content-center">
+	<div class="container container_box">
+<!-- 		<div class="row justify-content-center"> -->
 			<!-- Blog Posts Area -->
-			<div class="col-12 col-md-8">
+			<div class="">
 				<div class="blog-posts-area">
 
 					<!-- 글내용#############@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 					<div class="single-post-details-area" style="margin: 0;">
 						<div class="post-content">
-
-
-
-
-
-
-
-
-							${vo.board_category }
-							<h4 class="post-title">${vo.title }</h4>
-							<div class="post-meta mb-30">
-								<a href="#"><i class="fa fa-user" aria-hidden="true"></i>${vo.user_name }</a>
-								<a href="#"><i class="fa fa-clock-o" aria-hidden="true"></i>
-								<fmt:formatDate pattern="yy-MM-dd HH:mm"
-										value="${vo.write_date }" /></a> <a href="#"><i class="fa"
-									aria-hidden="true"></i>조회수 ${vo.readcount }</a>
-
+						
+							<!-- 게시글 헤더 -->
+							<div class="board_head">
+								<div class="board_category">${vo.board_category }</div>
+								<h4 class="post-title">${vo.title }</h4>
+								<div class="post-meta mb-30">
+									<a><i class="fa fa-user" aria-hidden="true"></i>${vo.user_name }</a>
+									<a><i class="fa fa-clock-o" aria-hidden="true"></i>
+										<fmt:formatDate pattern="yy-MM-dd HH:mm"	value="${vo.write_date }" /></a> 
+									<a><!-- <i class="fa" aria-hidden="true"> --></i>조회수 ${vo.readcount }</a>
+								</div>
 							</div>
-							<div class="row mb-30">
-								<div class="col-lg-7"
-									style="margin-bottom: 80px; margin-top: 40px;">
-									${vo.content }</div>
+							
+							<!-- 게시글 본문 -->
+							<div class=" mb-30 content_box">
+								<div class="content_inner_box" style="margin-bottom: 80px; margin-top: 40px;">${vo.content }</div>
 							</div>
+							
+							<!-- 게시글 버튼 -->
 							<div class="row">
-
-								<div class="alazea-portfolio-filter">
-									<div class="portfolio-filter">
-										<button type="submit" class="btn" id="listAll"
-											style="font-size: 15px;">목록</button>
+<!-- 								<div class="alazea-portfolio-filter"> -->
+									<div class="portfolio-filter board_btn_box">
+										<button type="submit" class="btn board_btn" id="listAll">목록</button>
 										 <c:if test="${sessionScope.user_id == vo.user_id }">
-										<button type="submit" class="btn" id="updateBoard"
-											style="font-size: 15px;">수정</button>
-										<button type="submit" class="btn" id="deleteBoard"
-											style="font-size: 15px;">삭제</button>
+											<button type="submit" class="btn board_btn" id="updateBoard">수정</button>
+											<button type="submit" class="btn board_btn" id="deleteBoard">삭제</button>
 										 </c:if>
 									</div>
-								</div>
+<!-- 								</div> -->
 							</div>
 
 						</div>
@@ -109,9 +281,9 @@
 
 					<!-- 댓글리스트@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 					<div class="comment_area clearfix">
-						<h6 class="headline">댓글</h6>
+						<h6 class="headline comment_title">Comment</h6>
 
-						<ol>
+						<ol class="comment_text">
 							<c:if test="${msg == 'NO' }">
                                 	작성된 댓글이 없습니다.<br>
 							</c:if>
@@ -119,36 +291,42 @@
 							<c:forEach var="replyVO" items="${replyVO }">
 
 								<li class="single_comment_area">
-									<div class="comment-wrapper d-flex"
-										id="edit_div${replyVO.reply_num }">
-										<form role="form" method="post"
-											id="boardReply${replyVO.reply_num }">
-											<input type="hidden" name="board_num"
-												value="${vo.board_num }"> <input type="hidden"
-												name="reply_num" value="${replyVO.reply_num }">
+									<div class="comment-wrapper " id="edit_div${replyVO.reply_num }">
+										<form role="form" method="post" id="boardReply${replyVO.reply_num }">
+											<input type="hidden" name="board_num" value="${vo.board_num }"> 
+											<input type="hidden" name="reply_num" value="${replyVO.reply_num }">
+											
 											<div class="comment-content">
-												<div
-													class="d-flex align-items-center justify-content-between">
-													<h5>${replyVO.user_name }</h5>
-													&nbsp;&nbsp;&nbsp; <span class="comment-date"><fmt:formatDate
-															pattern="yy-MM-dd HH:mm"
-															value="${replyVO.reply_updatedate }" /></span>&nbsp;&nbsp;&nbsp;
+												<div class="align-items-center justify-content-between comment-head">
+		
+												
+													
+													<!-- 댓글 작성자 -->
+													<div class="comment_meta">
+														<span class="comment_meta_name">${replyVO.user_name }</span>
+														<span class="comment-date"><fmt:formatDate pattern="yy-MM-dd HH:mm"
+																value="${replyVO.reply_updatedate }" /></span>
+													</div>
 
-												<c:if test="${sessionScope.user_id == replyVO.user_id }">
-													<a class="active" id="updateFormReply"
-														href="javascript:void(0);"
-														onclick="updateReplyFun(${vo.board_num },${replyVO.reply_num },'${replyVO.reply_content }','${replyVO.user_name }');">수정</a>
-													&nbsp;&nbsp;&nbsp;
-													<a class="active" id="deleteReply"
-														href="javascript:void(0);"
-														onclick="deleteReply(${replyVO.reply_num })">삭제</a>
-												</c:if>
-
-												</div>
-												<input type="hidden" name="reply_content"
-													value="${replyVO.reply_content }">
-												<p id="edit_acontent">${replyVO.reply_content }</p>
-											</div>
+												</div><!-- comment-head -->
+												
+												
+												<!-- 댓글 본문 -->
+												<input type="hidden" name="reply_content" value="${replyVO.reply_content }">
+												<div class="comment_content" id="edit_acontent">${replyVO.reply_content }</div>
+												
+													<!-- 댓글 제어 버튼 -->
+													<div class="comment_control">
+													<c:if test="${sessionScope.user_id == replyVO.user_id }">
+														<a class="active" id="updateFormReply" href="javascript:void(0);"
+															onclick="updateReplyFun(${vo.board_num },${replyVO.reply_num },'${replyVO.reply_content }','${replyVO.user_name }');">수정</a>
+										
+														<a class="active" id="deleteReply" href="javascript:void(0);"
+															onclick="deleteReply(${replyVO.reply_num })">삭제</a>
+													</c:if>
+	
+													</div>
+											</div><!-- comment-content -->
 										</form>
 
 									</div>
@@ -161,18 +339,18 @@
 						<nav aria-label="Page navigation">
 							<ul class="pagination">
 								<c:if test="${pm.prev }">
-									<li class="page-item"><a class="page-link"
+									<li class="page-item"><a class="page-link" id="page-link_real"
 										href="boardRead?board_num=${vo.board_num }&page=${pm.startPage-1 }"><i
 											class="fa fa-angle-left"></i></a></li>
 								</c:if>
 								<c:forEach var="idx" begin="${pm.startPage }"
 									end="${pm.endPage }">
-									<li class="page-item"><a class="page-link"
+									<li class="page-item"><a class="page-link" id="page-link_real"
 										href="boardRead?board_num=${vo.board_num }&page=${idx }">${idx }</a></li>
 
 								</c:forEach>
 								<c:if test="${pm.next }">
-									<li class="page-item"><a class="page-link"
+									<li class="page-item"><a class="page-link" id="page-link_real"
 										href="boardRead?board_num=${vo.board_num }&page=${pm.endPage+1 }"><i
 											class="fa fa-angle-right"></i></a></li>
 								</c:if>
@@ -201,8 +379,8 @@
 													placeholder="댓글을 입력하세요"></textarea>
 											</div>
 										</div>
-										<div class="col-12">
-											<input type="submit" class="btn alazea-btn" id="insertReply"
+										<div class="board_btn_box">
+											<input type="submit" class="btn board_btn" id="insertReply"
 												value="댓글쓰기">
 										</div>
 									</div>
@@ -212,7 +390,7 @@
 					</div>
 
 				</div>
-			</div>
+<!-- 			</div> -->
 
 
 

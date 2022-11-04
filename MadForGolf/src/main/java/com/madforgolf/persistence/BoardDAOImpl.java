@@ -29,6 +29,23 @@ public class BoardDAOImpl implements BoardDAO{
 	
 	 
 	/////////////////////////////////////////////////////////////////////////////
+
+	
+	@Override
+	public String getUser_name(String user_id) {
+		log.info(" 3. DAO - getUser_name(user_id) ");
+		
+//		log.info("##############DAO user_id : "+user_id);
+//		log.info("##############DAO user_name : "+NAMESPACE+".getUser_name",user_id);
+
+		return sqlSession.selectOne(NAMESPACE+".getUser_name",user_id);
+	}
+	
+
+	//----------------------------------------------------------------------
+	
+	
+	
 	
 	
 	@Override

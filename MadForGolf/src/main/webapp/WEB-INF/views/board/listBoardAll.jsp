@@ -81,40 +81,42 @@
 
 .table_box{
 /* 		border: 5px solid yellow; */
-		margin-top: 10px;
+		margin-top: 40px;
 }
 
 .page_box{
 /* 	border: 5px solid blue; */
-	margin-bottom: 20px;
+	
+	margin: 40px 0;
 }
 
 #page-link_real:hover{
 	background-color: #C6EBC5;
-	boder-color: #C6EBC5;
+	border: 1px solid #C6EBC5;
 }
 
 
 @media only screen and (max-width: 767px){
 	.pagination{
-/* 			border: 5px solid blue; */
+/*  			border: 5px solid blue;  */
 		
 	}
 	
 	.page-item{
-/* 			border: 5px solid red; */
-	
+/*  		border: 5px solid red;  */
+		display: flex;
+		height: 30px;
+		position: relative;
 	}
 	#page-link_real{
-/* 			border: 5px solid yellow; */
+/*  			border: 5px solid yellow;  */
 			font-size: 15px;
-			width: 30px;
-			height: 30px;
+			width: 40px;
+			line-height: 45px;
 			padding: 0px;
-			margin: 0 5px;
-			border-radius: 3px;
+  			margin: 0 2px; 
+			border-radius: 50%;
 			
-	
 	}
 		
 }
@@ -191,7 +193,6 @@
 	
 	
 
-<%-- 	${sessionScope.user_id} --%>
 	<c:if test="${!(empty sessionScope.user_id) }">
         <div class="col-12 writeBtn_box">
         	<a class="writeBtn" href="/board/insertBoard">글쓰기</a>

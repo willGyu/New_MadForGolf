@@ -56,6 +56,15 @@ public class BoardServiceImpl implements BoardService{
 	
 	//------------------------------------------------------------------------
 	
+	@Override
+	public String getUser_name(String user_id) {
+		log.info(" 2. service - getUser_name(user_id) ");
+
+//		log.info("##############service user_name : "+dao.getUser_name(user_id));
+		return dao.getUser_name(user_id);
+	}
+	
+	
 	//글작성
 	@Override
 	public void boardWrite(BoardVO vo) throws Exception {

@@ -97,24 +97,25 @@
 
 @media only screen and (max-width: 767px){
 	.pagination{
-/* 			border: 5px solid blue; */
+/*  			border: 5px solid blue;  */
 		
 	}
 	
 	.page-item{
-/* 			border: 5px solid red; */
-	
+/*  		border: 5px solid red;  */
+		display: flex;
+		height: 30px;
+		position: relative;
 	}
 	#page-link_real{
-/* 			border: 5px solid yellow; */
+/*  			border: 5px solid yellow;  */
 			font-size: 15px;
-			width: 30px;
-			height: 30px;
+			width: 40px;
+			line-height: 45px;
 			padding: 0px;
-			margin: 0 5px;
-			border-radius: 3px;
+  			margin: 0 2px; 
+			border-radius: 50%;
 			
-	
 	}
 		
 }

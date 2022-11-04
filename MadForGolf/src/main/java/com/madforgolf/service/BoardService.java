@@ -9,7 +9,8 @@ import com.madforgolf.domain.ReplyVO;
 
 public interface BoardService {
 	
-	
+	//글쓴이 이름 가져오기
+	public String getUser_name(String user_id);
 	
 	//글쓰기
 	public void boardWrite(BoardVO vo) throws Exception;
@@ -54,4 +55,5 @@ public interface BoardService {
 	public Integer deleteReply(Integer reply_num) throws Exception;
 	//댓글 수
 	public Integer replyCnt(Integer board_num) throws Exception;
+	
 }

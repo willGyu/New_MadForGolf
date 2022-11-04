@@ -9,6 +9,9 @@ import com.madforgolf.domain.ReplyVO;
 
 public interface BoardDAO {
 
+	//글쓴이 이름 가져오기
+	public String getUser_name(String user_id);
+	
 	//글쓰기 - boardWrite(vo)
 	public void boardWrite(BoardVO vo) throws Exception;
 	//글내용 보기
@@ -55,6 +58,7 @@ public interface BoardDAO {
 	
 	//댓글 수
 	public Integer replyCnt(Integer board_num) throws Exception;
+	
 	
 }
 

@@ -1,6 +1,12 @@
 package com.madforgolf.controller;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.inject.Inject;
@@ -16,12 +22,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.madforgolf.domain.BoardVO;
 import com.madforgolf.domain.MemberVO;
 import com.madforgolf.domain.PageMakerVO;
 import com.madforgolf.domain.PageVO;
+import com.madforgolf.domain.ProductVO;
 import com.madforgolf.domain.ReplyVO;
 import com.madforgolf.service.BoardService;
 
@@ -44,8 +52,19 @@ public class BoardController {
 	
 	//글쓰기 페이지 불러오기
 	@RequestMapping(value = "/insertBoard", method = RequestMethod.GET)
-	public void insertBoardGET() throws Exception{
+	public String insertBoardGET(HttpSession session, Model model) throws Exception{
 		log.info(" 1. controller - insertBoardGET() 호출 ");
+		
+		String user_id = (String)session.getAttribute("user_id");
+//		log.info("############"+user_id);
+		
+		String user_name = service.getUser_name(user_id);
+		
+//		log.info("############# controller user_name : "+user_name);
+		model.addAttribute("user_name",user_name);
+		session.setAttribute("user_id", user_id);
+		
+		return "/board/insertBoard";
 //		log.info(" /board/insertBoard (get) -> board/insertBoard.jsp");
 	}
 	
@@ -56,82 +75,44 @@ public class BoardController {
 	
 	
 	
-	//글 작성해서 DB에 삽입
+	//게시글 작성 - 다중업로드
 	@RequestMapping(value = "/insertBoard", method = RequestMethod.POST)
-	public String insertBoardPOST(BoardVO vo, @RequestParam("img") MultipartFile img,
-			@RequestParam("file") MultipartFile file, RedirectAttributes redirect) throws Exception{
+	public String insertBoardPOST(BoardVO vo, MultipartHttpServletRequest multi, HttpServletRequest request) throws Exception{
 		log.info(" 1. controller - insertBoardPOST() 호출");
 		
-		//한글 처리
-		//전달된 정보 저장
+		log.info("multi : "+multi);
 		
-		log.info("@@@@@@@@@@@@@@@@@@@@@@@vo: "+vo);
+		//파일 정보 저장
+		Map<String, String> map = new HashMap<String, String>();
 		
-		// 파일 개요
-		String fileRealName = file.getOriginalFilename();
-		long fileSize = file.getSize();
-		log.info("파일명 : " + fileRealName);
-		log.info("용량(Byte) : " + fileSize);
+		//파일 외 정보들 저장
+		Enumeration<String> enu = multi.getParameterNames();
+		log.info("multi : "+multi);
 		
-		// 이미지파일 개요
-		String imgRealName = img.getOriginalFilename();
-		long imgSize = img.getSize();
-		log.info("이미지명 : " + imgRealName);
-		log.info("용량(Byte) : " + imgSize);
 		
-		// 파일 등록 - 등록되는 파일 경로
-		// (!important) 파일 경로 일치 필요
-//		String uploadFolder = "C:\\Users\\ITWILL\\git\\mad4golf_Test12\\src\\main\\webapp\\resources\\product_img";
-		String uploadFolder = "C:\\Users\\ITWILL\\git\\New_MadForGolf\\MadForGolf\\src\\main\\webapp\\resources\\board_file";
-				
-		// 파일 등록 - 파일 이름 랜덤 생성(이름 중복 방지)
-		UUID fileUuid = UUID.randomUUID();
-		log.info("fileUUID : " + fileUuid);
-		String[] fileUuids = fileUuid.toString().split("-");
-		String fileUniqueName = fileUuids[0];
-		
-		// 사진 등록 - 사진 이름 랜덤 생성(이름 중복 방지)
-		UUID imgUuid = UUID.randomUUID();
-		log.info("imgUUID : " + imgUuid);
-		String[] imgUuids = imgUuid.toString().split("-");
-		String imgUniqueName = imgUuids[0];
-		
-		// 파일 등록 - 확장자명 만들기
-		String fileExtension = fileRealName.substring(fileRealName.lastIndexOf("."), fileRealName.length());
-		
-		// 사진 등록 - 확장자명 만들기
-		String imgExtension = imgRealName.substring(imgRealName.lastIndexOf("."), imgRealName.length());
-		
-		log.info("파일 - 생성된 고유문자열 : " + fileUniqueName);
-		log.info("파일 - 확장자명 : " + fileExtension);
-		
-		log.info("사진 - 생성된 고유문자열 : " + imgUniqueName);
-		log.info("사진 - 확장자명 : " + imgExtension);
-		
-		// 파일 등록
-		java.io.File saveFile = new java.io.File(uploadFolder + "\\" + fileUniqueName + fileExtension);
-		java.io.File saveImgFile = new java.io.File(uploadFolder + "\\" + imgUniqueName + imgExtension);
-		
-
-		try {
-			file.transferTo(saveFile); // 실제 파일 저장메서드
-			img.transferTo(saveImgFile); // 실제 사진 저장메서드
-			log.info("file : " + file.toString());
-			log.info("imgFile : " + img.toString());
-			
-			log.info("파일&사진 등록 완료!");
-		} catch (Exception e) {
-			log.info(e.getMessage());
+		//파일 외 정보들 while문으로 Map에 저장
+		while(enu.hasMoreElements()) {
+			String name = (String)enu.nextElement();
+			log.info("name : " + name);
+			String value = multi.getParameter(name);
+			log.info("value : " + value);
+			map.put(name, value);
 		}
-				
-		log.info("vo : " + vo);
-
+		log.info("map : "+map);
 		
-		// 서비스 - DB에 상품 등록
-		vo.setContent_img(imgUniqueName + imgExtension);
-		vo.setContent_file(fileUniqueName + fileExtension);
+		//DB 저장을 위해서 Map에서 VO로 옮기기
+		vo.setBoard_category((String)map.get("board_category"));
+		vo.setUser_id((String)map.get("user_id"));
+		vo.setUser_name((String)map.get("user_namd"));
+		vo.setTitle((String)map.get("title"));
+		vo.setContent((String)map.get("content"));
 		
-		log.info("vo : " + vo);
+		log.info("########## vo: "+ vo);
+		
+		// 업로드 파일 Map에 삽입
+		map.put("fileList", fileProcess(multi)) ;
+		vo.setContent_file((String)map.get("fileList"));
+		log.info("######### 최종 vo : " + vo);
 
 		
 		service.boardWrite(vo);
@@ -141,9 +122,70 @@ public class BoardController {
 		
 		
 		//페이지 이동(리스트)
-//		return "redirect:/board/listAll?msg=writeOk";
 		return "redirect:/board/listBoardAll";
 	}
+	
+	
+	
+	//파일 처리 전용 메서드
+	public String fileProcess(MultipartHttpServletRequest multi)throws Exception{
+		log.info("첨부파일 처리 시작");
+		
+		//파일의 원래 이름을 담을 리스트 준비
+		List<String> fileList = new ArrayList<String>();
+		String uploadFileName = "";
+		
+		//파일 정보를 Interator에 불러서 담아주기
+		Iterator<String> fileNames = multi.getFileNames();
+		
+		while(fileNames.hasNext()) {
+			
+			//파일의 파라미터명(name)
+			String filename = fileNames.next();
+			log.info("파일 파라미터명 : "+filename );
+			
+			//파일 정보 가져오기
+			MultipartFile mfile = multi.getFile(filename);
+			
+			//파일의 원래 이름 가져오기
+			String ofileName = mfile.getOriginalFilename();
+			
+			//파일 확장자 가져오기
+			String fileExtention = ofileName.substring(ofileName.lastIndexOf("."),ofileName.length());
+			
+			//파일 저장위치
+			String uploadFolder = "C:\\Users\\Hazle_dandan\\git\\New";
+			
+			log.info("파일의 원래 이름 : " + ofileName);
+			//파일 이름 저장
+			fileList.add(ofileName);
+			
+			//파일명 중복을 위해서 랜덤으로 변경
+			UUID uuid = UUID.randomUUID();
+			System.out.println(uuid.toString());
+			String[] uuids = uuid.toString().split("-");
+			String uniqueName = uuids[0];
+			System.out.println("생성된 고유 파일명 : " + uniqueName);
+			System.out.println("파일 확장자 : "+ fileExtention);
+			
+			//저장소에 저장될 바뀔 파일명
+			uploadFileName = uniqueName + fileExtention;
+			
+			//파일을 저장소에 저장하기 위한 파일 객체 생성 후 지정
+			//지정된 위치에 파일 저장
+			File file = new File(uploadFolder+"\\"+uploadFileName);
+			
+			//멀티파트로 가져온 파일의 사이즈가 0이 아닐 때 == 파일이 있을 때
+			if(mfile.getSize() != 0) {
+				//첨부파일 업로드
+				mfile.transferTo(file);
+				log.info("파일 업로드 성공");
+			}//if문 종료
+		}//while문 종료
+		log.info("첨부파일 처리 끝");
+		return uploadFileName;
+	}//게시글 등록
+	
 	
 	
 	

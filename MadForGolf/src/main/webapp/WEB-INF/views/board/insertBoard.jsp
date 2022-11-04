@@ -112,6 +112,20 @@
 
 
 </style>
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+
+
+function readURL(input) {
+	if(input.files && input.files[0]) {
+		var reader = new FileReader();
+		reader.onload = function(e) { document.getElementById('preview').src = e.target.result; };
+		reader.readAsDataURL(input.files[0]);
+	} else {
+		document.getElementById('preview').src = "";
+	}
+}
+</script>
 
 
     <!-- ##### Breadcrumb Area Start ##### -->
@@ -148,11 +162,11 @@
                         <h2>Write Board</h2>
 <!--                         <p>Send us a message, we will call back later</p> -->
                     </div>
-                    
+
                     <!-- Contact Form Area -->
                     <div class="contact-form-area mb-100">
                         <form action="${pageContext.request.contextPath }/board/insertBoard" method="post" enctype="multipart/form-data">
-							<input type="hidden" name="user_id" value="다은쓰">
+							<input type="hidden" name="user_id" value="${sessionScope.user_id}">
                             <div class="row">
                             
                                 <div class="col-12 col-md-6">
@@ -171,7 +185,7 @@
                                 <div class="col-12 col-md-6">
                                     <div class="form-group">
 <!--                                     	<label class="label" for="company">작성자</label> -->
-                                    	<input type="text" name="user_name" class="form-control_real" value="작성자 이름">
+                                    	<input type="text" name="user_name" class="form-control_real" value="${user_name}" readonly="readonly">
                                     </div>
                                 </div>
                                 
@@ -201,6 +215,11 @@
                                 	<div class="form-group">
 <!--                                 		<label for="content_file">파일 등록</label> -->
                                 		<input type="file" class="form-control_file" id="content_file" name="file" onchange="readURL(this);">
+                                		<img id="preview"/><br>
+                           			    <input type="button" id="button2" value="첨부사진 추가" onclick="addFile();">
+                                		<input type="button" id="button2" value="첨부사진 삭제" onclick="delFile();">
+										<div id="div_file"><!-- <input type="file" name="file"> --></div>
+                           
                             		</div>
                             	</div>
                             	

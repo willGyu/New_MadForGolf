@@ -5,10 +5,15 @@
   
 <mapper namespace="com.madforgolf.mapper.BoardMapper">
 	
+	<select id="getUser_name" resultType="String">
+		select user_name 
+		from mfg_member 
+		where user_id = #{user_id}
+	</select>
 	
 	<insert id="boardWrite">
-		insert into mfg_board(board_category,user_id,title,content,content_img,content_file) 
-		values(#{board_category},#{user_id},#{title},#{content},#{content_img},#{content_file})
+		insert into mfg_board(board_category,user_id,user_name,title,content,content_img,content_file) 
+		values(#{board_category},#{user_id},#{user_name},#{title},#{content},#{content_img},#{content_file})
 	</insert>
 
 

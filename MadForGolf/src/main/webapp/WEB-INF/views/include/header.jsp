@@ -48,13 +48,13 @@
                             <!-- Login -->
                             <div class="login">
 								 <ul class="util">
-								 <c:if test="${loginVO == null }">
+								 <c:if test="${user_id == null }">
 							        <!-- 로그인 X - 회원가입 -->
 							        <div class="login">
                                		<a href="/member/insert"><i class="fa fa-user" aria-hidden="true"></i> <span>Join</span></a>
                            		</c:if>			
 							       
-							    <c:if test="${loginVO == null }">
+							    <c:if test="${user_id == null }">
 							    	<!-- 로그인 X - 로그인 -->
 						          	<a href="/member/login"><i class="fa fa-user" aria-hidden="true"></i> <span>Login</span></a>
 							    </c:if>	
@@ -62,7 +62,7 @@
 							    	
 									
 									
-							<c:if test="${loginVO != null }">
+							<c:if test="${user_id != null }">
 								<!-- 로그인 O - 마이페이지 -->
 							    <!-- 로그인 O - 'OO'님 환영합니다. -->
 							    <div class="login">
@@ -71,12 +71,12 @@
 							</c:if>
 							        
 							        
-							<c:if test="${loginVO != null }">
+							<c:if test="${user_id != null }">
 							    <!-- 로그인 O - 거래목록 -->
 							    <a href="#"><i class="fa fa-user" aria-hidden="true"></i> <span>거래목록</span></a>
 							</c:if>
 							        
-							<c:if test="${loginVO != null }">
+							<c:if test="${user_id != null }">
 								<!-- 로그인 O - 로그아웃 -->
 						        <a href="/member/logout"><i class="fa fa-user" aria-hidden="true"></i> <span>로그아웃</span></a>         
 							</c:if>

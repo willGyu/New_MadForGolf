@@ -1,7 +1,9 @@
 package com.madforgolf.controller;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -11,7 +13,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,8 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.madforgolf.domain.MemberVO;
-import com.madforgolf.service.MemberService;
-import com.madforgolf.service.MemberServiceImpl;
+import com.madforgolf.service.MemberService;;
 
 @Controller
 @RequestMapping("/member/*")
@@ -43,7 +43,7 @@ public class MemberController {
 		log.info("insertGET() 호출");
 		log.info(" /member/sign (get) -> /member/insert.jsp 로 연결");
 	}
-
+	
 	// 회원가입 - POST
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	public String insertPOST(MemberVO vo, HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -76,6 +76,7 @@ public class MemberController {
 		return "redirect:/member/login";
 	}
 
+	
 	// 아이디 중복 체크
 	@ResponseBody
 	@RequestMapping(value = "/idCheck", method = RequestMethod.POST)
@@ -97,38 +98,46 @@ public class MemberController {
 	}
 	
 	
-	
-	// ---------------------------------- 카카오 로그인 ---------------------------------------------
-//	@RequestMapping(value="/kakaoLogin")
-//	public @ResponseBody String KaKaoAuthUrl() throws Exception{
-//		String kakaoUri = "https://kauth.kakao.com/oauth/authorize?client_id=a1e9c36223914cdc6e0edf2ff5f92f81&redirect_uri=http://localhost:8088/member/kakaoLogin&response_type=code";
-//		log.info("code 설정");
-//		
-//		return kakaoUri;
-//	}
-	
-	
-	@RequestMapping(value="/kakaoLogin",method=RequestMethod.GET)
-	public String kakaoLogin(@RequestParam(value="code",required=false) String code) throws Exception{
+	// 카카오 로그인
+	@RequestMapping(value="/kakaoLogin", method=RequestMethod.GET)
+	public String kakaoLogin(@RequestParam(value = "code", required = false) String code, HttpSession session) throws Exception {
+		log.info("kakaoLogin() 호출");
 		
-		log.info("@@@@@@ 카카오"+code);
+		log.info("#########" + code);
 		
 		String access_Token = service.getAccessToken(code);
-		log.info("@@@@@@@@@@ 카카오토큰 : "+access_Token);
+		log.info("###access_Token#### : " + access_Token);
 		
-		return "/member/testPage";
+		MemberVO userInfo = service.getUserInfo(access_Token);
+		
+		log.info("###access_Token#### : " + access_Token);
+		log.info("###nickname#### : " + userInfo.getUser_name());
+		log.info("###email#### : " + userInfo.getUser_id());
+		
+		if(userInfo.getUser_id() != null) {
+			session.setAttribute("user_id", userInfo.getUser_id());
+			session.setAttribute("access_Token", access_Token);
+			log.info("세션등록완료@@@@@ email : "+ session.getAttribute("user_id"));
+		}
+		
+		// 로그인 후 메인페이지로 이동
+		return "redirect:index";
+	
 	}
 	
 	
 	
+	
+	
+	
+	
 	// ------------------------ 회원가입 끝 ------------------------------------
-		
 	
 	
 		
 	// ------------------------ 로그인, 로그아웃 ------------------------------------
 		
-		
+	
 	
 	// http://localhost:8088/member/login
 	// 로그인 - GET

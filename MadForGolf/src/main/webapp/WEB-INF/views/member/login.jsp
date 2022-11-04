@@ -78,7 +78,13 @@
                                     <label for="last_name">PW</label>
                                     <input type="password" class="form-control" id="loginpw" name="user_pw" style="width:360pt;height:40pt; margin:auto;">
                                 	<br>
-                         			<button type="submit" class="idCheck btn alazea-btn w-80" id="login" value="N" style="width:360pt;height:40pt; margin:auto;">Login</button>                           
+                         			<button type="submit" class="idCheck btn alazea-btn w-80" id="login" value="N" style="width:360pt;height:40pt; margin:auto;">Login</button>
+                         			<br><br><br><br>
+                         			<!-- 카카오 로그인 -->
+									<!-- form태그 안?밖? -->
+									<a class="p-2" href="https://kauth.kakao.com/oauth/authorize?client_id=a1e9c36223914cdc6e0edf2ff5f92f81&redirect_uri=http://localhost:8088/member/kakaoLogin&response_type=code">
+									<img src="${pageContext.request.contextPath }/resources/icon/kakao_login_medium_wide.png" style="height:40px;margin:auto;">
+								    </a>                           
                      		  	</div>
                      		  	<br>
                      		  	

@@ -53,21 +53,6 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 	
 	
-	//카카오로그인 정보 저장
-//	@Override
-//	public void kakaoInert(HashMap<String, Object> userInfo) {
-//		sqlSession.insert(NAMESPACE+".kakaoInsert", userInfo);
-//		
-//	}
-//
-//		
-//	//위도 경도 저장
-//	@Override
-//	public void lalong(HashMap<String, String> paramMap) {
-//		log.info("DAIImpl :"+paramMap);
-//		sqlSession.insert(NAMESPACE+".insert", paramMap);
-//	}
-	
 	
 
 	// 로그인
@@ -144,8 +129,6 @@ public class MemberDAOImpl implements MemberDAO {
 //	}
 	
 	
-	// 은주 시작
-	
 	// 아이디 찾기
 	@Override
 	public MemberVO findId(MemberVO vo) throws Exception {
@@ -207,6 +190,24 @@ public class MemberDAOImpl implements MemberDAO {
 	public List<MemberVO> getMemberList() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	
+	// 카카오 DB에 정보 저장
+	@Override
+	public void kakaoinsert(HashMap<String, Object> userInfo) throws Exception {
+		sqlSession.insert(NAMESPACE+".insert",userInfo);
+		
+	}
+
+	
+	// 카카오 DB 정보 확인
+	@Override
+	public MemberVO findkakao(HashMap<String, Object> userInfo) throws Exception {
+		log.info("DAOImpl : "+userInfo.get("user_name"));
+		log.info("DAOImpl : "+userInfo.get("user_id"));
+		
+		return sqlSession.selectOne(NAMESPACE+".findKakao", userInfo);
 	}
 }
 		

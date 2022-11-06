@@ -114,7 +114,34 @@
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
-
+var cnt = 2;
+function addFile(){
+	// alert("클릭");
+	if(cnt < 4) {
+	// 버튼 클릭시 동작 -> 파일입력창 추가
+		$('#div_file').append("<input type='file' class='form-control' id='content_img" + cnt + "' name='file" + cnt + "'><img id='preview'/><br>");
+		cnt++;
+	} else {
+		alert("사진 추가는 2개까지만 가능합니다.")
+	}
+}
+function delFile(){
+	// alert("클릭");
+	
+	if(cnt == 2) {
+	// 버튼 클릭시 동작 -> 파일입력창 삭제
+		$('#content_img').remove();
+		cnt--;
+	}
+	else if(cnt == 3) {
+	// 버튼 클릭시 동작 -> 파일입력창 삭제
+		$('#content_img2').remove();
+		cnt--;
+	} else if(cnt == 4){
+		$('#content_img3').remove();
+		cnt--;
+	} 
+}
 
 function readURL(input) {
 	if(input.files && input.files[0]) {
@@ -128,112 +155,113 @@ function readURL(input) {
 </script>
 
 
-    <!-- ##### Breadcrumb Area Start ##### -->
-    <div class="breadcrumb-area">
-        <!-- Top Breadcrumb Area -->
-        <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(${pageContext.request.contextPath }/resources/img/bg-img/24.jpg);">
-            <h2>Community</h2>
-        </div>
+<!-- ##### Breadcrumb Area Start ##### -->
+<div class="breadcrumb-area">
+    <!-- Top Breadcrumb Area -->
+    <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(${pageContext.request.contextPath }/resources/img/bg-img/24.jpg);">
+        <h2>Community</h2>
+    </div>
 
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="/"><i class="fa fa-home"></i> Home</a></li>
-                            <li class="breadcrumb-item"><a href="/board/listBoardAll"> Community</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Write Board</li>
-                        </ol>
-                    </nav>
-                </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/"><i class="fa fa-home"></i> Home</a></li>
+                        <li class="breadcrumb-item"><a href="/board/listBoardAll"> Community</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Write Board</li>
+                    </ol>
+                </nav>
             </div>
         </div>
     </div>
-    <!-- ##### Breadcrumb Area End ##### -->
+</div>
+<!-- ##### Breadcrumb Area End ##### -->
+
 
 
 <!-- 		<section class="contact-area"> -->
-        <div class="container">
-            <div class="row align-items-center justify-content-between container2">
-				<div class="container3">
-	
-                    <!-- Section Heading -->
-                    <div class="section-heading">
-                        <h2>Write Board</h2>
-<!--                         <p>Send us a message, we will call back later</p> -->
-                    </div>
+<div class="container">
+	<div class="row align-items-center justify-content-between container2">
+		<div class="container3">
 
-                    <!-- Contact Form Area -->
-                    <div class="contact-form-area mb-100">
-                        <form action="${pageContext.request.contextPath }/board/insertBoard" method="post" enctype="multipart/form-data">
-							<input type="hidden" name="user_id" value="${sessionScope.user_id}">
-                            <div class="row">
-                            
-                                <div class="col-12 col-md-6">
-                                    <div class="form-group">
-<!--                                     	<label class="label" for="company">말머리</label> -->
-                                    	<select name="board_category" class="form-control_real" id="">
-                                    		<option class="form-control_real" value="">--말머리 선택--</option>
-							   				<option class="form-control_real" value="질문">질문</option>
-						  					<option class="form-control_real"  value="신고">신고</option>
-							   				<option class="form-control_real"  value="친목">친목</option>
-							   				<option class="form-control_real"  value="정보">정보</option>
-										</select>
-                                    </div>
-                                </div>
-                                
-                                <div class="col-12 col-md-6">
-                                    <div class="form-group">
-<!--                                     	<label class="label" for="company">작성자</label> -->
-                                    	<input type="text" name="user_name" class="form-control_real" value="${user_name}" readonly="readonly">
-                                    </div>
-                                </div>
-                                
-                                <div class="col-12">
-                                    <div class="form-group">
-<!--                                     	<label class="label"  for="company">제목</label> -->
-                                    	<input type="text" name="title" class="form-control placeholder" id="" placeholder="제목을 작성하세요">
-                                    </div>
-                                </div>
-                                
-                                <div class="col-12">
-                                    <div class="form-group">
-<!--                                     	<label for="company">내용</label> -->
-                                        <textarea class="form-control placeholder" name="content" id="message" cols="30" rows="40" placeholder="내용을 작성하세요"></textarea>
-                                    </div>
-                                </div>
-                                
-                                <div class="col-12 mb-4 ">
-                                	<div class="form-group">
-<!-- 	                                	<label for="content_img">사진 등록</label> -->
-                                		<input type="file" class="form-control_file" id="content_img" name="img" onchange="readURL(this);">
-	                                	<img id="preview"/>
-                                	</div>
-                            	</div>
-                            	
-                                <div class="col-12 mb-4">
-                                	<div class="form-group">
-<!--                                 		<label for="content_file">파일 등록</label> -->
-                                		<input type="file" class="form-control_file" id="content_file" name="file" onchange="readURL(this);">
-                                		<img id="preview"/><br>
-                           			    <input type="button" id="button2" value="첨부사진 추가" onclick="addFile();">
-                                		<input type="button" id="button2" value="첨부사진 삭제" onclick="delFile();">
-										<div id="div_file"><!-- <input type="file" name="file"> --></div>
-                           
-                            		</div>
-                            	</div>
-                            	
-                                <div class="col-12 board_btn">
-                                    <button type="submit" class="btn alazea-btn mt-15">게시글 작성</button>
-                                    <button type="button" class="btn alazea-btn mt-15" onclick="location.href='/board/listBoardAll'">작성 취소</button>
-                                </div>
+                <!-- Section Heading -->
+            <div class="section-heading">
+                <h2>Write Board</h2>
+            </div>
+
+
+
+            <!-- Contact Form Area -->
+            <div class="contact-form-area mb-100">
+                <form action="/board/insertBoard" method="post" enctype="multipart/form-data">
+				<input type="hidden" name="user_id" value="${sessionScope.user_id}">
+                    <div class="row">
+
+                       	<!-- 말머리 선택 -->
+                        <div class="col-12 col-md-6">
+                            <div class="form-group">
+                            	<select name="board_category" class="form-control_real" id="">
+                            		<option class="form-control_real" value="">--말머리 선택--</option>
+  									<option class="form-control_real" value="질문">질문</option>
+									<option class="form-control_real"  value="신고">신고</option>
+  									<option class="form-control_real"  value="친목">친목</option>
+  									<option class="form-control_real"  value="정보">정보</option>
+								</select>
                             </div>
-                        </form>
+                        </div>
+                        
+                        
+                        <!-- 작성자명 -->
+                        <div class="col-12 col-md-6">
+                            <div class="form-group">
+                            	<input type="text" class="form-control_real" value="${user_name}" readonly="readonly">
+                            	<input type="hidden" name="user_name" value="${user_name}">
+                            </div>
+                        </div>
+                        
+                        
+                        <!-- 제목 -->
+                        <div class="col-12">
+                            <div class="form-group">
+                            	<input type="text" name="title" class="form-control placeholder" id="" placeholder="제목을 작성하세요">
+                            </div>
+                        </div>
+                        
+                        
+	                    <!-- 내용 -->
+                        <div class="col-12">
+                            <div class="form-group">
+                                <textarea class="form-control placeholder" name="content" id="message" cols="30" rows="40" placeholder="내용을 작성하세요"></textarea>
+                            </div>
+                        </div>
+                        
+                        
+                        <!-- 첨부파일 -->
+                        <div class="col-12 mb-4 ">
+                        	<div class="form-group">
+                        		<input type="file" class="form-control_file" id="content_img" name="file1" onchange="readURL(this);">
+                         		<img id="preview"/><br>
+                                <input type="button" id="button2" value="첨부사진 추가" onclick="addFile();">
+                                <input type="button" id="button2" value="첨부사진 삭제" onclick="delFile();">
+								<div id="div_file"><!-- <input type="file" name="file"> --></div>
+                        	</div>
+                    	</div>
+                                
+                    	
+                    	<!-- 제어버튼 -->
+                        <div class="col-12 board_btn">
+                            <button type="submit" class="btn alazea-btn mt-15">게시글 작성</button>
+                            <button type="button" class="btn alazea-btn mt-15" onclick="location.href='/board/listBoardAll'">작성 취소</button>
+                        </div>
+                    
+                    
                     </div>
-                </div>
-                          </div>
+                </form>
+            </div>
         </div>
-<!--     </section>   -->
+	</div>
+</div>
                 
                 
 

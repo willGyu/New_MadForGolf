@@ -1,6 +1,7 @@
 package com.madforgolf.controller;
 
 import java.io.File;
+
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -201,125 +202,124 @@ public class ProductController {
 
 	
 	
-	// 상품 등록 - 등록 (POST) - 다중 업로드
-		@RequestMapping(value = "/productInsert", method = RequestMethod.POST)
-		public String productInsertPOST(MultipartHttpServletRequest multi, ProductVO vo, HttpServletRequest request) throws Exception {
-			log.info("productInsertPOST() 호출");
-			
-			// log.info("multi : " + multi);
 
-			// 파일의 정보를 저장하는 MAP
-			Map map = new HashMap();
-			
-			Enumeration enu = multi.getParameterNames(); // 파일정보 x
-			// log.info("enu : " + enu);
-			
-			while(enu.hasMoreElements()) {
-				String name = (String)enu.nextElement();
-				log.info("name : " + name);
-				String value = multi.getParameter(name);
-				log.info("value : " + value);
-				map.put(name, value);
-			}
-			
-			// 굳이 이렇게 해야하나...
-			log.info("map : " + map);
-			vo.setSeller_id((String)map.get("seller_id"));
-			vo.setProd_name((String)map.get("prod_name"));
-			vo.setPrice(Integer.parseInt((String)map.get("price")));
-			vo.setDetail((String)map.get("detail"));
-			vo.setCondition((String)map.get("condition"));
-			vo.setCategory((String)map.get("category"));
-			vo.setGender(Integer.parseInt((String)map.get("gender")));
-			// 전달정보(파라미터값)을 MAP에 저장 끝
-			
-			// 업로드 파일 처리
-			fileProcess(multi, vo, request);
-			
-			service.productInsert(vo);
-			
-			return "redirect:/";
+	// 상품 등록 - 등록 (POST) - 다중 업로드
+	@RequestMapping(value = "/productInsert", method = RequestMethod.POST)
+	public String productInsertPOST(MultipartHttpServletRequest multi, ProductVO vo, HttpServletRequest request) throws Exception {
+		log.info("productInsertPOST() 호출");
+		
+		// log.info("multi : " + multi);
+
+		// 파일의 정보를 저장하는 MAP
+		Map map = new HashMap();
+		
+		Enumeration enu = multi.getParameterNames(); // 파일정보 x
+		// log.info("enu : " + enu);
+		
+		while(enu.hasMoreElements()) {
+			String name = (String)enu.nextElement();
+			log.info("name : " + name);
+			String value = multi.getParameter(name);
+			log.info("value : " + value);
+			map.put(name, value);
 		}
 		
-		// 전달된 파일 처리 전용 메서드
-		public List<String> fileProcess(MultipartHttpServletRequest multi, ProductVO vo, HttpServletRequest request) throws Exception {
-			log.info("첨부파일 처리 시작");
-			
-			// 파일정보를 저장하는 리스트(리턴)
-			List<String> fileList = new ArrayList<String>();
-			
-			// 전달된 파일정보를 받아서 처리
-			Iterator<String> fileNames = multi.getFileNames();
-			// log.info("fileNames : " + fileNames);
-			
-			while(fileNames.hasNext()) {
-				String fileName = fileNames.next(); // 파일의 파라미터명
-				log.info("fileName : " + fileName);
-				
-				MultipartFile mFile = multi.getFile(fileName); // 업로드된 파일정보를 가져오기
-				String oFileName = mFile.getOriginalFilename();
-				log.info("oFileName : " + oFileName);
-				
-				// 파일 등록 - 파일 이름 랜덤 생성(이름 중복 방지)
-				UUID uuid = UUID.randomUUID();
-				log.info("UUID : " + uuid);
-				String[] uuids = uuid.toString().split("-");
-				String uniqueName = uuids[0];
-				log.info("생성된 고유문자열 : " + uniqueName);
+		// 굳이 이렇게 해야하나...
+		log.info("map : " + map);
+		vo.setSeller_id((String)map.get("seller_id"));
+		vo.setProd_name((String)map.get("prod_name"));
+		vo.setPrice(Integer.parseInt((String)map.get("price")));
+		vo.setDetail((String)map.get("detail"));
+		vo.setCondition((String)map.get("condition"));
+		vo.setCategory((String)map.get("category"));
+		vo.setGender(Integer.parseInt((String)map.get("gender")));
+		// 전달정보(파라미터값)을 MAP에 저장 끝
 		
-				// 파일 등록 - 확장자명 만들기
-				String fileExtension = oFileName.substring(oFileName.lastIndexOf("."), oFileName.length());
-				log.info("확장자명 : " + fileExtension);
-				
-				// 파일 등록 - 고유한 이름 만들기
-				String uFileName = uniqueName + fileExtension;
-				log.info("고유한 이름 : " + uFileName);
-				
-				switch(fileName) {
-					case "file1" : vo.setProd_img(uFileName); break;
-					case "file2" : vo.setProd_img2(uFileName); break;
-					case "file3" : vo.setProd_img3(uFileName); break;
-				}
-				log.info("image1 : " + vo.getProd_img());
-				log.info("image2 : " + vo.getProd_img2());
-				log.info("image3 : " + vo.getProd_img3());
-				
-				// 업로드 될 파일의 이름들을 저장
-				fileList.add(uFileName);
-				log.info("fileList" + fileList);
-				
-				// 파일 업로드
-//				String uploadFolder1 = "C:\\Users\\ITWILL\\git\\New_MadForGolf\\MadForGolf\\src\\main\\webapp\\resources\\product_img";
-				String uploadFolder1 = "C:\\Users\\Hazle_dandan\\git\\New_MadForGolf\\MadForGolf\\src\\main\\webapp\\resources\\product_img";
-				// 속도가 느려 초반에 엑박뜸 and 경로 일치 필요 => but, 깃허브 연동 o
-				String uploadFolder2 = request.getServletContext().getRealPath("resources/product_img");
-				// 메서드를 통한 경로 => 속도가 빠름, 경로 일치 불필요 => but, 깃허브 연동 x
-				// 파일 저장 경로 : D:\workspace_sts6\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\MadForGolf\resources\product_img
-				// => 둘 다 필요
-				
-				// 파일 생성
-				File file1 = new File(uploadFolder1 + "\\" + uFileName);
-				File file2 = new File(uploadFolder2 + "\\" + uFileName);
-					
-				if(mFile.getSize() != 0) { // 첨부파일이 있을 때				
-					mFile.transferTo(file1); // 첨부파일로 전달된 정보를 파일로 전달
-					mFile.transferTo(file2); // 첨부파일로 전달된 정보를 파일로 전달
-					log.info("파일 업로드 성공");
-				} // if
-				
-			} // while
-			
-			if(vo.getProd_img2() == null) {
-				vo.setProd_img2(vo.getProd_img());
-			}
-			if(vo.getProd_img3() == null) {
-				vo.setProd_img3(vo.getProd_img());
-			}
-			
-			log.info("첨부파일 처리 끝");
-			return fileList;
-		} // 상품 등록 - 등록 (POST)
+		// 업로드 파일 처리
+		fileProcess(multi, vo, request);
 		
+		service.productInsert(vo);
+		
+		return "redirect:/";
+	}
+	
+	// 전달된 파일 처리 전용 메서드
+	public List<String> fileProcess(MultipartHttpServletRequest multi, ProductVO vo, HttpServletRequest request) throws Exception {
+		log.info("첨부파일 처리 시작");
+		
+		// 파일정보를 저장하는 리스트(리턴)
+		List<String> fileList = new ArrayList<String>();
+		
+		// 전달된 파일정보를 받아서 처리
+		Iterator<String> fileNames = multi.getFileNames();
+		// log.info("fileNames : " + fileNames);
+		
+		while(fileNames.hasNext()) {
+			String fileName = fileNames.next(); // 파일의 파라미터명
+			log.info("fileName : " + fileName);
+			
+			MultipartFile mFile = multi.getFile(fileName); // 업로드된 파일정보를 가져오기
+			String oFileName = mFile.getOriginalFilename();
+			log.info("oFileName : " + oFileName);
+			
+			// 파일 등록 - 파일 이름 랜덤 생성(이름 중복 방지)
+			UUID uuid = UUID.randomUUID();
+			log.info("UUID : " + uuid);
+			String[] uuids = uuid.toString().split("-");
+			String uniqueName = uuids[0];
+			log.info("생성된 고유문자열 : " + uniqueName);
+	
+			// 파일 등록 - 확장자명 만들기
+			String fileExtension = oFileName.substring(oFileName.lastIndexOf("."), oFileName.length());
+			log.info("확장자명 : " + fileExtension);
+			
+			// 파일 등록 - 고유한 이름 만들기
+			String uFileName = uniqueName + fileExtension;
+			log.info("고유한 이름 : " + uFileName);
+			
+			switch(fileName) {
+				case "file1" : vo.setProd_img(uFileName); break;
+				case "file2" : vo.setProd_img2(uFileName); break;
+				case "file3" : vo.setProd_img3(uFileName); break;
+			}
+			log.info("image1 : " + vo.getProd_img());
+			log.info("image2 : " + vo.getProd_img2());
+			log.info("image3 : " + vo.getProd_img3());
+			
+			// 업로드 될 파일의 이름들을 저장
+			fileList.add(uFileName);
+			log.info("fileList" + fileList);
+			
+			// 파일 업로드
+			String uploadFolder1 = "C:\\Users\\ITWILL\\git\\New_MadForGolf\\MadForGolf\\src\\main\\webapp\\resources\\product_img";
+			// 속도가 느려 초반에 엑박뜸 and 경로 일치 필요 => but, 깃허브 연동 o
+			String uploadFolder2 = request.getServletContext().getRealPath("resources/product_img");
+			// 메서드를 통한 경로 => 속도가 빠름, 경로 일치 불필요 => but, 깃허브 연동 x
+			// 파일 저장 경로 : D:\workspace_sts6\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\MadForGolf\resources\product_img
+			// => 둘 다 필요
+			
+			// 파일 생성
+			File file1 = new File(uploadFolder1 + "\\" + uFileName);
+			File file2 = new File(uploadFolder2 + "\\" + uFileName);
+				
+			if(mFile.getSize() != 0) { // 첨부파일이 있을 때				
+				mFile.transferTo(file1); // 첨부파일로 전달된 정보를 파일로 전달
+				mFile.transferTo(file2); // 첨부파일로 전달된 정보를 파일로 전달
+				log.info("파일 업로드 성공");
+			} // if
+			
+		} // while
+		
+		if(vo.getProd_img2() == null) {
+			vo.setProd_img2(vo.getProd_img());
+		}
+		if(vo.getProd_img3() == null) {
+			vo.setProd_img3(vo.getProd_img());
+		}
+		
+		log.info("첨부파일 처리 끝");
+		return fileList;
+	} // 상품 등록 - 등록 (POST)
 		
 		// 상품작성 수정하기 - GET (기존의 정보 조회 출력+수정할 정보 입력)
 		@RequestMapping(value = "/modify", method = RequestMethod.GET)
@@ -485,7 +485,9 @@ public class ProductController {
 				log.info("첨부파일 처리 끝");
 				return fileList;
 			} // 상품작성 수정하기 - POST (수정할데이터 처리)
-	// 상품작성 삭제 - POST
+			
+			
+			// 상품작성 삭제 - POST
 	@RequestMapping(value = "/remove", method = RequestMethod.GET)
 	public String removeProductPOST(@RequestParam("prod_num") int prod_num,@RequestParam("category") String category,ProductVO vo,PageVO vo2,RedirectAttributes rttr,Model model) throws Exception {
 		log.info(" removeProductPOST() 호출 ");

@@ -1,6 +1,7 @@
 package com.madforgolf.controller;
 
 import java.io.File;
+
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -87,7 +88,7 @@ public class BoardController {
 		
 		//파일 외 정보들 저장
 		Enumeration<String> enu = multi.getParameterNames();
-		log.info("multi : "+multi);
+		log.info("enu : "+enu);
 		
 		
 		//파일 외 정보들 while문으로 Map에 저장
@@ -110,16 +111,19 @@ public class BoardController {
 		log.info("########## vo: "+ vo);
 		
 		// 업로드 파일 Map에 삽입
-		map.put("fileList", fileProcess(multi)) ;
-		vo.setContent_file((String)map.get("fileList"));
+//		if(multi.getFileNames() != null) {
+			fileProcess(multi, vo, request);			
+//		}else {
+//			vo.setContent_img("");
+//			vo.setContent_img2("");
+//			vo.setContent_img3("");
+//		}
+		
 		log.info("######### 최종 vo : " + vo);
-
 		
 		service.boardWrite(vo);
 		
 		log.info(" 4. controller - 글쓰기 완료 ");
-		
-		
 		
 		//페이지 이동(리스트)
 		return "redirect:/board/listBoardAll";
@@ -128,7 +132,7 @@ public class BoardController {
 	
 	
 	//파일 처리 전용 메서드
-	public String fileProcess(MultipartHttpServletRequest multi)throws Exception{
+	public List<String> fileProcess(MultipartHttpServletRequest multi, BoardVO vo, HttpServletRequest request)throws Exception{
 		log.info("첨부파일 처리 시작");
 		
 		//파일의 원래 이름을 담을 리스트 준비
@@ -137,7 +141,8 @@ public class BoardController {
 		
 		//파일 정보를 Interator에 불러서 담아주기
 		Iterator<String> fileNames = multi.getFileNames();
-		
+		 log.info("fileNames : " + fileNames);
+
 		while(fileNames.hasNext()) {
 			
 			//파일의 파라미터명(name)
@@ -149,16 +154,8 @@ public class BoardController {
 			
 			//파일의 원래 이름 가져오기
 			String ofileName = mfile.getOriginalFilename();
-			
-			//파일 확장자 가져오기
-			String fileExtention = ofileName.substring(ofileName.lastIndexOf("."),ofileName.length());
-			
-			//파일 저장위치
-			String uploadFolder = "C:\\Users\\Hazle_dandan\\git\\New";
-			
 			log.info("파일의 원래 이름 : " + ofileName);
-			//파일 이름 저장
-			fileList.add(ofileName);
+			
 			
 			//파일명 중복을 위해서 랜덤으로 변경
 			UUID uuid = UUID.randomUUID();
@@ -166,24 +163,71 @@ public class BoardController {
 			String[] uuids = uuid.toString().split("-");
 			String uniqueName = uuids[0];
 			System.out.println("생성된 고유 파일명 : " + uniqueName);
+			
+			//파일 확장자 가져오기
+			String fileExtention = ofileName.substring(ofileName.lastIndexOf("."),ofileName.length());
 			System.out.println("파일 확장자 : "+ fileExtention);
 			
-			//저장소에 저장될 바뀔 파일명
+			//저장소에 저장될 바뀔 파일명 - 고유한 이름
 			uploadFileName = uniqueName + fileExtention;
+			log.info("고유한 이름 : " + uploadFileName);
+
+			switch(filename) {
+				case "file1" : vo.setContent_img(uploadFileName); break;
+				case "file2" : vo.setContent_img2(uploadFileName); break;
+				case "file3" : vo.setContent_img3(uploadFileName); break;
+			}
+			log.info("image1 : " + vo.getContent_img());
+			log.info("image2 : " + vo.getContent_img2());
+			log.info("image3 : " + vo.getContent_img3());
+		
+			//업로드 될 파일의 이름들을 저장
+			fileList.add(uploadFileName);
+			log.info("fileList" + fileList);
+			
+			
+			//파일 저장위치
+			String uploadFolder1 = "C:\\Users\\Hazle_dandan\\git\\New_MadForGolf\\MadForGolf\\src\\main\\webapp\\resources\\board_file";
+//			String uploadFolder1 = "C:\\Users\\ITWILL\\git\\New_MadForGolf\\MadForGolf\\src\\main\\webapp\\resources\\product_img";
+			// 속도가 느려 초반에 엑박뜸 and 경로 일치 필요 => but, 깃허브 연동 o
+
+			String uploadFolder2 = request.getServletContext().getRealPath("resources/board_file");
+			// 메서드를 통한 경로 => 속도가 빠름, 경로 일치 불필요 => but, 깃허브 연동 x
+			// 파일 저장 경로 : D:\workspace_sts6\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\MadForGolf\resources\product_img
+			// => 둘 다 필요
+			//파일 이름 저장
+			fileList.add(ofileName);
+			
+			log.info("파일 저장 위치 : "+uploadFolder1 + uploadFolder2); 
 			
 			//파일을 저장소에 저장하기 위한 파일 객체 생성 후 지정
 			//지정된 위치에 파일 저장
-			File file = new File(uploadFolder+"\\"+uploadFileName);
+			File file1 = new File(uploadFolder1+"\\"+uploadFileName);
+			File file2 = new File(uploadFolder2+"\\"+uploadFileName);
+			
+			log.info("파일 저장을 위한 객체 생성 성공");
 			
 			//멀티파트로 가져온 파일의 사이즈가 0이 아닐 때 == 파일이 있을 때
 			if(mfile.getSize() != 0) {
 				//첨부파일 업로드
-				mfile.transferTo(file);
+				mfile.transferTo(file1);
+//				mfile.transferTo(file2);
 				log.info("파일 업로드 성공");
 			}//if문 종료
 		}//while문 종료
+		
+		//2,3번째 파일이 없을 경우 빈 문자열 입력
+		if(vo.getContent_img2() == null) {
+			vo.setContent_img2("");
+		}
+		
+		if(vo.getContent_img3() == null) {
+			vo.setContent_img3("");
+		}
+		
+		
 		log.info("첨부파일 처리 끝");
-		return uploadFileName;
+		return fileList;
 	}//게시글 등록
 	
 	

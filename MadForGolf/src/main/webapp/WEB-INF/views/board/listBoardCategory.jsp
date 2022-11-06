@@ -48,8 +48,8 @@
 }
 
 .category_btn{
-	width: 100px;
-	height : 40px;
+	width: 120px;
+	height : 50px;
 	color: white;
 	text-align: center;
 	padding: 10px;
@@ -76,6 +76,7 @@
 .category_btn div{
  	font-size: 15px;
  	font-weight: bold;
+ 	line-height: 30px;
 }
 
 
@@ -84,19 +85,27 @@
 		margin-top: 40px;
 }
 
+.table td, .table th {
+    padding: 1.5rem;
+}    
+
 .page_box{
 /* 	border: 5px solid blue; */
+	
 	margin: 40px 0;
 }
 
 #page-link_real:hover{
 	background-color: #C6EBC5;
 	border: 1px solid #C6EBC5;
-
 }
 
 
 @media only screen and (max-width: 767px){
+	.category_btn{
+		width: 80px;
+	}
+	
 	.pagination{
 /*  			border: 5px solid blue;  */
 		

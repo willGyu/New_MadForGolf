@@ -14,13 +14,27 @@ public class BoardVO {
 	private String title;
 	private String content;
 	private String content_img;
-	private String content_real_img;
-	private String content_file;
-	private String content_real_file;
+	private String content_img2;
+	private String content_img3;
 	private Timestamp write_date;
 	private int re_reference;
 	private int re_sequence;
 	private int readcount;
+	
+	
+	
+	public String getContent_img2() {
+		return content_img2;
+	}
+	public void setContent_img2(String content_img2) {
+		this.content_img2 = content_img2;
+	}
+	public String getContent_img3() {
+		return content_img3;
+	}
+	public void setContent_img3(String content_img3) {
+		this.content_img3 = content_img3;
+	}
 	public String getBoard_num() {
 		return board_num;
 	}
@@ -63,24 +77,7 @@ public class BoardVO {
 	public void setContent_img(String content_img) {
 		this.content_img = content_img;
 	}
-	public String getContent_real_img() {
-		return content_real_img;
-	}
-	public void setContent_real_img(String content_real_img) {
-		this.content_real_img = content_real_img;
-	}
-	public String getContent_file() {
-		return content_file;
-	}
-	public void setContent_file(String content_file) {
-		this.content_file = content_file;
-	}
-	public String getContent_real_file() {
-		return content_real_file;
-	}
-	public void setContent_real_file(String content_real_file) {
-		this.content_real_file = content_real_file;
-	}
+	
 	public Timestamp getWrite_date() {
 		return write_date;
 	}
@@ -109,9 +106,9 @@ public class BoardVO {
 	public String toString() {
 		return "BoardVO [board_num=" + board_num + ", board_category=" + board_category + ", user_id=" + user_id
 				+ ", user_name=" + user_name + ", title=" + title + ", content=" + content + ", content_img="
-				+ content_img + ", content_real_img=" + content_real_img + ", content_file=" + content_file
-				+ ", content_real_file=" + content_real_file + ", write_date=" + write_date + ", re_reference="
-				+ re_reference + ", re_sequence=" + re_sequence + ", readcount=" + readcount + "]";
+				+ content_img + ", content_img2=" + content_img2 + ", content_img3=" + content_img3 + ", write_date="
+				+ write_date + ", re_reference=" + re_reference + ", re_sequence=" + re_sequence + ", readcount="
+				+ readcount + "]";
 	} 
 
 	

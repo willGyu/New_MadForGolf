@@ -24,13 +24,14 @@
 }
 
 .writeBtn{
-	width: 100px;
-	height : 40px;
+	width: 120px;
+	height : 50px;
 	border-radius: 3px;
 	color: white;
 	text-align: center;
 	padding: 10px;
 	background-color : #C6EBC5;
+	line-height: 30px;
 }
 
 .writeBtn:hover{
@@ -48,8 +49,8 @@
 }
 
 .category_btn{
-	width: 100px;
-	height : 40px;
+	width: 120px;
+	height : 50px;
 	color: white;
 	text-align: center;
 	padding: 10px;
@@ -76,6 +77,7 @@
 .category_btn div{
  	font-size: 15px;
  	font-weight: bold;
+ 	line-height: 30px;
 }
 
 
@@ -83,6 +85,10 @@
 /* 		border: 5px solid yellow; */
 		margin-top: 40px;
 }
+
+.table td, .table th {
+    padding: 1.5rem;
+}    
 
 .page_box{
 /* 	border: 5px solid blue; */
@@ -97,6 +103,13 @@
 
 
 @media only screen and (max-width: 767px){
+	.category_btn{
+		width: 100px;
+	}
+	.table td, .table th {
+    	padding: 1.5rem 0.5rem;
+}
+
 	.pagination{
 /*  			border: 5px solid blue;  */
 		
@@ -112,11 +125,18 @@
 /*  			border: 5px solid yellow;  */
 			font-size: 15px;
 			width: 40px;
-			line-height: 45px;
+			height: 40px;
+			line-height: 40px;
 			padding: 0px;
   			margin: 0 2px; 
 			border-radius: 50%;
 			
+	}
+	.writeBtn{
+		width: 100px;
+	}
+	.text{
+		font-size: 13px;
 	}
 		
 }
@@ -176,15 +196,15 @@
 		
 			<c:forEach var="vo" items="${boardList }">
 				<tr>
-					<td>${vo.board_num }</td>
-					<td class="category all">${vo.board_category }</td>
+					<td class="text">${vo.board_num }</td>
+					<td class="category all text">${vo.board_category }</td>
 					<td>
 						<a href="/board/boardRead?board_num=${vo.board_num}">${vo.title }</a></td>
-					<td>조인해오기</td>
-					<td>
+					<td class="text">${vo.user_name }</td>
+					<td class="text">
 						<fmt:formatDate value="${vo.write_date }" pattern="yy-MM-dd HH:mm"/>
 					</td>
-					<td>${vo.readcount}</td>
+					<td class="text">${vo.readcount}</td>
 				</tr>
 			</c:forEach>
 			</tbody>

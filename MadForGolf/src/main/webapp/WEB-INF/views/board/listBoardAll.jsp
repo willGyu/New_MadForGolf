@@ -14,6 +14,23 @@
 /* 	border: 5px solid black; */
 
 }
+
+.list_like_box{
+	float: right;
+	margin-top: 30px;
+}
+
+.list_like{
+	margin: 5px;
+	font-weight: bolder;
+	color: #52734D;
+}
+
+.list_like:hover{
+	font-weight: bolder;
+	color: #FA7070;	
+}
+
 .writeBtn_box{
 /* 	border: 5px solid red; */
 	display: flex;
@@ -30,7 +47,7 @@
 	color: white;
 	text-align: center;
 	padding: 10px;
-	background-color : #C6EBC5;
+	background-color : #91C788;
 	line-height: 30px;
 }
 
@@ -43,6 +60,7 @@
 
 .category_list{
 /* 	border: 5px solid green; */
+	margin-top: 10px;
 	display: flex;
 	flex-flow: row wrap;
 	justify-content: center;	
@@ -69,7 +87,7 @@
 }
 
 .category_btn:hover{
-	background-color : #91C788;
+	background-color : #FA7070;
 	color: white;
 
 }
@@ -83,7 +101,7 @@
 
 .table_box{
 /* 		border: 5px solid yellow; */
-		margin-top: 40px;
+		margin-top: 60px;
 }
 
 .table td, .table th {
@@ -100,7 +118,6 @@
 	background-color: #C6EBC5;
 	border: 1px solid #C6EBC5;
 }
-
 
 @media only screen and (max-width: 767px){
 	.category_btn{
@@ -177,6 +194,13 @@
  		<a class="category_btn" href="listBoardCategory?board_category=친목"><div>친목</div></a>
  		<a class="category_btn" href="listBoardCategory?board_category=정보"><div>정보</div></a>
 	</div>
+   
+   
+   <!-- 최신순 / 인기순 버튼 -->
+   <div class="list_like_box">
+   		<a class="list_like" href="listBoardAll">최신순</a>
+   		<a class="list_like" href="listBoardLikeAll">인기순</a>
+   </div>
    
    
   <!--  #####  게시글 리스트 시작   ##### --> 

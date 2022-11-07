@@ -152,6 +152,36 @@ function readURL(input) {
 		document.getElementById('preview').src = "";
 	}
 }
+
+
+
+$(document).ready(function(){
+	// alert("확인");
+	$('form').submit(function(){
+		// alert("확인");
+		// 카테고리 제어
+		if($('#category option:selected').val()==""){
+			alert('카테고리를 선택해주세요.');
+			$('#category').focus();
+			return false;
+		}
+		
+		// 제목 제어
+		if($('#title').val()==""){
+			alert('제목을 작성하세요.');
+			$('#title').focus();
+			return false;
+		}
+		// 내용 제어
+		if($('#message').val()==""){
+			alert('내용을 작성하세요.');
+			$('#message').focus();
+			return false;
+		}
+		
+		alert("게시글 등록이 완료되었습니다.");
+	});
+});
 </script>
 
 
@@ -201,7 +231,7 @@ function readURL(input) {
                        	<!-- 말머리 선택 -->
                         <div class="col-12 col-md-6">
                             <div class="form-group">
-                            	<select name="board_category" class="form-control_real" id="">
+                            	<select name="board_category" class="form-control_real" id="category">
                             		<option class="form-control_real" value="">--말머리 선택--</option>
   									<option class="form-control_real" value="질문">질문</option>
 									<option class="form-control_real"  value="신고">신고</option>
@@ -215,7 +245,7 @@ function readURL(input) {
                         <!-- 작성자명 -->
                         <div class="col-12 col-md-6">
                             <div class="form-group">
-                            	<input type="text" class="form-control_real" value="${user_name}" readonly="readonly">
+                            	<input type="text" class="form-control_real" value="${user_name}" readonly="readonly" id="user_name">
                             	<input type="hidden" name="user_name" value="${user_name}">
                             </div>
                         </div>
@@ -224,7 +254,7 @@ function readURL(input) {
                         <!-- 제목 -->
                         <div class="col-12">
                             <div class="form-group">
-                            	<input type="text" name="title" class="form-control placeholder" id="" placeholder="제목을 작성하세요">
+                            	<input type="text" name="title" class="form-control placeholder" id="title" placeholder="제목을 작성하세요">
                             </div>
                         </div>
                         

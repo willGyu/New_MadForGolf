@@ -49,16 +49,27 @@
 .content_box{
 /*  	border: 5px solid gray;  */
 	padding: 30px;
-	height: 500px;
+	height: auto;
 	background-color: white;
 }
-
 
 .content_inner_box{
 /* 	border: 5px solid blue; */
 	width: 100%;
 	font-weight: bold;
 	color: black;
+}
+
+.img_box{
+	display: flex;
+	flex-flow: column wrap;
+	justify-content: center;
+	margin-left: 10%;
+}
+
+.img{
+	width: 85%;
+	margin: 10px;
 }
 
 .alazea-portfolio-filter{
@@ -258,7 +269,22 @@ comment-head{
 							
 							<!-- 게시글 본문 -->
 							<div class=" mb-30 content_box">
-								<div class="content_inner_box" style="margin-bottom: 80px; margin-top: 40px;">${vo.content }</div>
+								<div class="content_inner_box" style="margin-bottom: 80px; margin-top: 40px;"><pre>${vo.content }</pre></div>
+								<div class="img_box">
+									 <div class="img">
+	                                   	<img  src="${pageContext.request.contextPath }/resources/board_file/${vo.content_img }"alt="1">
+	                                 </div>
+	                                 <c:if test="${not empty vo.content_img2}">
+		                                 <div class="img">
+		                                    <img src="${pageContext.request.contextPath }/resources/board_file/${vo.content_img2 }" alt="1">
+		                                 </div>
+	                                 </c:if>
+	                                 <c:if test="${not empty vo.content_img3}">
+		                                 <div class="img">
+		                                    <img src="${pageContext.request.contextPath }/resources/board_file/${vo.content_img3 }" alt="1">
+		                                 </div>
+	                                 </c:if>
+								</div>
 							</div>
 							
 							<!-- 게시글 버튼 -->
@@ -280,13 +306,12 @@ comment-head{
 
 
 					<!-- 댓글리스트@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+					<c:if test="${msg != 'NO' }">
 					<div class="comment_area clearfix">
 						<h6 class="headline comment_title">Comment</h6>
 
 						<ol class="comment_text">
-							<c:if test="${msg == 'NO' }">
-                                	작성된 댓글이 없습니다.<br>
-							</c:if>
+							
 							<!-- Single Comment Area -->
 							<c:forEach var="replyVO" items="${replyVO }">
 
@@ -304,8 +329,7 @@ comment-head{
 													<!-- 댓글 작성자 -->
 													<div class="comment_meta">
 														<span class="comment_meta_name">${replyVO.user_name }</span>
-														<span class="comment-date"><fmt:formatDate pattern="yy-MM-dd HH:mm"
-																value="${replyVO.reply_updatedate }" /></span>
+														<span class="comment-date"><fmt:formatDate pattern="yy-MM-dd HH:mm" value="${replyVO.reply_updatedate }"/></span>
 													</div>
 
 												</div><!-- comment-head -->
@@ -357,7 +381,7 @@ comment-head{
 							</ul>
 						</nav>
 					</div>
-
+				</c:if>			
 
 
 					<!-- 댓글남기기@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->

@@ -47,7 +47,7 @@ public class BoardDAOImpl implements BoardDAO{
 	
 	
 	
-	
+	//글쓰기
 	@Override
 	public void boardWrite(BoardVO vo) throws Exception{
 		log.info(" 3. DAO - insertBoard(vo) ");
@@ -160,6 +160,15 @@ public class BoardDAOImpl implements BoardDAO{
 	
 	
 
+	//----------------------------------------------------------------------
+
+	
+	@Override
+	public List<BoardVO> listLikePage(PageVO vo) {
+		log.info(" 3. DAO - listLikePage(vo) 호출 ");
+		return sqlSession.selectList(NAMESPACE+".listLikePage",vo);
+	}
+
 
 	//----------------------------------------------------------------------
 
@@ -181,6 +190,29 @@ public class BoardDAOImpl implements BoardDAO{
 //		log.info(categoryObj.toString());
 		
 		return sqlSession.selectList(NAMESPACE+".listCategory",categoryObj);
+	}
+	
+	
+	//----------------------------------------------------------------------
+	
+	
+	@Override
+	public List<BoardVO> listLikeCategory(PageVO vo, String board_category) throws Exception {
+		
+		log.info(" 3. DAO - listLikeCategory(vo, board_category) 호출 ");
+		
+		int page = vo.getPage();
+		int perPageNum = vo.getPerPageNum();
+		
+		
+		Map<String, Object> categoryObj = new HashMap<String, Object>();
+		categoryObj.put("page", page);
+		categoryObj.put("perPageNum", perPageNum);
+		categoryObj.put("board_category", board_category);
+		
+//		log.info(categoryObj.toString());
+		
+		return sqlSession.selectList(NAMESPACE+".listLikeCategory",categoryObj);
 	}
 	
 	

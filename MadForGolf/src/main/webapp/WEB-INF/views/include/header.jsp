@@ -13,10 +13,10 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title -->
-    <title>MadForGolf - Gardening &amp; Landscaping HTML Template</title>
+    <title>Mad For Golf</title>
 
     <!-- Favicon -->
-    <link rel="icon" href="${pageContext.request.contextPath }/resources/img/core-img/favicon.ico">
+    <link rel="icon" href="${pageContext.request.contextPath }/resources/img/core-img/golf_logo.png">
 
     <!-- Core Stylesheet -->
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/style.css">
@@ -102,8 +102,19 @@
                     <!-- Menu -->
                     <nav class="classy-navbar justify-content-between" id="alazeaNav">
 
+<style>
+#header_title{
+	color: white;
+	padding-left: 10px;
+	line-height: 1.4;
+}
+
+#logo_img{
+	height: 30px;
+}
+</style>
                         <!-- Nav Brand -->
-                        <a href="/member/main" class="nav-brand"><img src="${pageContext.request.contextPath }/resources/img/core-img/logo.png" alt=""></a>
+                        <a href="/" class="nav-brand"><img id="logo_img" src="${pageContext.request.contextPath }/resources/img/core-img/golf_logo.png" alt=""><span id="header_title">Mad For Golf</span></a>
 
                         <!-- Navbar Toggler -->
                         <div class="classy-navbar-toggler">

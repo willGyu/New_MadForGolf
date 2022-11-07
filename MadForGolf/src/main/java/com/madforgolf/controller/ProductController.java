@@ -466,6 +466,9 @@ public class ProductController {
 						log.info("image2 : " + vo.getProd_img2());
 						log.info("image3 : " + vo.getProd_img3());
 						
+						
+						
+						
 						// 업로드 될 파일의 이름들을 저장
 						fileList.add(uFileName);
 						log.info("fileList" + fileList);

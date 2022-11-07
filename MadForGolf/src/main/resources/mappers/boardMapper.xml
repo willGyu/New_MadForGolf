@@ -19,7 +19,7 @@
 
 	<!-- 글내용 -->
 	<select id="getBoard" resultType="com.madforgolf.domain.BoardVO">		
-		select b.board_num, b.board_category, b.user_id, m.user_name, b.title, b.content, b.content_img, b.content_file, b.write_date, b.readcount
+		select b.board_num, b.board_category, b.user_id, m.user_name, b.title, b.content, b.content_img, b.content_img2, b.content_img3, b.write_date, b.readcount
 		from mfg_board b join mfg_member m
 		on b.user_id = m.user_id
 		where b.board_num = #{board_num};
@@ -28,7 +28,7 @@
 	<!-- 글수정 -->	 
 	<update id="updateBoard">
 	  update mfg_board 
-	  set board_category=#{board_category}, title=#{title},content=#{content},content_img=#{content_img}  
+	  set board_category=#{board_category}, title=#{title},content=#{content},content_img=#{content_img},content_img2=#{content_img2},content_img3=#{content_img3} 
 	  where board_num=#{board_num}	   
 	</update>
 	
@@ -83,10 +83,27 @@
 	
 	
 	
+	<select id="listLikePage" resultType="BoardVO">
+		select * from mfg_board 
+		order by readcount desc 
+		limit #{pageStart},#{perPageNum}
+	</select>
+	
+	
+	
 	<select id="listCategory" resultType="BoardVO">
 		select * from mfg_board 
 		where board_category = #{board_category} 
 		order by board_num desc, write_date desc 
+		limit #{page},#{perPageNum}
+	</select>
+
+	
+	
+	<select id="listLikeCategory" resultType="BoardVO">
+		select * from mfg_board 
+		where board_category = #{board_category} 
+		order by readcount desc 
 		limit #{page},#{perPageNum}
 	</select>
 

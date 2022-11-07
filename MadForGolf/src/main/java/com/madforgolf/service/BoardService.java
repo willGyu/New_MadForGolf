@@ -32,14 +32,18 @@ public interface BoardService {
 	//글 전체 목록
 //		public List<BoardVO> listBoardAll() throws Exception;
 
-	//글 리스트 가져오기(페이징 처리)
+	//글 리스트 가져오기
 	public List<BoardVO> listPage(PageVO vo) throws Exception;
 	
+	//글 리스트 - 인기순
+	public List<BoardVO> listLikePage(PageVO vo) throws Exception;
 	
 	//글 리스트 가져오기(말머리)
 	public List<BoardVO> listCategory(PageVO vo, String board_category) throws Exception;
 	
 	
+	// 글 리스트 - 인기순(말머리)
+	public List<BoardVO> listLikeCategory(PageVO vo, String board_category) throws Exception;
 	
 	//-----------------------------------------------------------------
 	
@@ -55,5 +59,7 @@ public interface BoardService {
 	public Integer deleteReply(Integer reply_num) throws Exception;
 	//댓글 수
 	public Integer replyCnt(Integer board_num) throws Exception;
+
+
 	
 }

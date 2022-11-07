@@ -100,6 +100,17 @@ public class BoardServiceImpl implements BoardService{
 	}
 	
 	
+	//------------------------------------------------------------------------
+
+	
+	
+	//리스트(페이징처리) - 인기순
+	@Override
+	public List<BoardVO> listLikePage(PageVO vo) {
+		log.info(" 2. service - listLikePage(vo) ");
+		return dao.listLikePage(vo);
+
+	}
 
 
 	//------------------------------------------------------------------------
@@ -117,6 +128,18 @@ public class BoardServiceImpl implements BoardService{
 	}
 	
 
+	//------------------------------------------------------------------------
+	
+	
+	
+	//리스트 - 인기순, 카테고리별(페이징 처리)
+	@Override
+	public List<BoardVO> listLikeCategory(PageVO vo, String board_category) throws Exception {
+		log.info(" 2. service - listLikeCategory(vo,board_category) ");
+		return dao.listLikeCategory(vo,board_category);
+	}
+	
+	
 	//------------------------------------------------------------------------
 	
 	

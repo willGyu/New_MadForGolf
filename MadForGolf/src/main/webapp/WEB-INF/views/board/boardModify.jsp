@@ -113,6 +113,7 @@
 
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <script type="text/javascript">
 
 
@@ -125,6 +126,34 @@ function readURL(input) {
 		document.getElementById('preview').src = "";
 	}
 }
+
+$(document).ready(function(){
+// 	alert("확인");
+	$('form').submit(function(){
+		alert("확인");
+		// 카테고리 제어
+		if($('#board_category option:selected').val()==""){
+			alert('카테고리를 선택해주세요.');
+			$('#board_category').focus();
+			return false;
+		}
+		
+		// 제목 제어
+		if($('#contact-subject').val()==""){
+			alert('제목을 작성하세요.');
+			$('#contact-subject').focus();
+			return false;
+		}
+		// 내용 제어
+		if($('#message').val()==""){
+			alert('내용을 작성하세요.');
+			$('#message').focus();
+			return false;
+		}
+		
+		alert("게시글 수정이 완료되었습니다.");
+	});
+});
 </script>
 
 	
@@ -166,7 +195,7 @@ function readURL(input) {
              
             <!-- 수정, 삭제 시 필요한 글번호 저장 -->
             <div class="contact-form-area mb-100">
-				<form action="/board/boardModify" method="post">
+				<form action="/board/boardModify?oldfile1=${vo.content_img}&oldfile2=${vo.content_img2}&oldfile3=${vo.content_img3}" enctype="multipart/form-data" method="post">
                 <input type="hidden" class="form-control" name="board_num" id="contact-name" readonly value="${vo.board_num }">
                 	<div class="row">
                 		
@@ -214,7 +243,13 @@ function readURL(input) {
                          	<img id="preview"/>
                         	</div>
                     	</div> -->
-                    	
+                    	<div class="carousel-item active">
+                        	<a class="product-img" href="${pageContext.request.contextPath }/resources/board_file/${vo.content_img }" >
+                            <img src="${pageContext.request.contextPath }/resources/board_file/${vo.content_img }" alt="1" style="width: 300px; margin: 20px;">
+                            </a>
+<!--                             		<input type="file" class="form-control_file" id="content_img" name="file1" onchange="readURL(this);"> -->
+                            
+                        </div>
                     	
                     	                        
                         <!-- 제어버튼 -->        

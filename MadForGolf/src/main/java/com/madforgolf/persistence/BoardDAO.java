@@ -37,9 +37,16 @@ public interface BoardDAO {
 	// 글 전체 목록 - listPage(pageVO)
 	public List<BoardVO> listPage(PageVO vo) throws Exception;
 	
+	// 글 전체 목록 - 인기순
+	public List<BoardVO> listLikePage(PageVO vo);
+	
+	
 	// 글 전체 목록 - listCategory(vo, board_category)
 	public List<BoardVO> listCategory(PageVO vo, String board_category) throws Exception;
 	
+	//글 전체 목록 - 인기순(카테고리별)
+	public List<BoardVO> listLikeCategory(PageVO vo, String board_category) throws Exception;
+
 
 	//------------------------------------------------------
 	
@@ -58,7 +65,8 @@ public interface BoardDAO {
 	
 	//댓글 수
 	public Integer replyCnt(Integer board_num) throws Exception;
-	
+
+
 	
 }
 

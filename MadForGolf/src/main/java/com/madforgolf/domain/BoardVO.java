@@ -23,6 +23,7 @@ public class BoardVO {
 	
 	
 	
+	
 	public String getContent_img2() {
 		return content_img2;
 	}

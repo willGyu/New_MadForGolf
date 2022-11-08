@@ -20,6 +20,7 @@ public class BoardDAOImpl implements BoardDAO{
 	private static final Logger log = LoggerFactory.getLogger(BoardDAOImpl.class);
 	
 	
+	
 	//SqlSession객체(디비연결, mybatis, 매퍼, 자원해제)
 	@Inject
 	private SqlSession sqlSession;

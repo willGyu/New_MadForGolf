@@ -240,6 +240,7 @@ $(document).ready(function(){
 								</select>
                             </div>
                         </div>
+    
                         
                         
                         <!-- 작성자명 -->

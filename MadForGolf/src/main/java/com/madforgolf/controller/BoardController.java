@@ -45,6 +45,7 @@ public class BoardController {
 
 	
 	
+	
 
 	
 	//--------------------------------------------------------------------------------------------------
@@ -511,7 +512,7 @@ public class BoardController {
 		log.info("글 삭제 완료");
 		rttr.addFlashAttribute("msg", "DELETEOK");
 		
-		return "redirect:/board/listPage";
+		return "redirect:/board/listBoardAll";
 	}
 	
 	

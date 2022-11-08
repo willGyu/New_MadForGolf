@@ -87,6 +87,7 @@
 }
 
 
+
 .board_btn{
 /* 	border: 5px solid blue; */
 	width : 140px;

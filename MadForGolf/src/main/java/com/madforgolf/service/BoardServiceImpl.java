@@ -16,6 +16,7 @@ import com.madforgolf.persistence.BoardDAO;
 @Service
 public class BoardServiceImpl implements BoardService{
 	
+	
 	private static final Logger log = LoggerFactory.getLogger(BoardServiceImpl.class);
 	
 	//객체 생성

@@ -9,6 +9,7 @@ import com.madforgolf.domain.ReplyVO;
 
 public interface BoardService {
 	
+	
 	//글쓴이 이름 가져오기
 	public String getUser_name(String user_id);
 	

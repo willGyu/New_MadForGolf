@@ -11,6 +11,7 @@
 		where user_id = #{user_id}
 	</select>
 	
+	
 	<insert id="boardWrite">
 		insert into mfg_board(board_category,user_id,user_name,title,content,content_img,content_img2,content_img3) 
 		values(#{board_category},#{user_id},#{user_name},#{title},#{content},#{content_img},#{content_img2},#{content_img3})

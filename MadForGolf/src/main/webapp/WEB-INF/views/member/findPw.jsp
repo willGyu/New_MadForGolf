@@ -15,7 +15,7 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i> Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Login</li>
+                            <li class="breadcrumb-item active" aria-current="page">Find My Account</li>
                         </ol>
                     </nav>
                 </div>
@@ -31,8 +31,8 @@
 			<div class="row justify-content-between">
 				<div class="col-12 col-lg-7">
 					<div class="checkout_details_area clearfix">
-						<h5>비밀번호 찾기</h5>
-						<br>
+						<h5>Find My Password</h5>
+						<br><br>
 						
 						<form action="${pageContext.request.contextPath }/member/findPw" id="findPw" method="post" name="findPw">
 							<div class="row">

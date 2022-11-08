@@ -16,7 +16,7 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i> Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Login</li>
+                            <li class="breadcrumb-item active" aria-current="page">Find My Account</li>
                         </ol>
                     </nav>
                 </div>
@@ -32,8 +32,8 @@
 			<div class="row justify-content-between">
 				<div class="col-12 col-lg-7">
 					<div class="checkout_details_area clearfix">
-						<h5>Find ID</h5>
-						<br>
+						<h5>Find My Email</h5>
+						<br><br>
 						
 						
 							<div class="row">
@@ -46,11 +46,13 @@
 								<br><br>
 								</div> --%>
 								<div>
-								<a class="action remind" href="${pageContext.request.contextPath }/member/login"><span>Go To Login</span></a><br>
+									<a class="action remind" href="${pageContext.request.contextPath }/member/login"><span>Go To Login</span></a>
+									<br><br>
+								</div>
+								<div>
+									<a class="action remind" href="${pageContext.request.contextPath }/member/findPw"><span>Forgot Your Password?</span></a><br>
 								</div>
 								</div>
-                        
-						
 						
 					</div>
 				</div>

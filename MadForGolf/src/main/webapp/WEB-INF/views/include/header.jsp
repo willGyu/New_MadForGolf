@@ -66,7 +66,7 @@
 								<!-- 로그인 O - 마이페이지 -->
 							    <!-- 로그인 O - 'OO'님 환영합니다. -->
 							    <div class="login">
-									<b id="user_id" >${loginVO.user_name }</b>님 환영합니다.
+									<b id="user_id" >${user_name }</b>님 환영합니다.
 							        <a href="/member/mypage"><i class="fa fa-user" aria-hidden="true"></i> <span>마이페이지</span></a>
 							</c:if>
 							        

@@ -8,7 +8,7 @@
     <div class="breadcrumb-area">
         Top Breadcrumb Area
         <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(${pageContext.request.contextPath }/resources/img/bg-img/24.jpg);">
-            <h2>Find My ID</h2>
+            <h2>Find Your ID</h2>
         </div>
         <div class="container">
             <div class="row">
@@ -16,7 +16,7 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i> Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Login</li>
+                            <li class="breadcrumb-item active" aria-current="page">Find My Account</li>
                         </ol>
                     </nav>
                 </div>
@@ -32,8 +32,8 @@
 			<div class="row justify-content-between">
 				<div class="col-12 col-lg-7">
 					<div class="checkout_details_area clearfix">
-						<h5>아이디 찾기</h5>
-						<br>
+						<h5>Find My Email</h5>
+						<br><br>
 						
 						<form action="${pageContext.request.contextPath }/member/findId" id="findId" method="post" name="findId">
 							<div class="row">

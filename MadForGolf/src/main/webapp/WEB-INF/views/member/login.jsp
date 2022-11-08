@@ -28,7 +28,7 @@
 
    <script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script type="text/javascript">
-
+	
 	
 	// 아이디 틀렸을 경우
     $(document).ready(function() {
@@ -67,6 +67,7 @@
                 <div class="col-12 col-lg-7" style="margin: auto;">
                     <div class="checkout_details_area clearfix">
                         <h5>Login</h5>
+                        <br><br>
                         <form action="/member/login" id="login" method="post">
                             <div class="row">
                                
@@ -78,12 +79,23 @@
                                     <label for="last_name">PW</label>
                                     <input type="password" class="form-control" id="loginpw" name="user_pw" style="width:360pt;height:40pt; margin:auto;">
                                 	<br>
-                         			<button type="submit" class="idCheck btn alazea-btn w-80" id="login" value="N" style="width:360pt;height:40pt; margin:auto;">Login</button>                           
+                         			<button type="submit" class="idCheck btn alazea-btn w-80" id="login" value="N" style="width:360pt;height:40pt; margin:auto;">Login</button>
+                         			<br><br><br><br>
+                         			<!-- 카카오 로그인 -->
+                         			<div>
+										<a class="p-2" href="https://kauth.kakao.com/oauth/authorize?client_id=a1e9c36223914cdc6e0edf2ff5f92f81&redirect_uri=http://localhost:8088/member/kakaoLogin&response_type=code">
+										<img src="${pageContext.request.contextPath }/resources/icon/kakao_login_medium_wide.png" style="height:40px;margin:auto;">
+								    </a>                           
+                         			</div>
                      		  	</div>
                      		  	<br>
                      		  	
-                     		  	<a class="action remind" href="${pageContext.request.contextPath }/member/findId"><span>Forgot Your ID?</span></a><br>
-                     		  	
+                     		  	<div>                     		  	
+                     		  		<a class="action remind" href="${pageContext.request.contextPath }/member/findId"><span>Forgot Your ID?</span></a><br>
+                     		  	</div>
+                     		  	<div>
+	                     		  	<a class="action remind" href="${pageContext.request.contextPath }/member/findPw"><span>Forgot Your Password?</span></a><br>
+                     		  	</div>
                         </div>
                         </form>
                         </div>

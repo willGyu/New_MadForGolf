@@ -2,11 +2,11 @@
 	pageEncoding="UTF-8"%>
 
 <%@ include file="../include/header.jsp" %> 
-
 <title>Insert title here</title>
 <script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
-	
+
+
 </script>
 
 <!-- ##### Breadcrumb Area Start ##### -->
@@ -21,7 +21,8 @@
                 <div class="col-12">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="/member/insert"><i class="fa fa-home"></i>Create an Account</a></li>
+                            <li class="breadcrumb-item"><i class="fa fa-home"></i> home</li>
+                            <li class="breadcrumb-item active" aria-current="page"><a href="/member/insert">Join</a></li>
                         </ol>
                     </nav>
                 </div>
@@ -176,26 +177,29 @@
 	
 </script>
 
-					
 
+					
 
 	<!-- ##### Checkout Area Start ##### -->
 	<div class="checkout_area mb-100">
 		<div class="container">
 			<div class="row justify-content-between">
-				<div class="col-12 col-lg-7">
+<!-- 				<div class="col-12 col-lg-7"> -->
 					<div class="checkout_details_area clearfix">
 					
 						<h1>회원가입</h1> 
 						<h2>Join</h2><br><br>
 						
-						<button type="button" class="btn alazea-btn w-80" style="width:50pt;height:30pt;" onclick="goPopup();">주소검색</button> <br>
+							
+								
+						
 						<form name="form" action="/member/lalong" id="join" class="totalform" method="post">
 							<div class="row">
 								<div class="col-12 mb-4">
 									<label for="email_address">우리동네(Town) *</label> 
 									<input type="hidden" id="confmKey" name="confmKey" value=""  >
 									<input type="text" class="form-control" id="roadFullAddr" name="roadFullAddr"  value="" placeholder="주소검색을 눌러 우리동네를 설정하세요." readonly="readonly"><br>
+									<button type="button" class="btn alazea-btn w-80" style="width:50pt;height:30pt;float: right;" onclick="goPopup();">주소검색</button> <br>
 									
 								</div>
 								
@@ -206,7 +210,7 @@
 									<input type="email" name="user_id" class="form-control" id="user_id" value="" placeholder=" @를 포함해서 입력하세요.">
 									<input type="hidden" id="user_id2"><br>
 <!-- 									<input type="hidden" name="user_id2" id="user_id2"><br> -->
-									<button type="button" class="idCheck btn alazea-btn w-80" id="idCheck" value="N" style="width:50pt;height:30pt;">이메일 확인</button>
+									<button type="button" class="idCheck btn alazea-btn w-80" id="idCheck" value="N" style="width:50pt;height:30pt;float: right;">이메일 확인</button>
 									<input type="hidden" id="user_id2" value="0">
 <!-- 									<input type="hidden" name="user_id2" id="user_id2" value="0"> -->
 								</div>
@@ -233,7 +237,7 @@
 									<label for="phone_number">전화번호(Phone) *</label> 
 									<input type="text" name="user_phone" class="form-control" id="user_phone" value="" placeholder=" (-)제외후 입력하세요."><br>
 									<input type="hidden" name="user_phone1" id="user_phone1">
-									<button type="button" class="phoneCheck btn alazea-btn w-80" id="phoneCheck" value="N" style="width:40pt;height:30pt;">확인</button>
+									<button type="button" class="phoneCheck btn alazea-btn w-80" id="phoneCheck" value="N" style="width:40pt;height:30pt;float: right;">확인</button>
 									<input type="hidden" name="user_phone1" id="user_phone1" value="0">
 								<br><br><br><br>
 								</div>
@@ -241,32 +245,21 @@
 								
 								
 								<button class="btn alazea-btn w-120" style="width:360pt;height:40pt;margin:auto;">회원가입</button>
-								<br><br><br><br><br>
+								<!-- form태그 안?밖? -->
+								<a class="p-2 " href="https://kauth.kakao.com/oauth/authorize?client_id=a1e9c36223914cdc6e0edf2ff5f92f81&redirect_uri=http://localhost:8088/member/kakaoLogin&response_type=code">
+								<img src="${pageContext.request.contextPath }/resources/icon/kakao_login_medium_wide.png" style="width:360pt;height:40pt;margin:auto;">
+							    </a>
+                        
 								</div>
 								
-                        
 						</form>
 						
 						
-								<!-- 카카오 로그인 -->
-								<!-- form태그 안?밖? -->
-								<a class="p-2" href="https://kauth.kakao.com/oauth/authorize?client_id=a1e9c36223914cdc6e0edf2ff5f92f81&redirect_uri=http://localhost:8088/member/kakaoLogin&response_type=code">
-								<img src="${pageContext.request.contextPath }/resources/icon/kakao_login_medium_wide.png" style="height:40px;margin:auto;">
-							    </a>
+								
 						
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	
-	
-	
-
-<%@ include file="../include/footer.jsp" %>
-
-
-
-
-
 	

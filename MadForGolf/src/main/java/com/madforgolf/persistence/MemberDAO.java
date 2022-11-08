@@ -56,12 +56,10 @@ public interface MemberDAO {
 		public MemberVO loginMember(MemberVO vo);
 		
 		
-		//카카오로그인 정보 저장
-//		public void kakaoInert(HashMap<String, Object> userInfo) ;
-//		
-//				
-//		//위도 경도 저장
-//		public void lalong(HashMap<String, String> paramMap);
+		// 카카오 로그인
+		public void kakaoinsert(HashMap<String, Object> userInfo) throws Exception;
+		
+		public MemberVO findkakao(HashMap<String, Object> userInfo) throws Exception;
 		
 	
 }

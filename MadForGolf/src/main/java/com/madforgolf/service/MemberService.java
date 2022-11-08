@@ -18,17 +18,6 @@ public interface MemberService {
 	//휴대번호 중복체크
 	public int phoneCheck(MemberVO vo) throws Exception;
 	
-	
-	// 위도경도
-//	public void lalong(HashMap<String, String> paramMap);
-//			
-//	//카카오 지도
-//	public String getKakaoApiFromAddress(String roadFullAddr);
-//		
-//	//JSON String -> Map
-//	public HashMap<String, String> getXYMapfromJson(String jsonString);
-	
-	
 	// 로그인 
 	public MemberVO login(MemberVO vo) throws Exception;
 	
@@ -59,9 +48,11 @@ public interface MemberService {
 	// 비밀번호 체크
 	public int pwCheck(MemberVO vo) throws Exception;
 	
-	// 카카오 로그인
-	// authorize_code? code?
-	public String getAccessToken(String authorize_code) throws Exception;
+	//카카오 로그인
+	public String getAccessToken(String autorize_code) throws Exception;
+			
+	//카카오 사용자 정보 요청
+	public MemberVO getUserInfo(String access_Token) throws Exception;
 }
 
 	

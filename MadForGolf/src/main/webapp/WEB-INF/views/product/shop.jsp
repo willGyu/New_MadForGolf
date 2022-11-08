@@ -44,6 +44,16 @@
 	font-family: "Trebuchet MS", Dotum, Arial;
 	background-color: #A1C298;
 }
+#topMenu .menuLink3 {
+	text-decoration: none;
+	color: white;
+	display: block;
+	width: 150px;
+	font-size: 16px;
+	font-weight: bold;
+	font-family: "Trebuchet MS", Dotum, Arial;
+	background-color: white;
+}
 
 #topMenu .menuLink:hover {
 	color: #FBF2CF;
@@ -351,6 +361,33 @@ color:white;
 }
 /*===============상품올리기 버튼========================  */
 
+
+/*====================반응형 웹======================= */
+@media only screen and (max-width: 768px){
+	#topMenu{
+		width: 600px;
+	}
+	
+	#array{
+		width: 140px;
+		height: 100px;
+		padding: 0px;
+		margin: 0px;
+		
+	}
+	
+	#ProductArea{
+		width: 150px;
+	}
+	#ProductAreaPage{
+		width: 45px; 
+		
+	}
+
+}
+
+/*====================반응형 웹======================= */
+
 </style>
 
     <!-- ##### Breadcrumb Area Start ##### -->
@@ -379,23 +416,27 @@ color:white;
 	<div style="text-align: center; margin: 0px auto; height: 70px; width: 80%;">
 		<nav id="topMenu" style="margin: 0px auto;">
         	<ul>
+        	<!-- 지역인증 완료되면 주솟값에 위도/경도 추가 -->
 				<!-- 남성용  -->
-                <li><a class="menuLink1" style="border-top-left-radius: 5px;"> Men's </a></li>
-                <li><a class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Driver&gender=1">Driver</a></li>
-                <li><a class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Iron&gender=1">Iron</a></li>
-                <li><a class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Utility&gender=1">Utility</a></li>
-                <li><a class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Wedge&gender=1">Wedge</a></li>
-                <li><a class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Putter&gender=1">Putter</a></li>
-                <li><a class="menuLink" style="border-top-right-radius: 5px;" href="${pageContext.request.contextPath }/product/listAll?category=Etc&gender=1">Etc</a></li>
-               
+                <li><a id="genderNav" class="menuLink1" style="border-top-left-radius: 5px;"> Men's </a></li>
+                <li><a id="genderNav" class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Driver&gender=1">Driver</a></li>
+                <li><a id="genderNav" class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Iron&gender=1">Iron</a></li>
+                <li><a id="genderNav" class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Utility&gender=1">Utility</a></li>
+                <li><a id="genderNav" class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Wedge&gender=1">Wedge</a></li>
+                <li><a id="genderNav" class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Putter&gender=1">Putter</a></li>
+                <li><a id="genderNav" class="menuLink" style="border-top-right-radius: 5px;" href="${pageContext.request.contextPath }/product/listAll?category=Etc&gender=1">Etc</a></li>
+
+				       
                	<!-- 여성용 -->
-               	<li><a class="menuLink1" style="border-bottom-left-radius: 5px;"> Women's </a></li>
-                <li><a class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Driver&gender=2">Driver</a></li>
-                <li><a class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Iron&gender=2">Iron</a></li>
-                <li><a class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Utility&gender=2">Utility</a></li>
-                <li><a class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Wedge&gender=2">Wedge</a></li>
-                <li><a class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Putter&gender=2">Putter</a></li>
-                <li><a class="menuLink" style="border-bottom-right-radius: 5px;" href="${pageContext.request.contextPath }/product/listAll?category=Etc&gender=2">Etc</a></li>
+               	<li><a id="genderNav" class="menuLink1" style="border-bottom-left-radius: 5px;"> Women's </a></li>
+                <li><a id="genderNav" class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Driver&gender=2">Driver</a></li>
+                <li><a id="genderNav" class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Iron&gender=2">Iron</a></li>
+                <li><a id="genderNav" class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Utility&gender=2">Utility</a></li>
+                <li><a id="genderNav" class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Wedge&gender=2">Wedge</a></li>
+                <li><a id="genderNav" class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Putter&gender=2">Putter</a></li>
+                <li><a id="genderNav" class="menuLink" style="border-bottom-right-radius: 5px;" href="${pageContext.request.contextPath }/product/listAll?category=Etc&gender=2">Etc</a></li>
+                <li><a id="genderNav" class="menuLink3">&nbsp;</a></li>
+                <li><a id="genderNav" class="menuLink3">&nbsp;</a></li>
 			</ul>
         </nav>
    	</div>
@@ -409,11 +450,11 @@ color:white;
                 <div class="col-12"  style="width: 98%; margin: auto; ">
 					<div class="search_by_terms" style="float: right;">
 						<!-- 인기순,최신순 선택바 div  -->
-						<div style="float: right;"> 
+						<div id="array" style="float: right;"> 
 							<form action="#" method="post" class="form-inline">
-                                <a class="date_like" style="color:#A1C298; font-size: 15px;" href="${pageContext.request.contextPath }/product/listAll?category=${category}&gender=${gender}">최신순</a>
+                                <a  class="date_like" style="color:#A1C298; font-size: 15px;" href="${pageContext.request.contextPath }/product/listAll?category=${category}&gender=${gender}">최신순</a>
                  				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <a class="date_like" style="color:#A1C298; font-size: 15px;" href="${pageContext.request.contextPath }/product/listLike?category=${category}&gender=${gender}">인기순</a>
+                                <a  class="date_like" style="color:#A1C298; font-size: 15px;" href="${pageContext.request.contextPath }/product/listLike?category=${category}&gender=${gender}">인기순</a>
                             </form>
                         </div>    
 					</div>
@@ -431,7 +472,7 @@ color:white;
 						<div class="single-product-area mb-50">
 							<!-- Product Image -->
 							<div class="product-img">
-								<a href="${pageContext.request.contextPath }/product/productDetail?prod_num=${vo.prod_num}"><img src="${pageContext.request.contextPath }/resources/product_img/${vo.prod_img}"></a>
+								<a id="ProductArea" href="${pageContext.request.contextPath }/product/productDetail?prod_num=${vo.prod_num}"><img src="${pageContext.request.contextPath }/resources/product_img/${vo.prod_img}"></a>
 								<!-- Product Tag -->
 								<div class="product-tag">
 									<a href="#">Hot</a>
@@ -444,10 +485,10 @@ color:white;
 							</div>
 							<!-- Product Info -->
 							<div class="product-info mt-15 text-center">
-								<a href="${pageContext.request.contextPath }/product/productDetail?prod_num=${vo.prod_num}">
+								<a id="ProductArea" href="${pageContext.request.contextPath }/product/productDetail?prod_num=${vo.prod_num}">
 									<p>${vo.prod_name }</p>
 								</a>
-								<h6>${vo.price }원</h6>
+								<h6 id="ProductArea">${vo.price }원</h6>
 							</div>
 						</div>
 					</div>
@@ -465,17 +506,17 @@ color:white;
 				<ul class="pagination">
 					<c:if test="${pm.prev }">
 						<!-- ${pm.prev }결과가 참(true)일 때 -->
-						<li class="page-item"><a class="page-link" href="listAll?page=${pm.startPage-1 }&category=${category }"><i class="fa fa-angle-left"></i></a></li>
+						<li class="page-item"><a id="ProductAreaPage" class="page-link" href="listAll?page=${pm.startPage-1 }&category=${category }"><i class="fa fa-angle-left"></i></a></li>
 						<!-- 현재 위치한 페이지 블럭의 첫번째 페이지보다 -1인 페이지로 이동  -->
 							</c:if>
 								<c:forEach var="idx" begin="${pm.startPage }" end="${pm.endPage }">
 								<li class="page-item" <c:out value="${pm.vo.page == idx?'class=active':'active' }"/>>
-								<a class="page-link" href="listAll?page=${idx }&category=${category }">${idx }</a></li>
+								<a id="ProductAreaPage" class="page-link" href="listAll?page=${idx }&category=${category }">${idx }</a></li>
 							</c:forEach>
 							
 							<c:if test="${pm.next }">
 								<!-- ${pm.next }결과가 참(true)일 때  -->
-								<li class="page-item"><a class="page-link" href="listAll?page=${pm.endPage+1 }&category=${category }"><i class="fa fa-angle-right"></i></a></li>
+								<li class="page-item"><a id="ProductAreaPage" class="page-link" href="listAll?page=${pm.endPage+1 }&category=${category }"><i class="fa fa-angle-right"></i></a></li>
 								<!-- 현재 위치한 페이징 블럭의 마지막 페이지보다 +1인 페이지로 이동  -->
 							</c:if>
 						</ul>

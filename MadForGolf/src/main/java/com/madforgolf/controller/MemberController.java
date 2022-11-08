@@ -2,6 +2,7 @@ package com.madforgolf.controller;
 
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -19,8 +20,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.madforgolf.domain.MemberVO;
+import com.madforgolf.domain.ProductVO;
+import com.madforgolf.service.HomeService;
 import com.madforgolf.service.MemberService;
 import com.madforgolf.service.MemberServiceImpl;
+import com.madforgolf.service.ProductService;
 
 @Controller
 @RequestMapping("/member/*")
@@ -177,15 +181,31 @@ public class MemberController {
 	                                
 		}
 	}
-	
-	
-	
+
+	// 홈컨트롤러 index.jsp에 상품목록리스트 띄우기 위해 HomeService 객체 주입  
+	@Inject
+	private HomeService service1;
+
 	// http://localhost:8088/member/main
-	// 메인페이지 -  GET    
+	// 메인페이지 - GET
 	@RequestMapping(value = "index", method = RequestMethod.GET )
-	public String main() {
+	public String main(ProductVO vo,Model model,HttpSession session)throws Exception {
 		log.info(" mainGET() 호출 ");
 		log.info(" void 리턴 : /main.jsp 뷰 호출 ");
+		
+		 
+		  //------------------------------------------------------------------
+			// 서비스 - 글전체 목록 가져오는 메서드
+			List<ProductVO> productList = service1.listMain(vo);
+			log.info("상품 개수 : " + productList.size() + "개");
+
+			// 출력되는 상품 리스트를 어트리뷰트에 담아서 view로 보냄
+			model.addAttribute("productList", productList);
+
+			// 세션객체 - isUpdate 정보전달
+			session.setAttribute("isUpdate", false);
+
+		  //------------------------------------------------------------------
 			
 		return "index";
 	}

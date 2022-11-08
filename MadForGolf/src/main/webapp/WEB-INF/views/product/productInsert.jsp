@@ -194,7 +194,7 @@ function delFile(){
                             </div>
                             <div class="col-md-6 mb-4">
                             	<label for="city">Price</label>
-                            	<input type="number" class="form-control" id="price" name="price">
+                            	<input type="number" class="form-control" id="price" name="price" max="2147483647" min="0">
                             </div>
                             <div class="col-12 mb-4">
                                 <label for="email_address">Subject</label>

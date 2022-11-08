@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.madforgolf.domain.BoardVO;
+import com.madforgolf.domain.LikeVO;
 import com.madforgolf.domain.PageVO;
 import com.madforgolf.domain.ProductVO;
 
@@ -44,5 +45,24 @@ public interface ProductDAO {
 	
 	// 글 전체목록 - listPage(pageVO)
 	public List<ProductVO> listPage(PageVO vo) throws Exception;
+	
+	//상세페이지 좋아요
+	public LikeVO bringLike(LikeVO lvo) throws Exception;
+	
+	//좋아요 확인
+	public LikeVO findLike(Map<String, Integer> number);
+		
+	//좋아요 저장
+	public int insertLike(LikeVO vo);
+		
+	//좋아요 확인
+	public LikeVO findLikeB(LikeVO vo);
+		
+	//좋아요 삭제
+	public void deleteLike(LikeVO vo);
+	
+	// 구매내역 목록 - listBuyPage(pageVO) 수정중,,
+	public List<ProductVO> listBuyPage(PageVO vo) throws Exception;
+
 	
 }

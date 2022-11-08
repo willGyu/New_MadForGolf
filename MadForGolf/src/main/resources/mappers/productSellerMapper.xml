@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.madforgolf.mapper.ProductSellerMapper">
+
+	
+	<!-- 판매자 정보 가져오기-->
+	<select id="selectSellerInfo" resultType="com.madforgolf.domain.ProductSellerVO">
+		SELECT * FROM mfg_products mp inner join mfg_member mm on mp.seller_id =mm.user_id  
+
+		WHERE  prod_num =#{prod_num}
+	</select>
+	
+	
+	<select id="sellerProductTotlaCount" resultType="int">
+	SELECT count(prod_num) as cnt  FROM mfg_products mp inner join mfg_member mm on mp.seller_id =mm.user_id  
+
+	WHERE  mp.seller_id =#{seller_id}
+	</select>
+	
+	<select id="sellerProductList" resultType="com.madforgolf.domain.ProductSellerVO">
+			
+	SELECT * FROM mfg_products mp inner join mfg_member mm on mp.seller_id =mm.user_id  
+
+	WHERE  mp.seller_id =#{seller_id}
+	
+	order by prod_date desc limit #{pageStart}, #{perPageNum}
+	</select>
+	
+	
+
+</mapper>

@@ -12,11 +12,11 @@
 	</insert>
 	
 	<!-- 메인(index.jsp)상품 목록(일단, 최신순으로 카테고리/성별구분없이 설정함) -->
-<!-- 	<select id="lisiMain" resultType="productVO">
+	<select id="listMain" resultType="productVO">
 		select * from mfg_products
 		order by prod_date desc
 	</select>
-	 -->
+	
 	<!-- 상품 목록 조회(all)--> <!-- 성별구분X+최신순 -->
 	<select id="listAll" resultType="ProductVO">
 		select * from mfg_products
@@ -24,6 +24,20 @@
 		order by prod_date desc
 		limit #{pageStart},#{perPageNum}
 	</select>
+	<!-- 지역인증 왔을 때 쓸 쿼리문 (성별구분X+최신순)  -->
+<!-- 	<select id="listAll" resultType="productVO">
+		select p.prod_num, p.seller_id, p.prod_name, p.prod_img, p.price, p.detail,
+		p.`condition`, p.category, p.gender, p.like_count,
+		p.prod_date, p.prod_img2, p.prod_img3, m.latitude, m.longitude
+		from mfg_products p join mfg_member m
+		on p.seller_id = m.user_id
+		where category = #{category}
+		and latitude = #{latitude}
+		and longitude = #{longitude}
+		order by prod_date desc
+		limit #{pageStart},#{perPageNum}
+	</select> -->
+	<!-- 지역인증 왔을 때 쓸 쿼리문 (성별구분X+최신순)  -->
 	
 	<!-- 상품 목록 조회(성별)--> <!-- 성별구분O+최신순 -->
 	<select id="listAll2" resultType="ProductVO">
@@ -33,6 +47,21 @@
 		order by prod_date desc
 		limit #{pageStart},#{perPageNum}
 	</select>
+		<!-- 지역인증 왔을 때 쓸 쿼리문 (성별구분O+최신순)  -->
+<!-- 	<select id="listAll" resultType="productVO">
+		select p.prod_num, p.seller_id, p.prod_name, p.prod_img, p.price, p.detail,
+		p.`condition`, p.category, p.gender, p.like_count,
+		p.prod_date, p.prod_img2, p.prod_img3, m.latitude, m.longitude
+		from mfg_products p join mfg_member m
+		on p.seller_id = m.user_id
+		where category = #{category}
+		and gender = #{gender}
+		and latitude = #{latitude}
+		and longitude = #{longitude}
+		order by prod_date desc
+		limit #{pageStart},#{perPageNum}
+	</select> -->
+	<!-- 지역인증 왔을 때 쓸 쿼리문 (성별구분O+최신순)  -->
 	
 	<!-- 상품목록 조회(성별구분X+인기순) -->
 	<select id="listLike" resultType="ProductVO">
@@ -131,6 +160,47 @@
 	  order by prod_num desc
 	  limit #{pageStart},#{perPageNum}
 	</select>
+	
+	
+	<!-- 판매내역 목록 띄우기  수정중,, -->
+	<select id="listPage4" resultType="ProductVO">
+	select d.deal_num, p.prod_name, p.price
+	from mfg_deal d join mfg_products p
+	on d.seller_id= p.seller_id
+	where d.seller_id = #{seller_id}
+	order by p.prod_num desc
+	limit #{pageStart},#{perPageNum}
+	</select>
+	<!-- 판매내역 목록 띄우기   -->
+	
+	
+	
+	
+	<!-- 상세페이지 좋아요 -->
+		<select id="bringLike" resultType="LikeVO">
+		select `check` from mfg_like where prod_num=${prod_num} and buyer_id=#{buyer_id}
+	</select>
+	
+	 <!-- 좋아요 확인 -->
+	  <select id="findLike" parameterType="java.util.HashMap"  resultType="com.madforgolf.domain.LikeVO">
+	  	select * from mfg_like where prod_num=#{prod_num} and buyer_id=#{buyer_id}
+	  </select>
+  
+ 	 <!-- 좋아요 저장 -->
+	  <insert id="insertLike" >
+	   insert into mfg_like(prod_num,buyer_id,`check`) values(#{prod_num},#{buyer_id},1)
+	  </insert>
+  
+  	<!-- 좋아요 확인 -->
+	  <select id="findLikeB" resultType="com.madforgolf.domain.LikeVO"> 
+	   select * from mfg_like where prod_num=#{prod_num} and buyer_id=#{buyer_id}
+	  </select>
+  
+ 	 <!-- 좋아요 삭제 -->
+ 	  <delete id="deleteLike">
+ 	 	 delete from mfg_like where prod_num=#{prod_num} and buyer_id=#{buyer_id}
+ 	 </delete>
+	
 	
 	
 	

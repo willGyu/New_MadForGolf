@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.madforgolf.domain.BoardVO;
+import com.madforgolf.domain.LikeVO;
 import com.madforgolf.domain.PageVO;
 import com.madforgolf.domain.ProductVO;
 
@@ -104,7 +105,15 @@ public class ProductDAOImpl implements ProductDAO {
 	
 	@Override
 	public Integer getTotalCnt(ProductVO vo) throws Exception {
+		
+		if(vo.getGender()==0) {
+			
 		return sqlSession.selectOne(NAMESPACE + ".getTotalCnt",vo);
+	
+		}else {
+			
+			return sqlSession.selectOne(NAMESPACE + ".getTotalCnt2",vo);
+		}
 	}
 	
 	@Override
@@ -194,9 +203,55 @@ public class ProductDAOImpl implements ProductDAO {
 
 	@Override
 	public List<ProductVO> listPage(PageVO vo) throws Exception {
-		log.info(" listProductPage(ProductVO vo) 호출 ");
+		log.info(" listPage(PageVO vo) 호출 ");
 		
 		return sqlSession.selectList(NAMESPACE + ".listPage3",vo);		
+	}
+	
+	//상세페이지 좋아요
+	@Override
+	public LikeVO bringLike(LikeVO lvo) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + ".bringLike", lvo);
+	}
+	
+	//좋아요 확인
+	@Override
+	public LikeVO findLike(Map<String, Integer> number) {
+		log.info("findLike() 호출");
+		
+		return sqlSession.selectOne(NAMESPACE + ".findLike", number);
+	}
+	
+
+	//좋아요 저장 
+	@Override
+	public int insertLike(LikeVO vo) {
+		log.info("insertLike() 호출");
+		
+		return sqlSession.insert(NAMESPACE + ".insertLike", vo);
+	}
+
+	//좋아요 확인
+	@Override
+	public LikeVO findLikeB(LikeVO vo) {
+		log.info("findLikeB() 호출");
+		
+		return sqlSession.selectOne(NAMESPACE + ".findLikeB", vo);
+	}
+	@Override
+	//좋아요 삭제
+	public void deleteLike(LikeVO vo) {
+		log.info("deleteLike() 호출");
+		sqlSession.delete(NAMESPACE + ".deleteLike",vo);
+		
+	}
+	
+	//구매목록 수정중,,
+	@Override
+	public List<ProductVO> listBuyPage(PageVO vo) throws Exception {
+		log.info(" listBuyPage(PageVO vo) 호출 ");
+		
+		return sqlSession.selectList(NAMESPACE + ".listPage4",vo);		
 	}
 	
 	

@@ -114,6 +114,13 @@ public class ProductServiceImpl implements ProductService {
 		return dao.listPage(vo);
 	}
 	
+	//구매목록 
+	@Override
+	public List<ProductVO> listBuyPage(PageVO vo) throws Exception {
+		log.info(" listBuyPage(PageVO vo) ");
+		return dao.listBuyPage(vo);
+	}
+	
 	
 	
 	

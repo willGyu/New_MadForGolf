@@ -596,33 +596,33 @@ public class ProductController {
 
 //=========================메인화면 상품리스트=================================
 		
+	
+	  //-------------------------상품 판매관리/구매관리---------------------------------
+	  
+	  
+	  //게시판 리스트(페이징 처리) - GET :초기에 판매관리 누르면 판매내역 뜨는 페이지 보여주기
+	  
+	  @RequestMapping(value = "/listProductAll", method = RequestMethod.GET) 
+	  public String listProductAllGET(Model model,PageVO vo,HttpSession session)throws Exception
+	  { log.info(" 1. controller - listProductAllGET ");
+	  
+	  String user_id = (String)session.getAttribute("user_id");
+	  log.info("############"+user_id);
+	  
+	  session.setAttribute("user_id", user_id);
+	  model.addAttribute("buyProductList", service.listBuyPage(vo));
+	  
+	  
+	  //페이징 처리 하단부 정보 저장 
+	  PageMakerVO pm = new PageMakerVO(); pm.setVo(vo);
+	  pm.setTotalCnt(385); model.addAttribute("pm", pm);
+	  
+	  session.setAttribute("isUpdate", false); //조회수 때문에 주는 것
+	  
+	  return "/product/productList"; }
+	  
+	 
 
-//-------------------------상품 판매관리/구매관리---------------------------------
-		
-		
-		//게시판 리스트(페이징 처리) - GET
-		@RequestMapping(value = "/listBoardAll", method = RequestMethod.GET)
-		public String listBoardAllGET(Model model,PageVO vo,HttpSession session) throws Exception{
-			log.info(" 1. controller - listBoardAllGET ");
-			
-			String user_id = (String)session.getAttribute("user_id");
-			log.info("############"+user_id);
-			
-			session.setAttribute("user_id", user_id);
-			model.addAttribute("SellProductList", service.listPage(vo));//판매내역 먼저 띄우기 
-			
-			
-			//페이징 처리 하단부 정보 저장
-			PageMakerVO pm = new PageMakerVO();
-			pm.setVo(vo);
-			pm.setTotalCnt(512);
-			model.addAttribute("pm", pm);
-			
-			session.setAttribute("isUpdate", false); //조회수 때문에 주는 것
-				
-			return "/product/productList";
-		}
-		
 //-------------------------상품 판매관리/구매관리---------------------------------
 		
 		

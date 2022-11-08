@@ -17,6 +17,21 @@ public class ProductVO {
 	private String prod_img2;
 	private String prod_img3;
 	
+	//거래 목록 리스트 띄우기 위해 deal_num추가
+	private int deal_num;
+	
+	
+	public int getDeal_num() {
+		return deal_num;
+	}
+	public void setDeal_num(int deal_num) {
+		this.deal_num = deal_num;
+	}
+	
+	
+	//거래 목록 리스트 띄우기 위해 deal_num추가
+	
+	
 	//지역인증 넘어오면 추가할 위도,경도 (get/set,toString도 추가하셈)
 	/*
 	 * private double latitude; 
@@ -25,6 +40,7 @@ public class ProductVO {
 	//지역인증 넘어오면 추가할 위도,경도
 	
 	
+
 	//거래 상태 추가 함 
 	private int dealState;
 	
@@ -122,15 +138,33 @@ public class ProductVO {
 	public void setProd_img3(String prod_img3) {
 		this.prod_img3 = prod_img3;
 	}
-
+	
+	//deal_num까지 포함 toString
 	@Override
 	public String toString() {
 		return "ProductVO [prod_num=" + prod_num + ", seller_id=" + seller_id + ", prod_name=" + prod_name
 				+ ", prod_img=" + prod_img + ", price=" + price + ", detail=" + detail + ", condition=" + condition
 				+ ", category=" + category + ", gender=" + gender + ", like_count=" + like_count + ", prod_date="
-				+ prod_date + ", prod_img2=" + prod_img2 + ", prod_img3=" + prod_img3 + ", dealState=" + dealState
-				+ "]";
+				+ prod_date + ", prod_img2=" + prod_img2 + ", prod_img3=" + prod_img3 + ", deal_num=" + deal_num
+				+ ", dealState=" + dealState + ", getDeal_num()=" + getDeal_num() + ", getDealState()=" + getDealState()
+				+ ", getProduct_num()=" + getProduct_num() + ", getProd_num()=" + getProd_num() + ", getSeller_id()="
+				+ getSeller_id() + ", getProd_name()=" + getProd_name() + ", getProd_img()=" + getProd_img()
+				+ ", getPrice()=" + getPrice() + ", getDetail()=" + getDetail() + ", getCondition()=" + getCondition()
+				+ ", getCategory()=" + getCategory() + ", getGender()=" + getGender() + ", getLike_count()="
+				+ getLike_count() + ", getProd_date()=" + getProd_date() + ", getProd_img2()=" + getProd_img2()
+				+ ", getProd_img3()=" + getProd_img3() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
+				+ ", toString()=" + super.toString() + "]";
 	}
+
+	/*
+	 * @Override public String toString() { return "ProductVO [prod_num=" + prod_num
+	 * + ", seller_id=" + seller_id + ", prod_name=" + prod_name + ", prod_img=" +
+	 * prod_img + ", price=" + price + ", detail=" + detail + ", condition=" +
+	 * condition + ", category=" + category + ", gender=" + gender + ", like_count="
+	 * + like_count + ", prod_date=" + prod_date + ", prod_img2=" + prod_img2 +
+	 * ", prod_img3=" + prod_img3 + ", dealState=" + dealState + "]"; }
+	 */
+	
 	
 	
 	

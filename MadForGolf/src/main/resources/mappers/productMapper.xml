@@ -161,6 +161,16 @@
 	  limit #{pageStart},#{perPageNum}
 	</select>
 	
+	<!-- 판매내역 목록 띄우기   -->
+	<select id="listPage4" resultType="ProductVO">
+	select d.deal_num, p.prod_name, p.price
+	from mfg_deal d join mfg_products p
+	on d.seller_id= p.seller_id
+	where d.seller_id = #{seller_id}
+	order by p.prod_num desc
+	limit #{pageStart},#{perPageNum}
+	</select>
+	<!-- 판매내역 목록 띄우기   -->
 	
 	
 	

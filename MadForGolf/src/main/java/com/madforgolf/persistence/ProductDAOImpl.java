@@ -202,9 +202,16 @@ public class ProductDAOImpl implements ProductDAO {
 
 	@Override
 	public List<ProductVO> listPage(PageVO vo) throws Exception {
-		log.info(" listProductPage(ProductVO vo) 호출 ");
+		log.info(" listPage(PageVO vo) 호출 ");
 		
 		return sqlSession.selectList(NAMESPACE + ".listPage3",vo);		
+	}
+	
+	@Override
+	public List<ProductVO> listBuyPage(PageVO vo) throws Exception {
+		log.info(" listBuyPage(PageVO vo) 호출 ");
+		
+		return sqlSession.selectList(NAMESPACE + ".listPage4",vo);		
 	}
 	
 	

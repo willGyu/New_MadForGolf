@@ -43,6 +43,9 @@ public interface ProductService {
 	// 글 리스트 가져오기(페이징처리)
 	public List<ProductVO> listPage(PageVO vo) throws Exception;
 	
+	// 구매목록 가져오기(페이징처리)
+	public List<ProductVO> listBuyPage(PageVO vo) throws Exception;
+	
 	
 	
 

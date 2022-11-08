@@ -395,17 +395,17 @@ function shareMessage() {
                                     
                                     
                                     
-                                    <!-- 오픈뱅킹 본인인증을 위해 필요한 정보 -->
+                                    	<!-- 오픈뱅킹 본인인증을 위해 필요한 정보 -->
                                     
-                                   	<!-- OAuth 2.0 인증 요청 시 반환되는 형태, 고정값 : code -->
-										<input type="hidden" name="response_type" value="code">
-								
+                                   		<!-- OAuth 2.0 인증 요청 시 반환되는 형태, 고정값 : code -->
+										<input type="hidden" name="response_type" value="code">	
+																	
 										<!-- 오픈뱅킹에서 발급한 이용기관 앱의 Client ID(API Key에서 가져오기)-->
-										<input type="hidden" name="client_id" value="1a6ed02d-91ea-452a-8c74-b6b4222ccd0e">
+										<input type="hidden" name="client_id" value="6f948a13-11af-4892-b746-ee67d358abf2">
 								
 								
 										<!-- 사용자인증이 성공하면 이용기관으로 연결되는 URL(API Key에서 가져오기) -->
-										<input type="hidden" name="redirect_uri" value="http://localhost:8080/openbanking/callback">
+										<input type="hidden" name="redirect_uri" value="http://localhost:8088/fintech/callback">
 								
 								
 										<!-- 사용자의 권한 범위를 부여해주는 것 -->
@@ -421,16 +421,18 @@ function shareMessage() {
 
 <!--                                     <input type="button" id="deal" value="거래전" onclick="changeBtnName();"> -->
                                     <input type="submit" name="addtocart" value="구매하기" class="btn alazea-btn ml-15">
-                                </div>
-
-<!--                                     <input type="button" id="deal" value="거래전" onclick="changeBtnName();">
- -->                                </div>
-                                    <input type="submit" id="addtocart" name="addtocart" value="구매하기" class="btn alazea-btn ml-15">
-
+                                </div>                                  
                                 </form>
                                 
                                 
                                 
+
+
+
+
+
+
+
                                 
 									
 									

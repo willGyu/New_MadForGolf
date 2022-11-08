@@ -14,10 +14,10 @@ import com.madforgolf.openbanking.domain.ResponseTokenVO;
 @Service
 public class OpenBankingApiClient {
 	
-	private String client_id="1a6ed02d-91ea-452a-8c74-b6b4222ccd0e";
-	private String client_secret="834d0751-5f8e-4289-80c8-46565fad6767";
-	private String redirect_uri="http://localhost:8080/openbanking/callback";
-	private String grant_type="authorization_code"; // 요청명세를 할 때 grant 값을 지정해라, 3중 인증을 위해서 
+	private String client_id="6f948a13-11af-4892-b746-ee67d358abf2";
+	private String client_secret="4008271b-939d-4ee9-a981-5a132490eafc";
+	private String redirect_uri="http://localhost:8088/fintech/callback";
+	private String grant_type="authorization_code";
 	
 	
 	//REST API 요청

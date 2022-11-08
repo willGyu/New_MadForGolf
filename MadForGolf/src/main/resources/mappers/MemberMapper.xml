@@ -7,8 +7,8 @@
 
 	<!-- 회원가입 -->
 	<insert id="insert" >
-		insert into mfg_member(user_id,user_pw,user_name,user_phone,latitude,longitude)
-		values (#{user_id},#{user_pw},#{user_name},#{user_phone},'0.0','0.0') 
+	insert into mfg_member(user_id,user_pw,user_name,user_phone,latitude,longitude,roadFullAddr)
+	values (#{user_id},#{user_pw},#{user_name},#{user_phone},#{latitude},#{longitude},#{roadFullAddr})
 	</insert>
 
 	<!-- 아이디 중복 체크 -->
@@ -133,6 +133,14 @@
 	<update id="saveAddr" >
 		update mfg_member set roadFullAddr=#{roadFullAddr}
 		where user_id=#{user_id}
+	</update>
+	
+	
+	<!-- SNS 회원 주소 입력  -->
+	<update id="addressUpdate" >
+	update mfg_member
+	set roadFullAddr=#{roadFullAddr}
+	where user_id=#{user_id}
 	</update>
 	
 </mapper>

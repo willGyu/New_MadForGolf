@@ -47,7 +47,7 @@ public class OpenBankingController {
 		
 		//정보들고
 		model.addAttribute("responseToken", responseToken);
-		return "/openbanking/bank_main";
+		return "redirect:/openbanking/bank_main";
 	}
 	
 }

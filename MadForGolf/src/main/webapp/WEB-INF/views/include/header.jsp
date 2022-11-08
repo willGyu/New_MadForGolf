@@ -20,7 +20,9 @@
     <!-- Favicon -->
     <link rel="icon" href="${pageContext.request.contextPath }/resources/img/core-img/golf_logo.png">
 
+
 	<!-- 다은 수정 종료 1/3  -->
+
 
     <!-- Core Stylesheet -->
     <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/style.css">
@@ -106,8 +108,8 @@
                     <!-- Menu -->
                     <nav class="classy-navbar justify-content-between" id="alazeaNav">
 
-                       <!-- 다은 수정 시작 2/3  -->
 
+                       <!-- 다은 수정 시작 2/3  -->
 
 <style>
 #header_title{
@@ -123,7 +125,9 @@
                         <!-- Nav Brand -->
                         <a href="/" class="nav-brand"><img id="logo_img" src="${pageContext.request.contextPath }/resources/img/core-img/golf_logo.png" alt=""><span id="header_title">Mad For Golf</span></a>
 
+
     <!-- 다은 수정 종료 2/3 -->
+
 
                         <!-- Navbar Toggler -->
                         <div class="classy-navbar-toggler">

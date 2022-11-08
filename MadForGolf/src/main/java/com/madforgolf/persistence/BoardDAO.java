@@ -9,6 +9,10 @@ import com.madforgolf.domain.ReplyVO;
 
 public interface BoardDAO {
 
+	
+	//글쓴이 이름 가져오기
+	public String getUser_name(String user_id);
+	
 	//글쓰기 - boardWrite(vo)
 	public void boardWrite(BoardVO vo) throws Exception;
 	//글내용 보기
@@ -34,9 +38,16 @@ public interface BoardDAO {
 	// 글 전체 목록 - listPage(pageVO)
 	public List<BoardVO> listPage(PageVO vo) throws Exception;
 	
+	// 글 전체 목록 - 인기순
+	public List<BoardVO> listLikePage(PageVO vo);
+	
+	
 	// 글 전체 목록 - listCategory(vo, board_category)
 	public List<BoardVO> listCategory(PageVO vo, String board_category) throws Exception;
 	
+	//글 전체 목록 - 인기순(카테고리별)
+	public List<BoardVO> listLikeCategory(PageVO vo, String board_category) throws Exception;
+
 
 	//------------------------------------------------------
 	
@@ -55,6 +66,8 @@ public interface BoardDAO {
 	
 	//댓글 수
 	public Integer replyCnt(Integer board_num) throws Exception;
+
+
 	
 }
 

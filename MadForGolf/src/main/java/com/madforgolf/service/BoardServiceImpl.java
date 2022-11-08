@@ -16,6 +16,7 @@ import com.madforgolf.persistence.BoardDAO;
 @Service
 public class BoardServiceImpl implements BoardService{
 	
+	
 	private static final Logger log = LoggerFactory.getLogger(BoardServiceImpl.class);
 	
 	//객체 생성
@@ -56,6 +57,15 @@ public class BoardServiceImpl implements BoardService{
 	
 	//------------------------------------------------------------------------
 	
+	@Override
+	public String getUser_name(String user_id) {
+		log.info(" 2. service - getUser_name(user_id) ");
+
+//		log.info("##############service user_name : "+dao.getUser_name(user_id));
+		return dao.getUser_name(user_id);
+	}
+	
+	
 	//글작성
 	@Override
 	public void boardWrite(BoardVO vo) throws Exception {
@@ -91,6 +101,17 @@ public class BoardServiceImpl implements BoardService{
 	}
 	
 	
+	//------------------------------------------------------------------------
+
+	
+	
+	//리스트(페이징처리) - 인기순
+	@Override
+	public List<BoardVO> listLikePage(PageVO vo) {
+		log.info(" 2. service - listLikePage(vo) ");
+		return dao.listLikePage(vo);
+
+	}
 
 
 	//------------------------------------------------------------------------
@@ -108,6 +129,18 @@ public class BoardServiceImpl implements BoardService{
 	}
 	
 
+	//------------------------------------------------------------------------
+	
+	
+	
+	//리스트 - 인기순, 카테고리별(페이징 처리)
+	@Override
+	public List<BoardVO> listLikeCategory(PageVO vo, String board_category) throws Exception {
+		log.info(" 2. service - listLikeCategory(vo,board_category) ");
+		return dao.listLikeCategory(vo,board_category);
+	}
+	
+	
 	//------------------------------------------------------------------------
 	
 	

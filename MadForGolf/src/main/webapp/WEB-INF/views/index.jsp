@@ -4,7 +4,31 @@
 
 <%@ include file="./include/header.jsp"%>
 
+<!--챗봇 api-->
+<script>
+    var ht = null;
+    (function(id, scriptSrc, callback) {
+        var d = document,
+            tagName = 'script',
+            $script = d.createElement(tagName),
+            $element = d.getElementsByTagName(tagName)[0];
 
+        $script.id = id;
+        $script.async = true;
+        $script.src = scriptSrc;
+
+        if (callback) { $script.addEventListener('load', function (e) { callback(null, e); }, false); }
+        $element.parentNode.insertBefore($script, $element);
+    })('happytalkSDK', 'https://design.happytalkio.com/sdk/happytalk.chat.v2.min.js', function() {
+        ht = new Happytalk({
+          siteId: '1000226342',
+          siteName: 'madForGolf',
+          categoryId: '153106',
+          divisionId: '153107'
+      });
+    });
+</script>
+<!--챗봇 api-->
 
 <!-- ##### Hero Area Start ##### -->
     <section class="hero-area" style="margin-bottom: 100px;">

@@ -14,6 +14,23 @@
 /* 	border: 5px solid black; */
 
 }
+
+.list_like_box{
+	float: right;
+	margin-top: 30px;
+}
+
+.list_like{
+	margin: 5px;
+	font-weight: bolder;
+	color: #52734D;
+}
+
+.list_like:hover{
+	font-weight: bolder;
+	color: #FA7070;	
+}
+
 .writeBtn_box{
 /* 	border: 5px solid red; */
 	display: flex;
@@ -24,13 +41,14 @@
 }
 
 .writeBtn{
-	width: 100px;
-	height : 40px;
+	width: 120px;
+	height : 50px;
 	border-radius: 3px;
 	color: white;
 	text-align: center;
 	padding: 10px;
-	background-color : #C6EBC5;
+	background-color : #91C788;
+	line-height: 30px;
 }
 
 .writeBtn:hover{
@@ -42,14 +60,15 @@
 
 .category_list{
 /* 	border: 5px solid green; */
+	margin-top: 10px;
 	display: flex;
 	flex-flow: row wrap;
 	justify-content: center;	
 }
 
 .category_btn{
-	width: 100px;
-	height : 40px;
+	width: 120px;
+	height : 50px;
 	color: white;
 	text-align: center;
 	padding: 10px;
@@ -68,7 +87,7 @@
 }
 
 .category_btn:hover{
-	background-color : #91C788;
+	background-color : #FA7070;
 	color: white;
 
 }
@@ -76,45 +95,66 @@
 .category_btn div{
  	font-size: 15px;
  	font-weight: bold;
+ 	line-height: 30px;
 }
 
 
 .table_box{
 /* 		border: 5px solid yellow; */
-		margin-top: 10px;
+		margin-top: 60px;
 }
+
+.table td, .table th {
+    padding: 1.5rem;
+}    
 
 .page_box{
 /* 	border: 5px solid blue; */
-	margin-bottom: 20px;
+	
+	margin: 40px 0;
 }
 
 #page-link_real:hover{
 	background-color: #C6EBC5;
-	boder-color: #C6EBC5;
+	border: 1px solid #C6EBC5;
 }
 
-
 @media only screen and (max-width: 767px){
+	.category_btn{
+		width: 100px;
+	}
+	.table td, .table th {
+    	padding: 1.5rem 0.5rem;
+}
+
 	.pagination{
-/* 			border: 5px solid blue; */
+/*  			border: 5px solid blue;  */
 		
 	}
 	
-	.page-item{
-/* 			border: 5px solid red; */
 	
+	.page-item{
+/*  		border: 5px solid red;  */
+		display: flex;
+		height: 30px;
+		position: relative;
 	}
 	#page-link_real{
-/* 			border: 5px solid yellow; */
+/*  			border: 5px solid yellow;  */
 			font-size: 15px;
-			width: 30px;
-			height: 30px;
+			width: 40px;
+			height: 40px;
+			line-height: 40px;
 			padding: 0px;
-			margin: 0 5px;
-			border-radius: 3px;
+  			margin: 0 2px; 
+			border-radius: 50%;
 			
-	
+	}
+	.writeBtn{
+		width: 100px;
+	}
+	.text{
+		font-size: 13px;
 	}
 		
 }
@@ -157,6 +197,13 @@
 	</div>
    
    
+   <!-- 최신순 / 인기순 버튼 -->
+   <div class="list_like_box">
+   		<a class="list_like" href="listBoardAll">최신순</a>
+   		<a class="list_like" href="listBoardLikeAll">인기순</a>
+   </div>
+   
+   
   <!--  #####  게시글 리스트 시작   ##### --> 
 	<div class="table_box">
 	
@@ -174,15 +221,15 @@
 		
 			<c:forEach var="vo" items="${boardList }">
 				<tr>
-					<td>${vo.board_num }</td>
-					<td class="category all">${vo.board_category }</td>
+					<td class="text">${vo.board_num }</td>
+					<td class="category all text">${vo.board_category }</td>
 					<td>
 						<a href="/board/boardRead?board_num=${vo.board_num}">${vo.title }</a></td>
-					<td>조인해오기</td>
-					<td>
+					<td class="text">${vo.user_name }</td>
+					<td class="text">
 						<fmt:formatDate value="${vo.write_date }" pattern="yy-MM-dd HH:mm"/>
 					</td>
-					<td>${vo.readcount}</td>
+					<td class="text">${vo.readcount}</td>
 				</tr>
 			</c:forEach>
 			</tbody>
@@ -191,7 +238,6 @@
 	
 	
 
-<%-- 	${sessionScope.user_id} --%>
 	<c:if test="${!(empty sessionScope.user_id) }">
         <div class="col-12 writeBtn_box">
         	<a class="writeBtn" href="/board/insertBoard">글쓰기</a>

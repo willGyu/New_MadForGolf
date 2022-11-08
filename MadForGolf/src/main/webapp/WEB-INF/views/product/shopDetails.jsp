@@ -79,26 +79,59 @@ function shareMessage() {
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
+
+
+
+
+        //================= 찜하기 
+
 	$(document).ready(function() {
-/*         var like_count = ${product.like_count};
-        const like = parseInt(like_count);
-		
-        alert(like); //parsrInt시, int변환 값 넘어오는지 확인용 */
+
+
+
+		 $(".like").on("click", function(){
+			
+		 	$.ajax({
+		 		url : "/product/like",
+		 		type: 'GET',
+		 		data: {'prod_num':'${product.prod_num}', 'buyer_id':'${user_id}'},
+		 		success:function(data){
+				
+		 			if(data==1){
+		 				like2 = true;
+		 				alert("상품 찜 하셨습니다.");
+		 				$('#like').attr("src","${pageContext.request.contextPath }/resources/img/core-img/heart-fill.svg");
+		 				var result = confirm('찜목록으로 이동하시겠습니까?');
+		 				if (result) {
+		 					//yes
+		 	 				//찜 리스트 페이지 생성 후 -> 찜리스트 페이지 이동으로 변경 
+		 					location.href='/mypage/ggimList'; 
+		 					
+		 	 			} 
+		 				
+		 			}
+		 			else if(data == -1){
+		 				alert("로그인이 필요한 서비스입니다. ");
+		 				
+		 				
+		 			} 		 			
+		 			else {
+		 				like2 =false;
+		 				alert("상품 찜 취소하셨습니다. ");
+		 				$('#like').attr("src","${pageContext.request.contextPath }/resources/img/core-img/heart.svg");
+		 			}
+		 			
+		 		},
+		 		error:function(error){
+		 			console.log(error);
+		 		}
+				
+				
+		 	});
+		 });
+
         
-//=================찜하기 버튼 클릭 시 alert창 
-		$('#like_heart').click(function() {
-			var result = confirm('상품을 찜하시겠습니까?');
-
-			if (result) {
-				//yes
-				location.href='/';
-				//찜 리스트 페이지 생성 후 -> 찜리스트 페이지 이동으로 변경 
-			} else { 
-				//no
-			}
-		});
-//==================찜하기 버튼 클릭 시 alert창 
-
+		//================= 찜하기
 
 
 //============================================거래전/거래후:채팅하기/결제하기 비활성화,컬럼값 변경 
@@ -181,7 +214,7 @@ function shareMessage() {
 			target1.disabled = true;
 			
 			const target2 = document.getElementById('addtocart');
-			target2.disabled = true; //input type submit이라 안먹는 듯....샹 ....ㅠㅠ 찾아보자 
+			target2.disabled = true; 
 		});
 			  
 
@@ -322,8 +355,31 @@ function shareMessage() {
                                 <!-- Add to Cart Form -->
                                 <form class="cart clearfix d-flex align-items-center" method="post">
                                 <!-- Wishlist & Compare -->
-                                <div class="wishlist-compare d-flex flex-wrap align-items-center">
-                                    <a href="#" class="wishlist-btn ml-15"><i id="like_heart" class="icon_heart_alt"></i></a>
+                                          <div class="wishlist-compare d-flex flex-wrap align-items-center">
+
+
+									<c:if test="${result != null}">
+<!-- 									11111111111111 -->
+										<a class="like"> <c:if test="${result.check == 0}">
+												<img id="like" class="l1"
+													src="${pageContext.request.contextPath }/resources/img/core-img/heart.svg">
+											</c:if> <c:if test="${result.check == 1}">
+												<img id="like" class="l1"
+													src="${pageContext.request.contextPath }/resources/img/core-img/heart-fill.svg">
+											</c:if>
+										</a>
+									</c:if>
+									<c:if test="${result == null}">
+<!-- 									22222222222 -->
+										<a class="like">
+										<img id="like" class="l1"
+											src="${pageContext.request.contextPath }/resources/img/core-img/heart.svg">
+											</a>	
+									</c:if>
+
+
+
+                                    
                                     <input type="hidden" id="prod_img" value="${product.prod_img }">
                                     <input type="hidden" id="like_count" value="${product.like_count }">
                                     
@@ -336,6 +392,9 @@ function shareMessage() {
 
                             <div class="products--meta">
                                 <p><span>Condition:</span> <span>${product.condition }</span></p>
+                                <!--판매자 정보 페이지 연결 -->
+                                <p><span>Seller:</span> <span><a href="${pageContext.request.contextPath }/product/seller?prod_num=${product.prod_num }">${product.seller_id }</a></span></p>
+                                <!--판매자 정보 페이지 연결 -->
                                 <p><span>Gender:</span> <span><c:if test="${product.gender eq 1}">남</c:if><c:if test="${product.gender eq 2}">여</c:if></span></p>
                                 <p><span>Category:</span> <span>${product.category }</span></p>
                                 <p>

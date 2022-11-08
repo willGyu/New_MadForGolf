@@ -161,7 +161,8 @@
 	  limit #{pageStart},#{perPageNum}
 	</select>
 	
-	<!-- 판매내역 목록 띄우기   -->
+	
+	<!-- 판매내역 목록 띄우기  수정중,, -->
 	<select id="listPage4" resultType="ProductVO">
 	select d.deal_num, p.prod_name, p.price
 	from mfg_deal d join mfg_products p
@@ -171,6 +172,36 @@
 	limit #{pageStart},#{perPageNum}
 	</select>
 	<!-- 판매내역 목록 띄우기   -->
+	
+	
+	
+	
+	<!-- 상세페이지 좋아요 -->
+		<select id="bringLike" resultType="LikeVO">
+		select `check` from mfg_like where prod_num=${prod_num} and buyer_id=#{buyer_id}
+	</select>
+	
+	 <!-- 좋아요 확인 -->
+	  <select id="findLike" parameterType="java.util.HashMap"  resultType="com.madforgolf.domain.LikeVO">
+	  	select * from mfg_like where prod_num=#{prod_num} and buyer_id=#{buyer_id}
+	  </select>
+  
+ 	 <!-- 좋아요 저장 -->
+	  <insert id="insertLike" >
+	   insert into mfg_like(prod_num,buyer_id,`check`) values(#{prod_num},#{buyer_id},1)
+	  </insert>
+  
+  	<!-- 좋아요 확인 -->
+	  <select id="findLikeB" resultType="com.madforgolf.domain.LikeVO"> 
+	   select * from mfg_like where prod_num=#{prod_num} and buyer_id=#{buyer_id}
+	  </select>
+  
+ 	 <!-- 좋아요 삭제 -->
+ 	  <delete id="deleteLike">
+ 	 	 delete from mfg_like where prod_num=#{prod_num} and buyer_id=#{buyer_id}
+ 	 </delete>
+	
+	
 	
 	
 	

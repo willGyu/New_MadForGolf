@@ -1,5 +1,6 @@
 package com.madforgolf.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.madforgolf.domain.BoardVO;
+import com.madforgolf.domain.LikeVO;
 import com.madforgolf.domain.PageVO;
 import com.madforgolf.domain.ProductVO;
 import com.madforgolf.persistence.ProductDAO;
@@ -114,7 +116,41 @@ public class ProductServiceImpl implements ProductService {
 		return dao.listPage(vo);
 	}
 	
-	//구매목록 
+	//상세페이지 좋아요 
+	@Override
+	public LikeVO bringLike(LikeVO lvo) throws Exception {
+		log.info("bringLike(LikeVO lvo)");
+		return dao.bringLike(lvo);
+	}
+	
+	//좋아요 확인
+		@Override
+		public LikeVO findLike(int prod_num, int buyer_id) {
+			Map<String, Integer> number = new HashMap<String, Integer>();
+			number.put("prod_num", prod_num);
+			number.put("buyer_id",buyer_id);
+			return dao.findLike(number);
+		}
+		
+
+		//좋아요 저장
+		@Override
+		public int insertLike(LikeVO vo) {
+			int result = 0;
+			LikeVO find = dao.findLikeB(vo);
+			
+			if(find == null) {
+				result = dao.insertLike(vo);
+			} else {
+				dao.deleteLike(vo);
+			}		
+			
+			return result;
+		}
+
+	
+	
+	//구매목록 수정중,, 
 	@Override
 	public List<ProductVO> listBuyPage(PageVO vo) throws Exception {
 		log.info(" listBuyPage(PageVO vo) ");

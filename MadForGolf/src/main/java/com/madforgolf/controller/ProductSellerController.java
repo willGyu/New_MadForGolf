@@ -59,7 +59,6 @@ public class ProductSellerController {
 		map.put("pageStart", pageMaker.getPageStart());	
 		map.put("perPageNum", pageMaker.getPerPageNum());	
 		
-		
 		List<ProductSellerVO> sellerProductList = productSellerService.sellerProductList(map);
 		
 		return  ResponseEntity.status(HttpStatus.OK).body(sellerProductList);

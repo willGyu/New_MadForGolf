@@ -353,7 +353,12 @@ function shareMessage() {
 
                             <div class="cart--area d-flex flex-wrap align-items-center">
                                 <!-- Add to Cart Form -->
-                                <form class="cart clearfix d-flex align-items-center" method="post">
+<!--                                 <form class="cart clearfix d-flex align-items-center" action="/account/" method="post" > -->
+								
+								
+								<!-- 인증 요청 작업 수행 form -->
+								<form action="https://testapi.openbanking.or.kr/oauth/2.0/authorize" method="get">
+                                
                                 <!-- Wishlist & Compare -->
                                           <div class="wishlist-compare d-flex flex-wrap align-items-center">
 
@@ -383,11 +388,57 @@ function shareMessage() {
                                     <input type="hidden" id="prod_img" value="${product.prod_img }">
                                     <input type="hidden" id="like_count" value="${product.like_count }">
                                     
+                                    <!-- 구매를 위해서 상품 정보(이름, 가격) 보내기 -->
+                                    <input type="hidden" name="prod_num" value="${product.prod_num }">
+                                    <input type="hidden" name="prod_name" value="${product.prod_name }">
+                                    <input type="hidden" name="price" value="${product.price }">
+                                    
+                                    
+                                    
+                                    <!-- 오픈뱅킹 본인인증을 위해 필요한 정보 -->
+                                    
+                                   	<!-- OAuth 2.0 인증 요청 시 반환되는 형태, 고정값 : code -->
+										<input type="hidden" name="response_type" value="code">
+								
+										<!-- 오픈뱅킹에서 발급한 이용기관 앱의 Client ID(API Key에서 가져오기)-->
+										<input type="hidden" name="client_id" value="1a6ed02d-91ea-452a-8c74-b6b4222ccd0e">
+								
+								
+										<!-- 사용자인증이 성공하면 이용기관으로 연결되는 URL(API Key에서 가져오기) -->
+										<input type="hidden" name="redirect_uri" value="http://localhost:8080/openbanking/callback">
+								
+								
+										<!-- 사용자의 권한 범위를 부여해주는 것 -->
+										<input type="hidden" name="scope" value="login inquiry transfer">
+								
+										<!-- 우리가 임의로 세팅하는 난수값 -->
+										<input type="hidden" name="state" value="12345678123456781234567812345678">
+								
+										<!-- 인증을 한번 하게끔 구분 0 : 최초 인증, 2 : 인증 생략-->
+										<input type="hidden" name="auth_type" value="0">
+
                                     <input type="button" id="button" value="채팅하기" onclick="">
+
+<!--                                     <input type="button" id="deal" value="거래전" onclick="changeBtnName();"> -->
+                                    <input type="submit" name="addtocart" value="구매하기" class="btn alazea-btn ml-15">
+                                </div>
+
 <!--                                     <input type="button" id="deal" value="거래전" onclick="changeBtnName();">
  -->                                </div>
                                     <input type="submit" id="addtocart" name="addtocart" value="구매하기" class="btn alazea-btn ml-15">
+
                                 </form>
+                                
+                                
+                                
+                                
+									
+									
+								
+                                
+                                
+                                
+                                
                             </div>
 
                             <div class="products--meta">

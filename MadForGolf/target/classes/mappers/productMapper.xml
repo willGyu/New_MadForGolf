@@ -11,6 +11,12 @@
 	   values(#{prod_num},#{seller_id},#{detail})	
 	</insert>
 	
+	<!-- 메인(index.jsp)상품 목록(일단, 최신순으로 카테고리/성별구분없이 설정함) -->
+<!-- 	<select id="lisiMain" resultType="productVO">
+		select * from mfg_products
+		order by prod_date desc
+	</select>
+	 -->
 	<!-- 상품 목록 조회(all)--> <!-- 성별구분X+최신순 -->
 	<select id="listAll" resultType="ProductVO">
 		select * from mfg_products
@@ -75,22 +81,27 @@
 		values (#{seller_id}, #{prod_name}, #{prod_img}, #{price}, #{detail}, #{condition}, #{category}, #{gender})
 	</insert>
 	
+	<!-- 상품 수정 GET  -->
+	<select id="read" resultType="ProductVO">
+		select * from mfg_products 
+		where prod_num = #{prod_num} 
+	</select>
+	
+		
+	<!-- 상품 수정 POST-->
+	<update id="update">
+	  update mfg_products 
+	  set prod_name=#{prod_name},price=#{price},detail=#{detail},`condition`=#{condition},category=#{category},gender=#{gender},prod_img=#{prod_img},prod_img2=#{prod_img2},prod_img3=#{prod_img3}
+	  where prod_num = #{prod_num}	    
+	</update>
+	
+	
+	
 	<resultMap type="com.madforgolf.domain.ProductVO" id="vo">
 		<result property="content" column="content"/>
 	</resultMap>
 	
-	<!-- 상품 수정 GET  -->
-	<select id="read" resultType="ProductVO">
-		select * from mfg_products 
-		where prod_num = #{prod_num}
-	</select>
-	
-	<!-- 상품 수정 POST -->
-	<update id="updateBoard">
-	  update mfg_products 
-	  set prod_name=#{prod_name},price=#{price},detail=#{ detail},condition =#{condition},gender=#{gender},category=#{category},prod_img=#{prod_img}   
-	  where prod_num=#{prod_num}	    
-	</update>
+
 	
 	<update id="updateReadCnt">
 		update mfg_products 
@@ -100,7 +111,7 @@
 	
 	
 	<delete id="remove">
-		delete from mfg_products where prod_num=#{prod_num}	
+		delete from mfg_products where prod_num=#{prod_num} 
 	</delete>
 	
 <!-- 	<select id="listPage" resultType="ProductVO">

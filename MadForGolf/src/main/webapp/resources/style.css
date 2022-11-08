@@ -2156,15 +2156,8 @@ img {
     position: relative;
     z-index: 1; }
     .comment_area .single_comment_area::after {
-      position: absolute;
-      width: 1px;
-      height: 90%;
-      background-color: #ebebeb;
-      left: 100px;
-      top: 0;
-      z-index: 2;
-      content: ''; }
-      @media only screen and (max-width: 767px) {
+      display: none; }
+     @media only screen and (max-width: 767px) {
         .comment_area .single_comment_area::after {
           display: none; } }
     .comment_area .single_comment_area .comment-wrapper {

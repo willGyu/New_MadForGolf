@@ -43,7 +43,7 @@
                                 <h2>우리 동네 인증하기</h2>
                                 <p>지금 내가 있는 곳을 인증해서 우리 동네의 중고 물품을 거래해보세요.</p>
                                 <div class="welcome-btn-group">
-                                    <a href="/member/addressCheck" class="btn alazea-btn mr-30">동네 인증하기</a>
+                                    <a href="/member/address" class="btn alazea-btn mr-30">동네 인증하기</a>
                                     <a href="#screen_golf" class="btn alazea-btn active">동네 스크린 골프장 확인하기</a>
                                 </div>
                             </div>
@@ -55,6 +55,8 @@
         </div>
     </section>
     <!-- ##### Hero Area End ##### -->
+
+
 
 <!--============================메인화면 상품리스트 Area==========================  -->
                     <div class="section-heading text-center">
@@ -118,7 +120,33 @@
 
 <!--============================메인화면 상품리스트 Area==========================  -->
    
+<!-- ##### 나의 위치 정보 버튼 영역 ##### -->
+    <section class="subscribe-newsletter-area" style="background-image: url(${pageContext.request.contextPath }/resources/img/bg-img/subscribe.png);">
+        <div class="container">
+            <div class="row align-items-center justify-content-between">
+                <div class="col-12 col-lg-5">
+                    <!-- Section Heading -->
+                    <div class="section-heading mb-0">
+                        <h2>My Current Location</h2>
+                        <p>나의 위치를 설정하세요.</p>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6">
+                    <div class="subscribe-form">
+                       
+                       
+                       <button class="idCheck btn alazea-btn w-80" id="address" value="N" style="width:360pt;height:40pt; margin:auto;" onclick="clickBtn()">my location</button>
+                       
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
 
+        <!-- Subscribe Side Thumbnail -->
+
+    </section>
+    <!-- ##### 나의 위치 정보 버튼 영역 ##### -->
 
     <a name="screen_golf"></a>
     <!-- ##### 스크린 골프장 찾기 ##### -->

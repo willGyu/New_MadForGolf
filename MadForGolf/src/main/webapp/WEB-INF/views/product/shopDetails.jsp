@@ -442,6 +442,7 @@ $(document).ready(function(){
                                     <input type="hidden" name="price" value="${product.price }">
                                     
                                     
+
                                    	<!-- 오픈뱅킹 본인인증을 위해 필요한 정보 시작 -->
                                    
 									<!-- OAuth 2.0 인증 요청 시 반환되는 형태, 고정값 : code -->
@@ -466,14 +467,22 @@ $(document).ready(function(){
                                    	<!-- 오픈뱅킹 본인인증을 위해 필요한 정보 종료 -->
 
 
+
                                     <input type="button" id="button" value="채팅하기" onclick="">
 
 <!--                                     <input type="button" id="deal" value="거래전" onclick="changeBtnName();"> -->
-                                    <input type="submit" name="addtocart" id="buyBtn" value="구매하기" class="btn alazea-btn ml-15">
-                                </div> 
-                                                                 
+
+                                    <input type="submit" name="addtocart" value="구매하기" class="btn alazea-btn ml-15">
+                                </div>                                  
                                 </form>
-    
+                                
+                                            
+                               
+															
+                                
+                                
+
+                                  
                                 
                                 
                             </div>

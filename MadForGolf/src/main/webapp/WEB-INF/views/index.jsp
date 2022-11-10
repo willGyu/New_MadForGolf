@@ -59,10 +59,10 @@
 
 
 <!--============================메인화면 상품리스트 Area==========================  -->
-                    <div class="section-heading text-center">
-                        <h2>Best Deals</h2>
-                        <p>실시간으로 가장 인기있는 골프용품을 바로 즐겨보세요.</p>
-                    </div>
+     <div class="section-heading text-center">
+         <h2>Best Deals</h2>
+         <p>실시간으로 가장 인기있는 골프용품을 바로 즐겨보세요.</p>
+     </div>
 
 	
 	<!-- ##### Shop Area Start ##### -->
@@ -119,8 +119,7 @@
 
 
 <!--============================메인화면 상품리스트 Area==========================  -->
-   
-<!-- ##### 나의 위치 정보 버튼 영역 ##### -->
+  <!-- ##### 나의 위치 정보 버튼 영역 ##### -->
     <section class="subscribe-newsletter-area" style="background-image: url(${pageContext.request.contextPath }/resources/img/bg-img/subscribe.png);">
         <div class="container">
             <div class="row align-items-center justify-content-between">
@@ -143,12 +142,12 @@
             </div>
         </div>
 
-        <!-- Subscribe Side Thumbnail -->
-
+        
     </section>
     <!-- ##### 나의 위치 정보 버튼 영역 ##### -->
 
     <a name="screen_golf"></a>
+  
     <!-- ##### 스크린 골프장 찾기 ##### -->
     <section class="contact-area section-padding-100-0">
         <div class="container">
@@ -305,7 +304,7 @@
             </div>
         </div>
     </section>
-    <!-- ##### 스크린 골프장 찾기 ##### -->
+    <!-- ##### 스크린 골프장 찾기 ############################################################### -->
     
     <!--############################ 나의 위치 정보 함수영역 ########################## -->
     <script>
@@ -406,7 +405,6 @@ function sendAddr(address) {
 	
     
     <!--############################ 나의 위치 정보 함수 영역########################## -->
-    
     
     
     

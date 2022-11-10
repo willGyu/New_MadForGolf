@@ -13,9 +13,12 @@ public class DealVO {
 	private int price;				// 가격
 	private String state;			// 거래 상태
 	private Timestamp deal_date;	// 거래 일시
+	private ProductVO buyer;		// 구매자
+	private ProductVO product;		// 상품
+	private MemberVO seller;		// 판매자
 	
 	
-	public int getDeal_num() {
+	public int getDeal_num() {		
 		return deal_num;
 	}
 	public void setDeal_num(int deal_num) {
@@ -57,33 +60,34 @@ public class DealVO {
 	public void setDeal_date(Timestamp deal_date) {
 		this.deal_date = deal_date;
 	}
-	
+	public ProductVO getBuyer() {
+		return buyer;
+	}
+	public void setBuyer(ProductVO buyer) {
+		this.buyer = buyer;
+	}
+	public ProductVO getProduct() {
+		return product;
+	}
+	public void setProduct(ProductVO product) {
+		this.product = product;
+	}
+	public MemberVO getSeller() {
+		return seller;
+	}
+	public void setSeller(MemberVO seller) {
+		this.seller = seller;
+	}
 	
 	@Override
 	public String toString() {
 		return "DealVO [deal_num=" + deal_num + ", seller_id=" + seller_id + ", buyer_id=" + buyer_id + ", prod_num="
-				+ prod_num + ", price=" + price + ", state=" + state + ", deal_date=" + deal_date + "]";
+				+ prod_num + ", price=" + price + ", state=" + state + ", deal_date=" + deal_date + ", buyer=" + buyer
+				+ ", product=" + product + ", seller=" + seller + "]";
 	}
-
-
-@Data
-public class DealVO {
-	
-	private int deal_num; 
-	
-	private String seller_id;
-	private MemberVO seller;
-	
-	private String buyer_id;
-	private ProductVO buyer;
-
-	private int prod_num;
-	private ProductVO product;
-	
-	private int price;
-	private String state;
-	private Timestamp deal_date;
 		
-	
-	
 }
+
+
+
+

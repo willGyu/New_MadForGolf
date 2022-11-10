@@ -43,7 +43,7 @@
                             <!-- Top Header Content -->
                             <div class="top-header-meta">
                             <c:if test="${user_id != null }">
-                                <a href="#" data-placement="bottom" title=""> <b id="user_id" >${sessionScope.user_name }</b>김다은님 환영합니다.</a>
+                                <a href="#" data-placement="bottom" title=""> <b id="user_id" >${sessionScope.user_name }</b>님 환영합니다.</a>
 						        <a href="/member/logout"><i class="fa fa-user" aria-hidden="true"></i> <span>LogOut</span></a>         
                             </c:if>
                                 

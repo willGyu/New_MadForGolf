@@ -63,7 +63,7 @@
 }
 
 .category_btn:NTH-OF-TYPE(5){
-	border-radius: 0 5px 5px 0;
+	border-radius: 5px 5px 5px 5px;
 
 }
 
@@ -124,7 +124,7 @@
     <div class="breadcrumb-area">
         <!-- Top Breadcrumb Area -->
         <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(${pageContext.request.contextPath }/resources/img/bg-img/24.jpg);">
-            <h2>거래목록 ${user_id } // ${buyProductList }</h2>
+            <h2>거래목록</h2>
         </div>
 
         <div class="container">
@@ -145,34 +145,32 @@
 <div class="container container_box">
 
 
-	
 
-  	<!-- category 클릭 시 말머리별 게시글 리스트만 뜨도록 구현 -->
- 	<div class="category_list">
- 		<a class="category_btn" href="listBoardCategory?board_category=질문"><div>판매내역</div></a>
- 		<a class="category_btn" href="listBoardCategory?board_category=신고"><div>구매내역</div></a>
- 		<a class="category_btn" href="listBoardCategory?board_category=친목"><div>거래중</div></a>
+	<!-- category 클릭 시 말머리별 게시글 리스트만 뜨도록 구현 -->
+	<div class="category_list">
+		<a class="category_btn" href="/product/listProductAll?page=1"><div>판매내역</div></a>
+		<a class="category_btn" href="/product/listProductBuy?page=1"><div>구매내역</div></a>
+		<a class="category_btn" href="/product/listProductDealing?page=1"><div>거래중</div></a>
 	</div>
-   
-   
-  <!--  #####  게시글 리스트 시작   ##### --> 
+
+
+	<!--  #####  게시글 리스트 시작   ##### --> 
 	<div class="table_box">
 	
 		<table class="table">
 			<tbody>
 			
 				<tr>
-					<th>거래번호</th>
+					<th>거래일시</th>
 					<th>상품이름</th>
 					<th>가격</th>
 					<th>리뷰</th>
 				</tr>
-			<c:forEach var="vo" items="${buyProductList }">
-			<input type="hidden" value="${vo.seller_id }">
+			<c:forEach var="sell" items="${sellProductList }">
 				<tr>
-					<td>${vo.deal_num }</td>
-					<td><a href="/product/shopDetails?prod_num=${vo.prod_num}">${vo.prod_name }</a></td>
-					<td>${vo.price }</td>
+					<td>${sell.prod_date }</td>
+					<td><a href="/product/productDetail?prod_num=${sell.prod_num}">${sell.prod_name }</a></td>
+					<td>${sell.price }</td>
 					<td>리뷰</td>
 <%-- 					<td>
 						<a href="/board/boardRead?board_num=${vo.prod_num}">${vo.title }</a></td>
@@ -202,7 +200,7 @@
 	<nav aria-label="Page navigation">
     	<ul class="pagination">
     	
-    		<c:if test="${pm.prev}">
+    		<c:if test="${pm.prev}"> 
 	        	<li class="page-item">
 	        		<a class="page-link" id="page-link_real" href="listProductAll?page=${pm.startPage-1}">
         				<i class="fa fa-angle-left"></i>

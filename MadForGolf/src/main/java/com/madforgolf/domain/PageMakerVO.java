@@ -22,14 +22,22 @@ public class PageMakerVO {
 	private PageVO vo;		// 페이지 번호, 페이지의 크기
 	
 	private int displayPageNum = 10;   // 페이지 블럭의 크기 
+	
+	
+	  //판매내역 페이징에 사용중 
+	  public int getStartRow() {
+		
+	  return (vo.getPage()-1)*vo.getPerPageNum(); 
+	  }
+	 
 
 	
 	public void setVo(PageVO vo) { // 이미생성된 객체 사용
 		this.vo = vo;
+		System.out.println(vo);
 	}
 	public void setTotalCnt(int totalCnt) {
 		this.totalCnt = totalCnt; // DB에서 계산된 값으로 초기화
-		
 		calcData();
 	}
 	
@@ -39,6 +47,10 @@ public class PageMakerVO {
 		endPage = (int)Math.ceil(vo.getPage()/(double)displayPageNum) * displayPageNum;
 		
 		startPage = endPage - displayPageNum + 1;
+		
+
+		log.info("endPage:"+endPage);
+		log.info("startPage:"+startPage);
 		
 		// 모든 글개수 / 페이지 사이즈 => 총 필요한 페이지 수
 		int tmpEndPage = (int)Math.ceil(totalCnt / (double)vo.getPerPageNum());
@@ -105,7 +117,7 @@ public class PageMakerVO {
 	@Override
 	public String toString() {
 		return "PageMakerVO [totalCnt=" + totalCnt + ", startPage=" + startPage + ", endPage=" + endPage + ", prev="
-				+ prev + ", next=" + next + ", vo=" + vo + ", displayPageNum=" + displayPageNum + "]";
+				+ prev + ", next=" + next + ", vo=" + vo + ", displayPageNum=" + displayPageNum + "]" + getStartRow();
 	}
 
 	

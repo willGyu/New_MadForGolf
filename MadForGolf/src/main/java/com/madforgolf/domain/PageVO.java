@@ -78,12 +78,6 @@ public class PageVO {
 
 
 	
-	/*
-	 * @Override public String toString() { return "PageVO [page=" + page +
-	 * ", perPageNum=" + perPageNum + "]"; }
-	 */
-	
-	
 	
 	
 	

@@ -202,9 +202,8 @@ comment-head{
 <!-- ##### Breadcrumb Area Start ##### -->
 <div class="breadcrumb-area">
 
-	<div
-		class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center"
-		style="background-image: url(${pageContext.request.contextPath }/resources/img/bg-img/24.jpg);">
+        <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url('/resources/img/bg-img/background-img (3).jpg');">
+
 		<h2>COMMUNITY</h2>
 	</div>
 	<div class="container">

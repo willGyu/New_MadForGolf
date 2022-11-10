@@ -7,9 +7,10 @@
 
 	<!-- 회원가입 -->
 	<insert id="insert" >
-        insert into mfg_member(user_id,user_pw,user_name,user_phone,latitude,longitude,roadFullAddr)
-        values (#{user_id},#{user_pw},#{user_name},#{user_phone},#{latitude},#{longitude},#{roadFullAddr})
-    </insert>
+       insert into mfg_member(user_id,user_pw,user_name,user_phone,latitude,longitude,roadFullAddr)
+       values (#{user_id},#{user_pw},#{user_name},#{user_phone},#{latitude},#{longitude},#{roadFullAddr})
+   </insert>
+
 
 	<!-- 아이디 중복 체크 -->
 	<select id="idCheck" resultType="int">
@@ -135,12 +136,14 @@
 		where user_id=#{user_id}
 	</update>
 	
+
+	
+	<!-- SNS 회원 주소 입력  -->
 	<update id="addressUpdate" >
 	update mfg_member
 	set roadFullAddr=#{roadFullAddr}
 	where user_id=#{user_id}
 	</update>
-	
 	
 	<!-- 찜 목록 가져오기 -->
 	<select id="likeList" resultType="LikeListVO">
@@ -158,5 +161,4 @@
 		from mfg_like
 		where buyer_id=#{buyer_id}
 	</select>
-	
 </mapper>

@@ -1,7 +1,7 @@
 package com.madforgolf.domain;
 
 import java.sql.Timestamp;
-
+import lombok.Data;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -64,7 +64,26 @@ public class DealVO {
 		return "DealVO [deal_num=" + deal_num + ", seller_id=" + seller_id + ", buyer_id=" + buyer_id + ", prod_num="
 				+ prod_num + ", price=" + price + ", state=" + state + ", deal_date=" + deal_date + "]";
 	}
+
+
+@Data
+public class DealVO {
 	
+	private int deal_num; 
+	
+	private String seller_id;
+	private MemberVO seller;
+	
+	private String buyer_id;
+	private ProductVO buyer;
+
+	private int prod_num;
+	private ProductVO product;
+	
+	private int price;
+	private String state;
+	private Timestamp deal_date;
+		
 	
 	
 }

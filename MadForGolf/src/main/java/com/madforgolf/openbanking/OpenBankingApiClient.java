@@ -45,7 +45,7 @@ public class OpenBankingApiClient {
 	// => 파라미터 : 엑세스토큰, 리턴타입 : HttpHeaders	
 	public HttpHeaders setHeaderAccessToken(String access_token) {
 		
-		log.info("@@@@@@@@@@@ 3. OpenBankingApiClient - setHeaderAccessToken() : 헤더에 엑세스 토큰 추가 ");
+		System.out.println("@@@@@@@@@@@ 4. OpenBankingApiClient - setHeaderAccessToken() : 헤더에 엑세스 토큰 추가 ");
 		
 		// HttpHeaders 객체의 add() 메서드를 호출하여 "항목", "값" 형태로 파라미터 전달
 		//httpHeaders.add("Content-Type", "application/json; charset=UTF-8");
@@ -67,7 +67,7 @@ public class OpenBankingApiClient {
 	//토큰 발급
 	public ResponseTokenVO requestToken(RequestTokenVO requestTokenVO) {
 		
-		log.info("@@@@@@@@@@@ 3. OpenBankingApiClient - requestToken() : 토큰 발급 ");
+		System.out.println("@@@@@@@@@@@ 3. OpenBankingApiClient - requestToken() : 토큰 발급 ");
 
 		
 		//		요청 메시지 URL
@@ -97,7 +97,7 @@ public class OpenBankingApiClient {
 		//HttpHeader, HttpBody에 parameters를 담아서 감 => HttpEntity
 		HttpEntity<MultiValueMap<String, String>> param = new HttpEntity<MultiValueMap<String,String>>(parameters,httpHeaders);
 		
-		System.out.println("@@@@@@param : "+ param);
+		System.out.println("########## param : "+ param);
 		
 		String requestUrl="https://testapi.openbanking.or.kr/oauth/2.0/token";
 		return restTemplate.exchange(requestUrl, HttpMethod.POST, param, ResponseTokenVO.class).getBody();
@@ -113,7 +113,7 @@ public class OpenBankingApiClient {
 	//사용자 정보 조회
 	public UserInfoResponseVO findUser(UserInfoRequestVO userInfoRequestVO) {
 		
-		log.info("@@@@@@@@@@@ 3. OpenBankingApiClient - findUser() : 사용자 정보 조회 ");
+		System.out.println("@@@@@@@@@@@ 3. OpenBankingApiClient - findUser() : 사용자 정보 조회 ");
 
 		
 		/// REST 방식 요청에 필요한 객체 생성
@@ -154,7 +154,7 @@ public class OpenBankingApiClient {
 	//등록 계좌 리스트 조회
 	public AccountSearchResponseVO findAccount(AccountSearchRequestVO accountSearchRequestVO) {
 		
-		log.info("@@@@@@@@@@@ 3. OpenBankingApiClient - findAccount() : 등록 계좌 리스트 조회 ");
+		System.out.println("@@@@@@@@@@@ 3. OpenBankingApiClient - findAccount() : 등록 계좌 리스트 조회 ");
 
 		
 		/// REST 방식 요청에 필요한 객체 생성

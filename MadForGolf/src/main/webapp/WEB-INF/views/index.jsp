@@ -41,10 +41,10 @@
                             <!-- Post Content -->
                             <div class="hero-slides-content text-center">
                                 <h2>우리 동네 인증하기</h2>
-                                <p>지금 내가 있는 곳을 인증해서 우리 동네의 중고 거래를 확인 할 수 있습니다.</p>
+                                <p>지금 내가 있는 곳을 인증해서 우리 동네의 중고 물품을 거래해보세요.</p>
                                 <div class="welcome-btn-group">
-                                    <a href="#" class="btn alazea-btn mr-30">동네인증하기</a>
-                                    <a href="#" class="btn alazea-btn active">동네 물품 보러가기</a>
+                                    <a href="/member/addressCheck" class="btn alazea-btn mr-30">동네 인증하기</a>
+                                    <a href="#screen_golf" class="btn alazea-btn active">동네 스크린 골프장 확인하기</a>
                                 </div>
                             </div>
                         </div>
@@ -87,12 +87,12 @@
 								<div class="product-tag">
 									<a href="#">Hot</a>
 								</div>
-								<div class="product-meta d-flex">
-									<a href="#" class="wishlist-btn"><i class="icon_heart_alt"></i></a>
-									<a href="cart.html" class="add-to-cart-btn">Add to cart</a> <a
-										href="#" class="compare-btn"><i
-										class="arrow_left-right_alt"></i></a>
-								</div>
+<!-- 								<div class="product-meta d-flex"> -->
+<!-- 									<a href="#" class="wishlist-btn"><i class="icon_heart_alt"></i></a> -->
+<!-- 									<a href="cart.html" class="add-to-cart-btn">Add to cart</a> <a -->
+<!-- 										href="#" class="compare-btn"><i -->
+<!-- 										class="arrow_left-right_alt"></i></a> -->
+<!-- 								</div> -->
 							</div>
 							<!-- Product Info -->
 							<div class="product-info mt-15 text-center">
@@ -120,6 +120,7 @@
    
 
 
+    <a name="screen_golf"></a>
     <!-- ##### 스크린 골프장 찾기 ##### -->
     <section class="contact-area section-padding-100-0">
         <div class="container">
@@ -277,6 +278,109 @@
         </div>
     </section>
     <!-- ##### 스크린 골프장 찾기 ##### -->
+    
+    <!--############################ 나의 위치 정보 함수영역 ########################## -->
+    <script>
+
+	
+
+function clickBtn(){
+	window.navigator.geolocation.getCurrentPosition(function(position){
+		
+		var lat = position.coords.latitude;
+		var lng = position.coords.longitude;
+		
+		console.log('address.jsp clickBtn');
+		
+		
+		// 카카오 api test
+		getAddr(lat,lng);
+		
+		//document.getElementById('target').innerHTML=lat+","+lng;
+		console.log(lat+","+lng);
+		console.log(position);
+		// document.write(lat +","+ lng);
+
+	},
+	function(error){
+		switch(error.code){
+		case error.PERMISSION_DENIED:
+			str="사용자 거부";
+			break;
+		case error.POSITION_UNAVAILABLE:
+			str="지리정보 없음";
+			break;
+		case error.TIMEOUT:
+			str="시간 초과";
+			break;
+		}
+		document.getElementById('target').innerHTML=str;
+		
+// 		document.write(lat);
+// 		document.write(lng);
+	});
+}
+
+function getAddr(lat,lng){
+     let geocoder = new kakao.maps.services.Geocoder();
+
+     let coord = new kakao.maps.LatLng(lat, lng);
+     let callback = function(result, status) {
+         if (status === kakao.maps.services.Status.OK) {
+				console.log(result[0].address.address_name);
+				sendAddr(result[0].address.address_name);
+         }else {
+			//console.log('통신 실패');
+			alert('위도 경도를 불러오는데 실패하였습니다.');
+		 }
+     }
+     geocoder.coord2Address(coord.getLng(), coord.getLat(), callback);
+ }
+ 
+function sendAddr(address) {
+	console.log('sendAddrfunction in');
+	 $.ajax({
+		 type: "POST",
+		 url: "/member/sendAddr",
+		 data: {
+			 "address" : address
+		 },
+		 success: function(result) {
+			 console.log(result);
+			 if(result == 1) {
+				 alert("위치 정보를 저장하였습니다.");
+				 location.href('/member/mypage');
+				 // location.href='/member/mypage
+			 }
+			 
+			 if(result == 2) {
+				 alert("로그인이 필요합니다.");
+				 location.href('/member/login');
+			 }
+		 },
+		 error : function(request, status, error) {
+			 alert('서버 에러 발생');
+		 }
+	 })
+	 
+	 
+ }
+ 
+ 
+
+</script>
+
+
+<!-- <h3 id="target">location</h3> -->
+	
+
+
+	
+    
+    <!--############################ 나의 위치 정보 함수 영역########################## -->
+    
+    
+    
     
     
    

@@ -28,13 +28,13 @@
     <div class="container">
     
 		<h2>인증 완료</h2>
-		<h3>엑세스 토큰 : ${responseToken.access_token}</h3>
-		<h3>사용자 번호 : ${responseToken.user_seq_no}</h3>
-		<h3>token_type : ${responseToken.token_type}</h3>
-		<h3>expires_in : ${responseToken.expires_in}</h3>
-		<h3>refresh_token : ${responseToken.refresh_token}</h3>
-		<h3>scope : ${responseToken.scope}</h3>
-		${responseToken}
+		엑세스 토큰 : ${responseToken.access_token}<hr>
+		사용자 번호 : ${responseToken.user_seq_no}<hr>
+		token_type : ${responseToken.token_type}<hr>
+		expires_in : ${responseToken.expires_in}<hr>
+		refresh_token : ${responseToken.refresh_token}<hr>
+		scope : ${responseToken.scope}<hr>
+		${productVO}
 	
 		<hr>
 		
@@ -62,7 +62,8 @@
 		<hr>
 		
 		
-		
-		
 	</div>
+	
+	
+	
 <%@ include file="../include/footer.jsp" %>

@@ -87,23 +87,24 @@
 
 
 <style>
-#header_title{
-	color: white;
-	padding-left: 10px;
-	line-height: 1.4;
-}
 
-#logo_img{
-	height: 30px;
-}
-
-#header_community{
-	color: #C6EBC5;
-}
-
-#header_community:hover{
-	color: #FA7070;
-}
+	#header_title{
+		color: white;
+		padding-left: 10px;
+		line-height: 1.4;
+	}
+	
+	#logo_img{
+		height: 30px;
+	}
+	
+	#header_community{
+		color: #C6EBC5;
+	}
+	
+	#header_community:hover{
+		color: #FA7070;
+	}
 
 </style>
                         <!-- Nav Brand -->
@@ -139,9 +140,9 @@
                                             <li><a href="/product/listAll?category=Util">Util</a></li>
                                             <li><a href="/product/listAll?category=Wedge">Wedge</a></li>
 <!-- 											<li><a href="/product/listAll?category=Putter">Putter</a></li> -->
-<!-- 											<li><a href="/product/listAll?category=Etc">Etc</a> -->
+<!-- 											<li><a href="/product/listAll?category=Etc">Etc</a></li> -->
 
-                                            </li>
+                                            
 
 <!--                                         </ul> -->
 <!--                                     </li> -->
@@ -160,7 +161,6 @@
                     </div>
                 </div>
             </div>
-        </div>
     </header>
      <!--##### Header Area End #####-->
 

@@ -42,13 +42,13 @@ public class ProductVO {
 	
 
 	//거래 상태 추가 함 
-	private int dealState;
+	private String state;
 	
-	public int getDealState() {
-		return dealState;
+	public String getState() {
+		return state;
 	}
-	public void setDealState(int dealState) {
-		this.dealState = dealState;
+	public void setState(String state) {
+		this.state = state;
 	}
 	//거래 상태 추가 함 
 
@@ -146,15 +146,9 @@ public class ProductVO {
 				+ ", prod_img=" + prod_img + ", price=" + price + ", detail=" + detail + ", condition=" + condition
 				+ ", category=" + category + ", gender=" + gender + ", like_count=" + like_count + ", prod_date="
 				+ prod_date + ", prod_img2=" + prod_img2 + ", prod_img3=" + prod_img3 + ", deal_num=" + deal_num
-				+ ", dealState=" + dealState + ", getDeal_num()=" + getDeal_num() + ", getDealState()=" + getDealState()
-				+ ", getProduct_num()=" + getProduct_num() + ", getProd_num()=" + getProd_num() + ", getSeller_id()="
-				+ getSeller_id() + ", getProd_name()=" + getProd_name() + ", getProd_img()=" + getProd_img()
-				+ ", getPrice()=" + getPrice() + ", getDetail()=" + getDetail() + ", getCondition()=" + getCondition()
-				+ ", getCategory()=" + getCategory() + ", getGender()=" + getGender() + ", getLike_count()="
-				+ getLike_count() + ", getProd_date()=" + getProd_date() + ", getProd_img2()=" + getProd_img2()
-				+ ", getProd_img3()=" + getProd_img3() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
-				+ ", toString()=" + super.toString() + "]";
+				+ ", state=" + state + "]";
 	}
+	
 
 	/*
 	 * @Override public String toString() { return "ProductVO [prod_num=" + prod_num

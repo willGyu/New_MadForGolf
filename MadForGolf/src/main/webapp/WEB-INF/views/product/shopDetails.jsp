@@ -35,7 +35,8 @@ function shareMessage() {
 /*     var like_count = ${product.like_count}; */
 /*     const like = parseInt(like_count); */
    
-	const like = parseInt(${product.like_count}); //like_count int로 변환해야 나와서 바꿈 
+	const like = parseInt(${product.like_count}); 
+	//like_count int로 변환해야 나와서 바꿈 
 	
 	//alert(like);
     
@@ -75,6 +76,7 @@ function shareMessage() {
     });
   }
 </script>
+
 
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -138,8 +140,8 @@ function shareMessage() {
 
 		//loginID == sellerID일때만 버튼 '#deal'버튼 보이도록 
 
-		     var dealState = ${product.dealState}; 
-		     var state = parseInt(dealState); 
+/*  		     var dealState = ${product.state}; //나중에 join해서 변수값 바꿔야함
+		     var state = parseInt(dealState);  */
 
 		     
 			state = 0;//거래상태 디폴트 : 거래전 
@@ -202,7 +204,7 @@ function shareMessage() {
 				
 			});
 			
-			
+			 
 		});
 //============================================거래전/거래후:채팅하기/결제하기 비활성화,컬럼값 변경 
 
@@ -231,6 +233,55 @@ function shareMessage() {
   
 } */
 //==================거래전 버튼 -> 거래후 변경 
+
+
+
+//=================== 구매하기 버튼 안내창 제어 시작 ========================//
+
+
+$(document).ready(function(){
+	
+	//alert("test");
+	
+	$("#buyBtn").click(function(){
+		var answer = confirm('거래를 위한 본인인증 및 계좌 출금/조회 동의가 필요합니다.\n본인인증 페이지로 이동하시겠습니까?');
+		
+		if(answer){
+			var form = $(this).parents('form');
+			    form.submit();
+// 			    $.ajax({
+// 			    	url:'/deal'
+// 			    });
+			    
+			    
+			    
+			    
+			    
+// 			    $.ajax({
+// 					 url:'${pageContext.request.contextPath}/member/listJson',
+// 					 dataType:'json',//받아올 값이 없을 때
+// 					 success:function(rdata){//성공했을 때
+						 
+// 						 //rdata json data, 배열 데이터
+// 						 //each : jQuery의 반복문
+// 						 $.each(rdata,function(index,item){
+// 							 $('#notice').append('<tr><td>'+item.userid+'</td><td>'+item.userpw+'</td><td>'+item.username+'</td><td>'+item.useremail+'</td></tr>');
+						 
+// 						 });
+						 
+// 					 }
+// 				 });
+			    
+			    
+		}else{
+			return false;
+		}
+	});
+});
+
+
+//=================== 구매하기 버튼 안내창 제어 종료 ========================//
+
 
 </script>
 
@@ -327,12 +378,11 @@ function shareMessage() {
 					<div>
 						<!--나중에 마이페이지에 버튼 옮길 때, 마이페이지에도 productVO값 전달하고 세션 user_id랑 비교하기  -->
 						<c:if test="${product.seller_id == user_id }">
-						<input type="button" id="deal" value="거래전" onclick="changeBtnName();">
+						<input type="button" id="deal" value="거래전" onclick="">
 						</c:if>
 					</div>
 					<!-- 판매자 아이디 = 세션 로그인 아이디 같을 시에만 거래전버튼 활성화 -->
 
-					
 					
                     <div class="col-12 col-md-6">
                         <div class="single_product_desc" style="width: 410px;">
@@ -346,8 +396,6 @@ function shareMessage() {
                             <h4 class="price"><fmt:formatNumber value="${product.price }"/>원</h4>
                             <div class="short_overview">
                                 <p>${product.detail }</p>
-                                
-
                             </div>
    
 
@@ -394,49 +442,38 @@ function shareMessage() {
                                     <input type="hidden" name="price" value="${product.price }">
                                     
                                     
-                                    
-                                    <!-- 오픈뱅킹 본인인증을 위해 필요한 정보 -->
-                                    
-                                   	<!-- OAuth 2.0 인증 요청 시 반환되는 형태, 고정값 : code -->
-										<input type="hidden" name="response_type" value="code">
-								
-										<!-- 오픈뱅킹에서 발급한 이용기관 앱의 Client ID(API Key에서 가져오기)-->
-										<input type="hidden" name="client_id" value="1a6ed02d-91ea-452a-8c74-b6b4222ccd0e">
-								
-								
-										<!-- 사용자인증이 성공하면 이용기관으로 연결되는 URL(API Key에서 가져오기) -->
-										<input type="hidden" name="redirect_uri" value="http://localhost:8080/openbanking/callback">
-								
-								
-										<!-- 사용자의 권한 범위를 부여해주는 것 -->
-										<input type="hidden" name="scope" value="login inquiry transfer">
-								
-										<!-- 우리가 임의로 세팅하는 난수값 -->
-										<input type="hidden" name="state" value="12345678123456781234567812345678">
-								
-										<!-- 인증을 한번 하게끔 구분 0 : 최초 인증, 2 : 인증 생략-->
-										<input type="hidden" name="auth_type" value="0">
+                                   	<!-- 오픈뱅킹 본인인증을 위해 필요한 정보 시작 -->
+                                   
+									<!-- OAuth 2.0 인증 요청 시 반환되는 형태, 고정값 : code -->
+									<input type="hidden" name="response_type" value="code">
+							
+									<!-- 오픈뱅킹에서 발급한 이용기관 앱의 Client ID(API Key에서 가져오기)-->
+									<input type="hidden" name="client_id" value="1a6ed02d-91ea-452a-8c74-b6b4222ccd0e">
+							
+							
+									<!-- 사용자인증이 성공하면 이용기관으로 연결되는 URL(API Key에서 가져오기) -->
+									<input type="hidden" name="redirect_uri" value="http://localhost:8080/openbanking/callback">
+							
+									<!-- 사용자의 권한 범위를 부여해주는 것 -->
+									<input type="hidden" name="scope" value="login inquiry transfer">
+							
+									<!-- 우리가 임의로 세팅하는 난수값 -->
+									<input type="hidden" name="state" value="12345678123456781234567812345678">
+							
+									<!-- 인증을 한번 하게끔 구분 0 : 최초 인증, 2 : 인증 생략-->
+									<input type="hidden" name="auth_type" value="0">
+
+                                   	<!-- 오픈뱅킹 본인인증을 위해 필요한 정보 종료 -->
+
 
                                     <input type="button" id="button" value="채팅하기" onclick="">
 
 <!--                                     <input type="button" id="deal" value="거래전" onclick="changeBtnName();"> -->
-                                    <input type="submit" name="addtocart" value="구매하기" class="btn alazea-btn ml-15">
-                                </div>
-
-<!--                                     <input type="button" id="deal" value="거래전" onclick="changeBtnName();">
- -->                                </div>
-                                    <input type="submit" id="addtocart" name="addtocart" value="구매하기" class="btn alazea-btn ml-15">
-
+                                    <input type="submit" name="addtocart" id="buyBtn" value="구매하기" class="btn alazea-btn ml-15">
+                                </div> 
+                                                                 
                                 </form>
-                                
-                                
-                                
-                                
-									
-									
-								
-                                
-                                
+    
                                 
                                 
                             </div>
@@ -487,12 +524,12 @@ function shareMessage() {
                                     <input type="button" id="button2" value="목록으로" onclick="history.back();">
                                     
                                     <!-- 수정하기 get  -->
-                                    <input type="button" id="button2" value="수정하기" onclick="location.href='${pageContext.request.contextPath }/product/modify?prod_num=${product.prod_num}'">
+                                    <input type="button" id="button2" value="수정하기" onclick="location.href='${pageContext.request.contextPath }/product/modify?prod_num=${deal.product.prod_num}'">
                                     <!-- 수정하기 get  -->
                                     
                                     
                                     
-                                    <input type="button" id="button2" value="삭제하기" onclick="location.href='${pageContext.request.contextPath }/product/remove?prod_num=${product.prod_num}&category=${product.category }'">
+                                    <input type="button" id="button2" value="삭제하기" onclick="location.href='${pageContext.request.contextPath }/product/remove?prod_num=${deal.product.prod_num}&category=${deal.product.category }'">
                                     
                                     
 <%--                                     <!-- 삭제하기 post  -->

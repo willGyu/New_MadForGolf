@@ -5,6 +5,56 @@
   
 <mapper namespace="com.madforgolf.mapper.ProductMapper">
 
+		<!-- join하기 위해 -->
+	<resultMap type="ProductVO" id="product">
+		<id property="prod_num" column="prod_num" />
+		<result property="seller_id" column="seller_id"/>
+		<result property="buyer_id" column="buyer_id"/>
+		<result property="prod_name" column="prod_name"/>
+		<result property="prod_img" column="prod_img"/>
+		<result property="price" column="price"/>
+		<result property="detail" column="detail"/>
+		<result property="condition" column="condition"/>
+		<result property="category" column="category"/>
+		<result property="state" column="state"/>
+		<result property="like_count" column="like_count"/>
+		<result property="payment" column="payment"/>
+	</resultMap>
+	
+	<resultMap type="MemberVO" id="seller">
+		<id property="user_id" column="user_id"/>
+		<result property="user_pw" column="user_pw"/>
+		<result property="user_name" column="user_name"/>
+		<result property="user_phone" column="user_phone"/>
+		<result property="reg_date" column="reg_date"/>
+		<result property="score" column="score"/>
+		<result property="latitude" column="latitude"/>
+		<result property="logitude" column="logitude"/>
+	</resultMap>
+	
+	<resultMap type="MemberVO" id="buyer">
+		<id property="user_id" column="user_id"/>
+		<result property="user_pw" column="user_pw"/>
+		<result property="user_name" column="user_name"/>
+		<result property="user_phone" column="user_phone"/>
+		<result property="reg_date" column="reg_date"/>
+		<result property="score" column="score"/>
+		<result property="latitude" column="latitude"/>
+		<result property="logitude" column="logitude"/>
+	</resultMap>
+	
+	<resultMap type="DealVO" id="deal">
+		<id property="deal_num" column="deal_num"/>
+		<result property="seller_id" column="seller_id"/>
+		<result property="buyer_id" column="buyer_id"/>
+		<result property="prod_num" column="prod_num"/>
+		<result property="price" column="price"/>
+		<result property="deal_date" column="deal_date"/>
+		<collection property="product" resultMap="product"></collection>
+		<collection property="seller" resultMap="seller"></collection>
+		<collection property="buyer" resultMap="buyer"></collection>
+	</resultMap>
+
 	<!-- 글쓰기 -->
 	<insert id="create">
 	   insert into mfg_products (title,writer,content) 
@@ -104,6 +154,14 @@
 		where prod_num = #{prod_num}
 	</select>
 	
+<!-- 	<select id="getProductDetail" resultMap="deal">
+		select p.seller_id, p.prod_name, p.price, p.detail, p.prod_img, p.like_count,
+		p.prod_num,p.`condition`, p.gender, p.category, d.state
+		from mfg_products p join mfg_deal d
+		on p.prod_num = d.prod_num
+		where p.prod_num =#{prod_num}
+	</select> -->
+	
 	<!-- 상품 등록 -->
 	<insert id="insert">
 		insert into mfg_products (seller_id, prod_name, prod_img, price, detail, `condition`, category, gender)
@@ -162,16 +220,71 @@
 	</select>
 	
 	
-	<!-- 판매내역 목록 띄우기  수정중,, -->
-	<select id="listPage4" resultType="ProductVO">
-	select d.deal_num, p.prod_name, p.price
-	from mfg_deal d join mfg_products p
-	on d.seller_id= p.seller_id
-	where d.seller_id = #{seller_id}
-	order by p.prod_num desc
-	limit #{pageStart},#{perPageNum}
+	<!-- 판매내역 목록 띄우기  -->
+	<select id="sellProductList" resultMap="product">
+		select *
+		from mfg_products
+		where seller_id = #{user_id}
+		order by prod_date desc
+		limit #{pm.startRow},#{pm.vo.perPageNum}
+	</select>
+	
+	<select id="sellProductListCnt" resultType="Integer"> 
+		select count(*)
+		from mfg_products
+		where seller_id = #{user_id}
+		order by prod_date desc
 	</select>
 	<!-- 판매내역 목록 띄우기   -->
+	
+	<!-- 구매내역 목록 띄우기 -->
+	<select id="buyProductList" resultMap="deal">
+		select d.deal_date,p.prod_name,p.price
+		from mfg_products p join mfg_deal d 
+		on p.prod_num = d.prod_num
+		where d.buyer_id = #{user_id}
+		order by prod_date desc
+		limit #{pm.startRow},#{pm.vo.perPageNum}
+	</select>
+
+	<select id="buyProductListCnt" resultType="Integer">
+		select count(*) 
+		from mfg_products p join mfg_deal d 
+		on p.prod_num = d.prod_num
+		where d.buyer_id = #{user_id}
+		order by prod_date desc
+	</select>
+	<!-- 구매내역 목록 띄우기 -->
+	
+	<!-- 거래중 목록 띄우기 -->
+	<!--d.state: 거래전:0, 거래중:1, 거래후:2 -->
+	<select id="DealingProductList" resultMap="deal">
+		select d.deal_date, p.prod_name, p.price, d.state, d.deal_num
+		from mfg_products p join mfg_deal d
+		on p.prod_num = d.prod_num
+		where d.buyer_id = #{user_id}
+		and d.state = '거래중'
+		order by p.prod_date desc
+		limit #{pm.startRow},#{pm.vo.perPageNum}
+	</select>
+
+	<select id="DealingProductListCnt" resultType="Integer">
+		select count(*)
+		from mfg_products p join mfg_deal d
+		on p.prod_num = d.prod_num
+		where d.buyer_id = #{user_id}
+		and d.state = '거래중'
+		order by prod_date desc
+	</select>
+	<!-- 거래중 목록 띄우기 -->
+	
+	<!-- 거래중 ->거래후 버튼 -->
+	<update id="DealDone">
+		update mfg_deal 
+		set state = '거래후'
+		where deal_num = #{deal_num}
+	</update>
+	<!-- 거래중 ->거래후 버튼 -->
 	
 	
 	

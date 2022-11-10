@@ -11,23 +11,33 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.github.scribejava.core.model.OAuth2AccessToken;
+import com.madforgolf.domain.KakaoLoginBO;
+import com.madforgolf.domain.LikeListVO;
+import com.madforgolf.domain.LikeVO;
 import com.madforgolf.domain.MemberVO;
+import com.madforgolf.domain.NaverLoginBO;
+import com.madforgolf.domain.PageMakerVO;
+import com.madforgolf.domain.PageVO;
 import com.madforgolf.service.MemberService;
 import com.madforgolf.domain.ProductVO;
 import com.madforgolf.service.HomeService;
-import com.madforgolf.service.MemberService;
 import com.madforgolf.service.MemberServiceImpl;
-import com.madforgolf.service.ProductService;
 
 @Controller
 @RequestMapping("/member/*")
@@ -39,6 +49,17 @@ public class MemberController {
 	@Inject
 	private MemberService service;
 	
+	@Autowired
+	private MemberServiceImpl memberServiceImpl;
+	
+	@Inject
+	private NaverLoginBO naverLoginBO;
+	
+	private String apiResult = null;
+	
+	@Autowired
+	private KakaoLoginBO kakaoLoginBO;
+	
 	
 	// ------------------------ 회원가입 시작 ------------------------------------
 	
@@ -46,9 +67,19 @@ public class MemberController {
 	
 	// 회원가입 - GET
 	@RequestMapping(value = "/insert", method = RequestMethod.GET)
-	public void insertGET() throws Exception {
-		log.info("insertGET() 호출");
+	public void insertGET(HttpServletRequest request, Model model, HttpSession session) throws Exception {
+		log.info("@@@@@ insertGET() 호출");
 		log.info(" /member/sign (get) -> /member/insert.jsp 로 연결");
+		
+		// 네이버 URL
+		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
+		log.info("@@@@@ naver : "+naverAuthUrl);
+		model.addAttribute("naverURL", naverAuthUrl);
+		
+		// 카카오 URL
+		String kakaoAuthUrl = kakaoLoginBO.getAuthorizationUrl(session);
+		log.info("@@@@@ kakao :" + kakaoAuthUrl);		
+		model.addAttribute("kakaoURL", kakaoAuthUrl);
 	}
 	
 	// 회원가입 - POST
@@ -106,31 +137,32 @@ public class MemberController {
 	
 	
 	// 카카오 로그인
-	@RequestMapping(value="/kakaoLogin", method=RequestMethod.GET)
-	public String kakaoLogin(@RequestParam(value = "code", required = false) String code, HttpSession session) throws Exception {
-		log.info("kakaoLogin() 호출");
-		
-		log.info("#########" + code);
-		
-		String access_Token = service.getAccessToken(code);
-		log.info("###access_Token#### : " + access_Token);
-		
-		MemberVO userInfo = service.getUserInfo(access_Token);
-		
-		log.info("###access_Token#### : " + access_Token);
-		log.info("###nickname#### : " + userInfo.getUser_name());
-		log.info("###email#### : " + userInfo.getUser_id());
-		
-		if(userInfo.getUser_id() != null) {
-			session.setAttribute("user_id", userInfo.getUser_id());
-			session.setAttribute("access_Token", access_Token);
-			log.info("세션등록완료@@@@@ email : "+ session.getAttribute("user_id"));
-		}
-		
-		// 로그인 후 메인페이지로 이동
-		return "redirect:index";
+//	@RequestMapping(value="/kakaoLogin", method=RequestMethod.GET)
+//	public String kakaoLogin(@RequestParam(value = "code", required = false) String code, HttpSession session) throws Exception {
+//		log.info("kakaoLogin() 호출");
+//		
+//		log.info("#########" + code);
+//		
+//		String access_Token = service.getAccessToken(code);
+//		log.info("###access_Token#### : " + access_Token);
+//		
+//		MemberVO userInfo = service.getUserInfo(access_Token);
+//		
+//		log.info("###access_Token#### : " + access_Token);
+//		log.info("###nickname#### : " + userInfo.getUser_name());
+//		log.info("###email#### : " + userInfo.getUser_id());
+//		
+//		if(userInfo.getUser_id() != null) {
+//			session.setAttribute("user_id", userInfo.getUser_id());
+//			session.setAttribute("access_Token", access_Token);
+//			log.info("세션등록완료@@@@@ email : "+ session.getAttribute("user_id"));
+//			
+//			return "redirect:/member/address";
+//		}else {
+//			return "redirect:index";
+//		}
+//	}
 	
-	}
 	
 	
 	
@@ -149,10 +181,21 @@ public class MemberController {
 	// http://localhost:8088/member/login
 	// 로그인 - GET
 	@RequestMapping(value = "/login",method = RequestMethod.GET )
-	public String login() throws Exception {
+	public String login(HttpServletRequest request, HttpSession session, Model model) throws Exception {
 		log.info(" login() 실행 ");
 		log.info(" 연결된 뷰 페이지로 이동 ");
 					
+		// 네이버 URL
+		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
+		log.info("네이버: "+naverAuthUrl);
+		 model.addAttribute("naverURL", naverAuthUrl);
+		 
+		// 카카오 URL
+		String kakaoAuthUrl = kakaoLoginBO.getAuthorizationUrl(session);
+		log.info("@@@@@ kakao :" + kakaoAuthUrl);		
+		model.addAttribute("kakaoURL", kakaoAuthUrl);
+		
+		
 		return "/member/login";
 	}
 					
@@ -177,7 +220,10 @@ public class MemberController {
 		                    
 		session.setAttribute("user_id", loginVO.getUser_id());
 		session.setAttribute("loginVO", loginVO);
+		session.setAttribute("user_name", loginVO.getUser_name());
 		String user_id = (String)session.getAttribute("user_id");
+		String user_name = (String)session.getAttribute("user_name");
+		
 		log.info(user_id + "세션값");
 		                                        
 		//  session.setAttribute("loginVO", loginVO);
@@ -206,18 +252,18 @@ public class MemberController {
 		log.info(" void 리턴 : /main.jsp 뷰 호출 ");
 		
 		 
-		  //------------------------------------------------------------------
-			// 서비스 - 글전체 목록 가져오는 메서드
-			List<ProductVO> productList = service1.listMain(vo);
-			log.info("상품 개수 : " + productList.size() + "개");
-
-			// 출력되는 상품 리스트를 어트리뷰트에 담아서 view로 보냄
-			model.addAttribute("productList", productList);
-
-			// 세션객체 - isUpdate 정보전달
-			session.setAttribute("isUpdate", false);
-
-		  //------------------------------------------------------------------
+		//------------------------------------------------------------------
+		// 서비스 - 글전체 목록 가져오는 메서드
+		List<ProductVO> productList = service1.listMain(vo);
+		log.info("상품 개수 : " + productList.size() + "개");
+	
+		// 출력되는 상품 리스트를 어트리뷰트에 담아서 view로 보냄
+		model.addAttribute("productList", productList);
+	
+		// 세션객체 - isUpdate 정보전달
+		session.setAttribute("isUpdate", false);
+	
+		 //------------------------------------------------------------------
 			
 		return "index";
 	}
@@ -241,7 +287,7 @@ public class MemberController {
 		log.info(" 세션 초기화 완료 => 로그아웃 ");
 					
 		// 페이지 이동	
-		return "redirect:/index";
+		return "redirect:index";
 	}
 			
 			
@@ -453,4 +499,331 @@ public class MemberController {
 	
 	
 	// ------------------------ 회원 탈퇴 끝 ------------------------
+	
+	
+	
+
+	// ------------------------ SNS 로그인 ---------------------------
+	// 네이버 아이디 로그인 성공 시
+		@RequestMapping(value = "/naverLogin", method = { RequestMethod.GET, RequestMethod.POST })
+		public String callback(Model model, @RequestParam String code, RedirectAttributes rttr, @RequestParam String state, HttpSession session,
+				HttpServletRequest request) throws Exception {
+			log.info("여기는 callback");
+			log.info("세션: "+session);
+			log.info("코드: "+code);
+			log.info("스테이트: "+state);
+			
+			OAuth2AccessToken oauthToken;
+			oauthToken = naverLoginBO.getAccessToken(session, code, state);			
+			log.info("토큰: "+oauthToken);
+			//1. 로그인 사용자 정보를 읽어온다.
+			apiResult = naverLoginBO.getUserProfile(oauthToken); //String형식의 json데이터
+			/** apiResult json 구조
+			{"resultcode":"00",
+			"message":"success",
+			"response":{"id":"33666449","nickname":"shinn****","age":"20-29","gender":"M","email":"sh@naver.com","name":"\uc2e0\ubc94\ud638"}}
+			**/
+			//2. String형식인 apiResult를 json형태로 바꿈
+			JSONParser parser = new JSONParser();
+			Object obj = parser.parse(apiResult);
+			JSONObject jsonObj = (JSONObject) obj;
+			//3. 데이터 파싱
+			//Top레벨 단계 _response 파싱
+			JSONObject response_obj = (JSONObject)jsonObj.get("response");
+			//response의 nickname값 파싱
+			String id = ((String)response_obj.get("id")).substring(0,20);
+			log.info("암호화된 네이버 아이디 앞에서 20자리: "+id);
+			String pw = (String)response_obj.get("user_id");
+			log.info("기존의 암호화된 네이버 아이디를 비밀번호로 사용:" +pw);
+			String name = (String)response_obj.get("name");
+			String phone = "0"+((String)response_obj.get("mobile_e164")).substring(3);
+
+			MemberVO member = new MemberVO();
+				member.setUser_id(id);
+				member.setUser_pw(pw);
+				member.setUser_name(name);
+				member.setUser_phone(phone);
+			if(service.getMember(id)!=null) {
+				log.info("네이버 아이디로 이미 가입한 회원");
+				// 네이버 아이디로 이미 회원가입 한 경우
+				// 바로 로그인 하러 가기~
+				session.setAttribute("user_id", id);
+				rttr.addFlashAttribute("msg", name+"님, 환영합니다♡");
+				return "redirect:index";
+			} 
+			// 네이버에서 사용하는 닉네임이 이미 DB에 존재할 경우
+			/*if(service.getMemberNick(nick)!=null) {
+				log.info("닉네임 :"+nick);
+				model.addAttribute("msg", "'"+nick+"'"+"은 이미 존재하는 닉네임입니다.");
+				model.addAttribute("msg2", "새로운 닉네임 입력 페이지로 이동합니다.");
+				session.setAttribute("member", member);
+				return "/main/nickCheck";
+			} else {*/
+			
+			
+			// 네이버 정보로 회원가입한 적 없는 회원이 경우 자동 회원가입
+			log.info("회원가입 한 적 없는 사용자입니다.");
+			
+				service.insert(member);
+				
+				
+				
+				//4.파싱 아이디 세션으로 저장
+				session.setAttribute("user_id",id); //세션 생성
+				/*
+				 * rttr.addFlashAttribute("message", nick+"님의 회원가입 완료!");
+				 * rttr.addFlashAttribute("message2",
+				 * "현재 임시 비밀번호 상태이니 마이페이지에서 	반드시 비밀번호를 변경해주세요.");
+				 */
+				return "redirect:/member/address";
+			}
+		
+		
+		// 카카오 로그인 성공시
+		@RequestMapping(value = "/kakaoLogin", method = { RequestMethod.GET, RequestMethod.POST })
+		public String callbackKakao(Model model, @RequestParam String code, @RequestParam String state, HttpSession session, RedirectAttributes rttr) 
+				throws Exception {
+			System.out.println("로그인 성공 callbackKako");
+			OAuth2AccessToken oauthToken;
+			oauthToken = kakaoLoginBO.getAccessToken(session, code, state);	
+			// 로그인 사용자 정보를 읽어온다
+			apiResult = kakaoLoginBO.getUserProfile(oauthToken);
+			
+			JSONParser jsonParser = new JSONParser();
+			JSONObject jsonObj;
+			
+			jsonObj = (JSONObject) jsonParser.parse(apiResult);
+			JSONObject response_obj = (JSONObject) jsonObj.get("kakao_account");	
+			JSONObject response_obj2 = (JSONObject) response_obj.get("profile");
+			// 프로필 조회
+			String email = (String) response_obj.get("email");
+			String name = (String) response_obj2.get("nickname");
+			// 세션에 사용자 정보 등록
+			// session.setAttribute("islogin_r", "Y");
+			session.setAttribute("signIn", apiResult);
+			session.setAttribute("user_id", email);
+			session.setAttribute("user_name", name);
+
+			MemberVO member = new MemberVO();
+			member.setUser_id(email);
+			member.setUser_name(name);
+			if(service.getMember(email)!=null) {
+				log.info("카카오 아이디로 이미 가입한 회원");
+				// 네이버 아이디로 이미 회원가입 한 경우
+				// 바로 로그인 하러 가기~
+				session.setAttribute("user_id", email);
+				rttr.addFlashAttribute("msg", name+"님, 환영합니다♡");
+				return "redirect:index";
+		} 
+		// 네이버에서 사용하는 닉네임이 이미 DB에 존재할 경우
+		/*if(service.getMemberNick(nick)!=null) {
+			log.info("닉네임 :"+nick);
+			model.addAttribute("msg", "'"+nick+"'"+"은 이미 존재하는 닉네임입니다.");
+			model.addAttribute("msg2", "새로운 닉네임 입력 페이지로 이동합니다.");
+			session.setAttribute("member", member);
+			return "/main/nickCheck";
+		} else {*/
+		
+		
+		// 네이버 정보로 회원가입한 적 없는 회원이 경우 자동 회원가입
+		log.info("회원가입 한 적 없는 사용자입니다.");
+		
+			service.insert(member);
+			
+			
+			
+			//4.파싱 아이디 세션으로 저장
+			session.setAttribute("user_id",email); //세션 생성
+			/*
+			 * rttr.addFlashAttribute("message", nick+"님의 회원가입 완료!");
+			 * rttr.addFlashAttribute("message2",
+			 * "현재 임시 비밀번호 상태이니 마이페이지에서 	반드시 비밀번호를 변경해주세요.");
+			 */
+			return "redirect:/member/address";
+		}
+	    
+		// 소셜 로그인 성공 페이지
+//		@RequestMapping("/loginSuccess.do")
+//		public String loginSuccess() {
+//			return "loginSuccess";
+//		}
+//		
+		
+		
+		// ------------------------ SNS 로그인 ---------------------------
+
+		
+		
+		//카카오톡 위도경도 받아오기 ############################
+				@RequestMapping(value="/lalong" , method = RequestMethod.POST)
+				public String lalong(@RequestParam HashMap<String, String> paramMap, HttpServletResponse response) throws Exception {
+					String roadFullAddr = paramMap.get("roadFullAddr");
+					String jsonString =  memberServiceImpl.getKakaoApiFromAddress(roadFullAddr);
+
+					// x = 경도(longitude), y = 위도(latitude)
+					HashMap<String, String> XYMap = memberServiceImpl.getXYMapfromJson(jsonString);
+					paramMap.put("latitude", XYMap.get("y"));
+					paramMap.put("longitude", XYMap.get("x"));
+
+
+					memberServiceImpl.lalong(paramMap);
+					log.info("@@@@@회원가입 성공! ");
+
+					response.setContentType("text/html; charset=UTF-8");
+					PrintWriter out=response.getWriter();
+					out.println("<script>");
+					out.println("alert('회원가입완료!');");
+					out.println("location.href='/member/login'");
+					out.println("</script>");
+					out.close();
+
+
+					return "/member/login";
+				}
+				
+				//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@SNS 가입회원 주소입력  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+				@RequestMapping(value="/address" , method = RequestMethod.POST)
+				public String lalongAddr(@RequestParam HashMap<String, String> paramMap, HttpServletResponse response, HttpSession session, Model model) throws Exception {
+					// 세션값 가져오기
+					String id =(String)session.getAttribute("user_id");
+					log.info("id@@@@@@@@@@@@@@@@@@@@@@@@ : "+id);
+					
+					MemberVO vo=service.getMember(id);
+					String roadFullAddr = paramMap.get("roadFullAddr");
+					String jsonString =  memberServiceImpl.getKakaoApiFromAddress(roadFullAddr);
+
+					// x = 경도(longitude), y = 위도(latitude)
+					HashMap<String, String> XYMap = memberServiceImpl.getXYMapfromJson(jsonString);
+					paramMap.put("latitude", XYMap.get("y"));
+					paramMap.put("longitude", XYMap.get("x"));
+					paramMap.put("user_id", vo.getUser_id());
+
+						
+					memberServiceImpl.lalongAddr(paramMap);
+					
+				
+					
+					
+					return "/index";
+				}
+				
+				
+				// ------------------------ 지역인증 시작 (SNS 가입 회원 전용) ------------------
+
+				
+				// http://localhost:8088/member/address  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+				// SNS 가입 회원 주소 인증 페이지 -  GET (템플릿 X)
+				@RequestMapping(value = "/address", method = RequestMethod.GET )
+				public String address(Model model) {
+					log.info(" addressGET() 호출 ");
+					log.info(" void 리턴 : /address.jsp 뷰 호출 ");
+							
+							
+							
+					return "member/address";
+				}
+						
+						
+				// http://localhost:8088/member/addressCheck  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+				// SNS 가입 회원 주소 저장 후 값 보여주는 페이지 -  GET (템플릿 X)    
+				@RequestMapping(value = "/addressCheck", method = RequestMethod.GET )
+				public String addressCheck(Model model) {
+					log.info(" addressCheck() 호출 ");
+					log.info(" void 리턴 : /addressCheck.jsp 뷰 호출 ");
+							
+							
+							
+					return "member/addressCheck";
+				}
+						
+								
+				
+				// 위도경도 처리 - 서하 ############################
+						@ResponseBody
+						@RequestMapping(value="/sendAddr", method=RequestMethod.POST)
+						public int sendAddr(@RequestParam("address") String address, HttpSession session, HttpServletResponse response) throws Exception {
+							
+							MemberVO vo = new MemberVO();
+							vo.setRoadFullAddr(address);
+							
+							if(session.getAttribute("user_id") != null) {
+								vo.setUser_id(session.getAttribute("user_id").toString());	
+							} else {
+								return 2;	
+							}
+							
+							log.info("session 값  {}", session.getAttribute("user_id"));
+							service.saveAddr(vo);
+							log.info("역지오코딩 주소 저장 완료");
+							return 1;
+						}
+				
+				// ------------------------ 지역인증 끝 (SNS 가입 회원 전용) ------------------
+						
+						// ############################ 마이페이지 - 찜목록 ############################  //
+						
+						//찜목록 - 전체 목록 
+						@RequestMapping(value="/likeListAll", method=RequestMethod.GET)
+						public void listAllGET(LikeVO vo,PageVO vo2,@ModelAttribute("msg") String msg, Model model, HttpSession session) throws Exception {
+							// 세션값 가져오기
+							String id =(String)session.getAttribute("user_id");
+							log.info("id@@@@@@@@@@@@@@@@@@@@@@@@ : "+id);
+							
+							log.info("listAllGET() 호출");
+							
+							//세션값 넣어줌 -> 가지고 매퍼까지 가기 
+							LikeListVO vo3 = new LikeListVO();
+							vo3.setUser_id(id);
+							log.info(id+"$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+							
+							// 서비스 - 찜 목록을 가져오는 메서드
+							List<LikeListVO> likeList= service.getLikeList(vo3);
+							log.info(likeList+"**********************");
+							
+						
+							
+							
+							model.addAttribute("likeList", likeList);
+							
+							log.info("/member/likeListAll.jsp 로 이동");
+							
+							vo.setBuyer_id(id);
+							
+							
+							// ==================================================== 페이징 처리
+							// ====================================================
+							// 페이징 처리 하단부 정보 저장
+							//DB 내 찜한 상품의 개수 
+							Integer totalCnt = service.getTotalCnt(vo);
+							log.info("DB 내 찜 개수 : "+totalCnt+"개@@@@@@@@" );
+//							
+							
+//							// 페이징 처리 하단부 정보 저장
+							PageMakerVO pm = new PageMakerVO();
+							pm.setVo(vo2); // 페이징 처리 하단부 정보를 vo에 받아오고
+							pm.setTotalCnt(totalCnt); // calData() 페이징처리에 필요한 계산식 계산 메서드가 포함된 전체 글 갯수 초기화 메서드 호출
+							
+							log.info("pmVO : " + pm);
+							log.info("pageVO : " + vo2);
+		//
+//							// 페이징 처리 객체(pm)을 어트리뷰트에 담아서 view로 보냄
+							model.addAttribute("pm", pm);
+							model.addAttribute("vo",vo);
+							// ==================================================== 페이징 처리
+							// ====================================================
+							
+							
+						
+						}
+						
+						
+						
+						
+						// ############################ 마이페이지 - 찜목록 ############################  //
+						
+						
 }
+
+
+
+

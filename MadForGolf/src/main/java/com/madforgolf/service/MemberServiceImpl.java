@@ -23,9 +23,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.madforgolf.domain.LikeListVO;
+import com.madforgolf.domain.LikeVO;
 import com.madforgolf.domain.MemberVO;
 import com.madforgolf.persistence.MemberDAO;
 
@@ -35,7 +41,7 @@ public class MemberServiceImpl implements MemberService{
 	private static final Logger log
 			= LoggerFactory.getLogger(MemberServiceImpl.class);
 
-
+	
 	private final MemberDAO dao;
 
 	@Inject
@@ -60,6 +66,12 @@ public class MemberServiceImpl implements MemberService{
 	//휴대번호 중복 체크
 	@Override
 	public int phoneCheck(MemberVO vo) throws Exception {
+		return dao.phoneCheck(vo);
+	}
+	
+	//휴대번호 중복 체크 (회원정보수정)
+	@Override
+	public int updatePhoneCheck(MemberVO vo) throws Exception {
 		return dao.phoneCheck(vo);
 	}
 	
@@ -103,6 +115,13 @@ public class MemberServiceImpl implements MemberService{
 	public MemberVO loginMember(MemberVO vo) {
 		// TODO Auto-generated method stub
 		return dao.loginMember(vo);
+	}
+	
+	
+	//전화번호 업데이트처리
+	@Override
+	public int updatePhone(MemberVO vo) throws Exception {
+		return dao.updatePhone(vo);
 	}
 	
 	
@@ -285,6 +304,118 @@ public class MemberServiceImpl implements MemberService{
 		}
 		return access_Token;
 	}
+	
+	
+	//위도경도
+			@Override
+			public void lalong(HashMap<String, String> paramMap) {
+				dao.lalong(paramMap);
+			}
+
+
+			//카카오api  
+			@Override
+			public String getKakaoApiFromAddress(String roadFullAddr) {
+				String apiKey = "eebd25270c02664360c036c2485316e1";
+				String apiUrl = "https://dapi.kakao.com/v2/local/search/address.json";
+				String jsonString = null;
+
+				try {
+					roadFullAddr = URLEncoder.encode(roadFullAddr, "UTF-8");
+
+					String addr = apiUrl + "?query=" + roadFullAddr;
+
+					URL url = new URL(addr);
+					URLConnection conn = url.openConnection();
+					conn.setRequestProperty("Authorization", "KakaoAK " + apiKey);
+
+					BufferedReader rd = null;
+					rd = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+					StringBuffer docJson = new StringBuffer();
+
+					String line;
+
+					while ((line=rd.readLine()) != null) {
+						docJson.append(line);
+					}
+
+					if (0 < docJson.toString().length()) {
+						System.out.println("docJson : " + docJson.toString());
+					}
+
+					jsonString = docJson.toString();
+					rd.close();
+
+				} catch (UnsupportedEncodingException e) {
+					e.printStackTrace();
+				} catch (MalformedURLException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				return jsonString;
+			}
+
+
+			@Override
+			public HashMap<String, String> getXYMapfromJson(String jsonString) {
+				System.out.println("getXYMapfromJson::");
+				ObjectMapper mapper = new ObjectMapper();
+				HashMap<String, String> XYMap = new HashMap<String, String>();
+
+				try {
+					TypeReference<Map<String, Object>> typeRef = new TypeReference<Map<String, Object>>(){};
+					Map<String, Object> jsonMap = mapper.readValue(jsonString, typeRef);
+
+					@SuppressWarnings("unchecked")
+					List<Map<String, String>> docList =  (List<Map<String, String>>) jsonMap.get("documents");	
+
+					Map<String, String> adList = (Map<String, String>) docList.get(0);
+					XYMap.put("x",adList.get("x"));
+					XYMap.put("y", adList.get("y"));
+
+				} catch (JsonParseException e) {
+					e.printStackTrace();
+				} catch (JsonMappingException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				return XYMap;
+			}
+
+			//위도경도
+		
+			// 역지오코딩 주소 저장
+			@Override
+			public int saveAddr(MemberVO vo) throws Exception {
+				log.info("saveAddr 호출");
+									
+				return dao.saveAddr(vo);
+					}
+
+					
+			// SNS - 위도 경도 저장  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+			@Override
+			public void lalongAddr(HashMap<String, String> paramMap) {
+				dao.lalongAddr(paramMap);
+				log.info("$$$$$$$$$$$$$$$$$$$$$"+paramMap);
+					}
+			
+			
+			// 찜 목록
+			@Override
+			public List<LikeListVO> getLikeList(LikeListVO vo3) throws Exception {
+			List<LikeListVO> likeList = dao.getLikeList(vo3);
+							
+				return likeList;
+					}
+
+			@Override
+			public Integer getTotalCnt(LikeVO vo) throws Exception {
+				return dao.getTotalCnt(vo);
+								
+					}
 	
 	
 }

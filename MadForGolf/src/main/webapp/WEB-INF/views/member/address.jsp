@@ -206,7 +206,7 @@ function sendAddr(address) {
                
                   <div>
                      <h2>Address Check (For SNS Members)</h2>
-                  <form name="form" action="/member/address" id="address" name="address" class="totalform" method="get">
+                  <form name="form" action="/member/address" id="address" name="address" class="totalform" method="post">
                      <div class="row">
                         <div class="col-12 mb-4">
                            <label for="email_address">우리동네(Town) *</label> 

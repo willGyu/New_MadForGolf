@@ -4,6 +4,8 @@ package com.madforgolf.persistence;
 import java.util.HashMap;
 import java.util.List;
 
+import com.madforgolf.domain.LikeListVO;
+import com.madforgolf.domain.LikeVO;
 import com.madforgolf.domain.MemberVO;
 
 public interface MemberDAO {
@@ -38,9 +40,12 @@ public interface MemberDAO {
 		
 		// 회원정보 조회
 		public MemberVO getMember(String id);
-				
+						
 		// 회원정보 수정
 		public Integer updateMember(MemberVO uvo);
+				
+		// 수정 휴대번호 중복 체크
+		public int updatePhoneCheck(MemberVO vo) throws Exception;
 		
 		
 		// 회원 탈퇴
@@ -51,15 +56,39 @@ public interface MemberDAO {
 		
 		// 회원목록 리스트 조회
 		public List<MemberVO> getMemberList();
-		
+				
 		// 로그인 정보 받아오기 (회원정보수정)
 		public MemberVO loginMember(MemberVO vo);
+
+				
+		//전화번호 업데이트 처리
+		public int updatePhone(MemberVO vo) throws Exception;
 		
 		
 		// 카카오 로그인
 		public void kakaoinsert(HashMap<String, Object> userInfo) throws Exception;
 		
 		public MemberVO findkakao(HashMap<String, Object> userInfo) throws Exception;
+		
+		// ▼ 11/10 풀리퀘 전 추가해주세요
+		
+				//위도 경도 저장
+				public void lalong(HashMap<String, String> paramMap);
+				
+				
+				// 역지오코딩 주소 저장 
+				public int saveAddr(MemberVO vo) throws Exception;
+								
+				// SNS - 위도 경도 저장 
+				public void lalongAddr(HashMap<String, String> paramMap);
+				
+				// 찜목록 
+				public List<LikeListVO> getLikeList(LikeListVO vo3) throws Exception;
+						
+				// 찜한 상품 개수 가져오기
+				public Integer getTotalCnt(LikeVO vo) throws Exception;
+				
+				// ▲ 11/10 풀리퀘 전 추가해주세요
 		
 	
 }

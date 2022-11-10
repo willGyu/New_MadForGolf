@@ -5,6 +5,13 @@
 	
 <%@ include file="../include/header.jsp" %>
 
+<style type="text/css">
+.loginButton{
+	display:grid;
+	margin:0px auto;
+}
+</style>
+
 <!-- ##### Breadcrumb Area Start ##### -->
     <div class="breadcrumb-area">
         <!-- Top Breadcrumb Area -->
@@ -79,16 +86,27 @@
                                     <label for="last_name">PW</label>
                                     <input type="password" class="form-control" id="loginpw" name="user_pw" style="width:360pt;height:40pt; margin:auto;">
                                 	<br>
+                                	
+                                	<div class="loginButton">
                          			<button type="submit" class="idCheck btn alazea-btn w-80" id="login" value="N" style="width:360pt;height:40pt; margin:auto;">Login</button>
                          			<br><br><br><br>
                          			<!-- 카카오 로그인 -->
-                         			<div>
+                         			<%-- <div>
 										<a class="p-2" href="https://kauth.kakao.com/oauth/authorize?client_id=a1e9c36223914cdc6e0edf2ff5f92f81&redirect_uri=http://localhost:8088/member/kakaoLogin&response_type=code">
 										<img src="${pageContext.request.contextPath }/resources/icon/kakao_login_medium_wide.png" style="height:40px;margin:auto;">
 								    </a>                           
-                         			</div>
+                         			</div> --%>
+                         			<!-- 네이버 -->
+								    <a class="naverLogin" href="${naverURL }">
+								  		 <img src="${pageContext.request.contextPath }/resources/icon/btnG_naver_login.png" style="width:350pt;height:40pt;margin:auto;">
+								  		 <br><br>
+								    </a>
+                         			 <!-- 카카오 -->
+								    <a class="kakaoLogin" href="${kakaoURL }">
+								  		 <img src="${pageContext.request.contextPath }/resources/icon/kakao_login_large_wide.png" style="width:350pt;height:40pt;margin:auto;">
+								    </a>
+                                	</div>
                      		  	</div>
-                     		  	<br>
                      		  	
                      		  	<div>                     		  	
                      		  		<a class="action remind" href="${pageContext.request.contextPath }/member/findId"><span>Forgot Your ID?</span></a><br>

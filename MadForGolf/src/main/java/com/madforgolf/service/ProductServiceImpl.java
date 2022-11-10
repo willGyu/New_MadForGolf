@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.madforgolf.domain.BoardVO;
+import com.madforgolf.domain.DealVO;
 import com.madforgolf.domain.LikeVO;
+import com.madforgolf.domain.PageMakerVO;
 import com.madforgolf.domain.PageVO;
 import com.madforgolf.domain.ProductVO;
 import com.madforgolf.persistence.ProductDAO;
@@ -147,19 +149,58 @@ public class ProductServiceImpl implements ProductService {
 			
 			return result;
 		}
-
-	
-	
-	//구매목록 수정중,, 
+		
+	//판매목록
 	@Override
-	public List<ProductVO> listBuyPage(PageVO vo) throws Exception {
-		log.info(" listBuyPage(PageVO vo) ");
-		return dao.listBuyPage(vo);
+	public List<ProductVO> sellProductList(PageMakerVO pm, String user_id) throws Exception {
+
+		return dao.sellProductList(pm,user_id);	
+		
 	}
 	
 	
+	//판매목록 글갯수
+	@Override
+	public Integer sellProductListCnt(PageVO vo, String user_id) throws Exception {
+		
+		return dao.sellProductListCnt(vo,user_id);
+	}
 	
+	//구매목록
+	@Override
+	public List<DealVO> buyProductList(PageMakerVO pm, String user_id) throws Exception {
+		
+		return dao.buyProductList(pm,user_id);	
+		
+	}
+	//구매목록 글갯수
+	@Override
+	public Integer buyProductListCnt(PageVO vo, String user_id) throws Exception {
+		
+		return dao.buyProductListCnt(vo,user_id);
+	}
 	
+	//거래중목록
+	@Override
+	public List<DealVO> DealingProductList(PageMakerVO pm, String user_id) throws Exception {
+		
+		return dao.DealingProductList(pm,user_id);	
+		
+	}
+	//거래중목록 글갯수
+	@Override
+	public Integer DealingProductListCnt(PageVO vo, String user_id) throws Exception {
+		
+		return dao.DealingProductListCnt(vo,user_id);
+	}
+	
+	// 거래완료
+	@Override
+	public Integer dealDone(DealVO vo) throws Exception {
+	log.info("dealDone(DealVO vo) 호출");
+		
+		return dao.dealDone(vo);
+	}
 	
 	
 	

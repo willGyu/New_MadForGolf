@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.madforgolf.domain.BoardVO;
+import com.madforgolf.domain.DealVO;
 import com.madforgolf.domain.LikeVO;
+import com.madforgolf.domain.PageMakerVO;
 import com.madforgolf.domain.PageVO;
 import com.madforgolf.domain.ProductVO;
 
@@ -246,17 +248,89 @@ public class ProductDAOImpl implements ProductDAO {
 		
 	}
 	
-	//구매목록 수정중,,
+	//판매목록
 	@Override
-	public List<ProductVO> listBuyPage(PageVO vo) throws Exception {
-		log.info(" listBuyPage(PageVO vo) 호출 ");
+	public List<ProductVO> sellProductList(PageMakerVO pm, String user_id) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("pm", pm);
+		map.put("user_id", user_id);
 		
-		return sqlSession.selectList(NAMESPACE + ".listPage4",vo);		
+		log.info("DAOImplVO"+pm.getStartRow());
+		log.info(pm.getStartRow()+"!!!!!!!!!!!!!!");
+		
+		return sqlSession.selectList(NAMESPACE+".sellProductList", map);
+	}
+	
+	//판매목록 글갯수
+
+	@Override
+	public Integer sellProductListCnt(PageVO vo, String user_id) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("vo", vo);
+		map.put("user_id", user_id);
+		
+		return sqlSession.selectOne(NAMESPACE+".sellProductListCnt",map);
+
 	}
 	
 	
+	//구매목록
+	@Override
+	public List<DealVO> buyProductList(PageMakerVO pm, String user_id) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("pm", pm);
+		map.put("user_id", user_id);
+		
+		log.info("DAOImplVO"+pm.getStartRow());
+		
+		return sqlSession.selectList(NAMESPACE+".buyProductList", map);
+	}
 	
+	//구매목록 글갯수
 	
+	@Override
+	public Integer buyProductListCnt(PageVO vo, String user_id) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("vo", vo);
+		map.put("user_id", user_id);
+		
+		return sqlSession.selectOne(NAMESPACE+".buyProductListCnt",map);
+		
+	}
+	
+	//거래중목록
+	@Override
+	public List<DealVO> DealingProductList(PageMakerVO pm, String user_id) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("pm", pm);
+		map.put("user_id", user_id);
+		
+		
+		return sqlSession.selectList(NAMESPACE+".DealingProductList", map);
+	}
+	
+	//거래중목록 글갯수
+	
+	@Override
+	public Integer DealingProductListCnt(PageVO vo, String user_id) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("vo", vo);
+		map.put("user_id", user_id);
+		
+		return sqlSession.selectOne(NAMESPACE+".DealingProductListCnt",map);
+		
+	}
+	
+	//거래중 -> 거래후
+	@Override
+	public Integer dealDone(DealVO vo) throws Exception {
+		log.info("DAOImpl: DealDone(DealVO vo)호출");
+		
+		return sqlSession.update(NAMESPACE+".DealDone",vo);
+	}
 	
 
 }

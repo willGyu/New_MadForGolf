@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.Map;
 
 import com.madforgolf.domain.BoardVO;
+import com.madforgolf.domain.DealVO;
 import com.madforgolf.domain.LikeVO;
+import com.madforgolf.domain.PageMakerVO;
 import com.madforgolf.domain.PageVO;
 import com.madforgolf.domain.ProductVO;
 
@@ -54,8 +56,28 @@ public interface ProductService {
 	//좋아요 저장
 	public int insertLike(LikeVO vo);
 	
-	// 구매목록 가져오기(페이징처리) 수정중 ,,
-	public List<ProductVO> listBuyPage(PageVO vo) throws Exception;
+	//판매목록 리스트 
+	public List<ProductVO> sellProductList(PageMakerVO pm, String user_id)throws Exception;
+	
+	//판매목록 페이징에 필요한 판매목록 글갯수
+	public Integer sellProductListCnt(PageVO vo, String user_id) throws Exception;
+	
+	//구매목록 리스트 
+	public List<DealVO> buyProductList(PageMakerVO pm, String user_id)throws Exception;
+	
+	//구매목록 페이징에 필요한 판매목록 글갯수
+	public Integer buyProductListCnt(PageVO vo, String user_id) throws Exception;
+	
+	//거래중목록 리스트 
+	public List<DealVO> DealingProductList(PageMakerVO pm, String user_id)throws Exception;
+	
+	//거래중목록 페이징에 필요한 거래중목록 글갯수
+	public Integer DealingProductListCnt(PageVO vo, String user_id) throws Exception;
+	
+	// 거래완료
+	public Integer dealDone(DealVO vo) throws Exception;
+
+	
 	
 	
 	

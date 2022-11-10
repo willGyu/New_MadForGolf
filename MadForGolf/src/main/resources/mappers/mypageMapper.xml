@@ -4,27 +4,160 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.madforgolf.mapper.mypageMapper">
-<!-- 가계부 -->
-<!-- 월별 구매 금액 (차트)-->
-<select id="purchaseMonth" resultType="Integer">
-	select sum(price)
-	from mfg_deal
-	where buyer_id=#{buyer_id}
-	and month(deal_date)=month(sysdate())
-</select>
-
-<!-- 월별 판매 금액 (차트) -->
-<!-- <select id="saleMonth" resultType="DealVO">
-	select sum(price)
-	from mfg_deal
-	where seller_id=#(seller_id)
-	and month(deal_date)=month(sysdate())
-</select> -->
-
-
-
-
-<!-- 가계부 -->
+	
+	<!-- 가계부 -->
+	<!-- 월별 구매 금액 (차트)-->
+	<select id="purchaseMonth" resultType="int">
+		select ifnull(sum(price),0)
+		from mfg_deal
+		where buyer_id=#{user_id}
+		and month(deal_date)=month(sysdate())
+	</select>
+	
+	<!-- 월별 판매 금액 (차트) -->
+	<select id="saleMonth" resultType="int">
+		select ifnull(sum(price),0)
+		from mfg_deal
+		where seller_id=#{user_id}
+		and month(deal_date)=month(sysdate())
+	</select>
+	
+	<!-- 월별 구매 횟수 -->
+	<select id="purchaseCnt" resultType="int">
+		select ifnull(count(deal_num),0)
+		from mfg_deal
+		where buyer_id=#{user_id}
+		and month(deal_date)=month(sysdate())
+	</select>
+	
+	<!-- 월별 판매 횟수 -->
+	<select id="saleCnt" resultType="int">
+		select ifnull(count(deal_num),0)
+		from mfg_deal
+		where seller_id=#{user_id}
+		and month(deal_date)=month(sysdate())
+	</select>
+	
+	<!-- 드라이버 구매 -->
+	<select id="purchaseDriver" resultType="int">
+		select ifnull(sum(d.price),0)
+		from mfg_deal d join mfg_products p
+		on d.prod_num=p.prod_num
+		where d.buyer_id=#{user_id}
+		and month(d.deal_date)=month(sysdate())
+		and p.category='Driver'
+	</select>
+	
+	<!-- 아이언 구매 -->
+	<select id="purchaseIron" resultType="int">
+		select ifnull(sum(d.price),0)
+		from mfg_deal d join mfg_products p
+		on d.prod_num=p.prod_num
+		where d.buyer_id=#{user_id}
+		and month(d.deal_date)=month(sysdate())
+		and p.category='Iron'
+	</select>
+	
+	<!-- 유틸리티 구매 -->
+	<select id="purchaseUtil" resultType="int">
+		select ifnull(sum(d.price),0)
+		from mfg_deal d join mfg_products p
+		on d.prod_num=p.prod_num
+		where d.buyer_id=#{user_id}
+		and month(d.deal_date)=month(sysdate())
+		and p.category='Util'
+	</select>
+	
+	<!-- 웨지 구매 -->
+	<select id="purchaseWedge" resultType="int">
+		select ifnull(sum(d.price),0)
+		from mfg_deal d join mfg_products p
+		on d.prod_num=p.prod_num
+		where d.buyer_id=#{user_id}
+		and month(d.deal_date)=month(sysdate())
+		and p.category='Wedge'
+	</select>
+	
+	<!-- 퍼터 구매 -->
+	<select id="purchasePutter" resultType="int">
+		select ifnull(sum(d.price),0)
+		from mfg_deal d join mfg_products p
+		on d.prod_num=p.prod_num
+		where d.buyer_id=#{user_id}
+		and month(d.deal_date)=month(sysdate())
+		and p.category='Putter'
+	</select>
+	
+	<!-- 기타용품 구매 -->
+	<select id="purchaseEtc" resultType="int">
+		select ifnull(sum(d.price),0)
+		from mfg_deal d join mfg_products p
+		on d.prod_num=p.prod_num
+		where d.buyer_id=#{user_id}
+		and month(d.deal_date)=month(sysdate())
+		and p.category='Etc'
+	</select>
+	
+	<!-- 드라이버 판매 -->
+	<select id="saleDriver" resultType="int">
+		select ifnull(sum(d.price),0)
+		from mfg_deal d join mfg_products p
+		on d.prod_num=p.prod_num
+		where d.seller_id=#{user_id}
+		and month(d.deal_date)=month(sysdate())
+		and p.category='Driver'
+	</select>
+	
+	<!-- 아이언 판매 -->
+	<select id="saleIron" resultType="int">
+		select ifnull(sum(d.price),0)
+		from mfg_deal d join mfg_products p
+		on d.prod_num=p.prod_num
+		where d.seller_id=#{user_id}
+		and month(d.deal_date)=month(sysdate())
+		and p.category='Iron'
+	</select>
+	
+	<!-- 유틸리티 판매 -->
+	<select id="saleUtil" resultType="int">
+		select ifnull(sum(d.price),0)
+		from mfg_deal d join mfg_products p
+		on d.prod_num=p.prod_num
+		where d.seller_id=#{user_id}
+		and month(d.deal_date)=month(sysdate())
+		and p.category='Util'
+	</select>
+	
+	<!-- 웨지 판매 -->
+	<select id="saleWedge" resultType="int">
+		select ifnull(sum(d.price),0)
+		from mfg_deal d join mfg_products p
+		on d.prod_num=p.prod_num
+		where d.seller_id=#{user_id}
+		and month(d.deal_date)=month(sysdate())
+		and p.category='Wedge'
+	</select>
+	
+	<!-- 퍼터 판매 -->
+	<select id="salePutter" resultType="int">
+		select ifnull(sum(d.price),0)
+		from mfg_deal d join mfg_products p
+		on d.prod_num=p.prod_num
+		where d.seller_id=#{user_id}
+		and month(d.deal_date)=month(sysdate())
+		and p.category='Putter'
+	</select>
+	
+	<!-- 기타용품 판매 -->
+	<select id="saleEtc" resultType="int">
+		select ifnull(sum(d.price),0)
+		from mfg_deal d join mfg_products p
+		on d.prod_num=p.prod_num
+		where d.seller_id=#{user_id}
+		and month(d.deal_date)=month(sysdate())
+		and p.category='Etc'
+	</select>
+	<!-- 가계부 -->
 
 
 

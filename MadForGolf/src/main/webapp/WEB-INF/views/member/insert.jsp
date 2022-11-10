@@ -1,13 +1,26 @@
+<%@page import="java.math.BigInteger"%>
+<%@page import="java.net.URLEncoder"%>
+<%@page import="java.security.SecureRandom"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
 <%@ include file="../include/header.jsp" %> 
 <title>Insert title here</title>
 <script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js"></script>
 <script type="text/javascript">
-
-
 </script>
+<style type="text/css">
+.container{
+	display:grid;
+	width:700px;
+}
+
+.loginButton{
+	display:grid;
+	margin:0px auto;
+}
+</style>
 
 <!-- ##### Breadcrumb Area Start ##### -->
     <div class="breadcrumb-area">
@@ -22,7 +35,7 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><i class="fa fa-home"></i> home</li>
-                            <li class="breadcrumb-item active" aria-current="page"><a href="/member/insert">Join</a></li>
+                            <li class="breadcrumb-item active" aria-current="page"><a href="/member/insert">Create an Account</a></li>
                         </ol>
                     </nav>
                 </div>
@@ -186,16 +199,21 @@
 			<div class="row justify-content-between">
 <!-- 				<div class="col-12 col-lg-7"> -->
 					<div class="checkout_details_area clearfix">
-					
+					<!-- 
 						<h1>회원가입</h1> 
-						<h2>Join</h2><br><br>
+						<h2>Join</h2><br><br> -->
 						
-							
-								
+						<!-- 선 -->
+						<div class="col-12">
+							<div class="border-line"></div>
+							<br><br><br>
+						</div>
+						<!-- 선 -->
 						
 						<form name="form" action="/member/lalong" id="join" class="totalform" method="post">
 							<div class="row">
 								<div class="col-12 mb-4">
+								<br><br>
 									<label for="email_address">우리동네(Town) *</label> 
 									<input type="hidden" id="confmKey" name="confmKey" value=""  >
 									<input type="text" class="form-control" id="roadFullAddr" name="roadFullAddr"  value="" placeholder="주소검색을 눌러 우리동네를 설정하세요." readonly="readonly"><br>
@@ -221,17 +239,17 @@
 								<div class="col-12 mb-4">
 								<br><br>
 									<label for="email_address">비밀번호(Password) *</label> 
-									<input type="password" name="user_pw" class="password form-control" id="user_pw" value="" placeholder="비밀번호를 입력하세요.">
+									<input type="password" name="user_pw" class="password form-control" id="user_pw" value="" placeholder="비밀번호를 입력하세요."><br>
 									<div class="passdiv"></div>
 								</div>
 								<div class="col-12 mb-4">
 									<label for="email_address">비밀번호 재확인(Reconfirm Password) *</label> 
-									<input type="password" name="user_pw1" class="password2 form-control" id="user_pw1" value="" placeholder="비밀번호를 재입력하세요."><br>
+									<input type="password" name="user_pw1" class="password2 form-control" id="user_pw1" value="" placeholder="비밀번호를 재입력하세요."><br><br>
 									<div class="pass2div"></div>
 								</div>
 								<div class="col-12 mb-4">
 									<label for="phone_number">이름(Name) *</label> 
-									<input type="text" name="user_name" class="form-control" id="user_name" value="" placeholder="이름을 입력하세요.">
+									<input type="text" name="user_name" class="form-control" id="user_name" value="" placeholder="이름을 입력하세요."><br><br>
 								</div>
 								<div class="col-12 mb-4">
 									<label for="phone_number">전화번호(Phone) *</label> 
@@ -243,14 +261,23 @@
 								</div>
 								
 								
-								
-								<button class="btn alazea-btn w-120" style="width:360pt;height:40pt;margin:auto;">회원가입</button>
-								<!-- form태그 안?밖? -->
-								<a class="p-2 " href="https://kauth.kakao.com/oauth/authorize?client_id=a1e9c36223914cdc6e0edf2ff5f92f81&redirect_uri=http://localhost:8088/member/kakaoLogin&response_type=code">
-								<img src="${pageContext.request.contextPath }/resources/icon/kakao_login_medium_wide.png" style="width:360pt;height:40pt;margin:auto;">
-							    </a>
-                        
+								<div class="loginButton">
+									<button class="btn alazea-btn w-120" style="width:360pt;height:40pt;margin:auto;">회원가입</button><br><br>
+									<%-- <!-- 카카오로그인 -->
+									<a class="kakaoLogin" href="https://kauth.kakao.com/oauth/authorize?client_id=a1e9c36223914cdc6e0edf2ff5f92f81&redirect_uri=http://localhost:8088/member/kakaoLogin&response_type=code">
+									<img src="${pageContext.request.contextPath }/resources/icon/kakao_login_medium_wide.png" style="width:360pt;height:40pt;margin:auto;">
+								    </a> --%>
+								    <!-- 카카오 -->
+								    <a class="kakaoLogin" href="${kakaoURL }">
+								   		<img src="${pageContext.request.contextPath }/resources/icon/kakao_login_large_wide.png" style="width:300pt;height:40pt;margin:auto;"><br><br>
+								    </a>
+								    
+								    <!-- 네이버 -->
+								    <a class="naverLogin" href="${naverURL }">
+								   		<img src="${pageContext.request.contextPath }/resources/icon/btnG_naver_login.png" style="width:300pt;height:40pt;margin:auto;">
+								    </a>
 								</div>
+							</div>
 								
 						</form>
 						
@@ -261,5 +288,6 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	
+	
 	

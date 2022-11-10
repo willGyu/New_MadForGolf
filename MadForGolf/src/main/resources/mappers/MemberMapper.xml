@@ -7,9 +7,10 @@
 
 	<!-- 회원가입 -->
 	<insert id="insert" >
-	insert into mfg_member(user_id,user_pw,user_name,user_phone,latitude,longitude,roadFullAddr)
-	values (#{user_id},#{user_pw},#{user_name},#{user_phone},#{latitude},#{longitude},#{roadFullAddr})
-	</insert>
+       insert into mfg_member(user_id,user_pw,user_name,user_phone,latitude,longitude,roadFullAddr)
+       values (#{user_id},#{user_pw},#{user_name},#{user_phone},#{latitude},#{longitude},#{roadFullAddr})
+   </insert>
+
 
 	<!-- 아이디 중복 체크 -->
 	<select id="idCheck" resultType="int">
@@ -129,12 +130,13 @@
 		where user_id=#{user_id} and user_pw=#{user_pw}
 	</select>
 	
-	<!-- 역지오코딩 주소 저장 -->
+	<!-- 역지오코딩 주소 저장 /  ▼ 11/10 풀리퀘 전 추가해주세요 (찜한 상품 갯수까지) -->
 	<update id="saveAddr" >
 		update mfg_member set roadFullAddr=#{roadFullAddr}
 		where user_id=#{user_id}
 	</update>
 	
+
 	
 	<!-- SNS 회원 주소 입력  -->
 	<update id="addressUpdate" >
@@ -143,4 +145,20 @@
 	where user_id=#{user_id}
 	</update>
 	
+	<!-- 찜 목록 가져오기 -->
+	<select id="likeList" resultType="LikeListVO">
+	select p.seller_id, p.prod_name, p.price, l.`check`,p.prod_num
+	from mfg_products p join mfg_like l 
+	on p.prod_num = l.prod_num
+	join mfg_member m 
+	on l.buyer_id = m.user_id
+	where m.user_id=#{user_id}
+	</select>
+
+	<!-- 찜한 상품 개수 -->
+	<select id="getTotalCnt" resultType="Integer">
+		select count(*)
+		from mfg_like
+		where buyer_id=#{buyer_id}
+	</select>
 </mapper>

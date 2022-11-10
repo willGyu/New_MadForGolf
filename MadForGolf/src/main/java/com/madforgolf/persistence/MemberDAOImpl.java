@@ -11,6 +11,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
+
+import com.madforgolf.domain.LikeListVO;
+import com.madforgolf.domain.LikeVO;
 import com.madforgolf.domain.MemberVO;
 
 import com.mysql.cj.log.Log;
@@ -51,7 +54,6 @@ public class MemberDAOImpl implements MemberDAO {
 	public int phoneCheck(MemberVO vo) throws Exception {
 		return sqlSession.selectOne(NAMESPACE+".phoneCheck", vo);	
 	}
-	
 	
 	
 
@@ -119,6 +121,12 @@ public class MemberDAOImpl implements MemberDAO {
 		log.info(" updateMember -> 테스트 호출 ");
 		
 		return result;
+	}
+	
+	//휴대번호 중복 체크
+	@Override
+	public int updatePhoneCheck(MemberVO vo) throws Exception {
+			return sqlSession.selectOne(NAMESPACE+".phoneCheck", vo);	
 	}
 
 
@@ -191,6 +199,12 @@ public class MemberDAOImpl implements MemberDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
+	@Override
+	public int updatePhone(MemberVO vo) throws Exception {
+		return sqlSession.update(NAMESPACE+".updatePhone",vo);
+	}
 	
 	
 	// 카카오 DB에 정보 저장
@@ -209,6 +223,50 @@ public class MemberDAOImpl implements MemberDAO {
 		
 		return sqlSession.selectOne(NAMESPACE+".findKakao", userInfo);
 	}
+	
+	// ▼ 11/10 풀리퀘 전 추가해주세요
+	
+		//위도 경도 저장 @@@@@@@@@@@@@ 1101 추가
+			@Override
+			public void lalong(HashMap<String, String> paramMap) {
+				log.info("DAIImpl :"+paramMap);
+				sqlSession.insert(NAMESPACE+".insert", paramMap);
+			}
+			
+			// 역지오코딩 주소 저장
+			@Override
+			public int saveAddr(MemberVO vo) throws Exception {
+				log.info("saveAddr");
+						
+				return sqlSession.update(NAMESPACE+".saveAddr",vo);
+			}
+
+			// SNS - 위도 경도 저장
+			@Override
+			public void lalongAddr(HashMap<String, String> paramMap) {
+				log.info("DAIImpl :"+paramMap);
+				sqlSession.insert(NAMESPACE+".addressUpdate", paramMap);
+			}
+		
+			
+			//찜 목록
+			@Override
+			public List<LikeListVO> getLikeList(LikeListVO vo3) throws Exception {
+				log.info("listAll() 호출");
+				
+			List<LikeListVO> likeList = sqlSession.selectList(NAMESPACE+".likeList",vo3);
+				log.info("DAO: "+likeList);
+				return likeList;
+					}
+
+			//찜한 상품 개수 가져오기
+			@Override
+			public Integer getTotalCnt(LikeVO vo) throws Exception {
+
+			return sqlSession.selectOne(NAMESPACE+".getTotalCnt",vo);
+					}
+			
+			// ▲ 11/10 풀리퀘 전 추가해주세요
 }
 		
 

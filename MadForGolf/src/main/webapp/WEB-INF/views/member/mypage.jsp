@@ -46,7 +46,41 @@
                     <div class="row">
                     <div class="section-heading col-12 col-lg-12">
                         <h2>${user_name } 님의 마이페이지</h2><br>
-                        <p>${user_name} 님의 매너스코어는 ${loginVO.score }입니다.</p>
+					<%-- <p>${user_name} 님의 매너스코어는 ${loginVO.score }입니다.</p> --%>
+					
+					<!-- 매너스코어 -->
+				<div class="single-cool-fact d-flex align-items-center justify-content-center mb-100">
+		<div class="cf-icon">
+			<img src="/resources/img/core-img/cf3.png" alt=""> 
+				</div>
+					<c:set var="score" scope="session" value="${loginVO.score }" />
+				  	<p><c:out value="${user_name }"/>님의 매너 점수는</p>
+				  	<p>
+				  	<c:choose>
+				  		<c:when test="${score <=20 }">
+				  			파
+				  		</c:when>
+				  		<c:when test="${score <=40 }">
+				  			버디
+				  		</c:when>
+				  		<c:when test="${score <=60 }">
+				  			이글
+				  		</c:when>
+				  		<c:when test="${score <=80 }">
+				  			알바트로스
+				  		</c:when>
+				  		<c:when test="${score <=100 }">
+				  			홀인원
+				  		</c:when>
+				  		<c:otherwise>
+				  			리뷰가 없습니다.
+				  		</c:otherwise>
+				  	</c:choose>
+				  	</p>
+		 </div> 
+	</div>
+				<!-- 매너스코어 -->
+					
                         <br><br><br>
                     <!-- <button type="button" class="btn alazea-btn w-80" onClick="location.href='#'">채팅목록</button> <br>
                     <button type="button" class="btn alazea-btn w-80" onClick="location.href='#'">지역인증</button> <br>
@@ -104,10 +138,10 @@
                             
                             <!-- 찜 목록 -->
                             <div class="col-12 col-sm-12">
-                                <div class="single-benefits-area" onClick="location.href='/mypage/likeList'">
-                                    <a href="/member/update"><img src="${pageContext.request.contextPath }/resources/img/core-img/b2.png" alt=""></a>
-                                     <a href="/member/update"><h5>찜 목록</h5></a>
-                                     <a href="/member/update"><p>내가 찜한 상품을 확인할 수 있는 공간입니다. </p></a>
+                                <div class="single-benefits-area" onClick="location.href='/member/likeListAll'">
+                                    <a href="/member/likeListAll"><img src="${pageContext.request.contextPath }/resources/img/core-img/b2.png" alt=""></a>
+                                     <a href="/member/likeListAll"><h5>찜 목록</h5></a>
+                                     <a href="/member/likeListAll"><p>내가 찜한 상품을 확인할 수 있는 공간입니다. </p></a>
                                 </div>
                             </div>
                             
@@ -123,9 +157,9 @@
                             <!-- 지역 인증 -->
                             <div class="col-12 col-sm-12">
                                 <div class="single-benefits-area" onClick="location.href='/member/address'">
-                                    <a href="/member/update"><img src="${pageContext.request.contextPath }/resources/img/core-img/b4.png" alt=""></a>
-                                     <a href="/member/update"><h5>지역 인증</h5></a>
-                                     <a href="/member/update"><p>나의 지역을 인증할 수 있는 공간입니다. </p></a>
+                                    <a href="/member/address"><img src="${pageContext.request.contextPath }/resources/img/core-img/b4.png" alt=""></a>
+                                     <a href="/member/address"><h5>지역 인증</h5></a>
+                                     <a href="/member/address"><p>나의 지역을 인증할 수 있는 공간입니다. </p></a>
                                 </div>
                             </div>
                             

@@ -11,6 +11,7 @@ public class MemberVO {
 	private int score;
 	private double latitude;
 	private double longitude;
+	private String roadFullAddr;
 
 	public String getUser_id() {
 		return user_id;
@@ -60,12 +61,20 @@ public class MemberVO {
 	public void setLongitude(double longitude) {
 		this.longitude = longitude;
 	}
+	
+	public String getRoadFullAddr() {
+		return roadFullAddr;
+	}
+	public void setRoadFullAddr(String roadFullAddr) {
+		this.roadFullAddr = roadFullAddr;
+	}
 	@Override
 	public String toString() {
 		return "MemberVO [user_id=" + user_id + ", user_pw=" + user_pw + ", user_name=" + user_name + ", user_phone="
 				+ user_phone + ", reg_date=" + reg_date + ", score=" + score + ", latitude=" + latitude + ", longitude="
-				+ longitude + "]";
+				+ longitude + ", roadFullAddr=" + roadFullAddr + "]";
 	}
+	
 
 	
 	

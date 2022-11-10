@@ -63,7 +63,7 @@
 }
 
 .category_btn:NTH-OF-TYPE(5){
-	border-radius: 5px 5px 5px 5px;
+	border-radius: 0 5px 5px 0;
 
 }
 
@@ -145,16 +145,17 @@
 <div class="container container_box">
 
 
+	
 
-	<!-- category 클릭 시 말머리별 게시글 리스트만 뜨도록 구현 -->
-	<div class="category_list">
-		<a class="category_btn" href="/product/listProductAll?page=1"><div>판매내역</div></a>
-		<a class="category_btn" href="/product/listProductBuy?page=1"><div>구매내역</div></a>
-		<a class="category_btn" href="/product/listProductDealing?page=1"><div>거래중</div></a>
+  	<!-- category 클릭 시 말머리별 게시글 리스트만 뜨도록 구현 -->
+ 	<div class="category_list">
+ 		<a class="category_btn" href="/product/listProductAll?page=1"><div>판매내역</div></a>
+ 		<a class="category_btn" href="/product/listProductBuy?page=1"><div>구매내역</div></a>
+ 		<a class="category_btn" href="/product/listProductDealing?page=1"><div>거래중</div></a>
 	</div>
-
-
-	<!--  #####  게시글 리스트 시작   ##### --> 
+   
+   
+  <!--  #####  게시글 리스트 시작   ##### --> 
 	<div class="table_box">
 	
 		<table class="table">
@@ -166,11 +167,11 @@
 					<th>가격</th>
 					<th>리뷰</th>
 				</tr>
-			<c:forEach var="sell" items="${sellProductList }">
+			<c:forEach var="buy" items="${buyProductList }"> 
 				<tr>
-					<td>${sell.prod_date }</td>
-					<td><a href="/product/productDetail?prod_num=${sell.prod_num}">${sell.prod_name }</a></td>
-					<td>${sell.price }</td>
+					<td>${buy.deal_date }</td>
+					<td><a href="/product/productDetail?prod_num=${buy.product.prod_num}">${buy.product.prod_name }</a></td>
+					<td>${buy.product.price }</td>
 					<td>리뷰</td>
 <%-- 					<td>
 						<a href="/board/boardRead?board_num=${vo.prod_num}">${vo.title }</a></td>

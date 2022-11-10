@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.Map;
 
 import com.madforgolf.domain.BoardVO;
+import com.madforgolf.domain.DealVO;
 import com.madforgolf.domain.LikeVO;
+import com.madforgolf.domain.PageMakerVO;
 import com.madforgolf.domain.PageVO;
 import com.madforgolf.domain.ProductVO;
 
@@ -61,8 +63,26 @@ public interface ProductDAO {
 	//좋아요 삭제
 	public void deleteLike(LikeVO vo);
 	
-	// 구매내역 목록 - listBuyPage(pageVO) 수정중,,
-	public List<ProductVO> listBuyPage(PageVO vo) throws Exception;
+	//판매목록
+	public List<ProductVO> sellProductList(PageMakerVO pm, String user_id) throws Exception;
+
+	//판매목록 글갯수
+	public Integer sellProductListCnt(PageVO vo, String user_id) throws Exception;
+	
+	//구매목록
+	public List<DealVO> buyProductList(PageMakerVO pm, String user_id) throws Exception;
+	
+	//판매목록 글갯수
+	public Integer buyProductListCnt(PageVO vo, String user_id) throws Exception;
+	
+	//거래중목록
+	public List<DealVO> DealingProductList(PageMakerVO pm, String user_id) throws Exception;
+	
+	//거래중목록 글갯수
+	public Integer DealingProductListCnt(PageVO vo, String user_id) throws Exception;
+	
+	//거래중->거래후
+	public Integer dealDone(DealVO vo) throws Exception;
 
 	
 }

@@ -30,6 +30,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.madforgolf.domain.BoardVO;
+import com.madforgolf.domain.DealVO;
 import com.madforgolf.domain.LikeVO;
 import com.madforgolf.domain.PageMakerVO;
 import com.madforgolf.domain.PageVO;
@@ -187,15 +188,15 @@ public class ProductController {
 
 	// 상품 상세 페이지 - 이동(GET) 
 		@RequestMapping(value = "/productDetail", method = RequestMethod.GET)
-		public String productDetail(ProductVO vo, Model model, HttpSession session) throws Exception {
+		public String productDetail(ProductVO vo,Model model, HttpSession session) throws Exception {
 			log.info("productDetail(ProductVO vo) 호출");
 			int result=-1;
 			String user_id = (String)session.getAttribute("user_id");
 
-
 			ProductVO product = service.productDetail(vo);
 			model.addAttribute("product", product);
-
+			
+			
 			LikeVO lvo = new LikeVO();
 			lvo.setProd_num(product.getProd_num());
 			lvo.setBuyer_id(user_id);
@@ -210,7 +211,8 @@ public class ProductController {
 				like.setCheck(0);
 			}
 			model.addAttribute("result",like);
-
+			
+			session.setAttribute("user_id", user_id);
 
 			return "/product/shopDetails";
 
@@ -356,7 +358,6 @@ public class ProductController {
 			return "/product/productUpdate";
 		}
 		
-		
 		// 상품작성 수정하기 - POST (수정할데이터 처리)
 		@RequestMapping(value = "/modify", method = RequestMethod.POST)
 		public String modifyProductPOST(
@@ -371,7 +372,6 @@ public class ProductController {
 			// 파일의 정보를 저장하는 MAP
 			Map map = new HashMap();
 			
-
 			Enumeration enu = multi.getParameterNames(); // 파일정보 x
 			
 			while(enu.hasMoreElements()) {
@@ -381,24 +381,6 @@ public class ProductController {
 				log.info("value : " + value);
 				map.put(name, value);
 			}
-
-			while(fileNames.hasNext()) {
-				String fileName = fileNames.next(); // 파일의 파라미터명
-				log.info("fileName : " + fileName);
-				
-				MultipartFile mFile = multi.getFile(fileName); // 업로드된 파일정보를 가져오기
-				String oFileName = mFile.getOriginalFilename();
-				log.info("oFileName : " + oFileName);
-				
-				if(!oFileName.equals("")) {
-					// 파일 업로드 경로
-					String uploadFolder1 = "C:\\Users\\ITWILL\\git\\New_MadForGolf1\\MadForGolf11\\src\\main\\webapp\\resources\\product_img";
-					// 속도가 느려 초반에 엑박뜸 and 경로 일치 필요 => but, 깃허브 연동 o
-					String uploadFolder2 = request.getServletContext().getRealPath("resources/product_img");
-					// 메서드를 통한 경로 => 속도가 빠름, 경로 일치 불필요 => but, 깃허브 연동 x
-					// 파일 저장 경로 : D:\workspace_sts6\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\MadForGolf\resources\product_img
-					// => 둘 다 필요
-
 					
 			// 굳이 이렇게 해야하나...
 			log.info("map : " + map);
@@ -430,8 +412,7 @@ public class ProductController {
 				return "redirect:/product/modify?prod_num=" + vo.getProd_num();
 			}
 			
-
-		} 
+		}
 		
 		// 전달된 파일 처리 전용 메서드 - 오버로딩(oldfile)
 			public List<String> fileProcess(
@@ -439,7 +420,6 @@ public class ProductController {
 					String oldfile1, String oldfile2, String oldfile3) throws Exception {
 				log.info("첨부파일 처리 시작");
 				
-
 				// 파일정보를 저장하는 리스트(리턴)
 				List<String> fileList = new ArrayList<String>();
 				
@@ -450,41 +430,6 @@ public class ProductController {
 				while(fileNames.hasNext()) {
 					String fileName = fileNames.next(); // 파일의 파라미터명
 					log.info("fileName : " + fileName);
-
-					// 파일 등록 - 고유한 이름 만들기
-					String uFileName = uniqueName + fileExtension;
-					log.info("고유한 이름 : " + uFileName);
-					
-					switch(fileName) {
-						case "file1" : {
-							File oldDeleteFile1 = new File(uploadFolder1 + "\\" + oldfile1);
-							oldDeleteFile1.delete();
-							File oldDeleteFile2 = new File(uploadFolder2 + "\\" + oldfile1);
-							oldDeleteFile2.delete();
-							vo.setProd_img(uFileName);
-							break;
-						}
-						case "file2" : {
-							File oldDeleteFile1 = new File(uploadFolder1 + "\\" + oldfile2);
-							oldDeleteFile1.delete();
-							File oldDeleteFile2 = new File(uploadFolder2 + "\\" + oldfile2);
-							oldDeleteFile2.delete();
-							vo.setProd_img2(uFileName);
-							break;
-						}
-						case "file3" : {
-							File oldDeleteFile1 = new File(uploadFolder1 + "\\" + oldfile3);
-							oldDeleteFile1.delete();
-							File oldDeleteFile2 = new File(uploadFolder2 + "\\" + oldfile3);
-							oldDeleteFile2.delete();
-							vo.setProd_img3(uFileName);
-							break;
-						}
-					}
-					log.info("image1 : " + vo.getProd_img());
-					log.info("image2 : " + vo.getProd_img2());
-					log.info("image3 : " + vo.getProd_img3());
-
 					
 					MultipartFile mFile = multi.getFile(fileName); // 업로드된 파일정보를 가져오기
 					String oFileName = mFile.getOriginalFilename();
@@ -492,7 +437,7 @@ public class ProductController {
 					
 					if(!oFileName.equals("")) {
 						// 파일 업로드 경로
-						String uploadFolder1 = "C:\\Users\\ITWILL\\git\\New_MadForGolf1\\MadForGolf\\src\\main\\webapp\\resources\\product_img";
+						String uploadFolder1 = "C:\\Users\\ITWILL\\git\\New_MadForGolf\\MadForGolf\\src\\main\\webapp\\resources\\product_img";
 						// 속도가 느려 초반에 엑박뜸 and 경로 일치 필요 => but, 깃허브 연동 o
 						String uploadFolder2 = request.getServletContext().getRealPath("resources/product_img");
 						// 메서드를 통한 경로 => 속도가 빠름, 경로 일치 불필요 => but, 깃허브 연동 x
@@ -544,9 +489,6 @@ public class ProductController {
 						log.info("image2 : " + vo.getProd_img2());
 						log.info("image3 : " + vo.getProd_img3());
 						
-						
-						
-						
 						// 업로드 될 파일의 이름들을 저장
 						fileList.add(uFileName);
 						log.info("fileList" + fileList);
@@ -557,7 +499,7 @@ public class ProductController {
 						
 						if(mFile.getSize() != 0) { // 첨부파일이 있을 때				
 							//mFile.transferTo(file1); // 첨부파일로 전달된 정보를 파일로 전달  // 학원에서 사용할 때 주석 풀면 됩니다.
-							mFile.transferTo(file2); 
+							mFile.transferTo(file2);
 							log.info("파일 업로드 성공");
 						} // if
 					} // if(oFileName)
@@ -592,7 +534,7 @@ public class ProductController {
 	
 //=========================메인화면 상품리스트=================================	
 	// http://localhost:8080/product 
-		// 상품 리스트 - 조회 (GET)
+		// 상품 리스트 - 조회 (GET)]
 		@RequestMapping(value = "/index", method = RequestMethod.GET)
 		public void listMainGET(ProductVO vo,Model model, HttpSession session) throws Exception {
 			log.info("listMainGET() 호출");
@@ -661,33 +603,150 @@ public class ProductController {
 		
 		
 				
-//-------------------------상품 판매관리/구매관리--------------------------------- : 수정중 ..
+//-------------------------상품 판매내역--------------------------------- : 수정중 ..
 	  
-	  
-//게시판 리스트(페이징 처리) - GET :초기에 판매관리 누르면 판매내역 뜨는 페이지 보여주기
-	  
-	  @RequestMapping(value = "/listProductAll", method = RequestMethod.GET) 
-	  public String listProductAllGET(Model model,PageVO vo,HttpSession session)throws Exception
-	  { log.info(" 1. controller - listProductAllGET ");
-	  
-	  String user_id = (String)session.getAttribute("user_id");
-	  log.info("############"+user_id);
-	  
-	  session.setAttribute("user_id", user_id);
-	  model.addAttribute("buyProductList", service.listBuyPage(vo));
-	  
-	  
-	  //페이징 처리 하단부 정보 저장 
-	  PageMakerVO pm = new PageMakerVO(); pm.setVo(vo);
-	  pm.setTotalCnt(385); model.addAttribute("pm", pm);
-	  
-	  session.setAttribute("isUpdate", false); //조회수 때문에 주는 것
-	  
-	  return "/product/productList"; }
-	  
-	 
+		// 게시판 리스트(페이징 처리) - GET
+		@RequestMapping(value = "/listProductAll", method = RequestMethod.GET)
+		public String listProductAllGET(Model model, PageVO vo, HttpSession session) throws Exception {
+			// ==================================================== 페이징 처리
+			// ====================================================
+			String user_id = (String) session.getAttribute("user_id");
+			// DB 내 모든 상품의 총 개수
+			Integer sellProductListCnt = service.sellProductListCnt(vo,user_id);
+			log.info("DB 내 상품의 총 개수 : " + sellProductListCnt + "개");
+			
+			// 페이징 처리 하단부 정보 저장
+			PageMakerVO pm = new PageMakerVO();
+			pm.setVo(vo); // 페이징 처리 하단부 정보를 vo에 받아오고
+			pm.setTotalCnt(sellProductListCnt); // calData() 페이징처리에 필요한 계산식 계산 메서드가 포함된 전체 글 갯수 초기화 메서드 호출
+			
+			log.info("pmVO : " + pm);
+			log.info("pageVO : " + vo);
+			
+			// 페이징 처리 객체(pm)을 어트리뷰트에 담아서 view로 보냄
+			model.addAttribute("pm", pm);
+			// ==================================================== 페이징 처리
+			// ====================================================
+			
+			log.info(" 1. controller - listProductAllGET ");
+			log.info(vo+"");
 
-//-------------------------상품 판매관리/구매관리---------------------------------
+			log.info("############" + user_id);
+
+			session.setAttribute("user_id", user_id);
+
+			model.addAttribute("sellProductList", service.sellProductList(pm, user_id));
+			//log.info(service.sellProductList(pm, user_id)+"=======");
+			
+
+			session.setAttribute("isUpdate", false); // 조회수 때문에 주는 것
+
+			return "/product/productList";
+		}
+
+//-------------------------상품 판매내역---------------------------------
+		
+		
+//-------------------------상품 구매내역--------------------------------- : 수정중 ..
+		
+		// 게시판 리스트(페이징 처리) - GET
+		@RequestMapping(value = "/listProductBuy", method = RequestMethod.GET)
+		public String listProductBuyGET(Model model, PageVO vo, HttpSession session) throws Exception {
+			// ==================================================== 페이징 처리
+			// ====================================================
+			String user_id = (String) session.getAttribute("user_id");
+			// DB 내 모든 상품의 총 개수
+			Integer buyProductListCnt = service.buyProductListCnt(vo,user_id);
+			log.info("DB 내 상품의 총 개수 : " + buyProductListCnt + "개");
+			
+			// 페이징 처리 하단부 정보 저장
+			PageMakerVO pm = new PageMakerVO();
+			pm.setVo(vo); // 페이징 처리 하단부 정보를 vo에 받아오고
+			pm.setTotalCnt(buyProductListCnt); // calData() 페이징처리에 필요한 계산식 계산 메서드가 포함된 전체 글 갯수 초기화 메서드 호출
+			
+			log.info("pmVO : " + pm);
+			log.info("pageVO : " + vo);
+			
+			// 페이징 처리 객체(pm)을 어트리뷰트에 담아서 view로 보냄
+			model.addAttribute("pm", pm);
+			// ==================================================== 페이징 처리
+			// ====================================================
+			
+			log.info(" 1. controller - listProductAllGET ");
+			log.info(vo+"");
+			
+			log.info("############" + user_id);
+			
+			session.setAttribute("user_id", user_id);
+			
+			model.addAttribute("buyProductList", service.buyProductList(pm, user_id));
+			//log.info(service.sellProductList(pm, user_id)+"=======");
+			
+			
+			session.setAttribute("isUpdate", false); // 조회수 때문에 주는 것
+			
+			return "/product/productBuyList";
+		}
+		
+//-------------------------상품 구매내역---------------------------------
+		
+//-------------------------상품 거래중내역--------------------------------- 
+		
+		// 게시판 리스트(페이징 처리) - GET
+		@RequestMapping(value = "/listProductDealing", method = RequestMethod.GET)
+		public String listProductDealingGET(Model model, PageVO vo, HttpSession session) throws Exception {
+			// ==================================================== 페이징 처리
+			// ====================================================
+			String user_id = (String) session.getAttribute("user_id");
+			// DB 내 모든 상품의 총 개수
+			Integer DealingProductListCnt = service.DealingProductListCnt(vo,user_id);
+			log.info("DB 내 상품의 총 개수 : " + DealingProductListCnt + "개");
+			
+			// 페이징 처리 하단부 정보 저장
+			PageMakerVO pm = new PageMakerVO();
+			pm.setVo(vo); // 페이징 처리 하단부 정보를 vo에 받아오고
+			pm.setTotalCnt(DealingProductListCnt); // calData() 페이징처리에 필요한 계산식 계산 메서드가 포함된 전체 글 갯수 초기화 메서드 호출
+			
+			log.info("pmVO : " + pm);
+			log.info("pageVO : " + vo);
+			
+			// 페이징 처리 객체(pm)을 어트리뷰트에 담아서 view로 보냄
+			model.addAttribute("pm", pm);
+			// ==================================================== 페이징 처리
+			// ====================================================
+			
+			log.info(" 1. controller - listProductAllGET ");
+			log.info(vo+"");
+			
+			log.info("############" + user_id);
+			
+			session.setAttribute("user_id", user_id);
+			
+			model.addAttribute("DealingProductList", service.DealingProductList(pm, user_id));
+			//log.info(service.sellProductList(pm, user_id)+"=======");
+			
+			
+			session.setAttribute("isUpdate", false); // 조회수 때문에 주는 것
+			
+			return "/product/productDealingList";
+		}
+		
+//-------------------------상품 거래중내역---------------------------------
+		
+//-------------------------상품 거래중내역: 거래중->거래후 ---------------------------------
+			// 상품작성 삭제 - POST
+	@RequestMapping(value = "/dealDone", method = RequestMethod.GET)
+	public String dealDonePOST(DealVO vo,Model model) throws Exception {
+		log.info(" dealDonePOST() 호출 ");
+
+		//거래완료처리 메서드
+		service.dealDone(vo);
+	
+		return "redirect:/product/listProductDealing?page=1";
+	}
+//-------------------------상품 거래중내역: 거래중->거래후 ---------------------------------
+		
+		
 		
 		
 		

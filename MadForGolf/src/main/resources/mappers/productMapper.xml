@@ -16,9 +16,11 @@
 		<result property="detail" column="detail"/>
 		<result property="condition" column="condition"/>
 		<result property="category" column="category"/>
-		<result property="state" column="state"/>
 		<result property="like_count" column="like_count"/>
 		<result property="payment" column="payment"/>
+		<result property="gender" column="gender"/>
+		<result property="prod_img2" column="prod_img2"/>
+		<result property="prod_img3" column="prod_img3"/>
 	</resultMap>
 	
 	<resultMap type="MemberVO" id="seller">
@@ -49,6 +51,7 @@
 		<result property="buyer_id" column="buyer_id"/>
 		<result property="prod_num" column="prod_num"/>
 		<result property="price" column="price"/>
+		<result property="state" column="state"/>
 		<result property="deal_date" column="deal_date"/>
 		<collection property="product" resultMap="product"></collection>
 		<collection property="seller" resultMap="seller"></collection>
@@ -146,21 +149,34 @@
 		where category = #{category}
 		and gender = #{gender}
 	</select>
-	
-		<!-- 상품 1개 상세 출력 -->
-	<select id="getProductDetail" resultType="ProductVO">
+	<!-- 
+		상품 1개 상세 출력 -->
+<!-- 	<select id="getProductDetail" resultType="ProductVO">
 		select *
 		from mfg_products
 		where prod_num = #{prod_num}
-	</select>
+	</select> -->
+<!-- 	<select id="getProductDetail" resultMap="product">
+		select p.prod_img, p.seller_id, p.prod_name, p.price, p.detail,p.like_count, p.`condition`, p.prod_num,p.gender,
+		p.category, d.state
+		from mfg_products p join mfg_deal d
+		on p.prod_num = d.prod_num
+		where p.prod_num = #{prod_num}
+	</select> -->
 	
-<!-- 	<select id="getProductDetail" resultMap="deal">
-		select p.seller_id, p.prod_name, p.price, p.detail, p.prod_img, p.like_count,
-		p.prod_num,p.`condition`, p.gender, p.category, d.state
+	<select id="getProductDetail" resultMap="deal">
+		select p.seller_id, p.prod_name, p.price, p.detail, p.prod_img, p.prod_img2, p.prod_img3,p.like_count,
+		p.prod_num,p.`condition`, p.gender, p.category, d.state, d.deal_num
 		from mfg_products p join mfg_deal d
 		on p.prod_num = d.prod_num
 		where p.prod_num =#{prod_num}
-	</select> -->
+	</select>
+	
+	<select id="getState" resultType="String">
+		select state
+		from mfg_deal
+		where deal_num =#{deal_num}
+	</select>
 	
 	<!-- 상품 등록 -->
 	<insert id="insert">
@@ -285,6 +301,22 @@
 		where deal_num = #{deal_num}
 	</update>
 	<!-- 거래중 ->거래후 버튼 -->
+	
+	<!-- 거래전->거래중 버튼  -->
+	<update id="AfterDeal">
+		update mfg_deal
+		set state = '거래중'
+		where deal_num = #{deal_num}
+	</update>
+	<!-- 거래전->거래중 버튼  -->
+	
+	<!-- 거래중->거래전 버튼 -->
+	<update id="BeforeDeal">
+		update mfg_deal
+		set state = '거래전'
+		where deal_num = #{deal_num}
+	</update>
+	<!-- 거래중->거래전 버튼 -->
 	
 	
 	

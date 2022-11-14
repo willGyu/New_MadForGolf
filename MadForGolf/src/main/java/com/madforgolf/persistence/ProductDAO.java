@@ -24,7 +24,7 @@ public interface ProductDAO {
 	public Integer getTotalCnt(ProductVO vo) throws Exception;
 	
 	// 상품 1개 상세 출력 - getProductDetail(vo)
-	public ProductVO getProductDetail(ProductVO vo) throws Exception;
+	public DealVO getProductDetail(DealVO vo) throws Exception;
 	
 	// 상품 등록 - insertProduct(vo)
 	public void insertProduct(ProductVO vo) throws Exception;
@@ -83,6 +83,18 @@ public interface ProductDAO {
 	
 	//거래중->거래후
 	public Integer dealDone(DealVO vo) throws Exception;
+	
+	//거래전->거래중
+	public Integer BeforeAndDealing(DealVO dvo) throws Exception;
+	
+	//거래전->거래중
+	public String BeforeAndDealing1(DealVO dvo) throws Exception;
+	
+	
+	
+	
+	
+	
 
 	
 }

@@ -63,7 +63,7 @@ public class ProductServiceImpl implements ProductService {
 
 	
 	@Override
-	public ProductVO productDetail(ProductVO vo) throws Exception {
+	public DealVO productDetail(DealVO vo) throws Exception {
 		return dao.getProductDetail(vo);
 	}
 	
@@ -200,6 +200,19 @@ public class ProductServiceImpl implements ProductService {
 	log.info("dealDone(DealVO vo) 호출");
 		
 		return dao.dealDone(vo);
+	}
+	
+	@Override
+	public Integer BeforeAndDealing(DealVO dvo) throws Exception {
+		
+		log.info("BeforeAndDealing(DealVO dvo)");
+		return dao.BeforeAndDealing(dvo);
+	}
+	
+	@Override
+	public String BeforeAndDealing1(DealVO dvo) throws Exception {
+		log.info("BeforeAndDealing1(DealVO dvo)");
+		return dao.BeforeAndDealing1(dvo);
 	}
 	
 	

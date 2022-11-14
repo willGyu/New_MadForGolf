@@ -71,6 +71,7 @@ public class ProductController {
 		// 상품을 카테고리로 분류하기 위해 category 변수명으로 변수를 view로 넘겨줌
 		model.addAttribute("category", vo.getCategory());
 		model.addAttribute("gender", vo.getGender());
+		//지역컬럼 모델 추가 
 		
 		// 지역인증 되면, model로 위도/경도 넘기기 + header카테고리 주소값에도 위도경도 추가 + shop성별 카테고리에도 위도경도 추가 
 
@@ -124,6 +125,8 @@ public class ProductController {
 		model.addAttribute("category", vo.getCategory());
 
 		model.addAttribute("gender", vo.getGender());
+		//지역컬럼 
+		
 		// 출력되는 상품 리스트를 어트리뷰트에 담아서 view로 보냄
 		model.addAttribute("productList", productList);
 
@@ -188,17 +191,20 @@ public class ProductController {
 
 	// 상품 상세 페이지 - 이동(GET) 
 		@RequestMapping(value = "/productDetail", method = RequestMethod.GET)
-		public String productDetail(ProductVO vo,Model model, HttpSession session) throws Exception {
-			log.info("productDetail(ProductVO vo) 호출");
+		public String productDetail(DealVO vo,Model model, HttpSession session) throws Exception {
+			log.info("productDetail(DealVO vo) 호출");
+			
 			int result=-1;
+			
 			String user_id = (String)session.getAttribute("user_id");
 
-			ProductVO product = service.productDetail(vo);
-			model.addAttribute("product", product);
+			DealVO deal = service.productDetail(vo);
+			model.addAttribute("deal", deal);
 			
-			
+		 
+						
 			LikeVO lvo = new LikeVO();
-			lvo.setProd_num(product.getProd_num());
+			lvo.setProd_num(deal.getProduct().getProd_num());
 			lvo.setBuyer_id(user_id);
 			log.info(lvo+"");
 
@@ -230,7 +236,7 @@ public class ProductController {
 
 	// 상품 등록 - 등록 (POST) - 다중 업로드
 	@RequestMapping(value = "/productInsert", method = RequestMethod.POST)
-	public String productInsertPOST(MultipartHttpServletRequest multi, ProductVO vo, HttpServletRequest request) throws Exception {
+	public String productInsertPOST(MultipartHttpServletRequest multi, ProductVO vo,HttpServletRequest request) throws Exception {
 		log.info("productInsertPOST() 호출");
 		
 		// log.info("multi : " + multi);
@@ -316,7 +322,7 @@ public class ProductController {
 			log.info("fileList" + fileList);
 			
 			// 파일 업로드
-			String uploadFolder1 = "C:\\Users\\ITWILL\\git\\New_MadForGolf\\MadForGolf11\\src\\main\\webapp\\resources\\product_img";
+			//String uploadFolder1 = "C:\\Users\\ITWILL\\git\\New_MadForGolf3\\MadForGolf\\src\\main\\webapp\\resources\\product_img";
 			// 속도가 느려 초반에 엑박뜸 and 경로 일치 필요 => but, 깃허브 연동 o
 			String uploadFolder2 = request.getServletContext().getRealPath("resources/product_img");
 			// 메서드를 통한 경로 => 속도가 빠름, 경로 일치 불필요 => but, 깃허브 연동 x
@@ -324,11 +330,11 @@ public class ProductController {
 			// => 둘 다 필요
 			
 			// 파일 생성
-			File file1 = new File(uploadFolder1 + "\\" + uFileName);
+			//File file1 = new File(uploadFolder1 + "\\" + uFileName);
 			File file2 = new File(uploadFolder2 + "\\" + uFileName);
 				
 			if(mFile.getSize() != 0) { // 첨부파일이 있을 때				
-				mFile.transferTo(file1); // 첨부파일로 전달된 정보를 파일로 전달
+				//mFile.transferTo(file1); // 첨부파일로 전달된 정보를 파일로 전달
 				mFile.transferTo(file2); // 첨부파일로 전달된 정보를 파일로 전달
 				log.info("파일 업로드 성공");
 			} // if
@@ -348,11 +354,11 @@ public class ProductController {
 		
 		// 상품작성 수정하기 - GET (기존의 정보 조회 출력+수정할 정보 입력)
 		@RequestMapping(value = "/modify", method = RequestMethod.GET)
-		public String modifyProductGET(ProductVO vo, Model model) throws Exception {
+		public String modifyProductGET(DealVO vo, Model model) throws Exception {
 			log.info("modifyProductGET() 호출");
 			
 			// 연결된 뷰에 정보 전달(Model객체)
-			model.addAttribute("product", service.productDetail(vo));
+			model.addAttribute("deal", service.productDetail(vo));
 			
 			// 페이지 이동(출력) /product/productUpdate.jsp
 			return "/product/productUpdate";
@@ -363,9 +369,10 @@ public class ProductController {
 		public String modifyProductPOST(
 				@RequestParam("oldfile1") String oldfile1, @RequestParam("oldfile2") String oldfile2,
 				@RequestParam("oldfile3") String oldfile3, ProductVO vo, RedirectAttributes rttr,
-				MultipartHttpServletRequest multi, HttpServletRequest request) throws Exception {
+				MultipartHttpServletRequest multi, HttpServletRequest request,HttpSession session) throws Exception {
 			log.info("modifyProductPOST() 호출");
-			
+			String user_id = (String)session.getAttribute("user_id");
+
 			// 전달정보 저장(수정할 정보) VO
 			log.info("수정할 정보 : " + vo);
 			
@@ -745,8 +752,30 @@ public class ProductController {
 		return "redirect:/product/listProductDealing?page=1";
 	}
 //-------------------------상품 거래중내역: 거래중->거래후 ---------------------------------
+	
+//-------------------------상품 상세페이지: 거래전->거래중  // 거래전->거래후---------------------------------
+	@ResponseBody
+	@RequestMapping(value="/BeforeAndDealing2",method=RequestMethod.POST)
+	public Integer BeforeAndDealing(DealVO dvo,HttpSession session, Model model,@RequestParam("state") String state) throws Exception{
+		log.info("AfterDealPOST 실행 @@@@@@@@");
 		
+		log.info("dvo : " + dvo);
+		log.info(state);
 		
+		//String user_id = (String)session.getAttribute("user_id");
+				
+		Integer result = service.BeforeAndDealing(dvo);
+		log.info(dvo+"############");
+		
+				
+		session.setAttribute("result", result);
+				
+
+		return result;
+	}
+//-------------------------상품 상세페이지: 거래전->거래중  // 거래전->거래후---------------------------------
+	
+
 		
 		
 		

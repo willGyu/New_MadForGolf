@@ -62,7 +62,7 @@
 
 }
 
-.category_btn:NTH-OF-TYPE(5){
+.category_btn:NTH-OF-TYPE(3){
 	border-radius: 0 5px 5px 0;
 
 }

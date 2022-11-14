@@ -13,9 +13,10 @@ public class DealVO {
 	private int price;				// 가격
 	private String state;			// 거래 상태
 	private Timestamp deal_date;	// 거래 일시
-	private ProductVO buyer;		// 구매자
-	private ProductVO product;		// 상품
-	private MemberVO seller;		// 판매자
+	
+	private MemberVO seller;	// 판매자
+	private MemberVO buyer;		// 구매자
+	private ProductVO product;	// 상품
 	
 	
 	public int getDeal_num() {		
@@ -60,10 +61,10 @@ public class DealVO {
 	public void setDeal_date(Timestamp deal_date) {
 		this.deal_date = deal_date;
 	}
-	public ProductVO getBuyer() {
+	public MemberVO getBuyer() {
 		return buyer;
 	}
-	public void setBuyer(ProductVO buyer) {
+	public void setBuyer(MemberVO buyer) {
 		this.buyer = buyer;
 	}
 	public ProductVO getProduct() {

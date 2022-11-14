@@ -17,6 +17,7 @@ public class ProductVO {
 	private String prod_img2;
 	private String prod_img3;
 	
+	
 	//거래 목록 리스트 띄우기 위해 deal_num추가
 	private int deal_num;
 	

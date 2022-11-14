@@ -22,7 +22,7 @@ public interface ProductService {
 	public List<ProductVO> getProductListAll2(ProductVO vo, PageVO vo2) throws Exception;
 	
 	// 상품 1개 상세 불러오기
-	public ProductVO productDetail(ProductVO vo) throws Exception;
+	public DealVO productDetail(DealVO vo) throws Exception;
 	
 	// 상품 전체 개수 불러오기
 	public Integer getTotalCnt(ProductVO vo) throws Exception;
@@ -76,6 +76,13 @@ public interface ProductService {
 	
 	// 거래완료
 	public Integer dealDone(DealVO vo) throws Exception;
+	
+	//상세페이지 거래전->거래중   // ->거래전->거래중
+	public Integer BeforeAndDealing(DealVO dvo) throws Exception;
+	
+	//상세페이지 거래전->거래중   // ->거래전->거래중
+	public String BeforeAndDealing1(DealVO dvo) throws Exception;
+
 
 	
 	

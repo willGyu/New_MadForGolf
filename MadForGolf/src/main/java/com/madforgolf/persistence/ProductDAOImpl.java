@@ -119,7 +119,7 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 	
 	@Override
-	public ProductVO getProductDetail(ProductVO vo) throws Exception {
+	public DealVO getProductDetail(DealVO vo) throws Exception {
 		return sqlSession.selectOne(NAMESPACE + ".getProductDetail", vo);
 	}
 
@@ -324,12 +324,57 @@ public class ProductDAOImpl implements ProductDAO {
 		
 	}
 	
+	
 	//거래중 -> 거래후
 	@Override
 	public Integer dealDone(DealVO vo) throws Exception {
 		log.info("DAOImpl: DealDone(DealVO vo)호출");
 		
 		return sqlSession.update(NAMESPACE+".DealDone",vo);
+	}
+	
+	
+	//거래중 -> 거래후
+	@Override
+	public Integer BeforeAndDealing(DealVO dvo) throws Exception {
+		log.info("DAOImpl: BeforeAndDealing(DealVO dvo)호출");
+		
+		log.info("여기는 DAOImpl~~~~"+dvo.getState());
+		log.info(dvo+"dvo야~~~");
+		
+		Integer num = 0;
+		if(dvo.getState().equals("거래전")) { //거래전 -> 거래중
+			
+			num = sqlSession.update(NAMESPACE + ".AfterDeal", dvo);
+		}
+		if(dvo.getState().equals("거래중")){ //거래중->거래전
+			
+			num = sqlSession.update(NAMESPACE + ".BeforeDeal", dvo);
+		}
+		
+		return num;
+	}
+	
+	//거래중 -> 거래후
+	@Override
+	public String BeforeAndDealing1(DealVO dvo) throws Exception {
+		log.info("DAOImpl: BeforeAndDealing1(DealVO dvo)호출");
+		
+		log.info("여기는 DAOImpl~~~~"+dvo.getState());
+		log.info(dvo+"dvo야~~~");
+		
+		if(dvo.getState().equals("거래전")) { //거래전 -> 거래중
+			
+			sqlSession.update(NAMESPACE + ".AfterDeal", dvo);
+		}
+		if(dvo.getState().equals("거래중")){ //거래중->거래전
+			
+			sqlSession.update(NAMESPACE + ".BeforeDeal", dvo);
+		}
+			String state =  sqlSession.selectOne(NAMESPACE+".getState",dvo);
+			log.info(state);
+		
+		return state;
 	}
 	
 

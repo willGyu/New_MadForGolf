@@ -365,9 +365,16 @@ a.button {
 /*====================반응형 웹======================= */
 @media only screen and (max-width: 767px) {
  	#topMenu #genderNav {
-		width: 400px;
+		width: 112px;
 		height: 100%;
 		float: left;
+		margin: auto;
+	}
+ 	#topMenu #genderNav2 {
+		width: 112px;
+		height: 100%;
+		float: left;
+		margin: auto;
 	}
 	
 	#topMenu{
@@ -379,11 +386,12 @@ a.button {
 	}
 	
 
-	#array {
-		width: 140px;
+	.col-12 #array {
+		width: 100%;
 		height: 100px;
 		padding: 0px;
 		margin: 0px;
+		float: right;
 	}
 	#ProductArea {
 		width: 150px;
@@ -404,6 +412,50 @@ a.button {
 		text-align: center;
 	}
 	
+	#topMenu11 {
+		width: 40%;
+	}
+	
+	.shop-page section-padding-0-100 .container{
+		margin: 0px;
+		padding: 0px;
+	}
+	
+	.container {
+		text-align: center;
+	}
+	
+	.col-12 col-md-8 col-lg-9{
+		width: 100%;
+		text-align: center;
+		margin: 0px auto;
+	}
+	
+	 .col-12 col-md-8 col-lg-9 .row{
+
+		display: inline;
+	}
+	
+	.col-12 col-md-8 col-lg-9{
+		text-align: center;
+		margin: 0px auto;
+	}
+	
+	.col-12 col-sm-6 col-lg-4 .single-product-area mb-50 {
+		display: inline;
+	}
+
+	 
+	 .product-info mt-15 text-center {
+	 	display: flex;
+	 }
+	
+	#row1028 {
+		width: 600px; 
+	}
+	
+
+
 
 
 }
@@ -418,7 +470,7 @@ a.button {
             <h2>Shop</h2>
         </div>
 
-        <div class="container" style="margin: auto; width: 100%; ">
+        <div class="container" style="margin: auto; width: 100%; border: 2px; red; ">
             <div class="row">
                 <div class="col-12" style="margin: auto; width: 100%; ">
                     <nav aria-label="breadcrumb">
@@ -434,7 +486,7 @@ a.button {
 	<!-- ##### Breadcrumb Area End ##### -->
 	
 	<!-- =================================남성용/여성용 성별 구분 상품 카테고리=========================================== -->
-	<div style="text-align: center; margin: 0px auto; height: 70px; width: 80%;">
+	<div style="text-align: center; margin: 0px auto; height: 70px; width: 1050px;" id="topMenu11">
 		<nav id="topMenu" style="margin: 0px auto;">
         	<ul>
         	<!-- 지역인증 완료되면 주솟값에 위도/경도 추가 -->
@@ -446,17 +498,21 @@ a.button {
                 <li><a id="genderNav" class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Wedge&gender=1">Wedge</a></li>
                 <li><a id="genderNav" class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Putter&gender=1">Putter</a></li>
                 <li><a id="genderNav" class="menuLink" style="border-top-right-radius: 5px;" href="${pageContext.request.contextPath }/product/listAll?category=Etc&gender=1">Etc</a></li>
-
+			</ul>
+		</nav>
+		
+		<nav id="topMenu" style="margin: 0px auto;">
+			<ul>
                	<!-- 여성용 -->
-               	<li><a id="genderNav" class="menuLink1" style="border-bottom-left-radius: 5px;"> Women's </a></li>
-                <li><a id="genderNav" class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Driver&gender=2">Driver</a></li>
-                <li><a id="genderNav" class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Iron&gender=2">Iron</a></li>
-                <li><a id="genderNav" class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Utility&gender=2">Utility</a></li>
-                <li><a id="genderNav" class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Wedge&gender=2">Wedge</a></li>
-                <li><a id="genderNav" class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Putter&gender=2">Putter</a></li>
-                <li><a id="genderNav" class="menuLink" style="border-bottom-right-radius: 5px;" href="${pageContext.request.contextPath }/product/listAll?category=Etc&gender=2">Etc</a></li>
-                <li><a id="genderNav" class="menuLink3">&nbsp;</a></li>
-                <li><a id="genderNav" class="menuLink3">&nbsp;</a></li>
+               	<li><a id="genderNav2" class="menuLink1" style="border-bottom-left-radius: 5px;"> Women's </a></li>
+                <li><a id="genderNav2" class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Driver&gender=2">Driver</a></li>
+                <li><a id="genderNav2" class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Iron&gender=2">Iron</a></li>
+                <li><a id="genderNav2" class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Utility&gender=2">Utility</a></li>
+                <li><a id="genderNav2" class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Wedge&gender=2">Wedge</a></li>
+                <li><a id="genderNav2" class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Putter&gender=2">Putter</a></li>
+                <li><a id="genderNav2" class="menuLink" style="border-bottom-right-radius: 5px;" href="${pageContext.request.contextPath }/product/listAll?category=Etc&gender=2">Etc</a></li>
+                <li><a id="genderNav2" class="menuLink3">&nbsp;</a></li>
+                <li><a id="genderNav2" class="menuLink3">&nbsp;</a></li>
 			</ul>
         </nav>
 
@@ -465,10 +521,10 @@ a.button {
 	
 	<!-- ##### Shop Area Start ##### -->
 	<section class="shop-page section-padding-0-100" style="width: 80%; margin: auto;">
-        <div class="container" style="border: none; margin-top:0px; ">
+        <div class="container" >
             <div class="row">
                 <!-- Shop Sorting Data -->
-                <div class="col-12"  style="width: 98%; margin: auto; ">
+                <div class="col-12"  style="width: 98%; margin: auto;">
 					<div class="search_by_terms" style="float: right;">
 						<!-- 인기순,최신순 선택바 div  -->
 						<div id="array" style="float: right;"> 
@@ -484,15 +540,15 @@ a.button {
 		</div>
 		
         <!-- All Products Area -->
-        <div class="col-12 col-md-8 col-lg-9" style="margin: auto;" id="products">
-        	<div class="row" style="width: 910px; margin: 0px auto;">
+        <div class="col-md-8 col-lg-9" style="margin: auto;" id="products">
+        	<div class="row" id="row1028" style="width: 910px; margin: 0px auto;">
 				<!-- Single Product Area -->
 				<!-- for문으로 상품 리스트 반복  -->
 				<c:forEach var="vo" items="${productList }">
-					<div class="col-12 col-sm-6 col-lg-4">
+					<div class="col-sm-4 col-lg-4" style="border: 3px red;"> 
 						<div class="single-product-area mb-50">
 							<!-- Product Image -->
-							<div class="product-img">
+							<div class="product-img"> 
 								<a id="ProductArea" href="${pageContext.request.contextPath }/product/productDetail?prod_num=${vo.prod_num}"><img src="${pageContext.request.contextPath }/resources/product_img/${vo.prod_img}"></a>
 								<!-- Product Tag -->
 								<div class="product-tag">
@@ -506,9 +562,11 @@ a.button {
 							</div>
 							<!-- Product Info -->
 							<div class="product-info mt-15 text-center">
-								<a id="ProductArea" href="${pageContext.request.contextPath }/product/productDetail?prod_num=${vo.prod_num}">
-									<p>${vo.prod_name }</p>
-								</a>
+								<p style="width: 100%;"> 
+								<a id="ProductArea" href="${pageContext.request.contextPath }/product/productDetail?prod_num=${vo.prod_num}" style="color: black;">
+									${vo.prod_name }
+								</a> 
+								</p>
 								<h6 id="ProductArea">${vo.price }원</h6>
 							</div>
 						</div>

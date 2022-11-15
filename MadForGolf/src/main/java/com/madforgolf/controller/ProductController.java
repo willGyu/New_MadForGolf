@@ -30,11 +30,13 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.madforgolf.domain.BoardVO;
+import com.madforgolf.domain.ChattingVO;
 import com.madforgolf.domain.DealVO;
 import com.madforgolf.domain.LikeVO;
 import com.madforgolf.domain.PageMakerVO;
 import com.madforgolf.domain.PageVO;
 import com.madforgolf.domain.ProductVO;
+import com.madforgolf.service.ChattingService;
 import com.madforgolf.service.ProductService;
 
 @Controller
@@ -50,9 +52,12 @@ public class ProductController {
 
 	private static final Logger log = LoggerFactory.getLogger(ProductController.class);
 
-	// 서비스객체 필요(의존적)
+	// 서비스객체
 	@Inject
 	private ProductService service;
+	
+	@Inject
+	private ChattingService service2;
 
 //===============================================최신순 상품목록 조회:"/listAll"==========================================================
 
@@ -63,6 +68,9 @@ public class ProductController {
 		log.info("listAllGET() 호출");
 		log.info("카테고리 : " + vo.getCategory());
 		log.info("성별 : " + vo.getGender());
+		
+		String user_id = (String)session.getAttribute("user_id");
+
 
 		// 서비스 - 글전체 목록 가져오는 메서드
 		List<ProductVO> productList = service.getProductListAll(vo, vo2);
@@ -71,13 +79,13 @@ public class ProductController {
 		// 상품을 카테고리로 분류하기 위해 category 변수명으로 변수를 view로 넘겨줌
 		model.addAttribute("category", vo.getCategory());
 		model.addAttribute("gender", vo.getGender());
-		//지역컬럼 모델 추가 
-		
-		// 지역인증 되면, model로 위도/경도 넘기기 + header카테고리 주소값에도 위도경도 추가 + shop성별 카테고리에도 위도경도 추가 
 
 
 		// 출력되는 상품 리스트를 어트리뷰트에 담아서 view로 보냄
 		model.addAttribute("productList", productList);
+		
+		session.setAttribute("user_id", user_id);
+
 
 		// 세션객체 - isUpdate 정보전달
 		session.setAttribute("isUpdate", false);
@@ -115,6 +123,9 @@ public class ProductController {
 		log.info("listLikeGET() 호출");
 		log.info("카테고리 : " + vo.getCategory());
 		log.info("성별 : " + vo.getGender());
+		
+		String user_id = (String)session.getAttribute("user_id");
+
 
 		// 서비스 - 글전체 목록 가져오는 메서드
 		List<ProductVO> productList = service.getProductListAll2(vo, vo2);
@@ -129,6 +140,8 @@ public class ProductController {
 		
 		// 출력되는 상품 리스트를 어트리뷰트에 담아서 view로 보냄
 		model.addAttribute("productList", productList);
+		
+		session.setAttribute("user_id", user_id);
 
 		// 세션객체 - isUpdate 정보전달
 		session.setAttribute("isUpdate", false);
@@ -157,6 +170,111 @@ public class ProductController {
 	} // 상품 리스트 - 조회 (GET)
 
 //===============================================인기순 상품목록 조회:"/listLike"==========================================================
+	
+//===============================================최신순 상품목록 조회:"/listAll2"(메인)==========================================================
+	
+	// http://localhost:8080/product/listAll
+	// 상품 리스트 - 조회 (GET)
+	@RequestMapping(value = "/listAll2", method = RequestMethod.GET)
+	public String listAll2GET(ProductVO vo, PageVO vo2, Model model, HttpSession session) throws Exception {
+		log.info("listAll2GET() 호출");
+		
+		String user_id = (String)session.getAttribute("user_id");
+		
+		// 서비스 - 글전체 목록 가져오는 메서드
+		List<ProductVO> productList = service.getProductListAll3(vo, vo2);
+		log.info("상품 개수 : " + productList.size() + "개");
+				
+		
+		// 출력되는 상품 리스트를 어트리뷰트에 담아서 view로 보냄
+		model.addAttribute("productList", productList);
+		
+		session.setAttribute("user_id", user_id);
+
+		
+		// 세션객체 - isUpdate 정보전달
+		session.setAttribute("isUpdate", false);
+		
+		
+		// ==================================================== 페이징 처리
+		// ====================================================
+		// DB 내 모든 상품의 총 개수
+		Integer totalCnt = service.getTotalCnt2(vo);
+		log.info("DB 내 상품의 총 개수 : " + totalCnt + "개");
+		
+		// 페이징 처리 하단부 정보 저장
+		PageMakerVO pm = new PageMakerVO();
+		pm.setVo(vo2); // 페이징 처리 하단부 정보를 vo에 받아오고
+		pm.setTotalCnt(totalCnt); // calData() 페이징처리에 필요한 계산식 계산 메서드가 포함된 전체 글 갯수 초기화 메서드 호출
+		
+		log.info("pmVO : " + pm);
+		log.info("pageVO : " + vo2);
+		
+		// 페이징 처리 객체(pm)을 어트리뷰트에 담아서 view로 보냄
+		model.addAttribute("pm", pm);
+		// ==================================================== 페이징 처리
+		// ====================================================
+		
+		log.info("/product/listLike2 -> /product/mainShop.jsp ");
+		return "/product/mainShop";
+	} // 상품 리스트 - 조회 (GET)
+//===============================================최신순 상품목록 조회:"/listAll2"(메인)==========================================================
+	
+//===============================================인기순 상품목록 조회:"/listLike2"(메인)==========================================================
+	// http://localhost:8080/product/listLike
+	// 상품 리스트 - 조회 (GET)
+	@RequestMapping(value = "/listLike2", method = RequestMethod.GET)
+	public String listLike2GET(ProductVO vo, PageVO vo2, Model model, HttpSession session) throws Exception {
+		log.info("listLikeGET() 호출");
+		log.info("카테고리 : " + vo.getCategory());
+		log.info("성별 : " + vo.getGender());
+		
+		String user_id = (String)session.getAttribute("user_id");
+		
+		// 서비스 - 글전체 목록 가져오는 메서드
+		List<ProductVO> productList = service.getProductListAll4(vo, vo2);
+		log.info("상품 개수 : " + productList.size() + "개");
+		
+		// 상품을 카테고리로 분류하기 위해 category 변수명으로 변수를 view로 넘겨줌
+		// 최신순 정렬 위해 필요한 값 -> #{category}, #{gender}
+		model.addAttribute("category", vo.getCategory());
+		
+		model.addAttribute("gender", vo.getGender());
+		//지역컬럼 
+		
+		// 출력되는 상품 리스트를 어트리뷰트에 담아서 view로 보냄
+		model.addAttribute("productList", productList);
+		
+		session.setAttribute("user_id", user_id);
+
+		
+		// 세션객체 - isUpdate 정보전달
+		session.setAttribute("isUpdate", false);
+		
+		// ==================================================== 페이징 처리
+		// ====================================================
+		// DB 내 모든 상품의 총 개수
+		Integer totalCnt = service.getTotalCnt2(vo);
+		log.info("DB 내 상품의 총 개수 : " + totalCnt + "개");
+		
+		// 페이징 처리 하단부 정보 저장
+		PageMakerVO pm = new PageMakerVO();
+		pm.setVo(vo2); // 페이징 처리 하단부 정보를 vo에 받아오고
+		pm.setTotalCnt(totalCnt); // calData() 페이징처리에 필요한 계산식 계산 메서드가 포함된 전체 글 갯수 초기화 메서드 호출
+		
+		log.info("pmVO : " + pm);
+		log.info("pageVO : " + vo2);
+		
+		// 페이징 처리 객체(pm)을 어트리뷰트에 담아서 view로 보냄
+		model.addAttribute("pm", pm);
+		// ==================================================== 페이징 처리
+		// ====================================================
+		
+		log.info("/product/listLike2 -> /product/mainShop.jsp ");
+		return "/product/mainShop";
+	} // 상품 리스트 - 조회 (GET)
+	
+//===============================================인기순 상품목록 조회:"/listLike2"(메인)==========================================================
 
 	// 상품 페이징 리스트(GET) : 페이징처리 완료된 페이지 호출
 	@RequestMapping(value = "/listPage", method = RequestMethod.GET)
@@ -236,8 +354,12 @@ public class ProductController {
 
 	// 상품 등록 - 등록 (POST) - 다중 업로드
 	@RequestMapping(value = "/productInsert", method = RequestMethod.POST)
-	public String productInsertPOST(MultipartHttpServletRequest multi, ProductVO vo,HttpServletRequest request) throws Exception {
+	public String productInsertPOST(MultipartHttpServletRequest multi, ProductVO vo,HttpServletRequest request,HttpSession session) throws Exception {
 		log.info("productInsertPOST() 호출");
+		
+		String user_id = (String)session.getAttribute("user_id");
+		
+		session.setAttribute("user_id", user_id);
 		
 		// log.info("multi : " + multi);
 
@@ -527,7 +649,7 @@ public class ProductController {
 		log.info("category:"+category);
 
 		// 서비스 - 글삭제 동작 (bno)
-		int result = service.deleteBoard(prod_num);
+		int result = service.deleteProduct(prod_num);
 
 		if (result == 1) {
 			rttr.addFlashAttribute("msg", "DELOK");
@@ -776,114 +898,42 @@ public class ProductController {
 //-------------------------상품 상세페이지: 거래전->거래중  // 거래전->거래후---------------------------------
 	
 
+	// 채팅하기
+		@RequestMapping(value = "/chatting", method = RequestMethod.GET)
+		public void chattingGET(ChattingVO vo, Model model) throws Exception {
+			log.info("chattingGET() 호출");
+			log.info("vo : " + vo);
+			
+			ChattingVO vo2 = service2.chattingSelect(vo); // 왜 null 이 뜨지???
+			log.info("vo2 : " + vo2);
+			model.addAttribute("vo", vo2);
+		}
 		
-		
-		
-		
-
-		
-	// http://localhost:8080/board/regist
-	// 글쓰기 - GET
-	@RequestMapping(value = "/regist", method = RequestMethod.GET)
-	public void registerGET() throws Exception {
-		log.info(" registerGET() 호출 ");
-		log.info(" /board/regist (get) -> /board/regist.jsp");
-
-	}
-
-	// 글쓰기 - POST
-	@RequestMapping(value = "/regist", method = RequestMethod.POST)
-	public String registerPOST(BoardVO vo, RedirectAttributes rttr /* Model model */) throws Exception {
-		log.info("registerPOST() 호출");
-		// 한글처리 (필터)
-		// 전달된 정보 저장
-		log.info("글쓰기 정보 : " + vo);
-
-		// 서비스 - 글쓰기 동작
-		// service.boardWrite(vo);
-
-		log.info(" 글쓰기 완료 !! ");
-
-		// model.addAttribute("msg", "OK");
-
-		// RedirectAttributes 객체 => rediret 페이지 이동시에만 사용가능
-		rttr.addFlashAttribute("msg", "OK");
-		// -> 1회성 데이터 (체크용), URL에 표시 x
-
-		// 페이지 이동(리스트) 화면,주소 모두 변경
-
-		// return "/board/success";
-		// return "redirect:/board/listAll?msg=OK";
-//			return "redirect:/board/listAll";
-		return "redirect:/board/listPage";
-	}
-
-	/*
-	 * // http://localhost:8080/board/read?bno=12 // 글 본문보기 - GET
-	 * 
-	 * @RequestMapping(value = "/read",method = RequestMethod.GET) public void
-	 * readGET(HttpSession session,@RequestParam("bno") int bno,Model
-	 * model @ModelAttribute("bno") int bno ) throws Exception {
-	 * log.info("readGET() 호출"); // 전달정보 (bno) log.info(" bno : "+bno);
-	 * 
-	 * //boolean isUpdate = false;
-	 * log.info(" isUPdate : "+session.getAttribute("isUpdate"));
-	 * 
-	 * boolean isUpdate = (boolean)session.getAttribute("isUpdate");
-	 * 
-	 * //if(isUpdate == false) { if(!isUpdate) { // 서비스 - updateReadCount(BNO)
-	 * service.updateReadCount(bno); log.info(" 조회수 1증가! ");
-	 * session.setAttribute("isUpdate", true); }
-	 * 
-	 * // 서비스 - getBoard(int) BoardVO vo = service.getBoard(bno);
-	 * 
-	 * log.info(vo+""); model.addAttribute("vo", vo);
-	 * 
-	 * log.info("/board/read -> /board/read.jsp"); }
-	 */
-	/*
-	 * // 글 수정하기 - GET (기존의 정보 조회 출력+수정할 정보 입력)
-	 * 
-	 * @RequestMapping(value = "/modify",method = RequestMethod.GET) public void
-	 * modifyGET(@RequestParam("bno") int bno,Model model) throws Exception{ // 전달정보
-	 * 저장(bno) log.info("@@@"+bno);
-	 * 
-	 * // 서비스 - 게시판 글 정보를 가져오는 메서드 // 연결된 뷰에 정보 전달(Model객체) model.addAttribute("vo",
-	 * service.getBoard(bno)); // 페이지 이동(출력) /board/modify }
-	 * 
-	 * // 글 수정하기 - POST(수정할데이터 처리)
-	 * 
-	 * @RequestMapping(value = "/modify",method = RequestMethod.POST) public String
-	 * modifyPOST(BoardVO vo,RedirectAttributes rttr) throws Exception {
-	 * log.info(" modifyPOST() 호출 "); // 한글처리(생략) // 전달정보 저장(수정할 정보) VO
-	 * log.info("@@수정할정보@@"+vo);
-	 * 
-	 * // 서비스 - 글 수정메서드 int cnt = service.updateBoard(vo);
-	 * 
-	 * // 수정성공시 /listAll 페이지 이동 if(cnt == 1) { rttr.addFlashAttribute("msg",
-	 * "MODOK");
-	 * 
-	 * // return "redirect:/board/listAll"; return "redirect:/board/listPage"; }else
-	 * { // 예외처리 // new NullPointerException(); return
-	 * "/board/modify?bno="+vo.getBoard_num(); }
-	 * 
-	 * }
-	 * 
-	 * // 글 삭제 - POST
-	 * 
-	 * @RequestMapping(value = "/remove",method = RequestMethod.POST ) public String
-	 * removePOST(@RequestParam("bno") int bno,RedirectAttributes rttr) throws
-	 * Exception { log.info(" removePOST() 호출 ");
-	 * 
-	 * // 전달정보 저장(bno) log.info("bno : "+bno);
-	 * 
-	 * // 서비스 - 글삭제 동작 (bno) int result =service.deleteBoard(bno);
-	 * 
-	 * if(result == 1) { rttr.addFlashAttribute("msg", "DELOK"); }
-	 * 
-	 * // 글 리스트 페이지 이동 // return "redirect:/board/listAll"; return
-	 * "redirect:/board/listPage"; }
-	 * 
-	 */
+		// 채팅목록
+		@RequestMapping(value = "/chattingList", method = RequestMethod.GET)
+		public void chattingListGET(HttpSession session, Model model, PageVO vo2) throws Exception {
+			log.info("chattingListGET() 호출");
+			
+			String user_id = (String)session.getAttribute("user_id");
+			List<ChattingVO> chattingList = service2.chattingList(user_id);
+			
+			model.addAttribute("chattingList", chattingList);
+			
+			// =================================================== 페이징 처리 ===================================================
+			// DB 내 모든 상품의 총 개수
+			Integer totalCnt = service2.getTotalCnt(user_id);
+			log.info("DB 내 상품의 총 개수 : " + totalCnt + "개");
+			// 페이징 처리 하단부 정보 저장
+			PageMakerVO pm = new PageMakerVO();
+			pm.setVo(vo2); // 페이징 처리 하단부 정보를 vo에 받아오고
+			pm.setTotalCnt(totalCnt); // calData() 페이징처리에 필요한 계산식 계산 메서드가 포함된 전체 글 갯수 초기화 메서드 호출
+			log.info("pmVO : " + pm);
+			log.info("pageVO : " + vo2);
+			// 페이징 처리 객체(pm)을 어트리뷰트에 담아서 view로 보냄
+			model.addAttribute("pm", pm);
+			// =================================================== 페이징 처리 ===================================================
+			
+		}
+	
 
 }

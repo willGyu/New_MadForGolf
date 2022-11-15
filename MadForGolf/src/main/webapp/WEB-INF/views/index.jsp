@@ -22,8 +22,8 @@
                                 <h2>인기 상품 보러 가기</h2>
                                 <p>실시간으로 가장 주목 받고 있는 인기 상품을 확인할 수 있습니다.</p>
                                 <div class="welcome-btn-group">
-                                    <a href="/product/listLike?category=Driver&gender=0" class="btn alazea-btn mr-30">인기상품 보러가기</a>
-                                    <a href="/product/listAll?category=Driver&gender=0" class="btn alazea-btn active">최신상품 보러가기</a>
+                                    <a href="/product/listLike2" class="btn alazea-btn mr-30">인기상품 보러가기</a>
+                                    <a href="/product/listAll2" class="btn alazea-btn active">최신상품 보러가기</a>
                                 </div>
                             </div>
                         </div>
@@ -87,7 +87,7 @@
 								</a>
 								<!-- Product Tag -->
 								<div class="product-tag">
-									<a href="#">Hot</a>
+									<!-- <a href="#">Hot</a> -->
 								</div>
 <!-- 								<div class="product-meta d-flex"> -->
 <!-- 									<a href="#" class="wishlist-btn"><i class="icon_heart_alt"></i></a> -->

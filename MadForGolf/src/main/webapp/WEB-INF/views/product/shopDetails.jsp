@@ -34,7 +34,8 @@ function shareMessage() {
 /*     var like_count = ${product.like_count}; */
 /*     const like = parseInt(like_count); */
    
-	const like = parseInt(${deal.product.like_count}); 
+   	var like_count = ${deal.product.like_count};
+   	const like = parseInt(like_count);
 	//like_count int로 변환해야 나와서 바꿈 
 	
 	//alert(like);
@@ -190,44 +191,84 @@ $(document).ready(function() {
 //=======================================거래전중 변경버튼================================================
 
 
+//=================== 구매하기 버튼 안내창 제어 시작 ========================//
+
+
 $(document).ready(function(){
 	
-	//alert("test");
 	
-	$("#buyBtn").click(function(){
+	//alert(${product.seller_id});
+	
+	$("#addtocart").click(function(){
+ 		//alert("test");
+		
 		var answer = confirm('거래를 위한 본인인증 및 계좌 출금/조회 동의가 필요합니다.\n본인인증 페이지로 이동하시겠습니까?');
 		
 		if(answer){
 			var form = $(this).parents('form');
 			    form.submit();
-// 			    $.ajax({
-// 			    	url:'/deal'
-// 			    });
-			    
-			    
-			    
-			    
-			    
-// 			    $.ajax({
-// 					 url:'${pageContext.request.contextPath}/member/listJson',
-// 					 dataType:'json',//받아올 값이 없을 때
-// 					 success:function(rdata){//성공했을 때
-						 
-// 						 //rdata json data, 배열 데이터
-// 						 //each : jQuery의 반복문
-// 						 $.each(rdata,function(index,item){
-// 							 $('#notice').append('<tr><td>'+item.userid+'</td><td>'+item.userpw+'</td><td>'+item.username+'</td><td>'+item.useremail+'</td></tr>');
-						 
-// 						 });
-						 
-// 					 }
-// 				 });
-			    
-			    
+			    $.ajax({
+			    	type:'post',
+			    	url:'/deal/insertDeal',
+					dataType:'json',
+					data:{
+						'seller_id':'${deal.product.seller_id}',
+						'buyer_id':'${user_id}',
+						'prod_num':'${deal.product.prod_num}',
+						'price':'${deal.product.price}',
+						'state':'거래중'
+					},
+					success:function(){
+						console.log("거래 데이터 전송 성공");						
+					},
+			    	error: function(){
+						console.log("거래 데이터 전송 실패");
+					}
+			    });
 		}else{
 			return false;
 		}
 	});
+});
+	
+
+	//============================== 채팅창 활성화 ==============================//
+$(document).ready(function(){
+
+		$('#button').click(function(){
+	 		if("${sessionScope.user_id }" == "") {
+				alert("로그인이 필요한 서비스입니다.");
+			} else {
+				var talker1_id = "${sessionScope.user_id }";
+				var talker2_id = "${deal.product.seller_id }";
+				var chattingNum = "";
+				if(talker1_id > talker2_id) {
+					chattingNum = "Chatting-" + talker1_id + "-" + talker2_id
+				} else if(talker1_id < talker2_id) {
+					chattingNum = "Chatting-" + talker2_id + "-" + talker1_id
+				} else {
+					alert("본인입니다.")
+					return null;
+				}
+		
+				$.ajax({
+					url: "/product/chattingNum",
+			        async: false,
+					data: {"chattingNum":chattingNum, "talker1_id":talker1_id, "talker2_id":talker2_id},
+					success: function(chattingNum){
+						alert("성공");
+						alert(chattingNum);
+						window.open("/product/chatting?chattingNum="+chattingNum+"", "Mad for Golf", "menubar=no, toolbar=no, location=no, status=no, scrollbars=no, width=200");
+						},
+					error: function(){
+						alert("실패");
+						}
+				}); // Ajax
+			} // if	
+		}); // 채팅하기
+	//============================== 채팅창 활성화 ==============================//
+	
+	
 });
 
 
@@ -398,40 +439,30 @@ $(document).ready(function(){
                                     <input type="hidden" name="prod_name" value="${deal.product.prod_name }">
                                     <input type="hidden" name="price" value="${deal.product.price }">
                                     
-                                    
+                              
 
                                    	<!-- 오픈뱅킹 본인인증을 위해 필요한 정보 시작 -->
                                    
-									<!-- OAuth 2.0 인증 요청 시 반환되는 형태, 고정값 : code -->
+									<input type="hidden" name="client_id" value="6f948a13-11af-4892-b746-ee67d358abf2">
 									<input type="hidden" name="response_type" value="code">
-							
-									<!-- 오픈뱅킹에서 발급한 이용기관 앱의 Client ID(API Key에서 가져오기)-->
-									<input type="hidden" name="client_id" value="1a6ed02d-91ea-452a-8c74-b6b4222ccd0e">
-							
-							
-									<!-- 사용자인증이 성공하면 이용기관으로 연결되는 URL(API Key에서 가져오기) -->
-									<input type="hidden" name="redirect_uri" value="http://localhost:8080/openbanking/callback">
-							
-									<!-- 사용자의 권한 범위를 부여해주는 것 -->
-									<input type="hidden" name="scope" value="login inquiry transfer">
-							
-									<!-- 우리가 임의로 세팅하는 난수값 -->
+<!-- 									<input type="hidden" name="redirect_uri" value="http://localhost:8088/openbanking/callback"> -->
+									<input type="hidden" name="redirect_uri" value="http://localhost:8088/openbanking/callback">
+									<input type="hidden" name="scope" value="login inquiry transfer oob">
 									<input type="hidden" name="state" value="12345678123456781234567812345678">
-							
-									<!-- 인증을 한번 하게끔 구분 0 : 최초 인증, 2 : 인증 생략-->
 									<input type="hidden" name="auth_type" value="0">
 
                                    	<!-- 오픈뱅킹 본인인증을 위해 필요한 정보 종료 -->
 
 
+
 									<c:choose>
 										<c:when test="${deal.state eq '거래전'}">
 											<input type="button" id="button" value="채팅하기" onclick="" >
-											<input type="submit" id="addtocart" value="구매하기" class="btn alazea-btn ml-15" >
+											<input type="button" id="addtocart" value="구매하기" class="btn alazea-btn ml-15" >
 										</c:when>
 										<c:when test="${deal.state eq '거래중'}">
 											<input type="button" id="button" value="채팅하기" onclick="" disabled="disabled">
-											<input type="submit" id="addtocart" value="구매하기" class="btn alazea-btn ml-15" disabled="disabled">
+											<input type="button" id="addtocart" value="구매하기" class="btn alazea-btn ml-15" disabled="disabled">
 										</c:when>
 									</c:choose>
 
@@ -460,7 +491,7 @@ $(document).ready(function(){
                                     <span>Share on:</span>
                                     <span>
                                    <!--  <a href="#"><i class="fa fa-facebook" onclick="shareMessage();"></i></a> -->
-                                    <a href="#" onclick="shareMessage();"><img style="width: 17px; height: 17x;" src="${pageContext.request.contextPath }/resources/product_img/kakao.png"></a>
+                                    <a href="#" onclick="shareMessage();"><img style="width: 24px; height: 24x;" src="${pageContext.request.contextPath }/resources/product_img/kakao.png"></a>
                                 </span>
                                 </p>
 
@@ -505,17 +536,21 @@ $(document).ready(function(){
                             <div role="tabpanel" class="tab-pane fade show active" id="description"  style="text-align: center;">
                                 <div class="description_area">
                                     <input type="button" id="button2" value="목록으로" onclick="history.back();">
-                                    
-                                    <!-- 수정하기 get  -->
-                                    <input type="button" id="button2" value="수정하기" onclick="location.href='${pageContext.request.contextPath }/product/modify?prod_num=${deal.product.prod_num}'">
-                                    <!-- 수정하기 get  -->
-                                    
-                                    
-                                    
-                                    <input type="button" id="button2" value="삭제하기" onclick="location.href='${pageContext.request.contextPath }/product/remove?prod_num=${deal.product.prod_num}&category=${deal.product.category }'">
-                                    
-                                    
-<%--                                     <!-- 삭제하기 post  -->
+
+								<c:if test="${deal.product.seller_id == user_id }"> <!-- 작성자일때만 수정/삭제하기 보이게 -->
+
+									<!-- 수정하기 get  -->
+									<input type="button" id="button2" value="수정하기"
+										onclick="location.href='${pageContext.request.contextPath }/product/modify?prod_num=${deal.product.prod_num}'">
+									<!-- 수정하기 get  -->
+
+
+
+									<input type="button" id="button2" value="삭제하기"
+										onclick="location.href='${pageContext.request.contextPath }/product/remove?prod_num=${deal.product.prod_num}&category=${deal.product.category }'">
+								</c:if>
+
+								<%--                                     <!-- 삭제하기 post  -->
                                     <form action="${pageContext.request.contextPath }/product/remove" method="post">
                                     <input type="hidden" value="${product.prod_num }">
                                     <input type="submit" value="삭제하기">

@@ -6,10 +6,14 @@ import org.springframework.stereotype.Service;
 import com.madforgolf.domain.ProductVO;
 import com.madforgolf.openbanking.domain.AccountSearchRequestVO;
 import com.madforgolf.openbanking.domain.AccountSearchResponseVO;
+import com.madforgolf.openbanking.domain.DepositRequestVO;
+import com.madforgolf.openbanking.domain.DepositResponseVO;
 import com.madforgolf.openbanking.domain.RequestTokenVO;
 import com.madforgolf.openbanking.domain.ResponseTokenVO;
 import com.madforgolf.openbanking.domain.UserInfoRequestVO;
 import com.madforgolf.openbanking.domain.UserInfoResponseVO;
+import com.madforgolf.openbanking.domain.WithdrawRequestVO;
+import com.madforgolf.openbanking.domain.WithdrawResponseVO;
 
 @Service
 public class OpenBankingService {
@@ -57,5 +61,35 @@ public class OpenBankingService {
 	}
 
 
-
+	
+	
+	//-------------------------------------------------------------------------------------------
+	
+	
+	
+	
+	// 출금입금
+	public WithdrawResponseVO getwithdraw( WithdrawRequestVO withdrawRequestVO) {
+		return openBankingApiClient.withdraw(withdrawRequestVO);
+	}
+	
+	
+	
+	
+	
+	//-------------------------------------------------------------------------------------------
+	
+	
+	
+	// 입금이체
+	public DepositResponseVO getDeposit( DepositRequestVO depositRequestVO) throws Exception {
+		
+		return openBankingApiClient.deposit(depositRequestVO);
+	}
+	
+	
+	
+	
+	
+	
 }

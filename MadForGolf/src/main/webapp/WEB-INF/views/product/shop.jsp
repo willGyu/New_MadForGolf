@@ -475,13 +475,13 @@ color:white;
 								<a id="ProductArea" href="${pageContext.request.contextPath }/product/productDetail?prod_num=${vo.prod_num}"><img src="${pageContext.request.contextPath }/resources/product_img/${vo.prod_img}"></a>
 								<!-- Product Tag -->
 								<div class="product-tag">
-									<a href="#">Hot</a>
+									<!-- <a href="#">Hot</a> -->
 								</div>
-								<div class="product-meta d-flex">
+								<!-- <div class="product-meta d-flex">
 									<a href="#" class="wishlist-btn"><i class="icon_heart_alt"></i></a>
 									<a href="cart.html" class="add-to-cart-btn">Add to cart</a>
 									<a href="#" class="compare-btn"><i class="arrow_left-right_alt"></i></a>
-								</div>
+								</div> -->
 							</div>
 							<!-- Product Info -->
 							<div class="product-info mt-15 text-center">
@@ -495,10 +495,12 @@ color:white;
 				</c:forEach>
 				<!-- for문으로 상품 리스트 반복  -->
 				<!-- 상품 올리기 div  -->
+				<c:if test="${user_id != null}">
                    <div style="float: right; margin-bottom: 60px; width: 100px; margin-left: 835px;">
 <%-- 				<input type="button" title="Button fade blue/green" class="button btnFade btnBlueGreen" value="상품올리기" onclick="location.href='${pageContext.request.contextPath }/product/productInsert'"> --%>
 				    <a title="Button fade blue/green" class="button btnFade btnBlueGreen" onclick="location.href='${pageContext.request.contextPath }/product/productInsert'">상품올리기</a>
-				</div>        
+					</div>        
+				</c:if>
 			</div>
 <!-- ======================================== 페이징 네비바 ======================================== -->
 			<!-- Pagination -->

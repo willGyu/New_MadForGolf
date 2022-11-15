@@ -21,11 +21,20 @@ public interface ProductService {
 	// 상품 전체 목록 불러오기(인기순)
 	public List<ProductVO> getProductListAll2(ProductVO vo, PageVO vo2) throws Exception;
 	
+	// 상품 전체 목록 불러오기(최신순 - 메인화면:카테고리,성별 분류X)
+	public List<ProductVO> getProductListAll3(ProductVO vo, PageVO vo2) throws Exception;
+	
+	// 상품 전체 목록 불러오기(인기순  - 메인화면:카테고리,성별 분류X)
+	public List<ProductVO> getProductListAll4(ProductVO vo, PageVO vo2) throws Exception;
+	
 	// 상품 1개 상세 불러오기
 	public DealVO productDetail(DealVO vo) throws Exception;
 	
 	// 상품 전체 개수 불러오기
 	public Integer getTotalCnt(ProductVO vo) throws Exception;
+	
+	// 상품 전체 개수 불러오기(메인 -인기순,최신순)
+	public Integer getTotalCnt2(ProductVO vo) throws Exception;
 	
 	// 상품 등록 (Insert)
 	public void productInsert(ProductVO vo) throws Exception;
@@ -34,10 +43,10 @@ public interface ProductService {
 	public Integer updateProduct(ProductVO vo) throws Exception;
 	
 	// 글 삭제하기
-	public Integer deleteBoard(Integer prod_num) throws Exception;
+	public Integer deleteProduct(Integer prod_num) throws Exception;
 	
 	// 상품수정 1개정보 불러오기
-	public ProductVO getBoard(Integer prod_num) throws Exception;
+	public ProductVO getProduct(Integer prod_num) throws Exception;
 	
 	// 글 조회수 1증가
 	public void updateReadCount(Integer bno) throws Exception;

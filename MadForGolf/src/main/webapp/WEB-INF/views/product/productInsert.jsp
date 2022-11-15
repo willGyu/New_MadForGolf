@@ -178,7 +178,7 @@ function delFile(){
                 	<h5>상품등록</h5>
                     <form action="${pageContext.request.contextPath }/product/productInsert" method="post" id="form" enctype="multipart/form-data">
                     	<!-- 로그인 기능 구현 시 value 값 수정 필요 ${loginID } -->
-                    	<input type="hidden" value="itwill01" name="seller_id">
+                    	<input type="hidden" value="${user_id }" name="seller_id">
                         <div class="row">
                         	<div class="col-md-6 mb-4" id="category">
                             	<label for="country">Category</label>

@@ -54,10 +54,36 @@ public class ProductServiceImpl implements ProductService {
 		
 		return productList;
 	}
+
+	// 상품 전체 목록 불러오기(최신순 - 메인화면:카테고리,성별 분류X)
+	@Override
+	public List<ProductVO> getProductListAll3(ProductVO vo, PageVO vo2) throws Exception {
+		log.info("getProductListAll3() 호출");
+
+		List<ProductVO> productList = dao.listAll3(vo, vo2);
+
+		return productList;
+	}
+
+	// 상품 전체 목록 불러오기(인기순  - 메인화면:카테고리,성별 분류X)
+	@Override
+	public List<ProductVO> getProductListAll4(ProductVO vo, PageVO vo2) throws Exception {
+		log.info("getProductListAll4() 호출");
+
+		List<ProductVO> productList = dao.listAll4(vo, vo2);
+
+		return productList;
+	}
 	
 	@Override
 	public Integer getTotalCnt(ProductVO vo) throws Exception {
 		return dao.getTotalCnt(vo);
+	}
+	
+	//메인 -> 인기순,최신순
+	@Override
+	public Integer getTotalCnt2(ProductVO vo) throws Exception {
+		return dao.getTotalCnt2(vo);
 	}
 
 
@@ -87,11 +113,11 @@ public class ProductServiceImpl implements ProductService {
 
 	
 	@Override
-	public ProductVO getBoard(Integer prod_num) throws Exception {
+	public ProductVO getProduct(Integer prod_num) throws Exception {
 		log.info("getBoard(Integer prod_num) 호출 ");
 
 
-		return dao.getBoard(prod_num);
+		return dao.getProduct(prod_num);
 		//	return dao.getBoard(bno);
 	}
 
@@ -106,10 +132,10 @@ public class ProductServiceImpl implements ProductService {
 
 
 	@Override
-	public Integer deleteBoard(Integer prod_num) throws Exception {
+	public Integer deleteProduct(Integer prod_num) throws Exception {
 		log.info(" deleteBoard(bno) 호출 ");
 		
-		return dao.deleteBoard(prod_num);
+		return dao.deleteProduct(prod_num);
 	}
 
 	@Override

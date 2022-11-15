@@ -70,6 +70,23 @@
 		order by prod_date desc
 	</select>
 	
+	<!-- 메인에서 타고 들어가는 카테고리,성별 분류 없는 인기순 상품목록리스트 -->
+	<select id="listLike3" resultType="productVO">
+		select * from mfg_products
+		order by like_count desc
+		limit #{pageStart},#{perPageNum}
+	</select>
+	<!-- 메인에서 타고 들어가는 카테고리,성별 분류 없는 인기순 상품목록리스트 -->
+	
+	<!-- 메인에서 타고 들어가는 카테고리,성별 분류 없는 최신순 상품목록리스트 -->
+	<select id="listAll3" resultType="productVO">
+		select * from mfg_products
+		order by prod_date desc
+		limit #{pageStart},#{perPageNum}
+	</select>
+	<!-- 메인에서 타고 들어가는 카테고리,성별 분류 없는 최신순 상품목록리스트 -->
+	
+	
 	<!-- 상품 목록 조회(all)--> <!-- 성별구분X+최신순 -->
 	<select id="listAll" resultType="ProductVO">
 		select * from mfg_products
@@ -149,6 +166,13 @@
 		where category = #{category}
 		and gender = #{gender}
 	</select>
+	
+	<!-- 메인  -> 인기순,최신순   -->
+	<select id="getTotalCnt3" resultType="Integer">
+		select count(*)
+		from mfg_products
+	</select>
+	
 	<!-- 
 		상품 1개 상세 출력 -->
 <!-- 	<select id="getProductDetail" resultType="ProductVO">
@@ -273,7 +297,6 @@
 	<!-- 구매내역 목록 띄우기 -->
 	
 	<!-- 거래중 목록 띄우기 -->
-	<!--d.state: 거래전:0, 거래중:1, 거래후:2 -->
 	<select id="DealingProductList" resultMap="deal">
 		select d.deal_date, p.prod_name, p.price, d.state, d.deal_num
 		from mfg_products p join mfg_deal d

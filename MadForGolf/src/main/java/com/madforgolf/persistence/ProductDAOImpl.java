@@ -105,17 +105,75 @@ public class ProductDAOImpl implements ProductDAO {
 		return productList;
 	}
 	
+	// 상품 전체 목록 - listAll() 최신순 - 메인화면:카테고리,성별 분류X
+	@Override
+	public List<ProductVO> listAll3(ProductVO vo, PageVO vo2) throws Exception {
+		log.info("listAll3() 호출");
+
+		Map<String, Object> productObj = new HashMap<String, Object>();
+		productObj.put("pageStart", vo2.getPageStart());
+		productObj.put("perPageNum", vo2.getPerPageNum());
+		
+		log.info(productObj.get("pageStart")+"");
+		log.info(productObj.get("perPageNum")+"");
+		
+		// DB - 모든정보 가져오기(SQL/mapper 호출)
+		List<ProductVO> productList;
+		
+		productList = sqlSession.selectList(NAMESPACE + ".listAll3", productObj);
+		log.info("Mapper - listAll2 호출");
+		
+		log.info("상품 개수 : " + productList.size() + "개");
+		
+		return productList;
+				
+		
+	}
+	
+	// 상품 전체 목록 - listAll() 인기순 - 메인화면:카테고리,성별 분류X
+	@Override
+	public List<ProductVO> listAll4(ProductVO vo, PageVO vo2) throws Exception {
+		log.info("listAll4() 호출");
+
+		Map<String, Object> productObj = new HashMap<String, Object>();
+		productObj.put("pageStart", vo2.getPageStart());
+		productObj.put("perPageNum", vo2.getPerPageNum());
+		
+		log.info(productObj.get("pageStart")+"");
+		log.info(productObj.get("perPageNum")+"");
+		
+		// DB - 모든정보 가져오기(SQL/mapper 호출)
+		List<ProductVO> productList;
+		
+		productList = sqlSession.selectList(NAMESPACE + ".listLike3", productObj);
+		log.info("Mapper - listLike2 호출");
+		
+		log.info("상품 개수 : " + productList.size() + "개");
+		
+		return productList;
+	}
+	
 	@Override
 	public Integer getTotalCnt(ProductVO vo) throws Exception {
 		
 		if(vo.getGender()==0) {
 			
-		return sqlSession.selectOne(NAMESPACE + ".getTotalCnt",vo);
-	
+			return sqlSession.selectOne(NAMESPACE + ".getTotalCnt",vo);
+			
 		}else {
 			
 			return sqlSession.selectOne(NAMESPACE + ".getTotalCnt2",vo);
 		}
+	}
+	
+	// 상품 전체 목록 - listAll() 최신순 - 메인화면:카테고리,성별 분류X
+	@Override
+	public Integer getTotalCnt2(ProductVO vo) throws Exception {
+		
+			
+			return sqlSession.selectOne(NAMESPACE + ".getTotalCnt3",vo);
+			
+				
 	}
 	
 	@Override
@@ -149,7 +207,7 @@ public class ProductDAOImpl implements ProductDAO {
 	
 
 	@Override
-	public ProductVO getBoard(Integer prod_num) throws Exception {
+	public ProductVO getProduct(Integer prod_num) throws Exception {
 		log.info("getBoard(Integer bno) 호출");
 		
 
@@ -169,7 +227,7 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 
 	@Override
-	public Integer deleteBoard(Integer prod_num) throws Exception {
+	public Integer deleteProduct(Integer prod_num) throws Exception {
 		log.info(" deleteBoard(bno) 호출 ");
 
 		/*
@@ -340,7 +398,7 @@ public class ProductDAOImpl implements ProductDAO {
 		log.info("DAOImpl: BeforeAndDealing(DealVO dvo)호출");
 		
 		log.info("여기는 DAOImpl~~~~"+dvo.getState());
-		log.info(dvo+"dvo야~~~");
+		log.info(dvo+"");
 		
 		Integer num = 0;
 		if(dvo.getState().equals("거래전")) { //거래전 -> 거래중
@@ -361,7 +419,7 @@ public class ProductDAOImpl implements ProductDAO {
 		log.info("DAOImpl: BeforeAndDealing1(DealVO dvo)호출");
 		
 		log.info("여기는 DAOImpl~~~~"+dvo.getState());
-		log.info(dvo+"dvo야~~~");
+		log.info(dvo+"");
 		
 		if(dvo.getState().equals("거래전")) { //거래전 -> 거래중
 			

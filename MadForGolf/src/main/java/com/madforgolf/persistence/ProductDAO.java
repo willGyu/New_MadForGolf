@@ -20,8 +20,17 @@ public interface ProductDAO {
 	// 상품 전체 목록 - listAll() 인기순
 	public List<ProductVO> listAll2(ProductVO vo, PageVO vo2) throws Exception;
 	
+	// 상품 전체 목록 - listAll() 최신순 - 메인화면:카테고리,성별 분류X
+	public List<ProductVO> listAll3(ProductVO vo, PageVO vo2) throws Exception;
+	
+	// 상품 전체 목록 - listAll() 인기순 - 메인화면:카테고리,성별 분류X
+	public List<ProductVO> listAll4(ProductVO vo, PageVO vo2) throws Exception;
+	
 	// 상품 전체 개수 출력 - getTotalCnt()
 	public Integer getTotalCnt(ProductVO vo) throws Exception;
+	
+	// 상품 전체 개수 출력 - getTotalCnt2() - 메인(인기순,최신순) 
+	public Integer getTotalCnt2(ProductVO vo) throws Exception;
 	
 	// 상품 1개 상세 출력 - getProductDetail(vo)
 	public DealVO getProductDetail(DealVO vo) throws Exception;
@@ -34,13 +43,13 @@ public interface ProductDAO {
 	
 	
 	// 상품 수정 1개 정보 가져오기 - getBoard(int)
-	public ProductVO getBoard (Integer prod_num) throws Exception;
+	public ProductVO getProduct (Integer prod_num) throws Exception;
 	
 	// 글 조회수 1증가
 	public void updateReadCount(Integer bno) throws Exception;
 	
 	// 글 삭제하기
-	public Integer deleteBoard(Integer prod_num) throws Exception;
+	public Integer deleteProduct(Integer prod_num) throws Exception;
 	
 	// 글 전체목록 - listPage(page)
 	public List<BoardVO> listPage(Integer page) throws Exception;

@@ -112,14 +112,17 @@ public class BoardController {
 		
 		log.info("########## vo: "+ vo);
 		
+		log.info(" ************* "+!multi.getFile("file1").isEmpty());
+		
 		// 업로드 파일 Map에 삽입
-//		if(multi.getFileNames() != null) {
+		if(!multi.getFile("file1").isEmpty()) {
 			fileProcess(multi, vo, request);			
-//		}else {
-//			vo.setContent_img("");
-//			vo.setContent_img2("");
-//			vo.setContent_img3("");
-//		}
+		}
+		else {
+			vo.setContent_img("");
+			vo.setContent_img2("");
+			vo.setContent_img3("");
+		}
 		
 		log.info("######### 최종 vo : " + vo);
 		
@@ -149,7 +152,7 @@ public class BoardController {
 			
 			//파일의 파라미터명(name)
 			String filename = fileNames.next();
-			log.info("파일 파라미터명 : "+filename );
+			log.info("파일 파라미터명 : "+filename);
 			
 			//파일 정보 가져오기
 			MultipartFile mfile = multi.getFile(filename);

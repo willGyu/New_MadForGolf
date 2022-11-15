@@ -1,19 +1,29 @@
 package com.madforgolf.openbanking;
 
 
+import java.io.IOException;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.madforgolf.domain.ProductVO;
 import com.madforgolf.openbanking.domain.AccountSearchRequestVO;
 import com.madforgolf.openbanking.domain.AccountSearchResponseVO;
+import com.madforgolf.openbanking.domain.DepositRequestVO;
+import com.madforgolf.openbanking.domain.DepositResponseVO;
 import com.madforgolf.openbanking.domain.RequestTokenVO;
 import com.madforgolf.openbanking.domain.ResponseTokenVO;
 import com.madforgolf.openbanking.domain.UserInfoRequestVO;
 import com.madforgolf.openbanking.domain.UserInfoResponseVO;
+import com.madforgolf.openbanking.domain.WithdrawRequestVO;
+import com.madforgolf.openbanking.domain.WithdrawResponseVO;
 
 
 @Controller
@@ -33,7 +43,7 @@ public class OpenBankingController {
 	
 	//토큰발급
 	@RequestMapping(value = "/callback",method = RequestMethod.GET)
-	public String getToken(RequestTokenVO requestTokenVO, Model model, ProductVO productVO) throws Exception{
+	public String getToken(RequestTokenVO requestTokenVO, Model model, ProductVO productVO, HttpSession session) throws Exception{
 		
 		System.out.println(" @@@@@@@@ 1. OpenBankingController - getToken() 호출 ");
 		
@@ -50,6 +60,10 @@ public class OpenBankingController {
 		
 		
 		System.out.println("######### responseToken : "+responseToken.getAccess_token());
+		
+		int prod_num = (int)session.getAttribute("prod_num");
+		
+		System.out.println("********* 세션값 prod_num : "+ prod_num);
 		
 		//정보들고
 		model.addAttribute("responseToken", responseToken);
@@ -116,6 +130,77 @@ public class OpenBankingController {
 		
 		return "/openbanking/accountList";
 	}
+	
+	
+	
+	
+	
+	//-------------------------------------------------------------------------------------------
+	
+	
+	
+	
+	
+	// 출금이체
+	@RequestMapping(value = "/withdraw", method = RequestMethod.POST)
+	public @ResponseBody WithdrawResponseVO getWithdraw(@RequestBody WithdrawRequestVO withdrawRequestVO, Model model)
+			throws IOException {
+		// Service 객체의 findAccount() 메서드를 호출하여 사용자 정보 조회
+		// => 파라미터 : AccountSearchRequestVO, 리턴타입 AccountSearchResponseVO
+		// AccountSearchResponseVO accountList =
+		// openBankingService.findAccount(accountSearchRequestVO);
+		System.out.println(withdrawRequestVO + "@@@@@@@@@@@@@@@@@@@@@@@@");
+		WithdrawResponseVO withdrawOK = openBankingService.getwithdraw(withdrawRequestVO);
+
+		// Model 객체에 AccountSearchResponseVO 객체와 엑세스토큰 저장
+		model.addAttribute("withdrawOK", withdrawOK);
+		model.addAttribute("access_token", withdrawRequestVO.getAccess_token());
+		System.out.println("결과@@@@@@@@@@@@@" + withdrawOK);
+		// return "account/withdraw";
+		return withdrawOK;
+	}
+	
+	
+	
+	
+	
+	
+	//-------------------------------------------------------------------------------------------
+	
+	
+	
+	
+	
+	
+	//입금이체
+	@RequestMapping(value = "/deposit", method = RequestMethod.POST)
+	public @ResponseBody DepositResponseVO getDeposit(@RequestBody DepositRequestVO depositRequestVO,Model model)
+			throws Exception {
+		// Service 객체의 findAccount() 메서드를 호출하여 사용자 정보 조회
+		// => 파라미터 : AccountSearchRequestVO, 리턴타입 AccountSearchResponseVO
+		// AccountSearchResponseVO accountList =
+		// openBankingService.findAccount(accountSearchRequestVO);
+		System.out.println("##########################" + depositRequestVO);
+		DepositResponseVO depositOK = openBankingService.getDeposit(depositRequestVO);
+		System.out.println("@#@#@@#@#@#@@#갔다옴");
+		//System.out.println("##########################" + depositOK);
+		// Model 객체에 AccountSearchResponseVO 객체와 엑세스토큰 저장
+		model.addAttribute("withdrawOK", depositOK);
+		model.addAttribute("access_token", depositRequestVO.getAccess_token());
+		System.out.println("결과###############" + depositOK);
+		// return "account/withdraw";
+	
+		
+		return depositOK;
+	}
+	
+	
+	
+	
+	
+	
+
+	
 	
 	
 	

@@ -120,7 +120,7 @@
 
                             <!-- 거래 목록 -->
                             <div class="col-12 col-sm-12">
-                                <div class="single-benefits-area" onClick="location.href='/mypage/dealList'">
+                                <div class="single-benefits-area" onClick="location.href='/product/listProductAll?page=1'">
                                     <a href="#"><img src="${pageContext.request.contextPath }/resources/img/core-img/b4.png" alt=""></a>
                                     <a href="#"><h5>거래 목록</h5></a>
                                     <a href="#"><p>판매내역 및 구매내역을 확인할 수 있는 공간입니다. </p></a>
@@ -147,10 +147,10 @@
                             
                             <!-- 채팅 목록 -->
                             <div class="col-12 col-sm-12">
-                                <div class="single-benefits-area" onClick="location.href='/mypage/chatList'">
-                                    <a href="/member/update"><img src="${pageContext.request.contextPath }/resources/img/core-img/b3.png" alt=""></a>
-                                     <a href="/member/update"><h5>채팅 목록</h5></a>
-                                     <a href="/member/update"><p>나의 채팅 목록을 확인할 수 있는 공간입니다. </p></a>
+                                <div class="single-benefits-area" onClick="location.href='/product/chattingList'">
+                                    <a href="/product/chattingList"><img src="${pageContext.request.contextPath }/resources/img/core-img/b3.png" alt=""></a>
+                                     <a href="/product/chattingList"><h5>채팅 목록</h5></a>
+                                     <a href="/product/chattingList"><p>나의 채팅 목록을 확인할 수 있는 공간입니다. </p></a>
                                 </div>
                             </div>
                             

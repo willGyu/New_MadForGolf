@@ -44,6 +44,7 @@
 	font-family: "Trebuchet MS", Dotum, Arial;
 	background-color: #A1C298;
 }
+
 #topMenu .menuLink3 {
 	text-decoration: none;
 	color: white;
@@ -62,18 +63,22 @@
 
 /*=======최신순 인기순 마우스오버=================  */
 .date_like:hover {
-	color:#F8C4B4 !important;
-  font-weight: bolder;
-  cursor: pointer;
+	color: #F8C4B4 !important;
+	font-weight: bolder;
+	cursor: pointer;
 }
 /*=======최신순 인기순 마우스오버=================  */
 
 /*===============상품올리기 버튼========================  */
-@import url(https://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700); */
+@import
+	url(https://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700)
+	;
+
+* /
 
 
 .fonts {
-  font-family: 'Josefin Slab', serif;
+	font-family: 'Josefin Slab', serif;
 }
 
 /* 헤더도 연동되기 때문에 주석 */
@@ -85,47 +90,45 @@
 	background: #C6EBC5;
 	overflow-y: scroll;
 } */
-
 p {
-  margin-bottom: 0.5em;
+	margin-bottom: 0.5em;
 }
 
-a,
-a:visited {
-  text-decoration: none;
-  color: #F8C4B4;
+a, a:visited {
+	text-decoration: none;
+	color: #F8C4B4;
 }
 
 .clear {
-  clear: both;
+	clear: both;
 }
 
 .pageTitle {
-  font-size: 2em;
-  font-weight: 700;
-  text-transform: uppercase;
-  line-height: 1em;
-  color: #C6EBC5;
+	font-size: 2em;
+	font-weight: 700;
+	text-transform: uppercase;
+	line-height: 1em;
+	color: #C6EBC5;
 }
 
 .pageSubTitle {
-  margin-bottom: 0.5em;
-  font-size: 1.3em;
-  font-weight: 700;
-  line-height: 1em;
-  color: #222;
+	margin-bottom: 0.5em;
+	font-size: 1.3em;
+	font-weight: 700;
+	line-height: 1em;
+	color: #222;
 }
 
 .articleTitle {
-  font-size: 1.15em;
-  font-weight: 700;
-  line-height: 1em;
-  color: #222;
+	font-size: 1.15em;
+	font-weight: 700;
+	line-height: 1em;
+	color: #222;
 }
 
 .wrapper {
-  width: 600px;
-  margin: 20px auto;
+	width: 600px;
+	margin: 20px auto;
 }
 
 /* 헤더가 깨지기 때문에 주석 */
@@ -137,257 +140,275 @@ a:visited {
     1px
     #CCC;
 } */
-
 a.button {
-  display: block;
-  position: relative;
-  float: left;
-  width: 120px;
-  padding: 0;
-  margin: 10px 20px 10px 0;
-  font-weight: 600;
-  text-align: center;
-  line-height: 50px;
-  color: #FFF;
-  border-radius: 5px;
-  transition: all 0.2s ;
+	display: block;
+	position: relative;
+	float: left;
+	width: 120px;
+	padding: 0;
+	margin: 10px 20px 10px 0;
+	font-weight: 600;
+	text-align: center;
+	line-height: 50px;
+	color: #FFF;
+	border-radius: 5px;
+	transition: all 0.2s;
 }
 
 .btnBlueGreen {
-  background: #C6EBC5;
+	background: #C6EBC5;
 }
 
 .btnLightBlue {
-  background: #5DC8CD;
+	background: #5DC8CD;
 }
 
 .btnOrange {
-  background: #FFAA40;
+	background: #FFAA40;
 }
 
 .btnPurple {
-  background: #A74982;
+	background: #A74982;
 }
 
 /* FADE */
 .btnFade.btnBlueGreen:hover {
-color:white;
-  background: #F8C4B4;
-  font-weight: bolder;
-  cursor: pointer;
+	color: white;
+	background: #F8C4B4;
+	font-weight: bolder;
+	cursor: pointer;
 }
 
 .btnFade.btnLightBlue:hover {
-  background: #01939A;
+	background: #01939A;
 }
 
 .btnFade.btnOrange:hover {
-  background: #FF8E00;
+	background: #FF8E00;
 }
 
 .btnFade.btnPurple:hover {
-  background: #6D184B;
+	background: #6D184B;
 }
 
 /* 3D */
 .btnBlueGreen.btnPush {
-  box-shadow: 0px 5px 0px 0px #007144;
+	box-shadow: 0px 5px 0px 0px #007144;
 }
 
 .btnLightBlue.btnPush {
-  box-shadow: 0px 5px 0px 0px #1E8185;
+	box-shadow: 0px 5px 0px 0px #1E8185;
 }
 
 .btnOrange.btnPush {
-  box-shadow: 0px 5px 0px 0px #A66615;
+	box-shadow: 0px 5px 0px 0px #A66615;
 }
 
 .btnPurple.btnPush {
-  box-shadow: 0px 5px 0px 0px #6D184B;
+	box-shadow: 0px 5px 0px 0px #6D184B;
 }
 
 .btnPush:hover {
-  margin-top: 15px;
-  margin-bottom: 5px;
+	margin-top: 15px;
+	margin-bottom: 5px;
 }
 
 .btnBlueGreen.btnPush:hover {
-  box-shadow: 0px 0px 0px 0px #007144;
+	box-shadow: 0px 0px 0px 0px #007144;
 }
 
 .btnLightBlue.btnPush:hover {
-  box-shadow: 0px 0px 0px 0px #1E8185;
+	box-shadow: 0px 0px 0px 0px #1E8185;
 }
 
 .btnOrange.btnPush:hover {
-  box-shadow: 0px 0px 0px 0px #A66615;
+	box-shadow: 0px 0px 0px 0px #A66615;
 }
 
 .btnPurple.btnPush:hover {
-  box-shadow: 0px 0px 0px 0px #6D184B;
+	box-shadow: 0px 0px 0px 0px #6D184B;
 }
 
 /* BORDER */
 .btnBlueGreen.btnBorder {
-  box-shadow: 0px 0px 0px 0px #C6EBC5;
+	box-shadow: 0px 0px 0px 0px #C6EBC5;
 }
 
 .btnBlueGreen.btnBorder:hover {
-  box-shadow: 0px 0px 0px 5px #F8C4B4;
+	box-shadow: 0px 0px 0px 5px #F8C4B4;
 }
 
 .btnLightBlue.btnBorder {
-  box-shadow: 0px 0px 0px 0px #01939A;
+	box-shadow: 0px 0px 0px 0px #01939A;
 }
 
 .btnLightBlue.btnBorder:hover {
-  box-shadow: 0px 0px 0px 5px #01939A;
+	box-shadow: 0px 0px 0px 5px #01939A;
 }
 
 .btnOrange.btnBorder {
-  box-shadow: 0px 0px 0px 0px #A66615;
+	box-shadow: 0px 0px 0px 0px #A66615;
 }
 
 .btnOrange.btnBorder:hover {
-  box-shadow: 0px 0px 0px 5px #A66615;
+	box-shadow: 0px 0px 0px 5px #A66615;
 }
 
 .btnPurple.btnBorder {
-  box-shadow: 0px 0px 0px 0px #6D184B;
+	box-shadow: 0px 0px 0px 0px #6D184B;
 }
 
 .btnPurple.btnBorder:hover {
-  box-shadow: 0px 0px 0px 5px #6D184B;
+	box-shadow: 0px 0px 0px 5px #6D184B;
 }
 
 /* FLOAT */
 .btnFloat {
-  background: none;
-  box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.5);
+	background: none;
+	box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.5);
 }
 
 .btnFloat:before {
-  content: 'Float';
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 120px;
-  height: 50px;
-  border-radius: 5px;
-  transition: all 0.2s ;
+	content: 'Float';
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 120px;
+	height: 50px;
+	border-radius: 5px;
+	transition: all 0.2s;
 }
 
 .btnBlueGreen.btnFloat:before {
-  background: #F8C4B4;
+	background: #F8C4B4;
 }
 
 .btnLightBlue.btnFloat:before {
-  background: #5DC8CD;
+	background: #5DC8CD;
 }
 
 .btnOrange.btnFloat:before {
-  background: #FFAA40;
+	background: #FFAA40;
 }
 
 .btnPurple.btnFloat:before {
-  background: #8D336A;
+	background: #8D336A;
 }
-
 
 .btnFloat:before {
-  box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.4);
+	box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.4);
 }
 
 .btnFloat:hover:before {
-  
+	
 }
 
 .btnFloat:hover:before {
-  margin-top: -2px;
-  margin-left: 0px;
-  transform: scale(1.1,1.1);
-  -ms-transform: scale(1.1,1.1);
-  -webkit-transform: scale(1.1,1.1);
-  box-shadow: 0px 5px 5px -2px rgba(0, 0, 0, 0.25);
+	margin-top: -2px;
+	margin-left: 0px;
+	transform: scale(1.1, 1.1);
+	-ms-transform: scale(1.1, 1.1);
+	-webkit-transform: scale(1.1, 1.1);
+	box-shadow: 0px 5px 5px -2px rgba(0, 0, 0, 0.25);
 }
 
 /* SLIDE */
 .btnSlide.btnBlueGreen {
-  background: 0;
+	background: 0;
 }
 
 .btnSlide .top {
-  position: absolute;
-  top: 0px;
-  left: 0;
-  width: 120px;
-  height: 50px;
-  background: #C6EBC5;
-  z-index: 10;
-  transition: all 0.2s ;
-  border-radius: 5px;
+	position: absolute;
+	top: 0px;
+	left: 0;
+	width: 120px;
+	height: 50px;
+	background: #C6EBC5;
+	z-index: 10;
+	transition: all 0.2s;
+	border-radius: 5px;
 }
 
 .btnSlide.btnBlueGreen .top {
-  background: #C6EBC5;
+	background: #C6EBC5;
 }
 
 .btnSlide.btnLightBlue .top {
-  background: #5DC8CD;
+	background: #5DC8CD;
 }
 
 .btnSlide.btnOrange .top {
-  background: #FFAA40;
+	background: #FFAA40;
 }
 
 .btnSlide.btnPurple .top {
-  background: #A74982;
+	background: #A74982;
 }
 
 .btnSlide .bottom {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 120px;
-  height: 50px;
-  color: #000;
-  z-index: 5;
-  border-radius: 5px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 120px;
+	height: 50px;
+	color: #000;
+	z-index: 5;
+	border-radius: 5px;
 }
 
 .btnSlide:hover .top {
-  top: 40px;
+	top: 40px;
 }
 /*===============상품올리기 버튼========================  */
 
-
 /*====================반응형 웹======================= */
-@media only screen and (max-width: 768px){
-	#topMenu{
-		width: 600px;
+@media only screen and (max-width: 767px) {
+ 	#topMenu #genderNav {
+		width: 400px;
+		height: 100%;
+		float: left;
 	}
 	
-	#array{
+	#topMenu{
+		width: 100%;
+		text-align: center;
+		margin: 0px;
+		padding: 0px;
+		
+	}
+	
+
+	#array {
 		width: 140px;
 		height: 100px;
 		padding: 0px;
 		margin: 0px;
-		
 	}
-	
-	#ProductArea{
+	#ProductArea {
 		width: 150px;
 	}
-	#ProductAreaPage{
-		width: 45px; 
-		
+	#ProductAreaPage {
+		width: 45px;
 	}
+	.product-img {
+		width: 100px;
+		text-align: center;
+	}
+	.single-product-area mb-50 {
+		width: 100px;
+		text-align: center;
+	}
+	.col-12 col-sm-6 col-lg-4 {
+		width: 100px;
+		text-align: center;
+	}
+	
+
 
 }
 
 /*====================반응형 웹======================= */
-
 </style>
 
     <!-- ##### Breadcrumb Area Start ##### -->
@@ -426,7 +447,6 @@ color:white;
                 <li><a id="genderNav" class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Putter&gender=1">Putter</a></li>
                 <li><a id="genderNav" class="menuLink" style="border-top-right-radius: 5px;" href="${pageContext.request.contextPath }/product/listAll?category=Etc&gender=1">Etc</a></li>
 
-				       
                	<!-- 여성용 -->
                	<li><a id="genderNav" class="menuLink1" style="border-bottom-left-radius: 5px;"> Women's </a></li>
                 <li><a id="genderNav" class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Driver&gender=2">Driver</a></li>
@@ -439,6 +459,7 @@ color:white;
                 <li><a id="genderNav" class="menuLink3">&nbsp;</a></li>
 			</ul>
         </nav>
+
    	</div>
 	<!-- =================================남성용/여성용 성별 구분 상품 카테고리===========================================   -->
 	
@@ -508,17 +529,17 @@ color:white;
 				<ul class="pagination">
 					<c:if test="${pm.prev }">
 						<!-- ${pm.prev }결과가 참(true)일 때 -->
-						<li class="page-item"><a id="ProductAreaPage" class="page-link" href="listAll?page=${pm.startPage-1 }&category=${category }"><i class="fa fa-angle-left"></i></a></li>
+						<li class="page-item"><a id="ProductAreaPage" class="page-link" href="listAll?page=${pm.startPage-1 }&category=${category }&gender=${gender}"><i class="fa fa-angle-left"></i></a></li>
 						<!-- 현재 위치한 페이지 블럭의 첫번째 페이지보다 -1인 페이지로 이동  -->
 							</c:if>
 								<c:forEach var="idx" begin="${pm.startPage }" end="${pm.endPage }">
 								<li class="page-item" <c:out value="${pm.vo.page == idx?'class=active':'active' }"/>>
-								<a id="ProductAreaPage" class="page-link" href="listAll?page=${idx }&category=${category }">${idx }</a></li>
+								<a id="ProductAreaPage" class="page-link" href="listAll?page=${idx }&category=${category }&gender=${gender}">${idx }</a></li>
 							</c:forEach>
 							
 							<c:if test="${pm.next }">
 								<!-- ${pm.next }결과가 참(true)일 때  -->
-								<li class="page-item"><a id="ProductAreaPage" class="page-link" href="listAll?page=${pm.endPage+1 }&category=${category }"><i class="fa fa-angle-right"></i></a></li>
+								<li class="page-item"><a id="ProductAreaPage" class="page-link" href="listAll?page=${pm.endPage+1 }&category=${category }&gender=${gender}"><i class="fa fa-angle-right"></i></a></li>
 								<!-- 현재 위치한 페이징 블럭의 마지막 페이지보다 +1인 페이지로 이동  -->
 							</c:if>
 						</ul>

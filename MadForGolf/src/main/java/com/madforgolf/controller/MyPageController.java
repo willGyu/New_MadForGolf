@@ -63,6 +63,11 @@ public class MyPageController {
 		String user_id = (String)session.getAttribute("user_id");
 		log.info("@@@@@@@@"+user_id);
 		
+		// 구매 횟수 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 1116 추가 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+		int purchaseCnt = service.pruchaseCnt(user_id);
+		model.addAttribute("purchaseCnt", purchaseCnt);
+		// 끝 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+		
 		// 구매 내역 받아오기
 		// 드라이버
 		int purchaseDriver = service.purchaseDriver(user_id);
@@ -96,6 +101,11 @@ public class MyPageController {
 		
 		String user_id = (String)session.getAttribute("user_id");
 		log.info("@@@@@@@@"+user_id);
+		
+		// 판매 횟수 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 1116 추가 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+		int saleCnt = service.saleCnt(user_id);
+		model.addAttribute("saleCnt", saleCnt);
+		// 끝 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 		
 		// 판매 내역 받아오기
 		// 드라이버

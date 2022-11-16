@@ -15,6 +15,7 @@ import com.madforgolf.domain.LikeVO;
 import com.madforgolf.domain.PageMakerVO;
 import com.madforgolf.domain.PageVO;
 import com.madforgolf.domain.ProductVO;
+import com.madforgolf.domain.SellerReviewVO;
 import com.madforgolf.persistence.ProductDAO;
 
 @Service
@@ -85,14 +86,29 @@ public class ProductServiceImpl implements ProductService {
 	public Integer getTotalCnt2(ProductVO vo) throws Exception {
 		return dao.getTotalCnt2(vo);
 	}
+	
 
+
+	//////////////////////// 다은 수정 시작 1-1 /////////////////////////////////////////////////////////////////////////
+	
 
 	
 	@Override
-	public DealVO productDetail(DealVO vo) throws Exception {
-		return dao.getProductDetail(vo);
+	public DealVO productDetail(Integer prod_num) throws Exception {
+		log.info(" productDetail(prod_num) 호출");
+
+		return dao.getProductDetail(prod_num);
 	}
+
 	
+	//////////////////////// 다은 수정 종료 1-1 /////////////////////////////////////////////////////////////////////////
+	
+	
+
+	/*
+	 * @Override public DealVO productDetail(DealVO vo) throws Exception { return
+	 * dao.getProductDetail(vo); }
+	 */
 	@Override
 	public void productInsert(ProductVO vo) throws Exception {
 		log.info("productInsert(vo) 호출");
@@ -240,6 +256,21 @@ public class ProductServiceImpl implements ProductService {
 		log.info("BeforeAndDealing1(DealVO dvo)");
 		return dao.BeforeAndDealing1(dvo);
 	}
+	
+
+	// 구매내역 페이지 리뷰작성
+	@Override
+	public int buyProductWrite(SellerReviewVO reviewVO) throws Exception {
+		return dao.buyProductWrite(reviewVO);
+	}
+
+
+
+	@Override
+	public SellerReviewVO getReviewInfo(SellerReviewVO reviewVO) throws Exception {
+		return dao.getReviewInfo(reviewVO);
+	}
+	
 	
 	
 	

@@ -6,7 +6,7 @@
 <mapper namespace="com.madforgolf.mapper.dealMapper">
 
 	
-	<insert id="insertDeal">
+<!-- 	<insert id="insertDeal">
 		insert into mfg_deal(seller_id, buyer_id, prod_num, price, state) 
 		values(#{seller_id}, #{buyer_id}, #{prod_num}, #{price}, #{state})
 	</insert>
@@ -22,6 +22,24 @@
 	<delete id="deleteDeal">
 		delete from mfg_deal
 		where deal_num=#{deal_num}
-	</delete>
+	</delete> -->
+	
+	
+	<insert id="insertDeal">
+		insert into mfg_deal(seller_id, price, state) 
+		values(#{seller_id}, #{price}, #{state})
+	</insert>
+	
+	<update id="updateDeal">
+		update mfg_deal 
+		set buyer_id = #{buyer_id}  
+		where deal_num = #{deal_num}
+	</update>
+	
+	<update id="addProd_num">
+		update mfg_deal 
+		set prod_num = #{prod_num}  
+		where deal_num = #{prod_num}
+	</update>
 	
 </mapper>

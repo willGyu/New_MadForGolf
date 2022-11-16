@@ -1,5 +1,8 @@
 package com.madforgolf.persistence;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -8,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.madforgolf.domain.DealVO;
+import com.madforgolf.domain.ProductVO;
 
 @Repository
 public class DealDAOImpl implements DealDAO{
@@ -40,24 +44,37 @@ public class DealDAOImpl implements DealDAO{
 	//-------------------------------------------------------------------------
 	
 	
-	//거래 정보 가져오기
+	//거래 정보 수정(구매자 정보 입력)
 	@Override
-	public DealVO getDeal(String buyer_id) {
-		log.info(" 3. dao - insertDeal(buyer_id) ");
+	public void updateDeal(Integer deal_num, String buyer_id) throws Exception {
+		log.info(" 3. dao - updateDeal(buyer_id) ");
 		
-		return sqlSession.selectOne(NAMESPACE+".getDeal", buyer_id);
+		log.info("***** buyer_id :"+buyer_id);
+		log.info("***** deal_num :"+deal_num);
+		
+
+		Map<String, Object> dealObj = new HashMap<String, Object>();
+		dealObj.put("buyer_id", buyer_id);
+		dealObj.put("deal_num", deal_num);
+		
+		
+		sqlSession.update(NAMESPACE+".updateDeal", dealObj);
+		
 	}
 
 	
+
 	//-------------------------------------------------------------------------
 	
 	
-	//거래 취소하기(정보 삭제)
+	//거래 정보 수정 (거래 - 상품 번호 입력)
 	@Override
-	public void deleteDeal(Integer deal_num) {
-		log.info(" 3. dao - insertDeal(deal_num) ");
-	
-		sqlSession.delete(NAMESPACE+".deleteDeal", deal_num);
+	public void addProd_num(int prod_num) {
+		log.info(" 3. dao - updateDeal(buyer_id) ");
+		
+		log.info("******  prod_num : "+ prod_num);
+		sqlSession.update(NAMESPACE+".addProd_num", prod_num);
+
 	}
 	
 	

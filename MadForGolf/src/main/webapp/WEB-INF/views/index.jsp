@@ -181,18 +181,31 @@
 							<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9848c8896187625882fecd73a68b8c43&libraries=services"></script>
 							<script>
 							$(window).on('load', function() {
-								
 								// 주소명 가져오기
 								function getAddr(lat, lng){
-									
+
 								     let geocoder = new kakao.maps.services.Geocoder();
 
 								     let coord = new kakao.maps.LatLng(lat, lng);
 								     let callback = function(result, status) {
 								         if (status === kakao.maps.services.Status.OK) {
 								        	 	$('#centerAddr').val(result[0].address.address_name);
+								        	 	var addr = result[0].address.address_name;
+								        	 	
+								        	 	$.ajax({
+								        	 		url: "./product/address",
+								        	 		data: {"address":result[0].address.address_name},
+								        	 		success: function(){
+								        	 			alert("성공");
+								        	 		},
+								        	 		error: function(e){
+								        	 			console.log(e);
+								        	 		}
+								        	 	});
+								        	 	
 												return result[0].address.address_name;
-								         }else {
+								        	 	
+								         } else {
 											alert('위도 경도를 불러오는데 실패하였습니다.');
 										 }
 								     }
@@ -204,7 +217,7 @@
 										
 										var lat = position.coords.latitude;
 										var lng = position.coords.longitude;
-
+										
 										$('#latVal').val(lat);
 										$('#lngVal').val(lng);
 										getAddr(lat, lng);

@@ -118,6 +118,67 @@
 	}
 		
 }
+
+.btn{cursor: pointer; margin: 0 5px;}
+.reviewBtnCancle{
+ display: none;
+}
+.reviewWrite {
+background-color: #91C788;
+color: #fff;
+}
+
+.myform fieldset{
+    display: inline-block; /* 하위 별점 이미지들이 있는 영역만 자리를 차지함.*/
+    direction: rtl; /* 이모지 순서 반전 */
+    border: 0; /* 필드셋 테두리 제거 */
+}
+.myform fieldset legend{
+    text-align: left;
+}
+.myform input[type=radio]{
+    display: none; /* 라디오박스 감춤 */
+}
+.myform label{
+    font-size: 3em; /* 이모지 크기 */
+    color: transparent; /* 기존 이모지 컬러 제거 */
+    text-shadow: 0 0 0 #f0f0f0; /* 새 이모지 색상 부여 */
+    cursor: pointer;
+}
+.myform label:hover{
+    text-shadow: 0 0 0 #ffc107; /* 마우스 호버   ++ 색상 변경*/
+}
+.myform label:hover ~ label{
+    text-shadow: 0 0 0 #ffc107; /* 마우스 호버 뒤에오는 이모지들 ++ 색상 변경 */
+}
+.myform input[type=radio]:checked ~ label{
+    text-shadow: 0 0 0 #ffc107; /* 마우스 클릭 체크  ++ 색상 변경 */
+}
+.readonly{background: #ececec}
+
+.btn-review-write{
+background: #FA7070;
+color: #fff;
+}
+.btn-review-write:hover{
+ background: #cb3b2c;
+ box-shadow: 5px 5px 5px rgba(0,0,0,0.3);
+}
+ .btn-review-info{
+ 	background: #91C788;
+	color: #fff;
+ }
+ .btn-review-info:hover{
+ 	background: #52734D;
+ 	box-shadow: 5px 5px 5px rgba(0,0,0,0.3);
+ }
+ 
+ 
+.page-item.active .page-link {
+    border-color: #91C788;
+    background-color: #91C788;
+    color: #ffffff;
+}
 </style>
    
      <!-- ##### Breadcrumb Area Start ##### -->
@@ -161,7 +222,7 @@
 		<table class="table">
 			<tbody>
 			
-				<tr>
+				<tr class="text-center">
 					<th>거래일시</th>
 					<th>상품이름</th>
 					<th>가격</th>
@@ -171,8 +232,23 @@
 				<tr>
 					<td>${buy.deal_date }</td>
 					<td><a href="/product/productDetail?prod_num=${buy.product.prod_num}">${buy.product.prod_name }</a></td>
-					<td>${buy.product.price }</td>
-					<td>리뷰</td>
+					<td >
+					<fmt:formatNumber  value="${buy.product.price }"  pattern="###,###" /> 원
+					</td>
+					<td class="text-center">
+				    <c:choose>
+				    	<c:when test="${buy.review_count==0}">
+				    		 
+				    		<button class="btn btn-review-write" id="reviewBtn-${buy.product.prod_num}" onclick="reviewBtn('${buy.product.prod_num}')">리뷰 작성</button>	
+				    	</c:when>
+				    	<c:otherwise>
+				    		<button class="btn btn-review-info" id="getReview-${buy.product.prod_num}"
+				    		 onclick="getReviewInfo('${buy.product.prod_num}')">리뷰보기</button>	
+				    	</c:otherwise>
+				    </c:choose>			
+								
+								
+					</td>
 <%-- 					<td>
 						<a href="/board/boardRead?board_num=${vo.prod_num}">${vo.title }</a></td>
 					<td>조인해오기</td>
@@ -181,20 +257,174 @@
 					</td>
 					<td>${vo.readcount}</td> --%>
 				</tr>
+				<tr id="tr-${buy.product.prod_num}" style="display: none">
+					<!--  리뷰 작성 하기 -->
+					<td colspan="4" style="text-align: center; " class="myform">
+					<fieldset>				     
+				        <input type="radio" name="rating" value="5" id="rate1-${buy.product.prod_num}"><label for="rate1-${buy.product.prod_num}">⭐</label>
+				        <input type="radio" name="rating" value="4" id="rate2-${buy.product.prod_num}"><label for="rate2-${buy.product.prod_num}">⭐</label>
+				        <input type="radio" name="rating" value="3" id="rate3-${buy.product.prod_num}"><label for="rate3-${buy.product.prod_num}">⭐</label>
+				        <input type="radio" name="rating" value="2" id="rate4-${buy.product.prod_num}"><label for="rate4-${buy.product.prod_num}">⭐</label>
+				        <input type="radio" name="rating" value="1" id="rate5-${buy.product.prod_num}"><label for="rate5-${buy.product.prod_num}">⭐</label>
+				    </fieldset>
+						<input type="hidden" id="deal_num-${buy.product.prod_num}" value="${buy.deal_num}" >
+						<textarea style="width: 100%; min-height:200px " id="content-${buy.product.prod_num}"></textarea>
+						
+						<button class="btn reviewBtnCancle" id="reviewBtnCancle-${buy.product.prod_num}"
+						 onclick="reviewBtnCancle('${buy.product.prod_num}')">리뷰작성 취소</button>
+						
+						<button class="btn reviewWrite" id="reviewBtnCancle-${buy.product.prod_num}"
+						 onclick="reviewWrite('${buy.product.prod_num}')">리뷰작성 하기</button>
+					</td>
+				</tr>
+				
+				<tr id="tr-getReview-${buy.product.prod_num}" style="display: none">
+				<td colspan="4" style="text-align: center; " class="myform">	
+					<!-- 작성한 리뷰 보기 -->
+					<fieldset onclick="return false;">				     
+				        <input type="radio" readonly name="rating" value="5" id="rate1-2-${buy.product.prod_num}"><label for="rate1-2-${buy.product.prod_num}">⭐</label>
+				        <input type="radio" readonly name="rating" value="4" id="rate2-2-${buy.product.prod_num}"><label for="rate2-2-${buy.product.prod_num}">⭐</label>
+				        <input type="radio" readonly name="rating" value="3" id="rate3-2-${buy.product.prod_num}"><label for="rate3-2-${buy.product.prod_num}">⭐</label>
+				        <input type="radio" readonly name="rating" value="2" id="rate4-2-${buy.product.prod_num}"><label for="rate4-2-${buy.product.prod_num}">⭐</label>
+				        <input type="radio" readonly name="rating" value="1" id="rate5-2-${buy.product.prod_num}"><label for="rate5-2-${buy.product.prod_num}">⭐</label>
+				    </fieldset>						    			
+												
+					<textarea style="width: 100%; min-height:200px " readonly="readonly"  class="readonly"></textarea>				
+					<button class="btn reviewClose btn-review-info"  onclick="getReviewClose('${buy.product.prod_num}')">닫기</button>
+					</td>
+				</tr>
+				
+				
 			</c:forEach>
 			</tbody>
 		</table>
 	</div>	
 	
+<script>
+
+//열린 리뷰 보기 및 작성하기 모두 닫기
+function allClose(){
+	$(".reviewClose").click();
+	$(".reviewBtnCancle").click();
+}
+
+//한개 리뷰 정보 불러오기
+function getReviewInfo(prodNum){ 	
+	allClose();
+	
+	const parmData={
+		deal_num:$("#deal_num-"+prodNum).val(),
+		prod_num :prodNum			
+	}
+	
+	console.log(parmData);
+	
+	$.ajax({
+		url :"/product/getReviewInfo",
+		type:"POST",
+		data:parmData,
+		success:function(res){
+			if(!res){
+				alert("리뷰 가져오기에 실패 했습니다.");
+				return;
+			}
+			console.log(res);
+			$("#tr-getReview-"+prodNum + " textarea").val(res.content);
+			console.log(res.score);
+			const score=parseInt(res.score);
+			if(score===1){
+				$("#rate5-2-"+prodNum).prop("checked", true);
+			}else if(score===2){
+				$("#rate4-2-"+prodNum).prop("checked", true);
+			}else if(score===3){
+				$("#rate3-2-"+prodNum).prop("checked", true);		
+			}else if(score===4){
+				$("#rate2-2-"+prodNum).prop("checked", true);
+			}else{
+				$("#rate1-2-"+prodNum).prop("checked", true);
+			}
+			
+			
+				
+		},
+		error:function(error){
+			console.log(" 에러 : ", error);
+		}		
+		
+	})
+	
+	 $("#getReview-"+prodNum).hide();	
+	 $("#tr-getReview-"+prodNum).slideDown(200);		 
+}
+
+function getReviewClose(prodNum){
+	$("#tr-getReview-"+prodNum).hide();
+	$("#getReview-"+prodNum).show();
+}
+
+
+function reviewBtn(prodNum){ 	
+	 //$("#reviewBtn-"+prodNum).hide();
+	 allClose();
+	 $("#tr-"+prodNum + "  textarea").val("");
+	 $("#tr-"+prodNum).slideDown(200);	
+	 
+}
+
+
+function reviewBtnCancle(prodNum){
+	$("#tr-"+prodNum).hide();
+	$("#reviewBtn-"+prodNum).show();
+}
+
+
+function reviewWrite(prodNum){
+	const content =$("#content-"+prodNum).val();
+	
+	const parmData={
+			deal_num:$("#deal_num-"+prodNum).val(),
+			prod_num :prodNum,			
+			content:content,
+			score:$("#tr-"+prodNum + " input[name=rating]:checked" ).val()
+	}
+	
+	//console.log("parmData  " ,parmData); 
 	
 
-<%-- 	${sessionScope.user_id} --%>
-<%-- 	<c:if test="${!(empty sessionScope.user_id) }">
-        <div class="col-12 writeBtn_box">
-        	<a class="writeBtn" href="/board/insertBoard">글쓰기</a>
-        </div>
-	</c:if> --%>
+	if(!parmData.score|| parseInt(parmData.score)==0){
+		alert("별점을 선택해 주세요.");
+		return;
+	}
+	if(!content){
+		alert("내용을 입력해 주세요.");
+		return;
+	}
 	
+	
+	$.ajax({
+		url :"/product/buyProductWrite",
+		type:"POST",
+		data:parmData,
+		success:function(res){
+			if(res=="success"){
+				alert("리뷰가 등록 처리 되었습니다.");
+				location.reload();
+				//reviewBtnCancle(prodNum);
+			}
+		},
+		error:function(error){
+			console.log("에러  : ",error);
+		}
+	})
+	
+	
+	
+	
+}
+
+</script>
+
+
 	<!-- ##### 페이징 처리 시작  ##### -->
 	<div class="page_box">
 	

@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.madforgolf.domain.DealVO;
+import com.madforgolf.domain.ProductVO;
 import com.madforgolf.persistence.DealDAO;
 
 @Service
@@ -36,24 +37,24 @@ public class DealServiceImpl implements DealService {
 	//---------------------------------------------------------------------------------
 	
 	
-	//거래 정보 가져오기
+	// 거래 수정 (구매자 정보 입력) 
 	@Override
-	public DealVO getDeal(String buyer_id) throws Exception {
-		log.info(" 2. service - insertDeal(buyer_id) ");
+	public void updateDeal(Integer deal_num, String buyer_id) throws Exception {
+		log.info(" 2. service - updateDeal(vo, buyer_id) ");
 		
-		return dao.getDeal(buyer_id);
+		dao.updateDeal(deal_num, buyer_id);
 	}
 	
 
-	
 	//---------------------------------------------------------------------------------
 	
 	
-	//거래 취소하기(정보 삭제)
+	// 거래 수정 (거래 - 상품번호 삽입) 
 	@Override
-	public void deleteDeal(Integer deal_num) throws Exception {
-		log.info(" 2. service - deleteDeal(buyer_id) ");
+	public void addProd_num(int prod_num) throws Exception {
+		log.info(" 2. service - addProd_num(prod_num) ");
 		
-		dao.deleteDeal(deal_num);
+		dao.addProd_num(prod_num);
 	}
+	
 }

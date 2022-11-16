@@ -16,6 +16,16 @@ public class ProductVO {
 	private Date prod_date;
 	private String prod_img2;
 	private String prod_img3;
+
+	private MemberVO seller;
+
+	public MemberVO getSeller() {
+		return seller;
+	}
+
+	public void setSeller(MemberVO seller) {
+		this.seller = seller;
+	}
 	
 	
 	//거래 목록 리스트 띄우기 위해 deal_num추가
@@ -32,15 +42,7 @@ public class ProductVO {
 	
 	//거래 목록 리스트 띄우기 위해 deal_num추가
 	
-	
-	//지역인증 넘어오면 추가할 위도,경도 (get/set,toString도 추가하셈)
-	/*
-	 * private double latitude; 
-	 * private double longitude;
-	 */
-	//지역인증 넘어오면 추가할 위도,경도
-	
-	
+
 
 	//거래 상태 추가 함 
 	private String state;
@@ -139,26 +141,15 @@ public class ProductVO {
 	public void setProd_img3(String prod_img3) {
 		this.prod_img3 = prod_img3;
 	}
-	
-	//deal_num까지 포함 toString
+
 	@Override
 	public String toString() {
 		return "ProductVO [prod_num=" + prod_num + ", seller_id=" + seller_id + ", prod_name=" + prod_name
 				+ ", prod_img=" + prod_img + ", price=" + price + ", detail=" + detail + ", condition=" + condition
 				+ ", category=" + category + ", gender=" + gender + ", like_count=" + like_count + ", prod_date="
-				+ prod_date + ", prod_img2=" + prod_img2 + ", prod_img3=" + prod_img3 + ", deal_num=" + deal_num
-				+ ", state=" + state + "]";
+				+ prod_date + ", prod_img2=" + prod_img2 + ", prod_img3=" + prod_img3 + ", seller=" + seller
+				+ ", deal_num=" + deal_num + ", state=" + state + "]";
 	}
-	
-
-	/*
-	 * @Override public String toString() { return "ProductVO [prod_num=" + prod_num
-	 * + ", seller_id=" + seller_id + ", prod_name=" + prod_name + ", prod_img=" +
-	 * prod_img + ", price=" + price + ", detail=" + detail + ", condition=" +
-	 * condition + ", category=" + category + ", gender=" + gender + ", like_count="
-	 * + like_count + ", prod_date=" + prod_date + ", prod_img2=" + prod_img2 +
-	 * ", prod_img3=" + prod_img3 + ", dealState=" + dealState + "]"; }
-	 */
 	
 	
 	

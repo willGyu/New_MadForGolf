@@ -18,7 +18,8 @@ public class DealVO {
 	private MemberVO buyer;		// 구매자
 	private ProductVO product;	// 상품
 	
-	
+	private int review_count;    // 리뷰 작성 상태 0 이면 등록 안됨, 
+
 	public int getDeal_num() {		
 		return deal_num;
 	}
@@ -78,6 +79,13 @@ public class DealVO {
 	}
 	public void setSeller(MemberVO seller) {
 		this.seller = seller;
+	}
+	
+	public int getReview_count() {
+		return review_count;
+	}
+	public void setReview_count(int review_count) {
+		this.review_count = review_count;
 	}
 	
 	@Override

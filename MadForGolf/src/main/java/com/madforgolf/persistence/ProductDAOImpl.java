@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +18,7 @@ import com.madforgolf.domain.LikeVO;
 import com.madforgolf.domain.PageMakerVO;
 import com.madforgolf.domain.PageVO;
 import com.madforgolf.domain.ProductVO;
+import com.madforgolf.domain.SellerReviewVO;
 
 @Repository
 public class ProductDAOImpl implements ProductDAO {
@@ -27,6 +30,10 @@ public class ProductDAOImpl implements ProductDAO {
 	// SqlSession객체 주입(DI)
 	@Autowired
 	private SqlSession sqlSession;
+	
+	
+	@Autowired
+	private HttpSession session;
 
 	private static final String NAMESPACE = "com.madforgolf.mapper.ProductMapper";
 	
@@ -43,7 +50,7 @@ public class ProductDAOImpl implements ProductDAO {
 
 	@Override
 	public List<ProductVO> listAll(ProductVO vo, PageVO vo2) throws Exception {
-		log.info("listAll() 호출");
+log.info("listAll() 호출");
 		
 		Map<String, Object> productObj = new HashMap<String, Object>();		
 
@@ -51,22 +58,35 @@ public class ProductDAOImpl implements ProductDAO {
 		productObj.put("gender", vo.getGender());
 		productObj.put("pageStart", vo2.getPageStart());
 		productObj.put("perPageNum", vo2.getPerPageNum());
-				
+		
 		log.info(productObj.get("category")+"");
 		log.info(productObj.get("gender")+"");
 		log.info(productObj.get("pageStart")+"");
 		log.info(productObj.get("perPageNum")+"");
-		
-		
+				
 		// DB - 모든정보 가져오기(SQL/mapper 호출)
 		List<ProductVO> productList;
 		
 		if(vo.getGender() == 0) { //성별없음:0 남자:1 여자:2
-			productList = sqlSession.selectList(NAMESPACE + ".listAll", productObj);
-			log.info("Mapper - listAll 호출");
+			if((String)session.getAttribute("user_id") != null) {
+				productObj.put("user_id", (String)session.getAttribute("user_id"));
+				productList = sqlSession.selectList(NAMESPACE + ".listAll", productObj);
+				log.info("Mapper - listAll 호출(로그인 o : 회원정보 지역 기반 리스트 출력)");
+			} else {
+				productObj.put("addr", (String)session.getAttribute("addr"));
+				productList = sqlSession.selectList(NAMESPACE + ".listAll1-1", productObj);				
+				log.info("Mapper - listAll1-1 호출(로그인 x : GO 이용 리스트 출력)");
+			}
 		} else {
-			productList = sqlSession.selectList(NAMESPACE + ".listAll2", productObj);
-			log.info("Mapper - listAll2 호출");
+			if((String)session.getAttribute("user_id") != null) {
+				productObj.put("user_id", (String)session.getAttribute("user_id"));
+				productList = sqlSession.selectList(NAMESPACE + ".listAll2", productObj);
+				log.info("Mapper - listAll2 호출(로그인 o : 회원정보 지역 기반 리스트 출력)");
+			} else {
+				productObj.put("addr", (String)session.getAttribute("addr"));
+				productList = sqlSession.selectList(NAMESPACE + ".listAll2-1", productObj);				
+				log.info("Mapper - listAll2-1 호출(로그인 x : GO 이용 리스트 출력)");
+			}
 		}
 		
 		log.info("상품 개수 : "+ productList.size() + "개");
@@ -76,7 +96,7 @@ public class ProductDAOImpl implements ProductDAO {
 	
 	@Override
 	public List<ProductVO> listAll2(ProductVO vo, PageVO vo2) throws Exception {
-		log.info("listAll2() 호출");
+log.info("listAll2() 호출");
 		
 		Map<String, Object> productObj = new HashMap<String, Object>();		
 		productObj.put("category", vo.getCategory());
@@ -93,17 +113,32 @@ public class ProductDAOImpl implements ProductDAO {
 		List<ProductVO> productList;
 		
 		if(vo.getGender() == 0) { //성별없음:0 남자:1 여자:2
-			productList = sqlSession.selectList(NAMESPACE + ".listLike", productObj);
-			log.info("Mapper - listLike 호출");
+			if((String)session.getAttribute("user_id") != null) {
+				productObj.put("user_id", (String)session.getAttribute("user_id"));
+				productList = sqlSession.selectList(NAMESPACE + ".listLike", productObj);
+				log.info("Mapper - listLike 호출(로그인 o : 회원정보 지역 기반 리스트 출력)");
+			} else {
+				productObj.put("addr", (String)session.getAttribute("addr"));
+				productList = sqlSession.selectList(NAMESPACE + ".listLike1-1", productObj);				
+				log.info("Mapper - listLike1-1 호출(로그인 x : GO 이용 리스트 출력)");
+			}
 		} else {
-			productList = sqlSession.selectList(NAMESPACE + ".listLike2", productObj);
-			log.info("Mapper - listLike2 호출");
+			if((String)session.getAttribute("user_id") != null) {
+				productObj.put("user_id", (String)session.getAttribute("user_id"));
+				productList = sqlSession.selectList(NAMESPACE + ".listLike2", productObj);
+				log.info("Mapper - listLike2 호출(로그인 o : 회원정보 지역 기반 리스트 출력)");
+			} else {
+				productObj.put("addr", (String)session.getAttribute("addr"));
+				productList = sqlSession.selectList(NAMESPACE + ".listLike2-1", productObj);				
+				log.info("Mapper - listLike2-1 호출(로그인 x : GO 이용 리스트 출력)");
+			}
 		}
 		
 		log.info("상품 개수 : "+ productList.size() + "개");
 		
 		return productList;
 	}
+	
 	
 	// 상품 전체 목록 - listAll() 최신순 - 메인화면:카테고리,성별 분류X
 	@Override
@@ -155,17 +190,33 @@ public class ProductDAOImpl implements ProductDAO {
 	
 	@Override
 	public Integer getTotalCnt(ProductVO vo) throws Exception {
+
+		Map<String, Object> productObj = new HashMap<String, Object>();		
+		productObj.put("category", vo.getCategory());
+		productObj.put("gender", vo.getGender());
 		
 		if(vo.getGender()==0) {
+			if((String)session.getAttribute("user_id") != null) {
+				productObj.put("user_id", (String)session.getAttribute("user_id"));			
+				return sqlSession.selectOne(NAMESPACE + ".getTotalCnt", productObj);
+			} else {
+				productObj.put("addr", (String)session.getAttribute("addr"));
+				return sqlSession.selectOne(NAMESPACE + ".getTotalCnt1-1", productObj);
+			}
 			
-			return sqlSession.selectOne(NAMESPACE + ".getTotalCnt",vo);
+		} else {
 			
-		}else {
-			
-			return sqlSession.selectOne(NAMESPACE + ".getTotalCnt2",vo);
+			if((String)session.getAttribute("user_id") != null) {
+				productObj.put("user_id", (String)session.getAttribute("user_id"));			
+				return sqlSession.selectOne(NAMESPACE + ".getTotalCnt2", productObj);
+			} else {
+				productObj.put("addr", (String)session.getAttribute("addr"));
+				return sqlSession.selectOne(NAMESPACE + ".getTotalCnt2-1", productObj);
+			}
 		}
 	}
 	
+
 	// 상품 전체 목록 - listAll() 최신순 - 메인화면:카테고리,성별 분류X
 	@Override
 	public Integer getTotalCnt2(ProductVO vo) throws Exception {
@@ -176,10 +227,37 @@ public class ProductDAOImpl implements ProductDAO {
 				
 	}
 	
+	
+
+	//////////////////////// 다은 수정 시작 1-1 /////////////////////////////////////////////////////////////////////////
+	
+	
+	@Override
+	public DealVO getProductDetail(Integer prod_num) throws Exception {
+		log.info("getProductDetail(prod_num) 호출");
+
+		log.info("ㅠㅠㅠㅠㅠㅠㅠㅠ"+sqlSession.selectOne(NAMESPACE + ".getProductDetail2", prod_num));
+		return sqlSession.selectOne(NAMESPACE + ".getProductDetail2", prod_num);
+		
+	}
+	
+	
 	@Override
 	public DealVO getProductDetail(DealVO vo) throws Exception {
+		log.info("getProductDetail(prod_num) 호출");
+		
+		
 		return sqlSession.selectOne(NAMESPACE + ".getProductDetail", vo);
 	}
+
+
+	//////////////////////// 다은 수정 종료 1-1 /////////////////////////////////////////////////////////////////////////
+
+	
+	/*
+	 * @Override public DealVO getProductDetail(DealVO vo) throws Exception { return
+	 * sqlSession.selectOne(NAMESPACE + ".getProductDetail", vo); }
+	 */
 
 
 
@@ -313,10 +391,12 @@ public class ProductDAOImpl implements ProductDAO {
 		map.put("pm", pm);
 		map.put("user_id", user_id);
 		
-		log.info("DAOImplVO"+pm.getStartRow());
+		log.info("페이지넘"+pm.getVo().getPerPageNum());
 		log.info(pm.getStartRow()+"!!!!!!!!!!!!!!");
 		
+		log.info("dddddd"+sqlSession.selectList(NAMESPACE+".sellProductList", map));
 		return sqlSession.selectList(NAMESPACE+".sellProductList", map);
+		
 	}
 	
 	//판매목록 글갯수
@@ -435,5 +515,17 @@ public class ProductDAOImpl implements ProductDAO {
 		return state;
 	}
 	
+
+	//거래목록 리뷰작성
+	@Override
+	public int buyProductWrite(SellerReviewVO reviewVO) throws Exception {
+		return sqlSession.insert(NAMESPACE+".buyProductWrite",reviewVO);
+	}
+	
+	//거래목록 리뷰가져오기
+	@Override
+	public SellerReviewVO getReviewInfo(SellerReviewVO reviewVO) throws Exception {
+		return sqlSession.selectOne(NAMESPACE+".getReviewInfo",reviewVO);
+	}
 
 }

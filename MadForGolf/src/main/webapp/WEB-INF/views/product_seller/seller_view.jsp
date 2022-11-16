@@ -6,6 +6,8 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
 
+
+
 </style>
 
 <script>
@@ -29,6 +31,8 @@
         <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" 
         	style="background-image: url('https://igp.brightspotcdn.com/dims4/default/42109d2/2147483647/strip/true/crop/1920x933+0+73/resize/1926x936!/quality/90/?url=http%3A%2F%2Findigogolf-brightspot.s3.amazonaws.com%2Fclubs%2F0f%2F0f%2Ffe62828f4d1591e4e038cf161087%2Fsydney-marovitz-pano-1.jpg');">
             <h2 style="font-family: 'Jua', sans-serif;">판매자 상세페이지</h2>
+            
+         
         </div>
               
         
@@ -69,11 +73,11 @@
                             <div class="row">
                                 <div class="col-md-6 mb-4">
                                     <label for="seller_Id">
-                                     <h3 style="font-family: 'Jua', sans-serif;">스쳐도 홀인원 드라이버</h3></label>
+                                     <h3 style="font-family: 'Jua', sans-serif;"> ${sellerInfo.prod_name}</h3></label>
                                     <input type="hidden" class="form-control" id="sellerId" name="sellerId" value="${sellerInfo.user_id}" required>
                                 </div>
                                 <div class="col-md-6 mb-4">
-                                    <label for="seller_name">379,000won</label>
+                                    <label for="seller_name">${sellerInfo.price} won</label>
                                     <input type="hidden" class="form-control" id="seller_name" name="seller_name" value=VeryGood required>
                                 </div>                                
                             </div>
@@ -214,7 +218,8 @@
 	                            <a href="#addi-info" class="nav-link" data-toggle="tab" role="tab">&#127948;</a>
 	                        </li>
 	                        <li class="nav-item">
-	                            <a style="font-family: 'Jua', sans-serif;" href="#reviews" class="nav-link" data-toggle="tab" role="tab">거래후기 <span class="text-muted">(7)</span></a>
+	                            <a style="font-family: 'Jua', sans-serif;" href="#reviews"
+	                             class="nav-link" data-toggle="tab" role="tab">거래후기 <span class="text-muted" id="review-totcnt"></span></a>
 	                        </li>
 	                    </ul>
 	                    <!-- Tab 시작  -->
@@ -257,7 +262,37 @@
 	                        </div>
 	                        <!-- tab3 (리뷰/후기) 시작 -->
 	                        <div role="tabpanel" class="tab-pane fade" id="reviews">
-	                            <div class="reviews_area">
+	                        
+	                        
+	                                                <!-- Comment Area Start -->
+                        <div class="comment_area clearfix">
+                            <h4 class="headline">2 Comments</h4>
+                            <ol>
+       
+								<!-- 리뷰란 -->
+                                
+                            </ol>
+                        </div>
+	                        
+                  <div class="page_box" >
+
+	<nav aria-label="Page navigation" id="review-pagination">
+<!--     	<ul class="pagination"  >
+    	    	        
+	        	<li class="page-item">
+	        		<a class="page-link" id="page-link_real" href="listBoardAll?page=1">1</a>
+        		</li>
+	        	
+      		
+	    </ul> -->
+	</nav>
+	</div>    
+										                     
+	                        
+	                        
+	                          
+	
+<!-- 			 <div class="reviews_area">
 	                                <ul>
 	                                    <li>
 	                                        <div class="single_user_review mb-15">
@@ -359,7 +394,10 @@
 	                                        </div>
 	                                    </div>
 	                                </form>
-	                            </div>
+	                            </div> -->
+	                       
+	                        
+	                        
 	                        </div>
 	
 	                    </div>

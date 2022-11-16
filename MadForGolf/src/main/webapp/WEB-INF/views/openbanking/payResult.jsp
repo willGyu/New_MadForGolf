@@ -73,7 +73,7 @@ font-size: 1.2em; margin-bottom: 10px;
 		</p>
 		<div class="description_area" >
 				<input type="button" id="button2" value="거래내역 확인하기"
-					onclick="location.href = '/product/listProductBuy';" >
+					onclick="location.href = '/product/listProductDealing';" >
 		</div>
 		</div>
 	</div>

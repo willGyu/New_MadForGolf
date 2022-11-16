@@ -14,43 +14,56 @@
 
 var DEMO_CHANNEL_ID = "${vo.chattingNum }";
 
-var talker1_id = "${sessionScope.user_id }";
+var userid1 = "${sessionScope.user_id }";
+var text1 = userid1.substring(0, userid1.indexOf('@'));
+var text2 = userid1.substring(userid1.indexOf("@")+1, userid1.indexOf("."));
+var text3 = userid1.substring(userid1.lastIndexOf('.') + 1);
+var talker1_id = text1 + text2 + text3;
 var talker1_name = "${sessionScope.user_name }";
 
+var userid2 = "";
 var talker2_id = "";
 var talker2_name = "";
 
 if(talker1_id == "${vo.talker1_id }") {
-	talker2_id = "${vo.talker2_id }";
+	userid2 = "${vo.talker2_id }";
+	var text4 = userid2.substring(0, userid2.indexOf('@'));
+	var text5 = userid2.substring(userid2.indexOf("@")+1, userid2.indexOf("."));
+	var text6 = userid2.substring(userid2.lastIndexOf('.') + 1);
+	talker2_id = text4 + text5 + text6;
 	talker2_name = "${vo.talker2_name }";
 } else {
-	talker2_id = "${vo.talker1_id }";
+	userid2 = "${vo.talker1_id }";
+	var text4 = userid2.substring(0, userid2.indexOf('@'));
+	var text5 = userid2.substring(userid2.indexOf("@")+1, userid2.indexOf("."));
+	var text6 = userid2.substring(userid2.lastIndexOf('.') + 1);
+	talker2_id = text4 + text5 + text6;
 	talker2_name = "${vo.talker1_name }";
 }
 
 //var APP_ID = '6d4f7ab2-f06e-4978-8282-8fc150e43cd0';
 //var client = new TalkPlus.Client({appId: APP_ID});
 
-	//사용자 생성
-$(document).ready(function(){
-	//alert("확인");
-	$.ajax({
-		url: "https://api.talkplus.io/v1.4/api/users/create",
-		type: "post",
-		beforeSend: function(hdata) {
-            hdata.setRequestHeader("content-type","application/json");
-            hdata.setRequestHeader("api-key", "03a0408c7c56c3b9da2fb2349a74888f9944a059b88423079eb46914750409ba");
-            hdata.setRequestHeader("app-id", "6d4f7ab2-f06e-4978-8282-8fc150e43cd0");
-        },
-        data: JSON.stringify({"userId" : talker1_id, "password" : "1234", "username" : talker1_name, "profileImageUrl":"https://notion-emojis.s3-us-west-2.amazonaws.com/prod/svg-twitter/26f3.svg"}),
-		success: function(rdata){
-			console.log(rdata);
-		},
-		error: function(rdata){
-			console.log(rdata);
-		}
-	});
-});
+// //사용자 생성
+// $(document).ready(function(){
+// 	//alert("확인");
+// 	$.ajax({
+// 		url: "https://api.talkplus.io/v1.4/api/users/create",
+// 		type: "post",
+// 		beforeSend: function(hdata) {
+//             hdata.setRequestHeader("content-type","application/json");
+//             hdata.setRequestHeader("api-key", "03a0408c7c56c3b9da2fb2349a74888f9944a059b88423079eb46914750409ba");
+//             hdata.setRequestHeader("app-id", "6d4f7ab2-f06e-4978-8282-8fc150e43cd0");
+//         },
+//         data: JSON.stringify({"userId" : talker1_id, "password" : "1234", "username" : talker1_name, "profileImageUrl":"https://notion-emojis.s3-us-west-2.amazonaws.com/prod/svg-twitter/26f3.svg"}),
+// 		success: function(rdata){
+// 			console.log(rdata);
+// 		},
+// 		error: function(rdata){
+// 			console.log(rdata);
+// 		}
+// 	});
+// });
 
 
 // 사용자 로그인

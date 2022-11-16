@@ -7,9 +7,11 @@ public interface DealDAO {
 	//거래 생성
 	public void insertDeal(DealVO vo) throws Exception;
 	
-	//거래 정보 가져오기
-	public DealVO getDeal(String buyer_id) throws Exception;
+	//거래 수정(구매자 정보 입력)
+	public void updateDeal(Integer deal_num, String buyer_id) throws Exception;
 
-	//거래 취소하기(정보 삭제)
-	public void deleteDeal(Integer deal_num) throws Exception;
+	// 거래 수정(거래 - 상품번호 입력)
+	public void addProd_num(int prod_num);
+
+	
 }

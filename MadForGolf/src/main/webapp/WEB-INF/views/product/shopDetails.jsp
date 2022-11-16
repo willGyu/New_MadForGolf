@@ -209,20 +209,18 @@ $(document).ready(function(){
 			    form.submit();
 			    $.ajax({
 			    	type:'post',
-			    	url:'/deal/insertDeal',
+			    	url:'/deal/updateDeal',
 					dataType:'json',
 					data:{
-						'seller_id':'${deal.product.seller_id}',
-						'buyer_id':'${user_id}',
-						'prod_num':'${deal.product.prod_num}',
-						'price':'${deal.product.price}',
-						'state':'거래중'
+						'deal_num':'${deal.deal_num}'
 					},
-					success:function(){
-						console.log("거래 데이터 전송 성공");						
+					success:function(data){
+						alert("거래 데이터 구매자 정보 입력 성공");	
+						$("#test").val(data);
+						
 					},
-			    	error: function(){
-						console.log("거래 데이터 전송 실패");
+				error: function(){
+						alert("거래 데이터 구매자 정보 입력 성공");
 					}
 			    });
 		}else{
@@ -230,6 +228,9 @@ $(document).ready(function(){
 		}
 	});
 });
+	
+
+
 	
 
 	//============================== 채팅창 활성화 ==============================//

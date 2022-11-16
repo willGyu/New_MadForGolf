@@ -10,6 +10,7 @@ import com.madforgolf.domain.LikeVO;
 import com.madforgolf.domain.PageMakerVO;
 import com.madforgolf.domain.PageVO;
 import com.madforgolf.domain.ProductVO;
+import com.madforgolf.domain.SellerReviewVO;
 
 public interface ProductService {
 	//메인(index.jsp)상품 목록 - 최신순(성별/카테고리 구분없음)
@@ -26,9 +27,20 @@ public interface ProductService {
 	
 	// 상품 전체 목록 불러오기(인기순  - 메인화면:카테고리,성별 분류X)
 	public List<ProductVO> getProductListAll4(ProductVO vo, PageVO vo2) throws Exception;
+	/*
+	 * // 상품 1개 상세 불러오기 public DealVO productDetail(DealVO vo) throws Exception;
+	 */
+	
+	
+	//////////////////////// 다은 수정 시작 1-1 /////////////////////////////////////////////////////////////////////////
+	
+	
 	
 	// 상품 1개 상세 불러오기
-	public DealVO productDetail(DealVO vo) throws Exception;
+	public DealVO productDetail(Integer prod_num) throws Exception;
+	
+
+	//////////////////////// 다은 수정 종료 1-1 /////////////////////////
 	
 	// 상품 전체 개수 불러오기
 	public Integer getTotalCnt(ProductVO vo) throws Exception;
@@ -91,6 +103,15 @@ public interface ProductService {
 	
 	//상세페이지 거래전->거래중   // ->거래전->거래중
 	public String BeforeAndDealing1(DealVO dvo) throws Exception;
+	
+	// 구매내역 페이지 리뷰작성
+	public int buyProductWrite(SellerReviewVO reviewVO) throws Exception;
+
+	// 구매내역 페이지 리뷰가져오기
+	public SellerReviewVO getReviewInfo(SellerReviewVO reviewVO) throws Exception;
+	
+	
+	
 
 
 	

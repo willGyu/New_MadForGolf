@@ -7,7 +7,6 @@
 <style type="text/css">
 .container{
 	display:grid;
-	justify-content: center;
 }
 
 .main-item{
@@ -15,14 +14,7 @@
 	justify-content: center;
 }
 
-.main-item-chart{
-	display:grid;
-	grid-template-columns:600px 600px;
-	grid-template-rows:350px 350px;
-}
-
 .chart-container{
-	justify-content: center;
 	width:500px;
 	height:800px;
 	margin:0px auto;
@@ -30,12 +22,8 @@
 }
 
 .content-container{
-	justify-content: center;
-	display:grid;
 	padding-top:100px;
 	paddig-left:300px;
-	grid-template-rows:S00px 100px;
-	row-gap:50px;
 }
 
 </style>
@@ -87,8 +75,6 @@
 							<br><br><br><br>
 						</div>
 						<button class="btn alazea-btn w-120" style="width:360pt;height:40pt;margin:auto;" onClick="location.href='/product/listAll'" value="">거래하러 가기</button>
-<!-- 						<div class="checkout-btn mt-30" onClick="location.href='/product/listAll'"> -->
-<!-- 							<a href="/product/listAll">거래하러 가기</a> -->
 					    	<br><br><br><br><br>
 						</div>
 					</div>
@@ -96,29 +82,6 @@
 				
 				<c:otherwise>
 					<div class="main-item">
-	                    <!-- 글자 영역 -->
-	                   <%--  <div class="content-container" onClick="location.href='/mypage/accountbookPurchase'">
-							<!-- Icon -->
-	                        <div class="icon-item" onClick="location.href='/mypage/accountbookPurchase'">
-								<img src="${pageContext.request.contextPath }/resources/img/core-img/s1.png" alt="">
-	                        </div>
-	                        <!-- Content -->
-	                        <div class="content-item" onClick="location.href='/mypage/accountbookPurchase'">
-	                            <h5>이번 달 구매 내역 보러가기</h5>
-	                            <p>이번 달 구매 횟수는 ${purchaseCnt }번 입니다.</p>
-	                            <p>이번 달 구매 금액은 ${purchaseMonth }원 입니다.</p>
-	                        </div>
-							<!-- Icon -->
-	                        <div class="icon-item" onClick="location.href='/mypage/accountbookSale'">
-								<img src="${pageContext.request.contextPath }/resources/img/core-img/s2.png" alt="">
-	                        </div>
-	                        <!-- Content -->
-	                        <div class="content-item" onClick="location.href='/mypage/accountbookSale'">
-	                            <h5>이번 달 판매 내역 보러가기</h5>
-	                            <p>이번 달 판매 횟수는 ${saleCnt }번 입니다.</p>
-	                            <p>이번 달 판매 금액은 ${saleMonth}원 입니다.</p>
-	                        </div>
-	                    </div> --%>
 	                    <div class="table-box">
 	
 							<table class="table">

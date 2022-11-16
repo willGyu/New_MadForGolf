@@ -15,17 +15,9 @@
 	padding-bottom:200px;
 }
 
-.main-container-img{
+.main-item{
 	display:grid;
-	grid-template-columns:500px;
-}
-
-.img-container{
-	display:grid;
-	width:300px;
-	height:300px;
-	padding-top:50px;
-	padding-bottom:500px;
+	justify-content: center;
 }
 
 .chart-container{
@@ -85,18 +77,18 @@
 			
 			<!-- JSTL -->
 			<c:choose>
+			<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@ 1116 수정 @@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 				<c:when test="${saleCnt eq 0}">
-					<div class="main-container-img">
+					<div class="main-item">
 						<div class="img-container">
-							<img src="${pageContext.request.contextPath }/resources/img/geoji4.jpg">
-							<br><br>
+							<img src="${pageContext.request.contextPath }/resources/img/geoji4.jpg" style="width:500px; height:500px; margin:0px auto;">
+							<br><br><br><br>
 						</div>
-						
-	                    <div class="checkout-btn mt-30">
-                            <a href="#" class="btn alazea-btn w-100">거래하러 가기</a>
-	                        <br><br><br><br>
-                        </div>
+						<button class="btn alazea-btn w-120" style="width:360pt;height:40pt;margin:auto;" onClick="location.href='/product/listAll'" value="">거래하러 가기</button>
+					    	<br><br><br><br><br>
+						</div>
 					</div>
+			<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@ 1116 수정 @@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 				</c:when>
 					
 				<c:otherwise>

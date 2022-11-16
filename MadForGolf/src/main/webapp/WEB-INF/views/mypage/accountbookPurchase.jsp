@@ -9,23 +9,15 @@
 	display:grid;
 }
 
+.main-item{
+	display:grid;
+	justify-content: center;
+}
+
 .main-container{
 	display:grid;
 	grid-template-columns:500px 500px;
 	padding-bottom:200px;
-}
-
-.main-container-img{
-	display:grid;
-	grid-template-columns:500px;
-}
-
-.img-container{
-	display:grid;
-	width:300px;
-	height:300px;
-	padding-top:50px;
-	padding-bottom:500px;
 }
 
 .chart-container{
@@ -84,22 +76,23 @@
 			</div>
 			<!-- 선 -->
 			
+			
 			<!-- JSTL -->
 			<c:choose>
+			<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@ 1116 수정 @@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 				<c:when test="${purchaseCnt eq 0}">
-					<div class="main-container-img">
+					<div class="main-item">
 						<div class="img-container">
-							<img src="${pageContext.request.contextPath }/resources/img/geoji4.jpg">
-							<br><br>
+							<img src="${pageContext.request.contextPath }/resources/img/geoji4.jpg" style="width:500px; height:500px; margin:0px auto;">
+							<br><br><br><br>
 						</div>
-						
-						<div class="checkout-btn mt-30">
-	                        <a href="#" class="btn alazea-btn w-100">거래하러 가기</a>
-	                        <br><br><br><br>
-	                    </div>
+						<button class="btn alazea-btn w-120" style="width:360pt;height:40pt;margin:auto;" onClick="location.href='/product/listAll'" value="">거래하러 가기</button>
+					    	<br><br><br><br><br>
+						</div>
 					</div>
+				<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@ 1116 수정 @@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 				</c:when>
-					
+				
 				<c:otherwise>
 					<div class="main-container">
 						<!-- 차트를 그릴 영역 -->

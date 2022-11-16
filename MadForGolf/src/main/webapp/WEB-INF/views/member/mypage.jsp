@@ -129,11 +129,28 @@
                             </div>
 
                             <!-- 거래 목록 -->
+
+                            <div class="col-12 col-sm-12">
+                                <div class="single-benefits-area" onClick="location.href='/product/listProductAll?page=1'">
+                                    <a href="#"><img src="${pageContext.request.contextPath }/resources/img/core-img/b4.png" alt=""></a>
+                                    <a href="#"><h5>거래 목록</h5></a>
+                                    <a href="#"><p>판매내역 및 구매내역을 확인할 수 있는 공간입니다. </p></a>
+                                </div>
+                            </div>
+
+                            <!-- 문의 내역 -->
+                            <div class="col-12 col-sm-12">
+                                <div class="single-benefits-area" onClick="location.href='/mypage/qnaList'">
+                                   <a href="#"><img src="${pageContext.request.contextPath }/resources/img/core-img/b1.png" alt=""></a>
+                                   <a href="#"> <h5>문의 내역</h5></a>
+                                   <a href="#"> <p>나의 문의 내역을 확인할 수 있는 공간입니다. </p></a>
+
                          <div class="col-md-6 mb-4">
                                 <div class="single-benefits-area" onClick="location.href='/product/listProductAll'">
                                     <a href="/product/listProductAll"><img src="${pageContext.request.contextPath }/resources/img/core-img/b4.png" alt=""></a>
                                     <a href="/product/listProductAll"><h5>거래 목록</h5></a>
                                     <a href="/product/listProductAll"><p>판매내역 및 구매내역을 확인할 수 있는 공간입니다. </p></a>
+
                                 </div>
                             </div>
                             
@@ -147,7 +164,11 @@
                             </div>
                             
                             <!-- 채팅 목록 -->
+
+                            <div class="col-12 col-sm-12">
+
                            <div class="col-md-6 mb-4">
+
                                 <div class="single-benefits-area" onClick="location.href='/product/chattingList'">
                                     <a href="/product/chattingList"><img src="${pageContext.request.contextPath }/resources/img/core-img/b3.png" alt=""></a>
                                      <a href="/product/chattingList"><h5>채팅 목록</h5></a>

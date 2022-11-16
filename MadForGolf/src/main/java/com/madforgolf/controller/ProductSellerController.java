@@ -36,7 +36,9 @@ public class ProductSellerController {
 		productSellerVO.setProd_num(prodNum);
 		ProductSellerVO sellerInfo = productSellerService.selectSellerInfo(productSellerVO);
 		String number = sellerInfo.getUser_phone();
-		String hide_number = number.substring(0, 4) + "**" + number.substring(7, 8) + "**";
+		//String hide_number = number.substring(0, 4) + "**" + number.substring(7, 8) + "**";
+		String hide_number = number.substring(0, number.length()-4)+"****";
+				
 		model.addAttribute("hide_number", hide_number);
 		
 		model.addAttribute("sellerInfo", sellerInfo);

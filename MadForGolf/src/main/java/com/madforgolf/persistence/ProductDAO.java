@@ -9,6 +9,7 @@ import com.madforgolf.domain.LikeVO;
 import com.madforgolf.domain.PageMakerVO;
 import com.madforgolf.domain.PageVO;
 import com.madforgolf.domain.ProductVO;
+import com.madforgolf.domain.SellerReviewVO;
 
 public interface ProductDAO {
 	//메인(index.jsp)상품 목록 - 최신순(성별/카테고리 구분없음)
@@ -20,11 +21,24 @@ public interface ProductDAO {
 	// 상품 전체 목록 - listAll() 인기순
 	public List<ProductVO> listAll2(ProductVO vo, PageVO vo2) throws Exception;
 	
+	// 상품 전체 목록 - listAll() 최신순 - 메인화면:카테고리,성별 분류X
+	public List<ProductVO> listAll3(ProductVO vo, PageVO vo2) throws Exception;
+	
+	// 상품 전체 목록 - listAll() 인기순 - 메인화면:카테고리,성별 분류X
+	public List<ProductVO> listAll4(ProductVO vo, PageVO vo2) throws Exception;
+	
 	// 상품 전체 개수 출력 - getTotalCnt()
 	public Integer getTotalCnt(ProductVO vo) throws Exception;
 	
+	// 상품 전체 개수 출력 - getTotalCnt2() - 메인(인기순,최신순) 
+	public Integer getTotalCnt2(ProductVO vo) throws Exception;
+	
+	
+	// 상품 1개 상세 출력 - getProductDetail(prod_num)
+	public DealVO getProductDetail(Integer prod_num) throws Exception;
+	
 	// 상품 1개 상세 출력 - getProductDetail(vo)
-	public ProductVO getProductDetail(ProductVO vo) throws Exception;
+	public DealVO getProductDetail(DealVO vo) throws Exception;
 	
 	// 상품 등록 - insertProduct(vo)
 	public void insertProduct(ProductVO vo) throws Exception;
@@ -33,14 +47,15 @@ public interface ProductDAO {
 	public Integer updateProduct(ProductVO vo) throws Exception;
 	
 	
-	// 상품 수정 1개 정보 가져오기 - getBoard(int)
-	public ProductVO getBoard (Integer prod_num) throws Exception;
+	 // 상품 수정 1개 정보 가져오기 - getBoard(int) 
+	 public ProductVO getProduct (Integer prod_num) throws Exception;
+	 
 	
 	// 글 조회수 1증가
 	public void updateReadCount(Integer bno) throws Exception;
 	
 	// 글 삭제하기
-	public Integer deleteBoard(Integer prod_num) throws Exception;
+	public Integer deleteProduct(Integer prod_num) throws Exception;
 	
 	// 글 전체목록 - listPage(page)
 	public List<BoardVO> listPage(Integer page) throws Exception;
@@ -72,7 +87,7 @@ public interface ProductDAO {
 	//구매목록
 	public List<DealVO> buyProductList(PageMakerVO pm, String user_id) throws Exception;
 	
-	//판매목록 글갯수
+	//구매목록 글갯수
 	public Integer buyProductListCnt(PageVO vo, String user_id) throws Exception;
 	
 	//거래중목록
@@ -83,6 +98,26 @@ public interface ProductDAO {
 	
 	//거래중->거래후
 	public Integer dealDone(DealVO vo) throws Exception;
+	
+	//거래전->거래중
+	public Integer BeforeAndDealing(DealVO dvo) throws Exception;
+	
+	//거래전->거래중
+	public String BeforeAndDealing1(DealVO dvo) throws Exception;
+	
+
+	//거래목록 리뷰작성
+	public int buyProductWrite(SellerReviewVO reviewVO) throws Exception;
+	
+	//거래목록 리뷰가져오기
+	public SellerReviewVO getReviewInfo(SellerReviewVO reviewVO) throws Exception;
+
+	
+	
+	
+	
+	
+	
 
 	
 }

@@ -62,8 +62,8 @@
 
 }
 
-.category_btn:NTH-OF-TYPE(5){
-	border-radius: 5px 5px 5px 5px;
+.category_btn:NTH-OF-TYPE(3){
+	border-radius: 0 5px 5px 0;
 
 }
 
@@ -164,14 +164,14 @@
 					<th>거래일시</th>
 					<th>상품이름</th>
 					<th>가격</th>
-					<th>리뷰</th>
 				</tr>
 			<c:forEach var="sell" items="${sellProductList }">
+			
 				<tr>
 					<td>${sell.prod_date }</td>
 					<td><a href="/product/productDetail?prod_num=${sell.prod_num}">${sell.prod_name }</a></td>
 					<td>${sell.price }</td>
-					<td>리뷰</td>
+
 <%-- 					<td>
 						<a href="/board/boardRead?board_num=${vo.prod_num}">${vo.title }</a></td>
 					<td>조인해오기</td>

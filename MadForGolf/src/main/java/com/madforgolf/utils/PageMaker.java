@@ -25,6 +25,8 @@ public class PageMaker {
 	// 검색처리 추가
 	private String searchType;
 	private String keyword;
+	
+	private Integer prodNum; 
 
 	public PageMaker() {
 		this.page = 1; // 초기 페이지는 1
@@ -127,48 +129,54 @@ public class PageMaker {
 	}
 
 	// 검색 추가 페이지 파라미터
-	public String makeSearch(int page) {
-		UriComponents uriComponents = UriComponentsBuilder.newInstance().queryParam("page", page)
-				.queryParam("perPageNum", perPageNum).queryParam("searchType", searchType)
-				.queryParam("keyword", keyword).build();
-		return uriComponents.toUriString();
-	}
-
-	// 검색 추가 페이징 부트스트랩 출력
-	public String bootStrapPagingSearchHTML(String url) {
-		StringBuffer sBuffer = new StringBuffer();
-		sBuffer.append("<ul class='pagination'>");
-		if (prev) {
-			sBuffer.append("<li><a href='" + url + makeSearch(1) + "'>처음</a></li>");
+		public String makeSearch(int page) {
+			UriComponents uriComponents = UriComponentsBuilder.newInstance().queryParam("page", page)
+					.queryParam("perPageNum", perPageNum).queryParam("searchType", searchType)
+					.queryParam("keyword", keyword).build();
+			return uriComponents.toUriString();
 		}
 
-		if (prev) {
-			sBuffer.append("<li><a href='" + url + makeSearch(startPage - 1) + "'>&laquo;</a></li>");
-		}
+//		 class=`page-link`
+//		<li class="page-item">
+//		<a class="page-link"  href="listBoardAll?page=1">1</a>
+	//</li>
 
-		String active = "";
-		for (int i = startPage; i <= endPage; i++) {
-			if (page == i) {
-				active = "class=active";
-			} else {
-				active = "";
+		// 검색 추가 페이징 부트스트랩 출력
+		public String bootStrapPagingSearchHTML(String url) {
+			StringBuffer sBuffer = new StringBuffer();
+			sBuffer.append("<ul class=\"pagination\">");
+			if (prev) {
+				sBuffer.append("<li class=\"page-item\" ><a  class=\"page-link\"  href=\"#\"  data-href='" + url + makeSearch(1) + "'>처음</a></li>");
 			}
-			sBuffer.append("<li " + active + " >");
-			sBuffer.append("<a href='" + url + makeSearch(i) + "'>" + i + "</a></li>");
-			sBuffer.append("</li>");
-		}
+			
 
-		if (next && endPage > 0) {
-			sBuffer.append("<li><a href='" + url + makeSearch(endPage + 1) + "'>&raquo;</a></li>");
-		}
+			if (prev) {
+				sBuffer.append("<li class=\"page-item\"><a  class=\"page-link\"  href=\"#\"  data-href='" + url + makeSearch(startPage - 1) + "'>&laquo;</a></li>");
+			}
 
-		if (next && endPage > 0) {
-			sBuffer.append("<li><a href='" + url + makeSearch(tempEndPage) + "'>마지막</a></li>");
-		}
+			String active = "";
+			for (int i = startPage; i <= endPage; i++) {
+				if (page == i) {
+					active = "class=\"page-item\"  id=\"page-link_real\" ";
+				} else {
+					active = "class=\"page-item\"";
+				}
+				sBuffer.append("<li " + active + " >");
+				sBuffer.append("<a class=\"page-link\"   href=\"#\"  data-href='" + url + makeSearch(i) + "'>" + i + "</a></li>");
+				sBuffer.append("</li>");
+			}
 
-		sBuffer.append("</ul>");
-		return sBuffer.toString();
-	}
+			if (next && endPage > 0) {
+				sBuffer.append("<li  class=\"page-item\"><a  class=\"page-link\"  href=\"#\"   data-href='" + url + makeSearch(endPage + 1) + "'>&raquo;</a></li>");
+			}
+
+			if (next && endPage > 0) {
+				sBuffer.append("<li class=\"page-item\"><a class=\"page-link\"  href=\"#\"  data-href='" + url + makeSearch(tempEndPage) + "'>마지막</a></li>");
+			}
+
+			sBuffer.append("</ul>");
+			return sBuffer.toString();
+		}
 
 	public int getPage() {
 		return page;
@@ -241,6 +249,24 @@ public class PageMaker {
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
 	}
+	
+
+
+	public int getTempEndPage() {
+		return tempEndPage;
+	}
+
+	public void setTempEndPage(int tempEndPage) {
+		this.tempEndPage = tempEndPage;
+	}
+
+	public Integer getProdNum() {
+		return prodNum;
+	}
+
+	public void setProdNum(Integer prodNum) {
+		this.prodNum = prodNum;
+	}
 
 	@Override
 	public String toString() {
@@ -249,5 +275,6 @@ public class PageMaker {
 				+ ", next=" + next + ", displayPageNum=" + displayPageNum + ", tempEndPage=" + tempEndPage
 				+ ", searchType=" + searchType + ", keyword=" + keyword + "]";
 	}
+
 
 }

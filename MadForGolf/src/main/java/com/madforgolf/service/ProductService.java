@@ -10,6 +10,7 @@ import com.madforgolf.domain.LikeVO;
 import com.madforgolf.domain.PageMakerVO;
 import com.madforgolf.domain.PageVO;
 import com.madforgolf.domain.ProductVO;
+import com.madforgolf.domain.SellerReviewVO;
 
 public interface ProductService {
 	//메인(index.jsp)상품 목록 - 최신순(성별/카테고리 구분없음)
@@ -21,11 +22,31 @@ public interface ProductService {
 	// 상품 전체 목록 불러오기(인기순)
 	public List<ProductVO> getProductListAll2(ProductVO vo, PageVO vo2) throws Exception;
 	
+	// 상품 전체 목록 불러오기(최신순 - 메인화면:카테고리,성별 분류X)
+	public List<ProductVO> getProductListAll3(ProductVO vo, PageVO vo2) throws Exception;
+	
+	// 상품 전체 목록 불러오기(인기순  - 메인화면:카테고리,성별 분류X)
+	public List<ProductVO> getProductListAll4(ProductVO vo, PageVO vo2) throws Exception;
+	/*
+	 * // 상품 1개 상세 불러오기 public DealVO productDetail(DealVO vo) throws Exception;
+	 */
+	
+	
+	//////////////////////// 다은 수정 시작 1-1 /////////////////////////////////////////////////////////////////////////
+	
+	
+	
 	// 상품 1개 상세 불러오기
-	public ProductVO productDetail(ProductVO vo) throws Exception;
+	public DealVO productDetail(Integer prod_num) throws Exception;
+	
+
+	//////////////////////// 다은 수정 종료 1-1 /////////////////////////
 	
 	// 상품 전체 개수 불러오기
 	public Integer getTotalCnt(ProductVO vo) throws Exception;
+	
+	// 상품 전체 개수 불러오기(메인 -인기순,최신순)
+	public Integer getTotalCnt2(ProductVO vo) throws Exception;
 	
 	// 상품 등록 (Insert)
 	public void productInsert(ProductVO vo) throws Exception;
@@ -34,10 +55,10 @@ public interface ProductService {
 	public Integer updateProduct(ProductVO vo) throws Exception;
 	
 	// 글 삭제하기
-	public Integer deleteBoard(Integer prod_num) throws Exception;
+	public Integer deleteProduct(Integer prod_num) throws Exception;
 	
 	// 상품수정 1개정보 불러오기
-	public ProductVO getBoard(Integer prod_num) throws Exception;
+	public ProductVO getProduct(Integer prod_num) throws Exception;
 	
 	// 글 조회수 1증가
 	public void updateReadCount(Integer bno) throws Exception;
@@ -76,6 +97,22 @@ public interface ProductService {
 	
 	// 거래완료
 	public Integer dealDone(DealVO vo) throws Exception;
+	
+	//상세페이지 거래전->거래중   // ->거래전->거래중
+	public Integer BeforeAndDealing(DealVO dvo) throws Exception;
+	
+	//상세페이지 거래전->거래중   // ->거래전->거래중
+	public String BeforeAndDealing1(DealVO dvo) throws Exception;
+	
+	// 구매내역 페이지 리뷰작성
+	public int buyProductWrite(SellerReviewVO reviewVO) throws Exception;
+
+	// 구매내역 페이지 리뷰가져오기
+	public SellerReviewVO getReviewInfo(SellerReviewVO reviewVO) throws Exception;
+	
+	
+	
+
 
 	
 	

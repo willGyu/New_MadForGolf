@@ -64,7 +64,7 @@
 							    <!-- 로그인 O - 마이페이지 -->
 							    <c:if test="${user_id != null }">
 							        <a href="/member/mypage"><i class="fa fa-user" aria-hidden="true"></i> <span>MyPage</span></a>
-							    	<a href="#"><i class="fa fa-user" aria-hidden="true"></i> <span>DealList</span></a>
+							    	<a href="/product/listProductAll?page=1"><i class="fa fa-user" aria-hidden="true"></i> <span>DealList</span></a>
 							    </c:if>
 							</div>
 							    	
@@ -115,7 +115,11 @@
 
                         <!-- Navbar Toggler -->
                         <div class="classy-navbar-toggler">
-                            <span class="navbarToggler"><span></span><span></span><span></span></span>
+                            <span class="navbarToggler">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            </span>
                         </div>
 
                         <!-- Menu -->

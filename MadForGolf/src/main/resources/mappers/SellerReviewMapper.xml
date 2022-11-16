@@ -2,16 +2,58 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
+
 <mapper namespace="com.madforgolf.mapper.SellerReviewMapper">
 
-	
-	<!-- 판매자 정보 가져오기-->
-	<select id="listSellerReview" resultType="com.madforgolf.domain.SellerReviewVO">
-		SELECT * FROM mfg_review  WHERE  prod_num =#{prodNum}
+
+	<!-- 판매자 정보 가져오기 -->
+	 <select id="listSellerReview" resultType="com.madforgolf.domain.SellerReviewVO"> 
+		SELECT * FROM mfg_review WHERE prod_num =#{prodNum} 
+	</select> 
+
+
+	<!-- 판매자에게 달린 모든 후기 가져오기 -->
+	<select id="listSellerReviewAll" resultType="com.madforgolf.domain.SellerReviewVO">
+		SELECT mp.seller_id ,  mr.*  , mp.prod_img  ,
+			
+			(
+			
+			SELECT DISTINCT  mm.user_name FROM  mfg_deal md  INNER JOIN mfg_member mm  on md.buyer_id =mm.user_id WHERE mm.user_id=mr.buyer_id
+			
+			) as buyer_name
+
+
+		FROM mfg_review mr INNER JOIN (
+			
+			select seller_id,  prod_num, prod_img from mfg_products WHERE  seller_id =(select seller_id  from  mfg_products WHERE  prod_num =#{prodNum})
+			
+		) mp
+
+		on mr.prod_num=mp.prod_num
+
+
+		ORDER BY review_date DESC  limit #{pageStart}, #{perPageNum}
+		
 	</select>
+
+
+	<!-- 판매자에게 달린 모든 후기 전체 갯수-->
+	<select id="listSellerReviewAllTotalCount" resultType="int">
 	
-	
+		SELECT COUNT(mr.review_num ) cnt
+		
+		FROM mfg_review mr 
+		
+		INNER JOIN (
+		
+		select seller_id,  prod_num, prod_img from mfg_products WHERE  seller_id =(select seller_id  from  mfg_products WHERE  prod_num =#{prodNum})
+		
+		) mp
+		
+		on mr.prod_num=mp.prod_num
+	</select>
+
+
 
 
 </mapper>

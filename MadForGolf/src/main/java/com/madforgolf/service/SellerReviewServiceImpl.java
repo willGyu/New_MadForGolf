@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.madforgolf.domain.SellerReviewVO;
 import com.madforgolf.persistence.SellerReviewDAO;
+import com.madforgolf.utils.PageMaker;
 
 @Service
 public class SellerReviewServiceImpl implements SellerReviewService {
@@ -23,6 +24,18 @@ public class SellerReviewServiceImpl implements SellerReviewService {
 	@Override
 	public List<SellerReviewVO> listSellerReview(Integer prodNum) throws Exception {
 		return sellerReviewDAO.listSellerReview(prodNum);
+	}
+
+
+	@Override
+	public List<SellerReviewVO> listSellerReviewAll(PageMaker pageMaker) throws Exception {
+		return sellerReviewDAO.listSellerReviewAll(pageMaker);
+	}
+
+
+	@Override
+	public int listSellerReviewAllTotalCount(PageMaker pageMaker) throws Exception {
+		return sellerReviewDAO.listSellerReviewAllTotalCount(pageMaker);
 	}
 
 	

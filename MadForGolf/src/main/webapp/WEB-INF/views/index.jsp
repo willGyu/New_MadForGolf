@@ -22,8 +22,8 @@
                                 <h2>인기 상품 보러 가기</h2>
                                 <p>실시간으로 가장 주목 받고 있는 인기 상품을 확인할 수 있습니다.</p>
                                 <div class="welcome-btn-group">
-                                    <a href="/product/listLike" class="btn alazea-btn mr-30">인기상품 보러가기</a>
-                                    <a href="/product/listAll" class="btn alazea-btn active">최신상품 보러가기</a>
+                                    <a href="/product/listLike2" class="btn alazea-btn mr-30">인기상품 보러가기</a>
+                                    <a href="/product/listAll2" class="btn alazea-btn active">최신상품 보러가기</a>
                                 </div>
                             </div>
                         </div>
@@ -87,7 +87,7 @@
 								</a>
 								<!-- Product Tag -->
 								<div class="product-tag">
-									<a href="#">Hot</a>
+									<!-- <a href="#">Hot</a> -->
 								</div>
 <!-- 								<div class="product-meta d-flex"> -->
 <!-- 									<a href="#" class="wishlist-btn"><i class="icon_heart_alt"></i></a> -->
@@ -181,18 +181,31 @@
 							<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9848c8896187625882fecd73a68b8c43&libraries=services"></script>
 							<script>
 							$(window).on('load', function() {
-								
 								// 주소명 가져오기
 								function getAddr(lat, lng){
-									
+
 								     let geocoder = new kakao.maps.services.Geocoder();
 
 								     let coord = new kakao.maps.LatLng(lat, lng);
 								     let callback = function(result, status) {
 								         if (status === kakao.maps.services.Status.OK) {
 								        	 	$('#centerAddr').val(result[0].address.address_name);
+								        	 	var addr = result[0].address.address_name;
+								        	 	
+								        	 	$.ajax({
+								        	 		url: "./product/address",
+								        	 		data: {"address":result[0].address.address_name},
+								        	 		success: function(){
+								        	 			alert("성공");
+								        	 		},
+								        	 		error: function(e){
+								        	 			console.log(e);
+								        	 		}
+								        	 	});
+								        	 	
 												return result[0].address.address_name;
-								         }else {
+								        	 	
+								         } else {
 											alert('위도 경도를 불러오는데 실패하였습니다.');
 										 }
 								     }
@@ -204,7 +217,7 @@
 										
 										var lat = position.coords.latitude;
 										var lng = position.coords.longitude;
-
+										
 										$('#latVal').val(lat);
 										$('#lngVal').val(lng);
 										getAddr(lat, lng);

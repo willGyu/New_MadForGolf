@@ -10,6 +10,9 @@ import org.springframework.stereotype.Repository;
 
 import com.madforgolf.domain.ProductSellerVO;
 import com.madforgolf.domain.SellerReviewVO;
+import com.madforgolf.utils.PageMaker;
+
+import sun.security.krb5.internal.PAEncTSEnc;
 
 @Repository
 public class SellerReviewDAOImpl implements SellerReviewDAO {
@@ -26,6 +29,18 @@ public class SellerReviewDAOImpl implements SellerReviewDAO {
 	@Override
 	public List<SellerReviewVO> listSellerReview(Integer prodNum) throws Exception {
 		return sqlSession.selectList(NAMESPACE + ".listSellerReview", prodNum);
+	}
+
+
+	@Override
+	public List<SellerReviewVO> listSellerReviewAll(PageMaker pageMaker) throws Exception {
+		return sqlSession.selectList(NAMESPACE + ".listSellerReviewAll", pageMaker);
+	}
+
+
+	@Override
+	public int listSellerReviewAllTotalCount(PageMaker pageMaker) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + ".listSellerReviewAllTotalCount", pageMaker);
 	}
 
 	

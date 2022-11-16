@@ -15,6 +15,7 @@ import com.madforgolf.domain.LikeVO;
 import com.madforgolf.domain.PageMakerVO;
 import com.madforgolf.domain.PageVO;
 import com.madforgolf.domain.ProductVO;
+import com.madforgolf.domain.SellerReviewVO;
 import com.madforgolf.persistence.ProductDAO;
 
 @Service
@@ -54,19 +55,60 @@ public class ProductServiceImpl implements ProductService {
 		
 		return productList;
 	}
+
+	// 상품 전체 목록 불러오기(최신순 - 메인화면:카테고리,성별 분류X)
+	@Override
+	public List<ProductVO> getProductListAll3(ProductVO vo, PageVO vo2) throws Exception {
+		log.info("getProductListAll3() 호출");
+
+		List<ProductVO> productList = dao.listAll3(vo, vo2);
+
+		return productList;
+	}
+
+	// 상품 전체 목록 불러오기(인기순  - 메인화면:카테고리,성별 분류X)
+	@Override
+	public List<ProductVO> getProductListAll4(ProductVO vo, PageVO vo2) throws Exception {
+		log.info("getProductListAll4() 호출");
+
+		List<ProductVO> productList = dao.listAll4(vo, vo2);
+
+		return productList;
+	}
 	
 	@Override
 	public Integer getTotalCnt(ProductVO vo) throws Exception {
 		return dao.getTotalCnt(vo);
 	}
+	
+	//메인 -> 인기순,최신순
+	@Override
+	public Integer getTotalCnt2(ProductVO vo) throws Exception {
+		return dao.getTotalCnt2(vo);
+	}
+	
 
+
+	//////////////////////// 다은 수정 시작 1-1 /////////////////////////////////////////////////////////////////////////
+	
 
 	
 	@Override
-	public ProductVO productDetail(ProductVO vo) throws Exception {
-		return dao.getProductDetail(vo);
+	public DealVO productDetail(Integer prod_num) throws Exception {
+		log.info(" productDetail(prod_num) 호출");
+
+		return dao.getProductDetail(prod_num);
 	}
+
 	
+	//////////////////////// 다은 수정 종료 1-1 /////////////////////////////////////////////////////////////////////////
+	
+	
+
+	/*
+	 * @Override public DealVO productDetail(DealVO vo) throws Exception { return
+	 * dao.getProductDetail(vo); }
+	 */
 	@Override
 	public void productInsert(ProductVO vo) throws Exception {
 		log.info("productInsert(vo) 호출");
@@ -87,11 +129,11 @@ public class ProductServiceImpl implements ProductService {
 
 	
 	@Override
-	public ProductVO getBoard(Integer prod_num) throws Exception {
+	public ProductVO getProduct(Integer prod_num) throws Exception {
 		log.info("getBoard(Integer prod_num) 호출 ");
 
 
-		return dao.getBoard(prod_num);
+		return dao.getProduct(prod_num);
 		//	return dao.getBoard(bno);
 	}
 
@@ -106,10 +148,10 @@ public class ProductServiceImpl implements ProductService {
 
 
 	@Override
-	public Integer deleteBoard(Integer prod_num) throws Exception {
+	public Integer deleteProduct(Integer prod_num) throws Exception {
 		log.info(" deleteBoard(bno) 호출 ");
 		
-		return dao.deleteBoard(prod_num);
+		return dao.deleteProduct(prod_num);
 	}
 
 	@Override
@@ -201,6 +243,34 @@ public class ProductServiceImpl implements ProductService {
 		
 		return dao.dealDone(vo);
 	}
+	
+	@Override
+	public Integer BeforeAndDealing(DealVO dvo) throws Exception {
+		
+		log.info("BeforeAndDealing(DealVO dvo)");
+		return dao.BeforeAndDealing(dvo);
+	}
+	
+	@Override
+	public String BeforeAndDealing1(DealVO dvo) throws Exception {
+		log.info("BeforeAndDealing1(DealVO dvo)");
+		return dao.BeforeAndDealing1(dvo);
+	}
+	
+
+	// 구매내역 페이지 리뷰작성
+	@Override
+	public int buyProductWrite(SellerReviewVO reviewVO) throws Exception {
+		return dao.buyProductWrite(reviewVO);
+	}
+
+
+
+	@Override
+	public SellerReviewVO getReviewInfo(SellerReviewVO reviewVO) throws Exception {
+		return dao.getReviewInfo(reviewVO);
+	}
+	
 	
 	
 	

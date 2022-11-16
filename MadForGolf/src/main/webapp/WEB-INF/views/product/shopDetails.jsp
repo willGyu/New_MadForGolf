@@ -21,7 +21,6 @@
 	border: 1px solid;
 }
 </style>
-
 <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.0.0/kakao.min.js"
   integrity="sha384-PFHeU/4gvSH8kpvhrigAPfZGBDPs372JceJq3jAXce11bVA6rMvGWzvP4fMQuBGL" crossorigin="anonymous"></script>
   
@@ -35,7 +34,8 @@ function shareMessage() {
 /*     var like_count = ${product.like_count}; */
 /*     const like = parseInt(like_count); */
    
-	const like = parseInt(${product.like_count}); 
+   	var like_count = ${deal.product.like_count};
+   	const like = parseInt(like_count);
 	//like_count int로 변환해야 나와서 바꿈 
 	
 	//alert(like);
@@ -43,8 +43,8 @@ function shareMessage() {
 	Kakao.Share.sendDefault({
       objectType: 'feed',
       content: {
-        title: '${product.prod_name}',
-        description: '${product.detail}',
+        title: '${deal.product.prod_name}',
+        description: '${deal.product.detail}',
         imageUrl: 'https://cdn.pixabay.com/photo/2017/01/07/17/25/golfer-1960998_960_720.jpg',
         //대표 이미지 주소 넣을 예정 -> 상품별 이미지 불러오기 어려브..
         link: {
@@ -78,11 +78,8 @@ function shareMessage() {
 </script>
 
 
-
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
-
-
 
 
         //================= 찜하기 
@@ -96,7 +93,7 @@ function shareMessage() {
 		 	$.ajax({
 		 		url : "/product/like",
 		 		type: 'GET',
-		 		data: {'prod_num':'${product.prod_num}', 'buyer_id':'${user_id}'},
+		 		data: {'prod_num':'${deal.product.prod_num}', 'buyer_id':'${user_id}'},
 		 		success:function(data){
 				
 		 			if(data==1){
@@ -107,7 +104,7 @@ function shareMessage() {
 		 				if (result) {
 		 					//yes
 		 	 				//찜 리스트 페이지 생성 후 -> 찜리스트 페이지 이동으로 변경 
-		 					location.href='/mypage/ggimList'; 
+		 					location.href='/mypage/likeListAll '; 
 		 					
 		 	 			} 
 		 				
@@ -131,109 +128,67 @@ function shareMessage() {
 				
 		 	});
 		 });
-
+	}); 
         
-		//================= 찜하기
+</script>
 
 
-//============================================거래전/거래후:채팅하기/결제하기 비활성화,컬럼값 변경 
-
-		//loginID == sellerID일때만 버튼 '#deal'버튼 보이도록 
-
-/*  		     var dealState = ${product.state}; //나중에 join해서 변수값 바꿔야함
-		     var state = parseInt(dealState);  */
-
-		     
-			state = 0;//거래상태 디폴트 : 거래전 
-			
-			$('#deal').click(function(){
-				//alert('안녕2');
-				
-			if(state == 0){ //거래전 -> 거래후 변경하고 싶을 때 
-				//alert('안녕33');
-		//---------------------------1.버튼비활성화----------------------------------
-				const target1 = document.getElementById('button'); //채팅하기 버튼 
-				target1.disabled = 'disabled'; //버튼 비활성화 
-				const target2 = document.getElementById('addtocart'); //결제하기 버튼 
-				target2.disabled = 'disabled'; //버튼 비활성화 
-				//(마이페이지에서 할때는 버튼 비활성화는 script로 따로 빼야할듯..)
-		//---------------------------1.버튼비활성화----------------------------------
-
-		//---------------------------2.버튼문구변경-----------------------------------
-				const btnElement = document.getElementById('deal');
-				btnElement.value = "거래중"; //버튼 value바꿈 
-				
-				
-				const btnElement1 = document.getElementById('highlight');
-				btnElement1.value = "거래중"; //상품명 옆 거래전/거래중 표시문구  버튼
-		//---------------------------2.버튼문구변경-----------------------------------
-
-		//---------------------------3.변수값 변경------------------------------------
-				state =1; //거래후로 값 변경 
-		//---------------------------3.변수값 변경------------------------------------
-				
-			//$('#state').append(state); -> state 값 변환 확인용
-				
-			}else if(state == 1){ //거래후-> 거래전 변경하고 싶을 때 
-				//alert('안녕44');
-			
-		//---------------------------1.버튼비활성화----------------------------------
-				const target1 = document.getElementById('button');//채팅하기
-				target1.disabled = false; //버튼 비활성화 
-				const target2 = document.getElementById('addtocart');//결제하기
-				target2.disabled = false; //버튼 비활성화 
-				//(마이페이지에서 할때는 버튼 비활성화는 script로 따로 빼야할듯..)
-		//---------------------------1.버튼비활성화----------------------------------
-
-		//---------------------------2.버튼문구변경-----------------------------------
-				const btnElement = document.getElementById('deal');
-				btnElement.value = "거래전"; //버튼 value바꿈 
-				
-				const btnElement1 = document.getElementById('highlight');
-				btnElement1.value = "거래전"; //상품명 옆 거래전/거래중 표시문구  버튼
-		//---------------------------2.버튼문구변경-----------------------------------
-
-		//---------------------------3.변수값 변경------------------------------------
-				state = 0; //거래전으로 값 변경 
-		//---------------------------3.변수값 변경------------------------------------
-				
-			//$('#state').append(state); //-> state 값 변환 확인용
-			}
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+        
+//=======================================거래전중 변경버튼================================================
+$(document).ready(function() {
 
 
-				
-			});
-			
+		 $('#deal').click(function(){
+			 var result = confirm('거래상태를 변경하시겠습니까?');
+				if (result) {
+					
+					
 			 
-		});
-//============================================거래전/거래후:채팅하기/결제하기 비활성화,컬럼값 변경 
+		 	 $.ajax({
+			 		url : "/product/BeforeAndDealing",
+			 		type: 'POST',
+			 		data: {'state':'${deal.state}','deal_num':'${deal.deal_num}'},
+			 		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+			 		success:function(data){
+			 			
 
+			 			alert("거래상태 변경완료!");
+			 			//alert("성공"+data); 
+/* 			 			$('#deal').val() = data;
+ */	
+ 
+ 						//버튼 
+ 			 			$('#test').html('<input type="button" id="deal" value="'+data+
+								'" onclick=""  style="background:#f2f4f5; border-color: #f2f4f5; color: black;">');
+ 
+ 						//문구
+ 						$('#test2').html('<input type="button" id="highlight" value="'+data+
+ 								'" style="border: none; background-color: #FA7070; font-size: small; font-weight: bold;">');
+ 					
+ 						if(data == "거래전"){
+ 							$('#button').attr("disabled",false);
+	 						$('#addtocart').attr("disabled",false);
+ 						}
+ 						else{
+ 							$('#button').attr("disabled","disabled");
+	 						$('#addtocart').attr("disabled","disabled");
+ 						}
+ 						
+			 		},
+		 	 		error:function(data){
+			 			
+			 			alert("실패"+data); 
+			 		}
+		 	});
+		 	 
+		 	 
+	 		} 
+		 });
+});
 
-//==================거래 전 버튼 클릭시, 채팅하기 구매하기 버튼 비활성화
-/*         
-		$('#deal').click(function(){
-			const target1 = document.getElementById('button');
-			target1.disabled = true;
-			
-			const target2 = document.getElementById('addtocart');
-			target2.disabled = true; 
-		});
-			  
-
-	}); */
-//==================거래 전 버튼 클릭시, 채팅하기 구매하기 버튼 비활성화
-
-
-
-//==================거래전 버튼 -> 거래후 변경
-/* function changeBtnName()  {
-  const btnElement = document.getElementById('deal');
-  
-  btnElement.value = "거래후"; //버튼 value바꿈 
-  
-} */
-//==================거래전 버튼 -> 거래후 변경 
-
+//=======================================거래전중 변경버튼================================================
 
 
 //=================== 구매하기 버튼 안내창 제어 시작 ========================//
@@ -241,42 +196,80 @@ function shareMessage() {
 
 $(document).ready(function(){
 	
-	//alert("test");
 	
-	$("#buyBtn").click(function(){
+	//alert(${product.seller_id});
+	
+	$("#addtocart").click(function(){
+ 		//alert("test");
+		
 		var answer = confirm('거래를 위한 본인인증 및 계좌 출금/조회 동의가 필요합니다.\n본인인증 페이지로 이동하시겠습니까?');
 		
 		if(answer){
 			var form = $(this).parents('form');
 			    form.submit();
-// 			    $.ajax({
-// 			    	url:'/deal'
-// 			    });
-			    
-			    
-			    
-			    
-			    
-// 			    $.ajax({
-// 					 url:'${pageContext.request.contextPath}/member/listJson',
-// 					 dataType:'json',//받아올 값이 없을 때
-// 					 success:function(rdata){//성공했을 때
-						 
-// 						 //rdata json data, 배열 데이터
-// 						 //each : jQuery의 반복문
-// 						 $.each(rdata,function(index,item){
-// 							 $('#notice').append('<tr><td>'+item.userid+'</td><td>'+item.userpw+'</td><td>'+item.username+'</td><td>'+item.useremail+'</td></tr>');
-						 
-// 						 });
-						 
-// 					 }
-// 				 });
-			    
-			    
+			    $.ajax({
+			    	type:'post',
+			    	url:'/deal/updateDeal',
+					dataType:'json',
+					data:{
+						'deal_num':'${deal.deal_num}'
+					},
+					success:function(data){
+						alert("거래 데이터 구매자 정보 입력 성공");	
+						$("#test").val(data);
+						
+					},
+				error: function(){
+						alert("거래 데이터 구매자 정보 입력 성공");
+					}
+			    });
 		}else{
 			return false;
 		}
 	});
+});
+	
+
+
+	
+
+	//============================== 채팅창 활성화 ==============================//
+$(document).ready(function(){
+
+		$('#button').click(function(){
+	 		if("${sessionScope.user_id }" == "") {
+				alert("로그인이 필요한 서비스입니다.");
+			} else {
+				var talker1_id = "${sessionScope.user_id }";
+				var talker2_id = "${deal.product.seller_id }";
+				var chattingNum = "";
+				if(talker1_id > talker2_id) {
+					chattingNum = "Chatting-" + talker1_id + "-" + talker2_id
+				} else if(talker1_id < talker2_id) {
+					chattingNum = "Chatting-" + talker2_id + "-" + talker1_id
+				} else {
+					alert("본인입니다.")
+					return null;
+				}
+		
+				$.ajax({
+					url: "/product/chattingNum",
+			        async: false,
+					data: {"chattingNum":chattingNum, "talker1_id":talker1_id, "talker2_id":talker2_id},
+					success: function(chattingNum){
+						alert("성공");
+						alert(chattingNum);
+						window.open("/product/chatting?chattingNum="+chattingNum+"", "Mad for Golf", "menubar=no, toolbar=no, location=no, status=no, scrollbars=no, width=200");
+						},
+					error: function(){
+						alert("실패");
+						}
+				}); // Ajax
+			} // if	
+		}); // 채팅하기
+	//============================== 채팅창 활성화 ==============================//
+	
+	
 });
 
 
@@ -284,7 +277,6 @@ $(document).ready(function(){
 
 
 </script>
-
 
 
     <!-- ##### Breadcrumb Area Start ##### -->
@@ -356,46 +348,52 @@ $(document).ready(function(){
                             <div id="product_details_slider" class="carousel slide" data-ride="carousel">
                                 <div class="carousel-inner">
                                     <div class="carousel-item active">
-                                    	<img class="d-block w-100" src="${pageContext.request.contextPath }/resources/product_img/${product.prod_img }" alt="1" style="width: 445px; height: 445px;">
+                                    	<img class="d-block w-100" src="${pageContext.request.contextPath }/resources/product_img/${deal.product.prod_img }" alt="1" style="width: 445px; height: 445px;">
                                     </div>
                                     <div class="carousel-item">
-                                        <img class="d-block w-100" src="${pageContext.request.contextPath }/resources/product_img/${product.prod_img2 }" alt="1" style="width: 445px; height: 445px;">
+                                        <img class="d-block w-100" src="${pageContext.request.contextPath }/resources/product_img/${deal.product.prod_img2 }" alt="1" style="width: 445px; height: 445px;">
                                     </div>
                                     <div class="carousel-item">
-                                        <img class="d-block w-100" src="${pageContext.request.contextPath }/resources/product_img/${product.prod_img3 }" alt="1" style="width: 445px; height: 445px;">
+                                        <img class="d-block w-100" src="${pageContext.request.contextPath }/resources/product_img/${deal.product.prod_img3 }" alt="1" style="width: 445px; height: 445px;">
                                     </div>
                                 </div>
                                 <ol class="carousel-indicators">
-                                    <li class="active" data-target="#product_details_slider" data-slide-to="0" style="background-image: url(${pageContext.request.contextPath }/resources/product_img/${product.prod_img });"></li>
-                                    <li data-target="#product_details_slider" data-slide-to="1" style="background-image: url(${pageContext.request.contextPath }/resources/product_img/${product.prod_img2 });"></li>
-                                    <li data-target="#product_details_slider" data-slide-to="2" style="background-image: url(${pageContext.request.contextPath }/resources/product_img/${product.prod_img3 });"></li>
+                                    <li class="active" data-target="#product_details_slider" data-slide-to="0" style="background-image: url(${pageContext.request.contextPath }/resources/product_img/${deal.product.prod_img });"></li>
+                                    <li data-target="#product_details_slider" data-slide-to="1" style="background-image: url(${pageContext.request.contextPath }/resources/product_img/${deal.product.prod_img2 });"></li>
+                                    <li data-target="#product_details_slider" data-slide-to="2" style="background-image: url(${pageContext.request.contextPath }/resources/product_img/${deal.product.prod_img3 });"></li>
                                 </ol>
                             </div>
                         </div>
                     </div>
                     
-					<!-- 판매자 아이디 = 세션 로그인 아이디 같을 시에만 거래전버튼 활성화 -->
-					<div>
-						<!--나중에 마이페이지에 버튼 옮길 때, 마이페이지에도 productVO값 전달하고 세션 user_id랑 비교하기  -->
-						<c:if test="${product.seller_id == user_id }">
-						<input type="button" id="deal" value="거래전" onclick="">
-						</c:if>
-					</div>
-					<!-- 판매자 아이디 = 세션 로그인 아이디 같을 시에만 거래전버튼 활성화 -->
+
 
 					
                     <div class="col-12 col-md-6">
                         <div class="single_product_desc" style="width: 410px;">
-                            <h4 class="title">${product.prod_name }
+                            <h4 class="title">${deal.product.prod_name }
                             
                             <!-- 상품명 옆에 거래전/거래중 표시 문구 버튼   -->
-                            <input type="button" id="highlight" value="거래전"
-                            style="border: none; background-color: #FA7070; font-size: small; font-weight: bold;"></h4>
+							<span id=test2>
+							<c:choose>
+								<c:when test="${deal.state eq '거래전'}">
+									<input type="button" id="highlight" value="거래전"
+										style="border: none; background-color: #FA7070; font-size: small; font-weight: bold;">
+										</c:when>
+								<c:when test="${deal.state eq '거래중'}">
+									<input type="button" id="highlight" value="거래중"
+										style="border: none; background-color: #FA7070; font-size: small; font-weight: bold;">
+								</c:when>
+							</c:choose>
+							</span>
+						</h4>
                             <!-- 상품명 옆에 거래전/거래중 표시 문구 버튼   -->
                             
-                            <h4 class="price"><fmt:formatNumber value="${product.price }"/>원</h4>
+                            <h4 class="price"><fmt:formatNumber value="${deal.product.price }"/>원</h4>
+
                             <div class="short_overview">
-                                <p>${product.detail }</p>
+                            					<!-- 판매자 아이디 = 세션 로그인 아이디 같을 시에만 거래전버튼 활성화 -->
+                                <p>${deal.product.detail }</p>
                             </div>
    
 
@@ -432,76 +430,84 @@ $(document).ready(function(){
 
 
 
-                                    
-                                    <input type="hidden" id="prod_img" value="${product.prod_img }">
-                                    <input type="hidden" id="like_count" value="${product.like_count }">
+                                    <input type="hidden" id="state" value="${deal.state }">
+                                    <input type="hidden" id="prod_img" value="${deal.product.prod_img }">
+                                    <input type="hidden" id="like_count" value="${deal.product.like_count }">
+                                    <input type="hidden" id="deal_num" value="${deal.deal_num }">
                                     
                                     <!-- 구매를 위해서 상품 정보(이름, 가격) 보내기 -->
-                                    <input type="hidden" name="prod_num" value="${product.prod_num }">
-                                    <input type="hidden" name="prod_name" value="${product.prod_name }">
-                                    <input type="hidden" name="price" value="${product.price }">
+                                    <input type="hidden" name="prod_num" value="${deal.product.prod_num }">
+                                    <input type="hidden" name="prod_name" value="${deal.product.prod_name }">
+                                    <input type="hidden" name="price" value="${deal.product.price }">
                                     
-                                    
+                              
 
                                    	<!-- 오픈뱅킹 본인인증을 위해 필요한 정보 시작 -->
                                    
-									<!-- OAuth 2.0 인증 요청 시 반환되는 형태, 고정값 : code -->
+									<input type="hidden" name="client_id" value="6f948a13-11af-4892-b746-ee67d358abf2">
 									<input type="hidden" name="response_type" value="code">
-							
-									<!-- 오픈뱅킹에서 발급한 이용기관 앱의 Client ID(API Key에서 가져오기)-->
-									<input type="hidden" name="client_id" value="1a6ed02d-91ea-452a-8c74-b6b4222ccd0e">
-							
-							
-									<!-- 사용자인증이 성공하면 이용기관으로 연결되는 URL(API Key에서 가져오기) -->
-									<input type="hidden" name="redirect_uri" value="http://localhost:8080/openbanking/callback">
-							
-									<!-- 사용자의 권한 범위를 부여해주는 것 -->
-									<input type="hidden" name="scope" value="login inquiry transfer">
-							
-									<!-- 우리가 임의로 세팅하는 난수값 -->
+<!-- 									<input type="hidden" name="redirect_uri" value="http://localhost:8088/openbanking/callback"> -->
+									<input type="hidden" name="redirect_uri" value="http://localhost:8088/openbanking/callback">
+									<input type="hidden" name="scope" value="login inquiry transfer oob">
 									<input type="hidden" name="state" value="12345678123456781234567812345678">
-							
-									<!-- 인증을 한번 하게끔 구분 0 : 최초 인증, 2 : 인증 생략-->
 									<input type="hidden" name="auth_type" value="0">
 
                                    	<!-- 오픈뱅킹 본인인증을 위해 필요한 정보 종료 -->
 
 
 
-                                    <input type="button" id="button" value="채팅하기" onclick="">
+									<c:choose>
+										<c:when test="${deal.state eq '거래전'}">
+											<input type="button" id="button" value="채팅하기" onclick="" >
+											<input type="button" id="addtocart" value="구매하기" class="btn alazea-btn ml-15" >
+										</c:when>
+										<c:when test="${deal.state eq '거래중'}">
+											<input type="button" id="button" value="채팅하기" onclick="" disabled="disabled">
+											<input type="button" id="addtocart" value="구매하기" class="btn alazea-btn ml-15" disabled="disabled">
+										</c:when>
+									</c:choose>
 
-<!--                                     <input type="button" id="deal" value="거래전" onclick="changeBtnName();"> -->
 
-                                    <input type="submit" name="addtocart" value="구매하기" class="btn alazea-btn ml-15">
+<!-- 									<input type="button" id="button" value="채팅하기" onclick="">
+
+                                    <input type="button" id="deal" value="거래전" onclick="changeBtnName();">
+
+                                    <input type="submit" id="addtocart" value="구매하기" class="btn alazea-btn ml-15"> -->
+
                                 </div>                                  
                                 </form>
-                                
-                                            
-                               
-															
-                                
-                                
 
-                                  
                                 
                                 
                             </div>
 
                             <div class="products--meta">
-                                <p><span>Condition:</span> <span>${product.condition }</span></p>
+                                <p><span>Condition:</span> <span>${deal.product.condition }</span></p>
                                 <!--판매자 정보 페이지 연결 -->
-                                <p><span>Seller:</span> <span><a href="${pageContext.request.contextPath }/product/seller?prod_num=${product.prod_num }">${product.seller_id }</a></span></p>
+                                <p><span>Seller:</span> <span><a href="${pageContext.request.contextPath }/product/seller?prod_num=${deal.product.prod_num }">${deal.product.seller_id }</a></span></p>
                                 <!--판매자 정보 페이지 연결 -->
-                                <p><span>Gender:</span> <span><c:if test="${product.gender eq 1}">남</c:if><c:if test="${product.gender eq 2}">여</c:if></span></p>
-                                <p><span>Category:</span> <span>${product.category }</span></p>
+                                <p><span>Gender:</span> <span><c:if test="${deal.product.gender eq 1}">남</c:if><c:if test="${deal.product.gender eq 2}">여</c:if></span></p>
+                                <p><span>Category:</span> <span>${deal.product.category }</span></p>
                                 <p>
                                     <span>Share on:</span>
                                     <span>
                                    <!--  <a href="#"><i class="fa fa-facebook" onclick="shareMessage();"></i></a> -->
-                                    <a href="#" onclick="shareMessage();"><img style="width: 17px; height: 17x;" src="${pageContext.request.contextPath }/resources/product_img/kakao.png"></a>
+                                    <a href="#" onclick="shareMessage();"><img style="width: 24px; height: 24x;" src="${pageContext.request.contextPath }/resources/product_img/kakao.png"></a>
                                 </span>
                                 </p>
-                            </div>
+
+							<p>
+								<c:if test="${deal.product.seller_id == user_id }">
+									<span> Deal State: </span>
+									<!--나중에 마이페이지에 버튼 옮길 때, 마이페이지에도 productVO값 전달하고 세션 user_id랑 비교하기  -->
+									<span id="test"> <input type="button" id="deal"
+										value="${deal.state }" onclick=""
+										style="background: #f2f4f5; border-color: #f2f4f5; color: black;">
+									</span>
+								</c:if>
+								<!-- 판매자 아이디 = 세션 로그인 아이디 같을 시에만 거래전버튼 활성화 -->
+							</p>
+						</div>
 
                         </div>
                     </div>
@@ -531,17 +537,21 @@ $(document).ready(function(){
                             <div role="tabpanel" class="tab-pane fade show active" id="description"  style="text-align: center;">
                                 <div class="description_area">
                                     <input type="button" id="button2" value="목록으로" onclick="history.back();">
-                                    
-                                    <!-- 수정하기 get  -->
-                                    <input type="button" id="button2" value="수정하기" onclick="location.href='${pageContext.request.contextPath }/product/modify?prod_num=${deal.product.prod_num}'">
-                                    <!-- 수정하기 get  -->
-                                    
-                                    
-                                    
-                                    <input type="button" id="button2" value="삭제하기" onclick="location.href='${pageContext.request.contextPath }/product/remove?prod_num=${deal.product.prod_num}&category=${deal.product.category }'">
-                                    
-                                    
-<%--                                     <!-- 삭제하기 post  -->
+
+								<c:if test="${deal.product.seller_id == user_id }"> <!-- 작성자일때만 수정/삭제하기 보이게 -->
+
+									<!-- 수정하기 get  -->
+									<input type="button" id="button2" value="수정하기"
+										onclick="location.href='${pageContext.request.contextPath }/product/modify?prod_num=${deal.product.prod_num}'">
+									<!-- 수정하기 get  -->
+
+
+
+									<input type="button" id="button2" value="삭제하기"
+										onclick="location.href='${pageContext.request.contextPath }/product/remove?prod_num=${deal.product.prod_num}&category=${deal.product.category }'">
+								</c:if>
+
+								<%--                                     <!-- 삭제하기 post  -->
                                     <form action="${pageContext.request.contextPath }/product/remove" method="post">
                                     <input type="hidden" value="${product.prod_num }">
                                     <input type="submit" value="삭제하기">
@@ -785,5 +795,5 @@ $(document).ready(function(){
 <!--         </div> -->
 <!--     </div> -->
     <!-- ##### Related Product Area End ##### -->
-
+<div id = "test2"></div>
 <%@ include file="../include/footer.jsp" %>

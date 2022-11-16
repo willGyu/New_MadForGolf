@@ -364,26 +364,46 @@ color:white;
 
 /*====================반응형 웹======================= */
 @media only screen and (max-width: 768px){
-	#topMenu{
-		width: 600px;
+	#topMenu #genderNav {
+		width: 112px;
+		height: 100%;
+		float: left;
+		margin: auto;
 	}
-	
-	#array{
-		width: 140px;
+ 	#topMenu #genderNav2 {
+		width: 112px;
+		height: 100%;
+		float: left;
+		margin: auto;
+	}
+	.col-12 #array {
+		width: 100%;
 		height: 100px;
 		padding: 0px;
 		margin: 0px;
-		
+		float: right;
 	}
 	
-	#ProductArea{
-		width: 150px;
+	#row1028 {
+		width: 630px !important; 
+		margin: 0px auto !important;
 	}
-	#ProductAreaPage{
-		width: 45px; 
-		
+	
+	#writeProduct {
+		margin-left: 500px !important;
 	}
-
+	
+	#container1{
+		margin: 0px !important;
+	}
+	
+	#container2{
+		margin: 0px auto !important;
+	}
+	
+	#topMenu11{
+		float:left !important;
+	}
 }
 
 /*====================반응형 웹======================= */
@@ -397,7 +417,7 @@ color:white;
             <h2>Shop</h2>
         </div>
 
-        <div class="container" style="margin: auto; width: 100%; ">
+        <div class="container" style="margin: auto; width: 100%; " id="container1">
             <div class="row">
                 <div class="col-12" style="margin: auto; width: 100%; ">
                     <nav aria-label="breadcrumb">
@@ -413,37 +433,58 @@ color:white;
 	<!-- ##### Breadcrumb Area End ##### -->
 	
 	<!-- =================================남성용/여성용 성별 구분 상품 카테고리=========================================== -->
-	<div style="text-align: center; margin: 0px auto; height: 70px; width: 80%;">
-		<nav id="topMenu" style="margin: 0px auto;">
-        	<ul>
-        	<!-- 지역인증 완료되면 주솟값에 위도/경도 추가 -->
-				<!-- 남성용  -->
-                <li><a id="genderNav" class="menuLink1" style="border-top-left-radius: 5px;"> Men's </a></li>
-                <li><a id="genderNav" class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Driver&gender=1">Driver</a></li>
-                <li><a id="genderNav" class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Iron&gender=1">Iron</a></li>
-                <li><a id="genderNav" class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Utility&gender=1">Utility</a></li>
-                <li><a id="genderNav" class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Wedge&gender=1">Wedge</a></li>
-                <li><a id="genderNav" class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Putter&gender=1">Putter</a></li>
-                <li><a id="genderNav" class="menuLink" style="border-top-right-radius: 5px;" href="${pageContext.request.contextPath }/product/listAll?category=Etc&gender=1">Etc</a></li>
+<div
+	style="text-align: center; margin: 0px auto; height: 70px; width: 80%;" id="topMenu11">
+	<nav id="topMenu" style="margin: 0px auto;">
+		<ul>
+			<!-- 지역인증 완료되면 주솟값에 위도/경도 추가 -->
+			<!-- 남성용  -->
+			<li><a id="genderNav" class="menuLink1"
+				style="border-top-left-radius: 5px;"> Men's </a></li>
+			<li><a id="genderNav" class="menuLink"
+				href="${pageContext.request.contextPath }/product/listAll?category=Driver&gender=1">Driver</a></li>
+			<li><a id="genderNav" class="menuLink"
+				href="${pageContext.request.contextPath }/product/listAll?category=Iron&gender=1">Iron</a></li>
+			<li><a id="genderNav" class="menuLink"
+				href="${pageContext.request.contextPath }/product/listAll?category=Utility&gender=1">Utility</a></li>
+			<li><a id="genderNav" class="menuLink"
+				href="${pageContext.request.contextPath }/product/listAll?category=Wedge&gender=1">Wedge</a></li>
+			<li><a id="genderNav" class="menuLink"
+				href="${pageContext.request.contextPath }/product/listAll?category=Putter&gender=1">Putter</a></li>
+			<li><a id="genderNav" class="menuLink"
+				style="border-top-right-radius: 5px;"
+				href="${pageContext.request.contextPath }/product/listAll?category=Etc&gender=1">Etc</a></li>
+		</ul>
+	</nav>
 
-				       
-               	<!-- 여성용 -->
-               	<li><a id="genderNav" class="menuLink1" style="border-bottom-left-radius: 5px;"> Women's </a></li>
-                <li><a id="genderNav" class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Driver&gender=2">Driver</a></li>
-                <li><a id="genderNav" class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Iron&gender=2">Iron</a></li>
-                <li><a id="genderNav" class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Utility&gender=2">Utility</a></li>
-                <li><a id="genderNav" class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Wedge&gender=2">Wedge</a></li>
-                <li><a id="genderNav" class="menuLink" href="${pageContext.request.contextPath }/product/listAll?category=Putter&gender=2">Putter</a></li>
-                <li><a id="genderNav" class="menuLink" style="border-bottom-right-radius: 5px;" href="${pageContext.request.contextPath }/product/listAll?category=Etc&gender=2">Etc</a></li>
-                <li><a id="genderNav" class="menuLink3">&nbsp;</a></li>
-                <li><a id="genderNav" class="menuLink3">&nbsp;</a></li>
-			</ul>
-        </nav>
-   	</div>
-	<!-- =================================남성용/여성용 성별 구분 상품 카테고리===========================================   -->
+
+	<nav id="topMenu" style="margin: 0px auto;">
+		<ul>
+			<!-- 여성용 -->
+			<li><a id="genderNav2" class="menuLink1"
+				style="border-bottom-left-radius: 5px;"> Women's </a></li>
+			<li><a id="genderNav2" class="menuLink"
+				href="${pageContext.request.contextPath }/product/listAll?category=Driver&gender=2">Driver</a></li>
+			<li><a id="genderNav2" class="menuLink"
+				href="${pageContext.request.contextPath }/product/listAll?category=Iron&gender=2">Iron</a></li>
+			<li><a id="genderNav2" class="menuLink"
+				href="${pageContext.request.contextPath }/product/listAll?category=Utility&gender=2">Utility</a></li>
+			<li><a id="genderNav2" class="menuLink"
+				href="${pageContext.request.contextPath }/product/listAll?category=Wedge&gender=2">Wedge</a></li>
+			<li><a id="genderNav2" class="menuLink"
+				href="${pageContext.request.contextPath }/product/listAll?category=Putter&gender=2">Putter</a></li>
+			<li><a id="genderNav2" class="menuLink"
+				style="border-bottom-right-radius: 5px;"
+				href="${pageContext.request.contextPath }/product/listAll?category=Etc&gender=2">Etc</a></li>
+			<li><a id="genderNav2" class="menuLink3">&nbsp;</a></li>
+			<li><a id="genderNav2" class="menuLink3">&nbsp;</a></li>
+		</ul>
+	</nav>
+</div>
+<!-- =================================남성용/여성용 성별 구분 상품 카테고리===========================================   -->
 	
 	<!-- ##### Shop Area Start ##### -->
-	<section class="shop-page section-padding-0-100" style="width: 80%; margin: auto;">
+	<section class="shop-page section-padding-0-100" style="width: 80%; margin: auto;" id="container2">
         <div class="container" style="border: none; margin-top:0px; ">
             <div class="row">
                 <!-- Shop Sorting Data -->
@@ -464,7 +505,7 @@ color:white;
 		
         <!-- All Products Area -->
         <div class="col-12 col-md-8 col-lg-9" style="margin: auto;" id="products">
-        	<div class="row" style="width: 910px; margin: 0px auto;">
+        	<div class="row" style="width: 910px; margin: 0px auto;" id="row1028">
 				<!-- Single Product Area -->
 				<!-- for문으로 상품 리스트 반복  -->
 				<c:forEach var="vo" items="${productList }">
@@ -495,7 +536,7 @@ color:white;
 				</c:forEach>
 				<!-- for문으로 상품 리스트 반복  -->
 				<!-- 상품 올리기 div  -->
-                   <div style="float: right; margin-bottom: 60px; width: 100px; margin-left: 835px;">
+                   <div style="float: right; margin-bottom: 60px; width: 100px; margin-left: 835px;" id="writeProduct">
 <%-- 				<input type="button" title="Button fade blue/green" class="button btnFade btnBlueGreen" value="상품올리기" onclick="location.href='${pageContext.request.contextPath }/product/productInsert'"> --%>
 				    <a title="Button fade blue/green" class="button btnFade btnBlueGreen" onclick="location.href='${pageContext.request.contextPath }/product/productInsert'">상품올리기</a>
 				</div>        

@@ -14,7 +14,7 @@
 <!-- ##### Breadcrumb Area Start ##### -->
     <div class="breadcrumb-area">
         <!-- Top Breadcrumb Area -->
-        <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(${pageContext.request.contextPath }/resources/img/bg-img/24.jpg);">
+        <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(${pageContext.request.contextPath }/resources/img/bg-img/golf-2704608.jpg);">
             <h2>Address</h2>
         </div>
 
@@ -23,7 +23,9 @@
                 <div class="col-12">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="/member/insert"><i class="fa fa-home"></i> Address </a></li>
+                        	<li class="breadcrumb-item"><a href="/"><i class="fa fa-home"></i> Home</a></li>
+                            <li class="breadcrumb-item"><a href="/member/mypage"> Mypage </a>
+                            <li class="breadcrumb-item active" aria-current="page">Address</li>
                         </ol>
                     </nav>
                 </div>
@@ -205,7 +207,7 @@ function sendAddr(address) {
                <div class="checkout_details_area clearfix">
                
                   <div>
-                     <h2>Address Check (For SNS Members)</h2>
+                     <h2>Address Check</h2><br><br><br>
                   <form name="form" action="/member/address" id="address" name="address" class="totalform" method="post">
                      <div class="row">
                         <div class="col-12 mb-4">
@@ -215,10 +217,10 @@ function sendAddr(address) {
                            <button type="button" class="btn alazea-btn w-80" style="width:50pt;height:30pt;" onclick="goPopup();">주소검색</button> <br>
                            <br>
                            <button class="btn alazea-btn w-120" style="width:360pt;height:40pt;margin:auto;">저장하기</button>
-                           </div>
+                           </div><br><br><br>
                         </div>
                      </div>                        
-                  </form>
+                  </form><br><br><br>
                </div>
             </div>
          </div>

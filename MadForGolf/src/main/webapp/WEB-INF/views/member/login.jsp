@@ -15,7 +15,7 @@
 <!-- ##### Breadcrumb Area Start ##### -->
     <div class="breadcrumb-area">
         <!-- Top Breadcrumb Area -->
-        <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(${pageContext.request.contextPath }/resources/img/bg-img/24.jpg);">
+        <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(${pageContext.request.contextPath }/resources/img/bg-img/tree-3127803.jpg);">
             <h2>Login</h2>
         </div>
         <div class="container">
@@ -98,12 +98,12 @@
                          			</div> --%>
                          			<!-- 네이버 -->
 								    <a class="naverLogin" href="${naverURL }">
-								  		 <img src="${pageContext.request.contextPath }/resources/icon/btnG_naver_login.png" style="width:350pt;height:40pt;margin:auto;">
+								  		 <img src="${pageContext.request.contextPath }/resources/icon/naverlogin.PNG" style="width:500pt;height:50pt;margin:auto;">
 								  		 <br><br>
 								    </a>
                          			 <!-- 카카오 -->
 								    <a class="kakaoLogin" href="${kakaoURL }">
-								  		 <img src="${pageContext.request.contextPath }/resources/icon/kakao_login_large_wide.png" style="width:350pt;height:40pt;margin:auto;">
+								  		 <img src="${pageContext.request.contextPath }/resources/icon/kakaologin.PNG" style="width:500pt;height:50pt;margin:auto;">
 								    </a>
                                 	</div>
                      		  	</div>
@@ -112,7 +112,7 @@
                      		  		<a class="action remind" href="${pageContext.request.contextPath }/member/findId"><span>Forgot Your ID?</span></a><br>
                      		  	</div>
                      		  	<div>
-	                     		  	<a class="action remind" href="${pageContext.request.contextPath }/member/findPw"><span>Forgot Your Password?</span></a><br>
+	                     		  	<a class="action remind" href="${pageContext.request.contextPath }/member/findPw"><span>　Forgot Your Password?</span></a><br>
                      		  	</div>
                         </div>
                         </form>

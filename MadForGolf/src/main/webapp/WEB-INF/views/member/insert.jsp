@@ -5,17 +5,12 @@
 	pageEncoding="UTF-8"%>
 
 <%@ include file="../include/header.jsp" %> 
-<title>Insert title here</title>
+
 <script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js"></script>
 <script type="text/javascript">
 </script>
 <style type="text/css">
-.container{
-	display:grid;
-	width:700px;
-}
-
 .loginButton{
 	display:grid;
 	margin:0px auto;
@@ -25,27 +20,28 @@
 <!-- ##### Breadcrumb Area Start ##### -->
     <div class="breadcrumb-area">
         <!-- Top Breadcrumb Area -->
-        <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(${pageContext.request.contextPath }/resources/img/bg-img/24.jpg);">
-            <h2>Join</h2>
+        <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(${pageContext.request.contextPath }/resources/img/bg-img/golf-course-1026356.jpg);">
+            <h2>Create an account</h2>
         </div>
-
         <div class="container">
             <div class="row">
                 <div class="col-12">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><i class="fa fa-home"></i> home</li>
-                            <li class="breadcrumb-item active" aria-current="page"><a href="/member/insert">Create an Account</a></li>
+                            <li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i> Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Create an account</li>
                         </ol>
                     </nav>
                 </div>
             </div>
         </div>
     </div>
-    <!-- ##### Breadcrumb Area End ##### -->
+<!-- ##### Breadcrumb Area End ##### --> 
 
 
-<script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/talkplus-js-0.2.17.js" ></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
+<script type="text/javascript">
 	$(document).ready(function() {
 		$('#join').submit(function() {
 			//alert("알럿!");
@@ -61,72 +57,83 @@
 				$('.pass2div').html("비밀번호를 입력하세요.");
 			}
 			
-			
-		}); 
-		
-		//이메일 제어1 - 이메일 중복시 제출 경우
-		$('#join').submit(function() {
-		if ($('#user_id2').val() == '1') {
+			//이메일 제어1 - 이메일 중복시 제출 경우
+			if ($('#user_id2').val() == '1') {
 				alert('사용 불가능한 이메일입니다.');
 				return false;
 			}
-		});
-		
-		// 이메일 제어 2
-		$('#join').submit(function() {
+			
+			// 이메일 제어 2
 			if ($('#user_id').val() == '') {
 				alert("이메일을 입력하세요.");
 				return false;
 			}
-
-		});
-		
-		
-		//비밀번호 제어 
-		$('#join').submit(function() {
+			
+			//비밀번호 제어
 			if ($('#user_pw').val() == '') {
 				alert("비밀번호를 입력하세요.");
 				return false;
 			}
-
-		});
-		
-		//비밀번호 재확인 제어 
-		$('#join').submit(function() {
+			
+			//비밀번호 재확인 제어 
 			if ($('#user_pw1').val() == '') {
-				alert("비밀번호를 재확인하세요.");
-				return false;
+					alert("비밀번호를 재확인하세요.");
+					return false;
 			}
-
-		});
-		
-
-		// 이름 제어
-		$('#join').submit(function() {
+			
+			// 이름 제어
 			if ($('#user_name').val() == '') {
 				alert("이름을 입력하세요.");
 				return false;
-			}
-
-		});
-
-		// 휴대전화 제어 - 중복유무 
-		$('#join').submit(function() {
+			}	
+			
+			// 휴대전화 제어 - 중복유무 
 			if ($('#user_phone').val() == '') {
 				alert("전화번호를 입력하세요.");
 				return false;
 			}
-
-		});
-		
-		//휴대전화 제어 
-		$('#join').submit(function() {
+			
+			//휴대전화 제어
 			if ($('#user_phone1').val() == '1') {
 				alert("사용 불가능한 번호입니다.");
 				return false;
 			}
-		});
-
+			
+			// 채팅 아이디 만들기
+			if($("#phoneCheck").val() == "Y") {
+				var userid = $('#user_id').val();
+				console.log(user_id);
+				
+				var text1 = userid.substring(0, userid.indexOf('@'));
+				var text2 = userid.substring(userid.indexOf("@")+1, userid.indexOf("."));
+				var text3 = userid.substring(userid.lastIndexOf('.') + 1);
+				var talker1_id = text1 + text2 + text3;
+				var talker1_name = $('#user_name').val();
+				
+				console.log(talker1_id);
+				console.log(talker1_name);
+				
+				
+				$.ajax({
+					url: "https://api.talkplus.io/v1.4/api/users/create",
+					type: "post",
+					beforeSend: function(hdata) {
+						hdata.setRequestHeader("content-type","application/json");
+		    	        hdata.setRequestHeader("api-key", "03a0408c7c56c3b9da2fb2349a74888f9944a059b88423079eb46914750409ba");
+		        	    hdata.setRequestHeader("app-id", "6d4f7ab2-f06e-4978-8282-8fc150e43cd0");
+					},
+			        data: JSON.stringify({"userId" : talker1_id, "password" : "1234", "username" : talker1_name, "profileImageUrl":"https://notion-emojis.s3-us-west-2.amazonaws.com/prod/svg-twitter/26f3.svg"}),
+					success: function(rdata){
+						console.log(rdata);
+					},
+					error: function(rdata){
+						console.log(rdata);
+					}
+				});
+			}
+			
+		}); 
+		
 		//아이디 중복체크
 		$('.idCheck').click(function() {
 			//alert($("#user_id").val());
@@ -197,16 +204,15 @@
 	<div class="checkout_area mb-100">
 		<div class="container">
 			<div class="row justify-content-between">
-<!-- 				<div class="col-12 col-lg-7"> -->
+				<div class="col-12" style="margin: auto;">
 					<div class="checkout_details_area clearfix">
-					<!-- 
-						<h1>회원가입</h1> 
-						<h2>Join</h2><br><br> -->
+				
+						<h2>Create An Account</h2>
 						
 						<!-- 선 -->
 						<div class="col-12">
 							<div class="border-line"></div>
-							<br><br><br>
+							<br><br>
 						</div>
 						<!-- 선 -->
 						
@@ -267,15 +273,18 @@
 									<a class="kakaoLogin" href="https://kauth.kakao.com/oauth/authorize?client_id=a1e9c36223914cdc6e0edf2ff5f92f81&redirect_uri=http://localhost:8088/member/kakaoLogin&response_type=code">
 									<img src="${pageContext.request.contextPath }/resources/icon/kakao_login_medium_wide.png" style="width:360pt;height:40pt;margin:auto;">
 								    </a> --%>
+								   	
+								   	<!-- 네이버 -->
+								    <a class="naverLogin" href="${naverURL }">
+								   		<img src="${pageContext.request.contextPath }/resources/icon/naverlogin.PNG" style="width:368pt;height:50pt;margin:auto;">
+								    </a><br><br>
+								   
 								    <!-- 카카오 -->
 								    <a class="kakaoLogin" href="${kakaoURL }">
-								   		<img src="${pageContext.request.contextPath }/resources/icon/kakao_login_large_wide.png" style="width:300pt;height:40pt;margin:auto;"><br><br>
+								   		<img src="${pageContext.request.contextPath }/resources/icon/kakaologin.PNG" style="width:368pt;height:50pt;margin:auto;"><br><br>
 								    </a>
 								    
-								    <!-- 네이버 -->
-								    <a class="naverLogin" href="${naverURL }">
-								   		<img src="${pageContext.request.contextPath }/resources/icon/btnG_naver_login.png" style="width:300pt;height:40pt;margin:auto;">
-								    </a>
+								    
 								</div>
 							</div>
 								
@@ -283,11 +292,11 @@
 						
 						
 								
-						
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	
 	
-	
+    <%@ include file="../include/footer.jsp" %>	

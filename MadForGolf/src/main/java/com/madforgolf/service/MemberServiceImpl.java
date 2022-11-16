@@ -33,6 +33,9 @@ import com.google.gson.JsonParser;
 import com.madforgolf.domain.LikeListVO;
 import com.madforgolf.domain.LikeVO;
 import com.madforgolf.domain.MemberVO;
+import com.madforgolf.domain.PageMakerVO;
+import com.madforgolf.domain.PageVO;
+import com.madforgolf.domain.ProductVO;
 import com.madforgolf.persistence.MemberDAO;
 
 @Service
@@ -401,21 +404,13 @@ public class MemberServiceImpl implements MemberService{
 				dao.lalongAddr(paramMap);
 				log.info("$$$$$$$$$$$$$$$$$$$$$"+paramMap);
 					}
-			
-			
-			// 찜 목록
-			@Override
-			public List<LikeListVO> getLikeList(LikeListVO vo3) throws Exception {
-			List<LikeListVO> likeList = dao.getLikeList(vo3);
-							
-				return likeList;
-					}
 
-			@Override
-			public Integer getTotalCnt(LikeVO vo) throws Exception {
-				return dao.getTotalCnt(vo);
-								
-					}
+			
+			
+			
+
+			
+			
 	
 	
 }

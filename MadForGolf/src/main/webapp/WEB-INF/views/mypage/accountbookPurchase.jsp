@@ -15,6 +15,19 @@
 	padding-bottom:200px;
 }
 
+.main-container-img{
+	display:grid;
+	grid-template-columns:500px;
+}
+
+.img-container{
+	display:grid;
+	width:300px;
+	height:300px;
+	padding-top:50px;
+	padding-bottom:500px;
+}
+
 .chart-container{
 	width:500px;
 	height:500px;
@@ -25,6 +38,11 @@
 .content-container{
 	padding-left:200px;
 	padding-top:100px;
+}
+
+.table-box{
+	padding-top:100px;
+	padding-bottom:100px;
 }
 
 </style>
@@ -68,15 +86,15 @@
 			
 			<!-- JSTL -->
 			<c:choose>
-				<c:when test="${purchaseCnt eq 0 && saleCnt eq 0}">
-					<div class="main-container">
+				<c:when test="${purchaseCnt eq 0}">
+					<div class="main-container-img">
 						<div class="img-container">
 							<img src="${pageContext.request.contextPath }/resources/img/geoji4.jpg">
 							<br><br>
 						</div>
 						
-						<div class="checkout-btn mt-30" onClick="location.href='/product/listAll'">
-	                        <a href="/product/listAll">거래하러 가기</a>
+						<div class="checkout-btn mt-30">
+	                        <a href="#" class="btn alazea-btn w-100">거래하러 가기</a>
 	                        <br><br><br><br>
 	                    </div>
 					</div>
@@ -85,21 +103,49 @@
 				<c:otherwise>
 					<div class="main-container">
 						<!-- 차트를 그릴 영역 -->
-						<div class="chart-container" style="position:relative; margin: 0px auto; height:300px; width: 300px;">
+						<div class="chart-container">
 							<canvas id="purchaseMonth"></canvas>
 							<br><br><br><br>
 						</div>
 						<!-- 차트를 그릴 영역 -->
 						
 						<!-- 글자 영역 -->
-						<div class="content-container">
-							<!-- <h5>이번 달 구매 내역</h5> -->
-	                        <p>Driver ${purchaseDriver }원</p>
-	                        <p>Iron ${purchaseIron }원</p>
-	                        <p>Util ${purchaseUtil }원</p>
-	                        <p>Wedge ${purchaseWedge }원</p>
-	                        <p>Putter ${purchasePutter }원</p>
-	                        <p>Etc. ${purchaseEtc }원</p>
+						<div class="table-box">
+	
+							<table class="table">
+								<tbody>
+								
+									<tr>
+										<th>Category</th>
+										<th>Amount</th>
+									</tr>
+									
+									<tr>
+										<th>Driver</th>
+										<th>${purchaseDriver }원</th>
+									</tr>
+									<tr>
+										<th>Iron</th>
+										<th>${purchaseIron }원</th>
+									</tr>
+									<tr>
+										<th>Util</th>
+										<th>${purchaseUtil }원</th>
+									</tr>
+									<tr>
+										<th>Wedge</th>
+										<th>${purchaseWedge }원</th>
+									</tr>
+									<tr>
+										<th>Putte</th>
+										<th>${purchasePutter }원</th>
+									</tr>
+									<tr>
+										<th>Etc.</th>
+										<th>${purchaseEtc }원</th>
+									</tr>
+								</tbody>
+							</table>
 						</div>
 						<!-- 글자 영역 -->
 					</div>

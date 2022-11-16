@@ -287,7 +287,7 @@ public class MemberController {
 		log.info(" 세션 초기화 완료 => 로그아웃 ");
 					
 		// 페이지 이동	
-		return "redirect:index";
+		return "redirect:/";
 	}
 			
 			
@@ -760,66 +760,11 @@ public class MemberController {
 				
 				// ------------------------ 지역인증 끝 (SNS 가입 회원 전용) ------------------
 						
-						// ############################ 마이페이지 - 찜목록 ############################  //
-						
-						//찜목록 - 전체 목록 
-						@RequestMapping(value="/likeListAll", method=RequestMethod.GET)
-						public void listAllGET(LikeVO vo,PageVO vo2,@ModelAttribute("msg") String msg, Model model, HttpSession session) throws Exception {
-							// 세션값 가져오기
-							String id =(String)session.getAttribute("user_id");
-							log.info("id@@@@@@@@@@@@@@@@@@@@@@@@ : "+id);
-							
-							log.info("listAllGET() 호출");
-							
-							//세션값 넣어줌 -> 가지고 매퍼까지 가기 
-							LikeListVO vo3 = new LikeListVO();
-							vo3.setUser_id(id);
-							log.info(id+"$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
-							
-							// 서비스 - 찜 목록을 가져오는 메서드
-							List<LikeListVO> likeList= service.getLikeList(vo3);
-							log.info(likeList+"**********************");
-							
-						
-							
-							
-							model.addAttribute("likeList", likeList);
-							
-							log.info("/member/likeListAll.jsp 로 이동");
-							
-							vo.setBuyer_id(id);
-							
-							
-							// ==================================================== 페이징 처리
-							// ====================================================
-							// 페이징 처리 하단부 정보 저장
-							//DB 내 찜한 상품의 개수 
-							Integer totalCnt = service.getTotalCnt(vo);
-							log.info("DB 내 찜 개수 : "+totalCnt+"개@@@@@@@@" );
-//							
-							
-//							// 페이징 처리 하단부 정보 저장
-							PageMakerVO pm = new PageMakerVO();
-							pm.setVo(vo2); // 페이징 처리 하단부 정보를 vo에 받아오고
-							pm.setTotalCnt(totalCnt); // calData() 페이징처리에 필요한 계산식 계산 메서드가 포함된 전체 글 갯수 초기화 메서드 호출
-							
-							log.info("pmVO : " + pm);
-							log.info("pageVO : " + vo2);
-		//
-//							// 페이징 처리 객체(pm)을 어트리뷰트에 담아서 view로 보냄
-							model.addAttribute("pm", pm);
-							model.addAttribute("vo",vo);
-							// ==================================================== 페이징 처리
-							// ====================================================
-							
-							
-						
-						}
 						
 						
 						
 						
-						// ############################ 마이페이지 - 찜목록 ############################  //
+		
 						
 						
 }

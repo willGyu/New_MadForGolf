@@ -8,6 +8,9 @@ import com.madforgolf.domain.DealVO;
 import com.madforgolf.domain.LikeListVO;
 import com.madforgolf.domain.LikeVO;
 import com.madforgolf.domain.MemberVO;
+import com.madforgolf.domain.PageMakerVO;
+import com.madforgolf.domain.PageVO;
+import com.madforgolf.domain.ProductVO;
 
 public interface MemberService {
 
@@ -80,11 +83,7 @@ public interface MemberService {
 		// SNS - 위도 경도 저장  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 		public void lalongAddr(HashMap<String, String> paramMap);
 		
-		// 찜목록 
-		public List<LikeListVO> getLikeList(LikeListVO vo3) throws Exception;
-			
-		// 찜한 상품 개수 가져오기
-		public Integer getTotalCnt(LikeVO vo) throws Exception;
+
 		
 }
 

@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.madforgolf.domain.DealVO;
+import com.madforgolf.domain.PageMakerVO;
+import com.madforgolf.domain.PageVO;
 import com.madforgolf.service.MypageService;
 
 @Controller
@@ -121,4 +123,43 @@ public class MyPageController {
 		model.addAttribute("saleEtc", saleEtc);
 	}
 	// ---------------------------------- 가계부 ----------------------------------
+	
+	
+	// ############################ 마이페이지 - 찜목록 ############################  //
+	
+	@RequestMapping(value="/likeListAll", method=RequestMethod.GET)
+	public void listLikeAllGET(Model model, PageVO vo,HttpSession session) throws Exception {
+		// ==================================================== 페이징 처리
+		// ====================================================
+		String user_id = (String)session.getAttribute("user_id");
+		Integer likeListCnt = service.likeListCnt(vo,user_id);
+		log.info("DB 내 찜 총 개수 ㅣ "+likeListCnt);
+	
+		
+		//페이징 처리 하단부 정보 저장
+		PageMakerVO pm = new PageMakerVO();
+		pm.setVo(vo);
+		pm.setTotalCnt(likeListCnt);
+		
+		log.info("pmVO :"+pm);
+		log.info("pageVO :"+vo);
+		
+		//페이징 처리 객체를 어트리뷰트에 담아 view로 보냄
+		model.addAttribute("pm", pm);
+		// ==================================================== 페이징 처리
+		// ====================================================
+		
+		log.info("############" + user_id);
+
+		session.setAttribute("user_id", user_id);
+
+		model.addAttribute("likeList",service.likeList(pm, user_id));
+		
+		session.setAttribute("isUpdate", false);
+		
+		// ############################ 마이페이지 - 찜목록 ############################  //
+		
+	}
+	
+	
 }

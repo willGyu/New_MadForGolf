@@ -1,5 +1,9 @@
 package com.madforgolf.persistence;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -8,6 +12,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.madforgolf.domain.DealVO;
+import com.madforgolf.domain.LikeListVO;
+import com.madforgolf.domain.PageMakerVO;
+import com.madforgolf.domain.PageVO;
 
 @Repository
 public class MypageDAOImpl implements MypageDAO {
@@ -171,6 +178,27 @@ public class MypageDAOImpl implements MypageDAO {
 		
 		int saleEtc = sqlSession.selectOne(NAMESPACE+".saleEtc",user_id);
 		return saleEtc;
+	}
+	
+	//찜목록
+	@Override
+	public List<LikeListVO> likeList(PageMakerVO pm, String user_id) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("pm", pm);
+		map.put("user_id", user_id);
+		
+		return sqlSession.selectList(NAMESPACE+".likeList",map);
+	}
+
+	//찜목록 개수
+	@Override
+	public Integer likeListCnt(PageVO vo, String user_id) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("vo", vo);
+		map.put("user_id", user_id);
+	
+		return sqlSession.selectOne(NAMESPACE+".likeListCnt",map);
+
 	}
 
 }

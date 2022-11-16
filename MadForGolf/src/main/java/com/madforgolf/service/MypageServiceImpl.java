@@ -1,5 +1,7 @@
 package com.madforgolf.service;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
@@ -7,6 +9,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.madforgolf.domain.DealVO;
+import com.madforgolf.domain.LikeListVO;
+import com.madforgolf.domain.PageMakerVO;
+import com.madforgolf.domain.PageVO;
 import com.madforgolf.persistence.MypageDAO;
 
 @Service
@@ -140,6 +145,21 @@ public class MypageServiceImpl implements MypageService {
 	}
 	// 가계부 끝 !!!!!!!!! 아싸
 	
+	//찜목록
+	@Override
+	public List<LikeListVO> likeList(PageMakerVO pm, String user_id) throws Exception {
+
+		return dao.likeList(pm,user_id);	
+		
+	}
+	
+	// 찜 목록 페이징에 필요한 판매목록 글갯수
+	@Override
+	public Integer likeListCnt(PageVO vo, String user_id) throws Exception {
+		
+		
+		return dao.likeListCnt(vo,user_id);
+	}
 	
 	
 	

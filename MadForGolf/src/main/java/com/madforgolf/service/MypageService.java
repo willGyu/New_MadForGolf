@@ -1,7 +1,12 @@
 package com.madforgolf.service;
 
 
+import java.util.List;
+
 import com.madforgolf.domain.DealVO;
+import com.madforgolf.domain.LikeListVO;
+import com.madforgolf.domain.PageMakerVO;
+import com.madforgolf.domain.PageVO;
 
 public interface MypageService {
 	
@@ -54,4 +59,10 @@ public interface MypageService {
 	
 	// 기타용품 판매
 	public int saleEtc(String user_id) throws Exception;
+	
+	//찜 목록 리스트 
+	public List<LikeListVO> likeList(PageMakerVO pm, String user_id) throws Exception;
+			
+	// 찜 목록 페이징에 필요한 판매목록 글갯수
+	public Integer likeListCnt(PageVO vo, String user_id) throws Exception;
 }

@@ -7,26 +7,35 @@
 <style type="text/css">
 .container{
 	display:grid;
+	justify-content: center;
 }
 
-.main-container{
+.main-item{
+	display:grid;
+	justify-content: center;
+}
+
+.main-item-chart{
 	display:grid;
 	grid-template-columns:600px 600px;
 	grid-template-rows:350px 350px;
 }
 
 .chart-container{
+	justify-content: center;
 	width:500px;
-	height:500px;
+	height:800px;
 	margin:0px auto;
 	positon:realtive
 }
 
 .content-container{
+	justify-content: center;
 	display:grid;
 	padding-top:100px;
 	paddig-left:300px;
 	grid-template-rows:S00px 100px;
+	row-gap:50px;
 }
 
 </style>
@@ -34,7 +43,7 @@
 	<!-- ##### Breadcrumb Area Start ##### -->
     <div class="breadcrumb-area">
         <!-- Top Breadcrumb Area -->
-        <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(${pageContext.request.contextPath }/resources/img/bg-img/24.jpg);">
+        <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(${pageContext.request.contextPath }/resources/img/bg-img/golf-2704608.jpg);">
             <h2>My Account Book</h2>
         </div>
         
@@ -43,7 +52,8 @@
                 <div class="col-12">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i> Home</a></li>
+                            <li class="breadcrumb-item"><a href="/"><i class="fa fa-home"></i> Home</a></li>
+                            <li class="breadcrumb-item"><a href="/member/mypage"> Mypage </a>
                             <li class="breadcrumb-item active" aria-current="page">My Account Book</li>
                         </ol>
                     </nav>
@@ -71,30 +81,23 @@
 			<!-- JSTL -->
 			<c:choose>
 				<c:when test="${purchaseCnt eq 0 && saleCnt eq 0}">
-					<div class="main-container">
+					<div class="main-item">
 						<div class="img-container">
 							<img src="${pageContext.request.contextPath }/resources/img/geoji4.jpg" style="width:500px; height:500px; margin:0px auto;">
-							<br><br>	
+							<br><br><br><br>
 						</div>
-						
-						<div class="checkout-btn mt-30" onClick="location.href='/product/listAll'">
-							<a href="/product/listAll">거래하러 가기</a>
-					    	<br><br><br><br>
+						<button class="btn alazea-btn w-120" style="width:360pt;height:40pt;margin:auto;" onClick="location.href='/product/listAll'" value="">거래하러 가기</button>
+<!-- 						<div class="checkout-btn mt-30" onClick="location.href='/product/listAll'"> -->
+<!-- 							<a href="/product/listAll">거래하러 가기</a> -->
+					    	<br><br><br><br><br>
 						</div>
 					</div>
 				</c:when>
-					
+				
 				<c:otherwise>
-					<div class="main-container">
-						<!-- 차트를 그릴 영역 -->
-						<div class="chart-container">
-							<canvas id="MonthChart"></canvas>
-							<br><br><br><br>
-						</div>
-						<!-- 차트를 그릴 영역 -->
-						
+					<div class="main-item">
 	                    <!-- 글자 영역 -->
-	                    <div class="content-container" onClick="location.href='/mypage/accountbookPurchase'">
+	                   <%--  <div class="content-container" onClick="location.href='/mypage/accountbookPurchase'">
 							<!-- Icon -->
 	                        <div class="icon-item" onClick="location.href='/mypage/accountbookPurchase'">
 								<img src="${pageContext.request.contextPath }/resources/img/core-img/s1.png" alt="">
@@ -115,8 +118,34 @@
 	                            <p>이번 달 판매 횟수는 ${saleCnt }번 입니다.</p>
 	                            <p>이번 달 판매 금액은 ${saleMonth}원 입니다.</p>
 	                        </div>
-	                    </div>
+	                    </div> --%>
+	                    <div class="table-box">
+	
+							<table class="table">
+								<tbody>
+								
+									<tr>
+										<th><a href="/mypage/accountbookPurchase">구매</a></th>
+										<th>${purchaseCnt }번</th>
+										<th>${purchaseMonth }원</th>
+									</tr>
+									
+									<tr>
+										<th><a href="/mypage/accountbookSale">판매</a></th>
+										<th>${saleCnt }번</th>
+										<th>${saleMonth}원</th>
+									</tr>
+								</tbody>
+							</table>
+						</div>
 						<!-- 글자 영역 -->
+						<!-- 차트를 그릴 영역 -->
+						<div class="chart-container">
+							<canvas id="MonthChart"></canvas>
+							<br><br><br><br>
+						</div>
+						<!-- 차트를 그릴 영역 -->
+						
 					</div>
 				</c:otherwise>
 				</c:choose>

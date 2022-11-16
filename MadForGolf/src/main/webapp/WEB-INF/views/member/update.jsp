@@ -7,8 +7,7 @@
 			<script type="text/javascript"> </script>
     <!-- ##### Breadcrumb Area Start ##### -->
     <div class="breadcrumb-area">
-        Top Breadcrumb Area
-        <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(${pageContext.request.contextPath }/resources/img/bg-img/24.jpg);">
+        <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(${pageContext.request.contextPath }/resources/img/bg-img/golf-2704608.jpg);">
             <h2>Update My Account</h2>
         </div>
         <div class="container">
@@ -16,8 +15,9 @@
                 <div class="col-12">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i> Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Login</li>
+                            <li class="breadcrumb-item"><a href="/"><i class="fa fa-home"></i> Home</a></li>
+                            <li class="breadcrumb-item"><a href="/member/mypage"> Mypage </a>
+                            <li class="breadcrumb-item active" aria-current="page">Update</li>
                         </ol>
                     </nav>
                 </div>
@@ -40,7 +40,8 @@
 <!--             <div class="row justify-content-between"> -->
 <!--                 <div class="col-12 col-lg-7"> -->
                     <div class="checkout_details_area clearfix">
-                        <h5>Member Details</h5>
+                        <h2>Update</h2>
+                        <br><br><br><br>
                         <form action="${pageContext.request.contextPath }/member/updatePro" id="updateFrm1" method="post">
                             <div class="row">
                                 <div class="col-12 mb-4">
@@ -97,7 +98,7 @@
                         </form>
                     </div>
 
-            </div>
+            </div><br><br>
             	
 			<script>
 				//전화번호 수정하기

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.madforgolf.mapper.ReviewMapper"> 
+  
+  
+  
+			<!-- join하기 위해 -->
+	<resultMap type="ProductVO" id="product">
+		<id property="prod_num" column="prod_num" />
+		<result property="seller_id" column="seller_id"/>
+		<result property="buyer_id" column="buyer_id"/>
+		<result property="prod_name" column="prod_name"/>
+		<result property="prod_img" column="prod_img"/>
+		<result property="price" column="price"/>
+		<result property="detail" column="detail"/>
+		<result property="condition" column="condition"/>
+		<result property="category" column="category"/>
+		<result property="state" column="state"/>
+		<result property="like_count" column="like_count"/>
+		<result property="payment" column="payment"/>
+	</resultMap>
+	
+	<resultMap type="ReviewVO" id="review">
+		<id property="review_num" column="review_num"/>
+		<result property="prod_num" column="prod_num"/>
+		<result property="content" column="content"/>
+		<result property="review_img" column="review_img"/>
+		<result property="score" column="score"/>
+		<result property="review_date" column="review_date"/>
+		<collection property="product" resultMap="product" />
+ 	</resultMap>
+ 	
+ 	
+	<!-- 리뷰 목록 (상품번호로) 가져오기 -->
+<!-- 	<select id="reviewProdList" resultType="ReviewVO" resultMap="review"> -->
+<!-- 		select r.content, r.review_img, r.review_num -->
+<!-- 		from mfg_review r join mfg_deal d -->
+<!-- 		on r.prod_num = d.prod_num -->
+<!-- 		where d.seller_id = #{user_id} -->
+<!-- 	</select> -->
+		
+		<!-- 매너스코어 가져오기 -->
+		<select id="reviewProdList" resultType="Integer">
+            select score
+			from mfg_member
+            where user_id = #{user_id};
+		</select>      
+		
+		<update id="reviewInsert">
+			update mfg_member
+			set score = #{score}
+			where user_id = #{user_id}
+		</update>
+		
+		<select id="reviewSelect" resultType="MemberVO">
+			select *
+			from mfg_member
+			where user_id = #{user_id}
+		</select>
+		
+		
+		<!-- 리뷰 목록 가져오기 -->
+		<select id="getReviewListAll" resultType="ReviewVO">
+			select r.*
+			from mfg_review r join mfg_products p
+			on r.prod_num = p.prod_num
+			where p.seller_id = #{seller_id }
+			order by review_date desc
+		</select>
+		
+		<!-- 페이징 처리 -->
+		<select id="getReviewCnt" resultType="Integer">
+			select count(r.review_num)
+			from mfg_review r join mfg_products p
+			on r.prod_num = p.prod_num
+			where p.seller_id = #{seller_id }
+		</select>
+		
+		<!-- 판매 상품 리뷰 상세 조회 -->
+  		<select id="reviewSell" resultType="ReviewVO">
+  			select *
+  			from mfg_review r join mfg_products p
+  			on r.prod_num = p.prod_num
+  			where r.prod_num = #{prod_num}
+  			and p.seller_id=#{user_id}
+  		</select>
+  		
+  		
+  		
+  		
+  		
+  </mapper>
+  
+  

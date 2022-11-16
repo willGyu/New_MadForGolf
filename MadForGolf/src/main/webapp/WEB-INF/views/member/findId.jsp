@@ -6,9 +6,8 @@
 	
 	<!-- ##### Breadcrumb Area Start ##### -->
     <div class="breadcrumb-area">
-        Top Breadcrumb Area
-        <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(${pageContext.request.contextPath }/resources/img/bg-img/24.jpg);">
-            <h2>Find Your ID</h2>
+        <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(${pageContext.request.contextPath }/resources/img/bg-img/golf-2704608.jpg);">
+            <h2>Find My Account</h2>
         </div>
         <div class="container">
             <div class="row">
@@ -30,9 +29,9 @@
 	<div class="checkout_area mb-100">
 		<div class="container">
 			<div class="row justify-content-between">
-				<div class="col-12 col-lg-7">
+				<div class="col-12 col-lg-7" style="margin: auto;">
 					<div class="checkout_details_area clearfix">
-						<h5>Find My Email</h5>
+						<h5>Find My Account</h5>
 						<br><br>
 						
 						<form action="${pageContext.request.contextPath }/member/findId" id="findId" method="post" name="findId">
@@ -59,7 +58,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div><br><br><br>
 	<!-- 본문 -->
 	
 	

@@ -5,8 +5,7 @@
 
 	<!-- ##### Breadcrumb Area Start ##### -->
     <div class="breadcrumb-area">
-        Top Breadcrumb Area
-        <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(${pageContext.request.contextPath }/resources/img/bg-img/24.jpg);">
+        <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(${pageContext.request.contextPath }/resources/img/bg-img/golf-2704608.jpg);">
             <h2>Find My Password</h2>
         </div>
         <div class="container">
@@ -15,7 +14,7 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i> Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Find My Account</li>
+                            <li class="breadcrumb-item active" aria-current="page">Find My Password</li>
                         </ol>
                     </nav>
                 </div>
@@ -29,7 +28,7 @@
 	<div class="checkout_area mb-100">
 		<div class="container">
 			<div class="row justify-content-between">
-				<div class="col-12 col-lg-7">
+				 <div class="col-12 col-lg-7" style="margin: auto;">
 					<div class="checkout_details_area clearfix">
 						<h5>Find My Password</h5>
 						<br><br>
@@ -55,7 +54,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div><br><br><br>
 	<!-- 본문 -->
 	
 	

@@ -15,7 +15,8 @@ import org.springframework.stereotype.Repository;
 import com.madforgolf.domain.LikeListVO;
 import com.madforgolf.domain.LikeVO;
 import com.madforgolf.domain.MemberVO;
-
+import com.madforgolf.domain.PageMakerVO;
+import com.madforgolf.domain.PageVO;
 import com.mysql.cj.log.Log;
 
 	
@@ -249,24 +250,14 @@ public class MemberDAOImpl implements MemberDAO {
 			}
 		
 			
-			//찜 목록
-			@Override
-			public List<LikeListVO> getLikeList(LikeListVO vo3) throws Exception {
-				log.info("listAll() 호출");
-				
-			List<LikeListVO> likeList = sqlSession.selectList(NAMESPACE+".likeList",vo3);
-				log.info("DAO: "+likeList);
-				return likeList;
-					}
 
-			//찜한 상품 개수 가져오기
-			@Override
-			public Integer getTotalCnt(LikeVO vo) throws Exception {
-
-			return sqlSession.selectOne(NAMESPACE+".getTotalCnt",vo);
-					}
-			
 			// ▲ 11/10 풀리퀘 전 추가해주세요
+			
+		
+			
+			
+			
+			
 }
 		
 

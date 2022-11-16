@@ -40,6 +40,10 @@
 	padding-top:100px;
 }
 
+.table-box{
+	padding-top:100px;
+	padding-bottom:100px;
+}
 </style>
 
 	<!-- ##### Breadcrumb Area Start ##### -->
@@ -81,7 +85,7 @@
 			
 			<!-- JSTL -->
 			<c:choose>
-				<c:when test="${purchaseCnt eq 0 && saleCnt eq 0}">
+				<c:when test="${saleCnt eq 0}">
 					<div class="main-container-img">
 						<div class="img-container">
 							<img src="${pageContext.request.contextPath }/resources/img/geoji4.jpg">
@@ -106,14 +110,42 @@
 						
 						
 						<!-- 글자 영역 -->
-						<div class="content-container">
-							<!-- <h5>이번 달 판매 내역</h5> -->
-	                        <p>Driver ${saleDriver }원</p>
-	                        <p>Iron ${saleIron }원</p>
-	                        <p>Util ${saleUtil }원</p>
-	                        <p>Wedge ${saleWedge }원</p>
-	                        <p>Putter ${salePutter }원</p>
-	                        <p>Etc. ${saleEtc }원</p>
+						<div class="table-box">
+	
+							<table class="table">
+								<tbody>
+								
+									<tr>
+										<th>Category</th>
+										<th>Amount</th>
+									</tr>
+									
+									<tr>
+										<th>Driver</th>
+										<th>${saleDriver }원</th>
+									</tr>
+									<tr>
+										<th>Iron</th>
+										<th>${saleIron }원</th>
+									</tr>
+									<tr>
+										<th>Util</th>
+										<th>${saleUtil }원</th>
+									</tr>
+									<tr>
+										<th>Wedge</th>
+										<th>${saleWedge }원</th>
+									</tr>
+									<tr>
+										<th>Putte</th>
+										<th>${salePutter }원</th>
+									</tr>
+									<tr>
+										<th>Etc.</th>
+										<th>${saleEtc }원</th>
+									</tr>
+								</tbody>
+							</table>
 						</div>
 						<!-- 글자 영역 -->
 						

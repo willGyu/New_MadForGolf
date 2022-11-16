@@ -6,8 +6,7 @@
 
 <!-- ##### Breadcrumb Area Start ##### -->
     <div class="breadcrumb-area">
-        Top Breadcrumb Area
-        <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(${pageContext.request.contextPath }/resources/img/bg-img/24.jpg);">
+        <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(${pageContext.request.contextPath }/resources/img/bg-img/golf-2704608.jpg);">
             <h2>Delete My Account</h2>
         </div>
         <div class="container">
@@ -15,8 +14,9 @@
                 <div class="col-12">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i> Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Login</li>
+                            <li class="breadcrumb-item"><a href="/"><i class="fa fa-home"></i> Home</a></li>
+                            <li class="breadcrumb-item"><a href="/member/mypage"> Mypage </a>
+                            <li class="breadcrumb-item active" aria-current="page">delete</li>
                         </ol>
                     </nav>
                 </div>
@@ -28,12 +28,12 @@
 
 	<!-- 본문 -->
     <!-- ##### Checkout Area Start ##### -->
-    <div class="checkout_area mb-100">
+    <div class="checkout_area mb-100" style="width: 1000px; margin: 0px auto;">
         <div class="container">
-            <div class="row justify-content-between">
-                <div class="col-12 col-lg-7">
+<!--             <div class="row justify-content-between"> -->
+<!--                 <div class="col-12 col-lg-7"> -->
                     <div class="checkout_details_area clearfix">
-                        <h5>회원 탈퇴</h5>
+                        <h2>회원 탈퇴</h2><br><br>
                         <form action="${pageContext.request.contextPath }/member/delete" id="deleteMember" method="post" name="deleteMember">
                             <div class="row">
                                 <div class="col-12 mb-4">
@@ -57,15 +57,14 @@
                                 
 				                <div class="col-12 mb-4">
 				                	<button class="btn alazea-btn w-100" name="checkPw" id="checkPw">Good-Bye</button>
-				                </div>
+				                </div><br><br><br>
                             </div>
                         </form>
                         
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+        
     <!-- ##### Checkout Area End ##### -->
     <!-- 본문 -->
     

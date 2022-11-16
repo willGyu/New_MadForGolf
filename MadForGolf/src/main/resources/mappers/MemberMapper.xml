@@ -145,20 +145,8 @@
 	where user_id=#{user_id}
 	</update>
 	
-	<!-- 찜 목록 가져오기 -->
-	<select id="likeList" resultType="LikeListVO">
-	select p.seller_id, p.prod_name, p.price, l.`check`,p.prod_num
-	from mfg_products p join mfg_like l 
-	on p.prod_num = l.prod_num
-	join mfg_member m 
-	on l.buyer_id = m.user_id
-	where m.user_id=#{user_id}
-	</select>
-
-	<!-- 찜한 상품 개수 -->
-	<select id="getTotalCnt" resultType="Integer">
-		select count(*)
-		from mfg_like
-		where buyer_id=#{buyer_id}
-	</select>
+	
+	
+	
+	
 </mapper>

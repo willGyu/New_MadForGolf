@@ -57,4 +57,16 @@ public class DealServiceImpl implements DealService {
 		dao.addProd_num(prod_num);
 	}
 	
+
+	//---------------------------------------------------------------------------------
+	
+	
+	// 구매자 정보 삭제
+	@Override
+	public void deleteBuyer(Integer deal_num) throws Exception {
+		log.info(" 2. service - deleteBuyer(prod_num) ");
+	
+		dao.deleteBuyer(deal_num);
+	
+	}
 }

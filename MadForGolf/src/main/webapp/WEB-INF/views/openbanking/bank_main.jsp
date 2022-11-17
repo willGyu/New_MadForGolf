@@ -62,6 +62,15 @@
 						$('#req_account_holder_name').val(data.account_holder_name);
 					} else {
 						alert('출금에 실패하였습니다.');
+						$.ajax({
+							url  : "/deal/deleteBuyer",
+							type : "GET",
+							dataType:'json',
+							data : {
+								'deal_num':'${sessionScope.prod_num}',
+							},
+							contentType : "application/json;charset=UTF-8",
+		    });
 						location.href = "/";
 						return false;
 					}
@@ -88,6 +97,15 @@
 								$('#recv_tran_amt').val(data.res_list[0].tran_amt);
 							}else {
 								alert('입금에 실패하였습니다.');
+								$.ajax({
+									url  : "/deal/deleteBuyer",
+									type : "GET",
+									dataType:'json',
+									data : {
+										'deal_num':'${sessionScope.prod_num}',
+									},
+									contentType : "application/json;charset=UTF-8",
+				    });
 								location.href = "/";
 								return false;
 							}
@@ -128,6 +146,15 @@
 					    error		: function(error) {
 					    	console.log(error);
 					    	alert('이체에 실패하셨습니다.');
+					    	$.ajax({
+								url  : "/deal/deleteBuyer",
+								type : "GET",
+								dataType:'json',
+								data : {
+									'deal_num':'${sessionScope.prod_num}',
+								},
+								contentType : "application/json;charset=UTF-8",
+			    });
 					    	location.href = "/";
 					    }
 					});
@@ -140,6 +167,15 @@
 			    error		: function(error) {
 			    	console.log(error);
 			    	alert('이체에 실패하셨습니다.');
+			    	$.ajax({
+						url  : "/deal/deleteBuyer",
+						type : "GET",
+						dataType:'json',
+						data : {
+							'deal_num':'${sessionScope.prod_num}',
+						},
+						contentType : "application/json;charset=UTF-8",
+	    });
 			    	location.href = "/";
 			    }
 			});
@@ -149,11 +185,11 @@
 			    
 			    if(answer){
 					$.ajax({
-									url  : "/deal/deleteDeal",
-									type : "POST",
+									url  : "/deal/deleteBuyer",
+									type : "GET",
 									dataType:'json',
 									data : {
-										'prod_num':'${sessionScope.prod_num}',
+										'deal_num':'${sessionScope.prod_num}',
 									},
 									contentType : "application/json;charset=UTF-8",
 				    });

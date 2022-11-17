@@ -38,6 +38,7 @@
 	padding-bottom:100px;
 	padding-left:100px;
 	font-size:18px;
+	text-align:center;
 }
 
 .img-container {

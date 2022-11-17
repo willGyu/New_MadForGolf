@@ -110,7 +110,6 @@
 					success:function(data){
 						if(data == 0){
 							consol.log(data);
-							alert("잘못된 비밀번호입니다.");
 							return;
 						}else{
 							if(confirm("정말 탈퇴하시겠습니까?")){

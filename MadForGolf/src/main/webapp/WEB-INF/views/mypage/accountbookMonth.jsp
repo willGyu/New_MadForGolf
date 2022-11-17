@@ -29,6 +29,7 @@
 
 .table-box{
 	font-size:18px;
+	text-align:center;
 }
 
 .account{

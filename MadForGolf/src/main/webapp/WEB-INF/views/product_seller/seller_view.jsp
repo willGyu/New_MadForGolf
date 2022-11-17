@@ -1,16 +1,89 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/style.css">
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
 
+/*-------------------------------------------------------------------------*/
+/*  skill bar style
+/*-------------------------------------------------------------------------*/
+
+    .zt-skill-bar {
+        color: #fff;
+        font-size: 11px;
+        line-height: 15px;
+        height: 15px;
+        margin-bottom: 5px;
+
+        background-color: rgba(0,0,0,0.1);
+
+        -webkit-border-radius: 2px;
+           -moz-border-radius: 2px;
+            -ms-border-radius: 2px;
+                border-radius: 2px;
+
+    }
+
+    .zt-skill-bar * {
+        webkit-transition: all 0.5s ease;
+          -moz-transition: all 0.5s ease;
+           -ms-transition: all 0.5s ease;
+            -o-transition: all 0.5s ease;
+               transition: all 0.5s ease;
+    }
+
+    .zt-skill-bar div {
+        background-color: #91C788;
+        position: relative;
+        padding-left: 25px;
+        width: 0;
+
+        -webkit-border-radius: 2px;
+           -moz-border-radius: 2px;
+           -ms- border-radius: 2px;
+                border-radius: 2px;
+    }
+
+    .zt-skill-bar span {
+        display: block;
+        position: absolute;
+        right: 0;
+        top: 0;
+        height: 100%;
+        padding: 0 5px 0 10px;
+        background-color: #1a1a1a;
+
+        -webkit-border-radius: 0 2px 2px 0;
+           -moz-border-radius: 0 2px 2px 0;
+            -ms-border-radius: 0 2px 2px 0;
+                border-radius: 0 2px 2px 0;
+    }
+
+    .zt-skill-bar span:before {
+        content: "";
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        top: 50%;
+        left: -3px;
+        margin-top: -3px;
+        background-color: #1a1a1a;
+
+        -webkit-transform: rotate(45deg);
+           -moz-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+                transform: rotate(45deg);
+    }
+
+
 
 
 </style>
 
-<script>
+<script type="text/javascript">
 	
 	function hide_numbers(s){
 	var result = "";
@@ -20,6 +93,30 @@
 	}
 	return result;
 }
+	
+	(function( $ ) {
+	    "use strict";
+	    $(function() {
+	        function animated_contents() {
+	            $(".zt-skill-bar > div ").each(function (i) {
+	                var $this  = $(this),
+	                    skills = $this.data('width');
+
+	                $this.css({'width' : skills + '%'});
+
+	            });
+	        }
+	        
+	        if(jQuery().appear) {
+	            $('.zt-skill-bar').appear().on('appear', function() {
+	                animated_contents();
+	            });
+	        } else {
+	            animated_contents();
+	        }
+	    });
+	}(jQuery));
+	
 
 
 </script>
@@ -54,13 +151,33 @@
 	
 	
     <!-- ##### Checkout Area Start ##### -->
+    
+                        	
     <div class="checkout_area mb-100">
         <div class="container">
             <div class="row justify-content-between">
                 <div class="col-12 col-lg-7">
                     <div class="checkout_details_area clearfix">
                         	<h2 class="text-center mb-5" style="font-family: 'Jua', sans-serif;">'${sellerInfo.user_id}'님의 매너점수는 ${sellerInfo.score}P     입니다.</h2>
-                        <h5 style="font-family: 'Jua', sans-serif;">현재보고 계신 상품</h5>
+                        <!-- 막대 그래프 -->
+                        <div class="zt-span6 last">
+						<h4><strong>매너점수 등급안내</strong></h4>
+							<div class="zt-skill-bar"><div data-width="20" style="">파<span>0~20p</span></div></div>
+							<div class="zt-skill-bar"><div data-width="40" style="">버디<span>21~40p</span></div></div>
+							<div class="zt-skill-bar"><div data-width="60" style=";">이글<span>41~60p</span></div></div>
+							<div class="zt-skill-bar"><div data-width="80" style=";">알바트로스<span>61~80p</span></div></div>
+							<div class="zt-skill-bar"><div data-width="100" style=";">홀인원<span>81~100p</span></div></div>
+						</div>
+                        
+						<div>
+							<span class="blue" data-val='20%'></span>
+							<span class="red" data-val='40%'></span>
+							<span class="green" data-val='60%'></span>
+							<span class="yellow" data-val='80%'></span>
+							<span class="black" data-val='100%'></span>				
+						</div>
+						<p>&nbsp;</p>
+						<h4><strong>현재 보고 계시는 상품</strong></h4>
                                                
                         
                         <input type="hidden" name="prodNum" id="prodNum" value=" ${sellerInfo.prod_num}">
@@ -73,28 +190,24 @@
                             <div class="row">
                                 <div class="col-md-6 mb-4">
                                     <label for="seller_Id">
-                                     <h3 style="font-family: 'Jua', sans-serif;"> ${sellerInfo.prod_name}</h3></label>
+                                     <h4 style="font-family: 'Jua', sans-serif;"> ${sellerInfo.prod_name}</h4></label>
                                     <input type="hidden" class="form-control" id="sellerId" name="sellerId" value="${sellerInfo.user_id}" required>
                                 </div>
                                 <div class="col-md-6 mb-4">
-                                    <label for="seller_name">${sellerInfo.price} won</label>
+                                    <label for="seller_name"> <h5> 판매가 : &#8361; <fmt:formatNumber  value="${sellerInfo.price}"  pattern="###,###" /></h5> </label>
                                     <input type="hidden" class="form-control" id="seller_name" name="seller_name" value=VeryGood required>
                                 </div>                                
                             </div>
                         </form> 
                     </div>
                 </div>
-          <!--               
-                        <h2>리뷰 출력란</h2>
-                          	<div id="sellerReviewList" >
-                        	
-                        </div>                                     
-                        
-                         <h2>리뷰 출력란 끝</h2> -->
+        
 
                 <div class="col-12 col-lg-4">
                     <div class="checkout-content">
-                        <h5 class="title--">${sellerInfo.user_id}님의 정보</h5>
+                        <p>&nbsp;</p>
+                        <p>&nbsp;</p>
+                        <h5 class="title--"><strong>${sellerInfo.user_id}님의 정보</h5>
                         <div class="subtotal d-flex justify-content-between align-items-center">
                             <h5>Name</h5>
                             <h5>${sellerInfo.user_name}</h5>
@@ -112,7 +225,7 @@
                             <h5>${sellerInfo.score}P</h5>
                         </div>
                         <div class="checkout-btn mt-30">
-                            <a href="http://localhost:8080/product/productDetail?prod_num=${sellerInfo.prod_num}" style="font-family: 'Jua', sans-serif;"  class="btn alazea-btn w-100">구매하러 가기</a>
+                            <a href="http://localhost:8080/product/productDetail?prod_num=${sellerInfo.prod_num}" class="btn alazea-btn w-100">목록으로</a>
                         </div>
                     </div>
                 </div>
@@ -125,83 +238,7 @@
 <section class="single_product_details_area mb-50">
         <div class="produts-details--content mb-50">
             <div class="container">
-<!--                 <div class="row justify-content-between">
 
-                    <div class="col-12 col-md-6 col-lg-5">
-                        <div class="single_product_thumb">
-                            <div id="product_details_slider" class="carousel slide" data-ride="carousel">
-                                <div class="carousel-inner">
-                                    <div class="carousel-item active">
-                                        <a class="product-img" href="img/bg-img/49.jpg" title="Product Image">
-                                        <img class="d-block w-100" src="img/bg-img/49.jpg" alt="1">
-                                    </a>
-                                    </div>
-                                    <div class="carousel-item">
-                                        <a class="product-img" href="img/bg-img/49.jpg" title="Product Image">
-                                        <img class="d-block w-100" src="img/bg-img/49.jpg" alt="1">
-                                    </a>
-                                    </div>
-                                    <div class="carousel-item">
-                                        <a class="product-img" href="img/bg-img/49.jpg" title="Product Image">
-                                        <img class="d-block w-100" src="img/bg-img/49.jpg" alt="1">
-                                    </a>
-                                    </div>
-                                </div>
-                                <ol class="carousel-indicators">
-                                    <li class="active" data-target="#product_details_slider" data-slide-to="0" style="background-image: url(img/bg-img/49.jpg);">
-                                    </li>
-                                    <li data-target="#product_details_slider" data-slide-to="1" style="background-image: url(img/bg-img/49.jpg);" class="">
-                                    </li>
-                                    <li data-target="#product_details_slider" data-slide-to="2" style="background-image: url(img/bg-img/49.jpg);" class="">
-                                    </li>
-                                </ol>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-12 col-md-6">
-                        <div class="single_product_desc">
-                            <h4 class="title">Recuerdos Plant</h4>
-                            <h4 class="price">$9.99</h4>
-                            <div class="short_overview">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pellem malesuada in nibh selama euismod. Curabitur a rhoncus dui. Nunc lobortis cursus magna utrum faucibus. Vivamus justo nibh, pharetra non risus accumsan, tincidunt suscipit leo.</p>
-                            </div>
-
-                            <div class="cart--area d-flex flex-wrap align-items-center">
-                                Add to Cart Form
-                                <form class="cart clearfix d-flex align-items-center" method="post">
-                                    <div class="quantity">
-                                        <span class="qty-minus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty > 1 ) effect.value--;return false;"><i class="fa fa-minus" aria-hidden="true"></i></span>
-                                        <input type="number" class="qty-text" id="qty" step="1" min="1" max="12" name="quantity" value="1">
-                                        <span class="qty-plus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>
-                                    </div>
-                                    <button type="submit" name="addtocart" value="5" class="btn alazea-btn ml-15">Add to cart</button>
-                                </form>
-                                Wishlist & Compare
-                                <div class="wishlist-compare d-flex flex-wrap align-items-center">
-                                    <a href="#" class="wishlist-btn ml-15"><i class="icon_heart_alt"></i></a>
-                                    <a href="#" class="compare-btn ml-15"><i class="arrow_left-right_alt"></i></a>
-                                </div>
-                            </div>
-
-                            <div class="products--meta">
-                                <p><span>SKU:</span> <span>CT201807</span></p>
-                                <p><span>Category:</span> <span>Outdoor Plants</span></p>
-                                <p><span>Tags:</span> <span>plants, green, cactus </span></p>
-                                <p>
-                                    <span>Share on:</span>
-                                    <span>
-                                    <a href="#"><i class="fa fa-facebook"></i></a>
-                                    <a href="#"><i class="fa fa-twitter"></i></a>
-                                    <a href="#"><i class="fa fa-pinterest"></i></a>
-                                    <a href="#"><i class="fa fa-google-plus"></i></a>
-                                </span>
-                                </p>
-                            </div>
-
-                        </div>
-                    </div>
-                </div> -->
             </div>
         </div>
 
@@ -212,10 +249,12 @@
 	                    <!-- Tabs -->
 	                    <ul class="nav nav-tabs" role="tablist" id="product-details-tab">
 	                        <li class="nav-item">
-	                            <a href="#description" class="nav-link active" data-toggle="tab" role="tab" style="font-family: 'Jua', sans-serif;">판매상품 총 37개 </a>
+	                            <a href="#description" class="nav-link active" 
+	                            data-toggle="tab" role="tab" style="font-family: 'Jua', sans-serif;" id="sellerTotalCount"></a>
+	                            
 	                        </li>
 	                        <li class="nav-item">
-	                            <a href="#addi-info" class="nav-link" data-toggle="tab" role="tab">&#127948;</a>
+	                            <a style="font-family: 'Jua', sans-serif;" href="#addi-info" class="nav-link" data-toggle="tab" role="tab">&#127948;FAQ&#127948;</a>
 	                        </li>
 	                        <li class="nav-item">
 	                            <a style="font-family: 'Jua', sans-serif;" href="#reviews"
@@ -248,23 +287,23 @@
 	                        </div>
 	                        <div role="tabpanel" class="tab-pane fade" id="addi-info">
 	                            <div style="font-family: 'Jua', sans-serif;" class="additional_info_area">
-	                                <p align="center"> 판매자가 직거래 도중 골프채로 저를 위협하면 어떻게 해야하나요???
-	                                    <br> <span>가까운 경찰서 혹은 주변에 도움을 청하세요.</span></p>
+	                                <p align="center"> 판매자가 직거래 도중 위협을 가하면 어떻게 해야하나요?
+	                                    <br> <span>MadForGolf 사건신고 부서로 연락주시기 바랍니다.</span></p>
 	                                <p align="center"> 판매자가 판매한 상품이 사진 및 설명과 많이 다릅니다.
-	                                    <br> <span> 저희 Mad For Golf 대표를 맡고 계신 Dev.Dan님께 연락을 취하면 해결될수도 있고 안될수도 있어요.</span></p>
+	                                    <br> <span> 증빙가능한 자료를 첨부하여 온라인 고객센터 접수 부탁드립니다.</span></p>
 	                                <p align="center"> 구매한 상품이 마음에 들지 않습니다. 환불이 되나요?
-	                                    <br> <span>Nope! 낙장불입</span></p>
-	                                <p align="center"> 너무 불친절한테 사이트 탈퇴 가능한가요?
-	                                    <br> <span> Nope! 가입할땐 당신 마음이지만 나갈땐 마음대로 못나갑니다.</span></p>
-	                                <p align="center"> 이 탭은 다른 컨텐츠로 대체할 예정이니 혹시 발견하신 분은 너무 놀라지 마세요&#128578; 
-	                                    <br> <span> 다들 프로젝트 하시느라 대단히 수고 많으십니다. 저의 숨겨진 메세지를 발견한 모두에게 큰 행운이 가득하기를...</span></p>
+	                                    <br> <span>구매확정을 누르시면 환불이 불가합니다. 구매확정은 신중하게! </span></p>
+	                                <p align="center"> 판매자와 만나서 현금결제가 가능한가요?
+	                                    <br> <span> 규정상 문제는 없으나 사전결제 모듈 이용을 권장 드립니다.</span></p>
+	                                <p align="center"> MAD FOR GOLF를 이용해주신 모든 고객님께 진심으로 감사드립니다. &#128578; 
+	                                    <br> <span> 소중한 후기 하나하나가 국내 1위 MadForGolf를 만듭니다.</span></p>
 	                            </div>
 	                        </div>
 	                        <!-- tab3 (리뷰/후기) 시작 -->
 	                        <div role="tabpanel" class="tab-pane fade" id="reviews">
 	                        
 	                        
-	                                                <!-- Comment Area Start -->
+	                      <!-- Comment Area Start -->
                         <div class="comment_area clearfix">
                             <h4 class="headline">2 Comments</h4>
                             <ol>

@@ -121,7 +121,7 @@
 
 .btn{cursor: pointer; margin: 0 5px;}
 .reviewBtnCancle{
- display: none;
+ /* display: none; */
 }
 .reviewWrite {
 background-color: #91C788;
@@ -168,10 +168,20 @@ color: #fff;
  	background: #91C788;
 	color: #fff;
  }
- .btn-review-info:hover{
+ .btn-review-info:hover , .reviewWrite:hover{
  	background: #52734D;
  	box-shadow: 5px 5px 5px rgba(0,0,0,0.3);
  }
+ 
+.reviewBtnCancle{
+ 	background: #343a40;
+	color: #fff;
+}
+ 
+ .reviewBtnCancle:hover{
+ 	background: #000;
+	box-shadow: 5px 5px 5px rgba(0,0,0,0.3);
+}
  
  
 .page-item.active .page-link {
@@ -233,7 +243,7 @@ color: #fff;
 					<td>${buy.deal_date }</td>
 					<td><a href="/product/productDetail?prod_num=${buy.product.prod_num}">${buy.product.prod_name }</a></td>
 					<td >
-					<fmt:formatNumber  value="${buy.product.price }"  pattern="###,###" /> 원
+					 &#8361;<fmt:formatNumber value="${buy.product.price }"  pattern="###,###" /> 원
 					</td>
 					<td class="text-center">
 				    <c:choose>

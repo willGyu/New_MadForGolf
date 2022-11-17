@@ -294,8 +294,17 @@ $(document).ready(function(){
 	 		if("${sessionScope.user_id }" == "") {
 				alert("로그인이 필요한 서비스입니다.");
 			} else {
-				var talker1_id = "${sessionScope.user_id }";
-				var talker2_id = "${deal.product.seller_id }";
+				var userid1 = "${sessionScope.user_id }";
+				var text1 = userid1.substring(0, userid1.indexOf('@'));
+				var text2 = userid1.substring(userid1.indexOf("@")+1, userid1.indexOf("."));
+				var text3 = userid1.substring(userid1.lastIndexOf('.') + 1);
+				var talker1_id = text1 + text2 + text3;
+				
+				var userid2 = "${deal.product.seller_id }";
+				var text4 = userid2.substring(0, userid2.indexOf('@'));
+				var text5 = userid2.substring(userid2.indexOf("@")+1, userid2.indexOf("."));
+				var text6 = userid2.substring(userid2.lastIndexOf('.') + 1);
+				var talker2_id = text4 + text5 + text6;
 				var chattingNum = "";
 				if(talker1_id > talker2_id) {
 					chattingNum = "Chatting-" + talker1_id + "-" + talker2_id

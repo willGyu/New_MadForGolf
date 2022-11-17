@@ -404,6 +404,62 @@ color:white;
 	#topMenu11{
 		float:left !important;
 	}
+	
+	
+}
+
+@media only screen and (max-width: 414px) { /* 414*896  */
+	#topMenu #genderNav {
+		width: 59px !important;
+		height: 100%;
+		float: left;
+		margin: auto;
+	}
+ 	#topMenu #genderNav2 {
+		width: 59px !important;
+		height: 100%;
+		float: left;
+		margin: auto;
+	}
+	
+	#row1028 {
+		width: 330px !important; 
+		margin: 0px auto !important;
+	}
+	
+	#writeProduct {
+		margin-left: 200px !important;
+	}
+	
+	#container1{
+		margin: 0px !important;
+	}
+	
+	#container2{
+		margin: 0px auto !important;
+	}
+	#img{
+		margin-right:50px !important;
+	}
+	#ProductArea{
+		margin-right:28px;
+	}
+	.ProductArea{
+		margin-left:60px;
+	}
+	#navDiv{
+		width: 400px !important;
+	}
+	#ProductAreaPage{
+		margin: 0px !important;
+		padding: 0px !important;
+	}
+	.pagination .page-item .page-link{
+		width: 20px !important;
+		height: 20px !important;
+	}
+
+
 }
 
 /*====================반응형 웹======================= */
@@ -513,7 +569,7 @@ color:white;
 						<div class="single-product-area mb-50">
 							<!-- Product Image -->
 							<div class="product-img">
-								<a id="ProductArea" href="${pageContext.request.contextPath }/product/productDetail?prod_num=${vo.prod_num}"><img src="${pageContext.request.contextPath }/resources/product_img/${vo.prod_img}"></a>
+								<a id="ProductArea" href="${pageContext.request.contextPath }/product/productDetail?prod_num=${vo.prod_num}"><img src="${pageContext.request.contextPath }/resources/product_img/${vo.prod_img}" id="img"></a>
 								<!-- Product Tag -->
 								<div class="product-tag">
 <!-- 									<a href="#">Hot</a>
@@ -526,7 +582,7 @@ color:white;
 							</div>
 							<!-- Product Info -->
 							<div class="product-info mt-15 text-center">
-								<a id="ProductArea" href="${pageContext.request.contextPath }/product/productDetail?prod_num=${vo.prod_num}">
+								<a id="ProductArea" class="ProductArea" href="${pageContext.request.contextPath }/product/productDetail?prod_num=${vo.prod_num}">
 									<p>${vo.prod_name }</p>
 								</a>
 								<h6 id="ProductArea">${vo.price }원</h6>
@@ -543,26 +599,33 @@ color:white;
 			</div>
 <!-- ======================================== 페이징 네비바 ======================================== -->
 			<!-- Pagination -->
-			<nav aria-label="Page navigation">
-				<ul class="pagination">
-					<c:if test="${pm.prev }">
-						<!-- ${pm.prev }결과가 참(true)일 때 -->
-						<li class="page-item"><a id="ProductAreaPage" class="page-link" href="listAll2?page=${pm.startPage-1 }"><i class="fa fa-angle-left"></i></a></li>
-						<!-- 현재 위치한 페이지 블럭의 첫번째 페이지보다 -1인 페이지로 이동  -->
-							</c:if>
-								<c:forEach var="idx" begin="${pm.startPage }" end="${pm.endPage }">
-								<li class="page-item" <c:out value="${pm.vo.page == idx?'class=active':'active' }"/>>
-								<a id="ProductAreaPage" class="page-link" href="listAll2?page=${idx }">${idx }</a></li>
-							</c:forEach>
-							
-							<c:if test="${pm.next }">
-								<!-- ${pm.next }결과가 참(true)일 때  -->
-								<li class="page-item"><a id="ProductAreaPage" class="page-link" href="listAll2?page=${pm.endPage+1 }"><i class="fa fa-angle-right"></i></a></li>
-								<!-- 현재 위치한 페이징 블럭의 마지막 페이지보다 +1인 페이지로 이동  -->
-							</c:if>
-						</ul>
-					</nav>
-<!-- ======================================== 페이징 네비바 ======================================== -->
+		<nav aria-label="Page navigation">
+			<ul class="pagination">
+				<c:if test="${pm.prev }">
+					<!-- ${pm.prev }결과가 참(true)일 때 -->
+					<li class="page-item"><a id="ProductAreaPage"
+						class="page-link" href="listAll2?page=${pm.startPage-1 }"><i
+							class="fa fa-angle-left"></i></a></li>
+					<!-- 현재 위치한 페이지 블럭의 첫번째 페이지보다 -1인 페이지로 이동  -->
+				</c:if>
+				<c:forEach var="idx" begin="${pm.startPage }" end="${pm.endPage }">
+					<li class="page-item"
+						<c:out value="${pm.vo.page == idx?'class=active':'active' }"/>>
+						<a id="ProductAreaPage" class="page-link"
+						href="listAll2?page=${idx }">${idx }</a>
+					</li>
+				</c:forEach>
+
+				<c:if test="${pm.next }">
+					<!-- ${pm.next }결과가 참(true)일 때  -->
+					<li class="page-item"><a id="ProductAreaPage"
+						class="page-link" href="listAll2?page=${pm.endPage+1 }"><i
+							class="fa fa-angle-right"></i></a></li>
+					<!-- 현재 위치한 페이징 블럭의 마지막 페이지보다 +1인 페이지로 이동  -->
+				</c:if>
+			</ul>
+		</nav>
+		<!-- ======================================== 페이징 네비바 ======================================== -->
 			</div>
 <!-- 	</div> -->
 <!-- </div> -->

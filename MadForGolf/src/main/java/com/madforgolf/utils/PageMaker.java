@@ -251,7 +251,6 @@ public class PageMaker {
 	}
 	
 
-
 	public int getTempEndPage() {
 		return tempEndPage;
 	}

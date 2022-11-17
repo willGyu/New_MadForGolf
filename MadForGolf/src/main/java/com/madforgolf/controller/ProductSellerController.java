@@ -1,6 +1,7 @@
 package com.madforgolf.controller;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.madforgolf.domain.ProductSellerVO;
 import com.madforgolf.service.ProductSellerService;
 import com.madforgolf.utils.PageMaker;
@@ -46,8 +48,9 @@ public class ProductSellerController {
 	}
 	
 	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@ResponseBody
-	@RequestMapping(value="/sellerProductList", method = RequestMethod.GET)
+	@RequestMapping(value="/sellerProductList", method = RequestMethod.GET, produces = "text/html;charset=utf-8")
 	public ResponseEntity<?> sellerProductList( @RequestParam String sellerId , PageMaker pageMaker,  Model model) throws Exception {
 		
 		System.out.println(" seller Id  : "+ sellerId);
@@ -58,13 +61,24 @@ public class ProductSellerController {
 		
 		int totalCnt=productSellerService.sellerProductTotlaCount(map);
 		pageMaker.setTotalCount(totalCnt);
-		map.put("pageStart", pageMaker.getPageStart());	
-		map.put("perPageNum", pageMaker.getPerPageNum());	
 		
+		map.put("pageStart", pageMaker.getPageStart());	
+		map.put("perPageNum", pageMaker.getPerPageNum());			
 		List<ProductSellerVO> sellerProductList = productSellerService.sellerProductList(map);
 		
-		return  ResponseEntity.status(HttpStatus.OK).body(sellerProductList);
 		
+		//LinkedHashMap 입력된 순서대로 출력
+		//json 반환처리 참조 주소
+		//ex) http://localhost:8080/product/sellerProductList?sellerId=itwill01
+		
+		Map<String, Object> resultMap=new LinkedHashMap<String, Object>();
+		resultMap.put("code", "success");
+		resultMap.put("totalCnt", totalCnt);
+		resultMap.put("pageMaker", pageMaker);	
+		resultMap.put("sellerProductList", sellerProductList);	
+
+		
+		return new ResponseEntity(new ObjectMapper().writeValueAsString(resultMap) , HttpStatus.OK);		
 	}
 	
 	

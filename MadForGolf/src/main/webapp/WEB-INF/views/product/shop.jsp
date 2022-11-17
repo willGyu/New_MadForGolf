@@ -467,8 +467,47 @@ a.button {
 		margin: 0px auto !important;
 	}
 
+@media only screen and (max-width: 414px) { /* 414*896  */
+	#topMenu #genderNav {
+		width: 59px !important;
+		height: 100%;
+		float: left;
+		margin: auto;
+	}
+ 	#topMenu #genderNav2 {
+		width: 59px !important;
+		height: 100%;
+		float: left;
+		margin: auto;
+	}
+	
+	#row1028 {
+		width: 330px !important; 
+		margin: 0px auto !important;
+	}
+	
+	#writeProduct {
+		margin-left: 200px !important;
+	}
+	
+	#container1{
+		margin: 0px !important;
+	}
+	
+	#container2{
+		margin: 0px auto !important;
+	}
+	#img{
+		margin-left:50px;
+	}
+	#ProductArea{
+		margin-right:28px;
+	}
+	.ProductArea{
+		margin-left:60px;
+	}
 
-
+}
 
 
 
@@ -563,7 +602,7 @@ a.button {
 						<div class="single-product-area mb-50" style="margin-top: 25px;">
 							<!-- Product Image -->
 							<div class="product-img"> 
-								<a id="ProductArea" href="${pageContext.request.contextPath }/product/productDetail?prod_num=${vo.prod_num}"><img src="${pageContext.request.contextPath }/resources/product_img/${vo.prod_img}"></a>
+								<a id="ProductArea" href="${pageContext.request.contextPath }/product/productDetail?prod_num=${vo.prod_num}"><img src="${pageContext.request.contextPath }/resources/product_img/${vo.prod_img}" id="img"></a>
 								<!-- Product Tag -->
 								<div class="product-tag">
 									<!-- <a href="#">Hot</a> -->
@@ -581,7 +620,7 @@ a.button {
 									${vo.prod_name }
 								</a> 
 								</p>
-								<h6 id="ProductArea">${vo.price }원</h6>
+								<h6 id="ProductArea" class="ProductArea">${vo.price }원</h6>
 							</div>
 						</div>
 					</div>

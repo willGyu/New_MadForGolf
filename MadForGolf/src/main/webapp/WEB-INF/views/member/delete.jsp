@@ -4,6 +4,27 @@
     
 <%@ include file="../include/header.jsp" %>
 
+<style>
+		
+		.checkout_area mb-100{
+			width: 1000px; 
+			margin: 0px auto;
+		
+		}
+		
+		
+		
+		@media only screen and (max-width: 767px) and (max-height: 1280px){
+			
+		.container {
+			width:90%;
+
+		}
+
+}
+	
+	</style>		
+
 <!-- ##### Breadcrumb Area Start ##### -->
     <div class="breadcrumb-area">
         <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(${pageContext.request.contextPath }/resources/img/bg-img/golf-2704608.jpg);">
@@ -28,7 +49,7 @@
 
 	<!-- 본문 -->
     <!-- ##### Checkout Area Start ##### -->
-    <div class="checkout_area mb-100" style="width: 1000px; margin: 0px auto;">
+    <div class="checkout_area mb-100">
         <div class="container">
 <!--             <div class="row justify-content-between"> -->
 <!--                 <div class="col-12 col-lg-7"> -->

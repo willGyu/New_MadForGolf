@@ -10,6 +10,7 @@
 	</c:if>
 	
 <style type="text/css">
+
 .container{
 	display:grid;
 }
@@ -19,6 +20,65 @@
 	border-bottom: 2px solid #91C788;
 }
 
+
+/* 	 skill bar style */
+
+    .zt-skill-bar {
+        color: #fff;
+        font-size: 11px;
+        line-height: 25px;
+        height: 25px;
+        margin-bottom: 5px;
+        background-color: rgba(0,0,0,0.1);
+        -webkit-border-radius: 2px;
+           -moz-border-radius: 2px;
+            -ms-border-radius: 2px;
+                border-radius: 2px;
+    }
+    .zt-skill-bar * {
+        webkit-transition: all 0.5s ease;
+          -moz-transition: all 0.5s ease;
+           -ms-transition: all 0.5s ease;
+            -o-transition: all 0.5s ease;
+               transition: all 0.5s ease;
+    }
+    .zt-skill-bar div {
+        background-color: #91C788;
+        position: relative;
+        padding-left: 25px;
+        width: 0;
+        -webkit-border-radius: 2px;
+           -moz-border-radius: 2px;
+           -ms- border-radius: 2px;
+                border-radius: 2px;
+    }
+    .zt-skill-bar span {
+        display: block;
+        position: absolute;
+        right: 0;
+        top: 0;
+        height: 100%;
+        padding: 0 5px 0 10px;
+        background-color: #1A1A1A;
+        -webkit-border-radius: 0 2px 2px 0;
+           -moz-border-radius: 0 2px 2px 0;
+            -ms-border-radius: 0 2px 2px 0;
+                border-radius: 0 2px 2px 0;
+    }
+    .zt-skill-bar span:before {
+        content: "";
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        top: 50%;
+        left: -3px;
+        margin-top: -3px;
+        background-color: #1A1A1A;
+        -webkit-transform: rotate(45deg);
+           -moz-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+                transform: rotate(45deg);
+    }
 
 </style>
 
@@ -129,28 +189,11 @@
                             </div>
 
                             <!-- 거래 목록 -->
-
-                            <div class="col-12 col-sm-12">
-                                <div class="single-benefits-area" onClick="location.href='/product/listProductAll?page=1'">
-                                    <a href="#"><img src="${pageContext.request.contextPath }/resources/img/core-img/b4.png" alt=""></a>
-                                    <a href="#"><h5>거래 목록</h5></a>
-                                    <a href="#"><p>판매내역 및 구매내역을 확인할 수 있는 공간입니다. </p></a>
-                                </div>
-                            </div>
-
-                            <!-- 문의 내역 -->
-                            <div class="col-12 col-sm-12">
-                                <div class="single-benefits-area" onClick="location.href='/mypage/qnaList'">
-                                   <a href="#"><img src="${pageContext.request.contextPath }/resources/img/core-img/b1.png" alt=""></a>
-                                   <a href="#"> <h5>문의 내역</h5></a>
-                                   <a href="#"> <p>나의 문의 내역을 확인할 수 있는 공간입니다. </p></a>
-
                          <div class="col-md-6 mb-4">
                                 <div class="single-benefits-area" onClick="location.href='/product/listProductAll'">
                                     <a href="/product/listProductAll"><img src="${pageContext.request.contextPath }/resources/img/core-img/b4.png" alt=""></a>
                                     <a href="/product/listProductAll"><h5>거래 목록</h5></a>
                                     <a href="/product/listProductAll"><p>판매내역 및 구매내역을 확인할 수 있는 공간입니다. </p></a>
-
                                 </div>
                             </div>
                             
@@ -164,11 +207,7 @@
                             </div>
                             
                             <!-- 채팅 목록 -->
-
-                            <div class="col-12 col-sm-12">
-
                            <div class="col-md-6 mb-4">
-
                                 <div class="single-benefits-area" onClick="location.href='/product/chattingList'">
                                     <a href="/product/chattingList"><img src="${pageContext.request.contextPath }/resources/img/core-img/b3.png" alt=""></a>
                                      <a href="/product/chattingList"><h5>채팅 목록</h5></a>

@@ -12,7 +12,7 @@
 		from mfg_deal
 		where buyer_id=#{user_id}
 		and month(deal_date)=month(sysdate())
-		and state='거래완료'
+		and state='거래후'
 	</select>
 	
 	<!-- 월별 판매 금액 (차트) -->
@@ -21,7 +21,7 @@
 		from mfg_deal
 		where seller_id=#{user_id}
 		and month(deal_date)=month(sysdate())
-		and state='거래완료'
+		and state='거래후'
 	</select>
 	
 	<!-- 월별 구매 횟수 -->
@@ -30,7 +30,7 @@
 		from mfg_deal
 		where buyer_id=#{user_id}
 		and month(deal_date)=month(sysdate())
-		and state='거래완료'
+		and state='거래후'
 	</select>
 	
 	<!-- 월별 판매 횟수 -->
@@ -39,7 +39,7 @@
 		from mfg_deal
 		where seller_id=#{user_id}
 		and month(deal_date)=month(sysdate())
-		and state='거래완료'
+		and state='거래후'
 	</select>
 	
 	<!-- 드라이버 구매 -->
@@ -50,7 +50,7 @@
 		where d.buyer_id=#{user_id}
 		and month(d.deal_date)=month(sysdate())
 		and p.category='Driver'
-		and state='거래완료'
+		and state='거래후'
 	</select>
 	
 	<!-- 아이언 구매 -->
@@ -61,7 +61,7 @@
 		where d.buyer_id=#{user_id}
 		and month(d.deal_date)=month(sysdate())
 		and p.category='Iron'
-		and state='거래완료'
+		and state='거래후'
 	</select>
 	
 	<!-- 유틸리티 구매 -->
@@ -72,7 +72,7 @@
 		where d.buyer_id=#{user_id}
 		and month(d.deal_date)=month(sysdate())
 		and p.category='Util'
-		and state='거래완료'
+		and state='거래후'
 	</select>
 	
 	<!-- 웨지 구매 -->
@@ -83,7 +83,7 @@
 		where d.buyer_id=#{user_id}
 		and month(d.deal_date)=month(sysdate())
 		and p.category='Wedge'
-		and state='거래완료'
+		and state='거래후'
 	</select>
 	
 	<!-- 퍼터 구매 -->
@@ -94,7 +94,7 @@
 		where d.buyer_id=#{user_id}
 		and month(d.deal_date)=month(sysdate())
 		and p.category='Putter'
-		and state='거래완료'
+		and state='거래후'
 	</select>
 	
 	<!-- 기타용품 구매 -->
@@ -105,7 +105,7 @@
 		where d.buyer_id=#{user_id}
 		and month(d.deal_date)=month(sysdate())
 		and p.category='Etc'
-		and state='거래완료'
+		and state='거래후'
 	</select>
 	
 	<!-- 드라이버 판매 -->
@@ -116,7 +116,7 @@
 		where d.seller_id=#{user_id}
 		and month(d.deal_date)=month(sysdate())
 		and p.category='Driver'
-		and state='거래완료'
+		and state='거래후'
 	</select>
 	
 	<!-- 아이언 판매 -->
@@ -127,7 +127,7 @@
 		where d.seller_id=#{user_id}
 		and month(d.deal_date)=month(sysdate())
 		and p.category='Iron'
-		and state='거래완료'
+		and state='거래후'
 	</select>
 	
 	<!-- 유틸리티 판매 -->
@@ -138,7 +138,7 @@
 		where d.seller_id=#{user_id}
 		and month(d.deal_date)=month(sysdate())
 		and p.category='Util'
-		and state='거래완료'
+		and state='거래후'
 	</select>
 	
 	<!-- 웨지 판매 -->
@@ -149,7 +149,7 @@
 		where d.seller_id=#{user_id}
 		and month(d.deal_date)=month(sysdate())
 		and p.category='Wedge'
-		and state='거래완료'
+		and state='거래후'
 	</select>
 	
 	<!-- 퍼터 판매 -->
@@ -160,7 +160,7 @@
 		where d.seller_id=#{user_id}
 		and month(d.deal_date)=month(sysdate())
 		and p.category='Putter'
-		and state='거래완료'
+		and state='거래후'
 	</select>
 	
 	<!-- 기타용품 판매 -->
@@ -171,7 +171,7 @@
 		where d.seller_id=#{user_id}
 		and month(d.deal_date)=month(sysdate())
 		and p.category='Etc'
-		and state='거래완료'
+		and state='거래후'
 	</select>
 	<!-- 가계부 -->
 	

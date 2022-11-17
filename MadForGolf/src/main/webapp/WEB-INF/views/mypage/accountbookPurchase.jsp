@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
     
 <%@ include file="../include/header.jsp" %>
 
@@ -17,12 +18,12 @@
 .main-container{
 	display:grid;
 	grid-template-columns:500px 500px;
-	padding-bottom:200px;
+	padding-bottom:100px;
 }
 
 .chart-container{
 	width:500px;
-	height:500px;
+	height:800px;
 	margin:0px auto;
 	positon:realtive
 }
@@ -33,10 +34,61 @@
 }
 
 .table-box{
-	padding-top:100px;
+	padding-top:200px;
 	padding-bottom:100px;
+	padding-left:100px;
+	font-size:18px;
 }
 
+.img-container {
+	width:500px; 
+	height:500px; 
+	margin:0px auto;
+	
+}
+
+.btn alazea-btn w-120 {
+	width:360pt;
+	height:40pt;
+	margin:auto;
+	
+}
+
+.account{
+	color:#A1C298;
+}
+
+@media only screen and (max-width: 767px){
+	.container {
+	
+		width:90%;
+	
+	}
+	.main-container{
+
+		display: flex;
+		flex-flow: row wrap;
+		justify-content: center;
+		
+	
+	}
+	#purchaseMonth{
+		width: 90%;
+	}
+	.table-box{
+		padding-top : 5%;
+		padding-left : 5%;
+		text-align: center;
+	
+ 	}
+	.col-12{
+
+	
+	}
+	.section-heading{
+
+	}
+}
 </style>
 
 	<!-- ##### Breadcrumb Area Start ##### -->
@@ -79,18 +131,16 @@
 			
 			<!-- JSTL -->
 			<c:choose>
-			<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@ 1116 수정 @@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 				<c:when test="${purchaseCnt eq 0}">
 					<div class="main-item">
 						<div class="img-container">
-							<img src="${pageContext.request.contextPath }/resources/img/geoji4.jpg" style="width:500px; height:500px; margin:0px auto;">
+							<img src="${pageContext.request.contextPath }/resources/img/geoji4.jpg">
 							<br><br><br><br>
 						</div>
-						<button class="btn alazea-btn w-120" style="width:360pt;height:40pt;margin:auto;" onClick="location.href='/product/listAll'" value="">거래하러 가기</button>
+						<button class="btn alazea-btn w-120" onClick="location.href='/product/listAll'" value="">거래하러 가기</button>
 					    	<br><br><br><br><br>
 						</div>
 					</div>
-				<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@ 1116 수정 @@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 				</c:when>
 				
 				<c:otherwise>
@@ -115,27 +165,27 @@
 									
 									<tr>
 										<th>Driver</th>
-										<th>${purchaseDriver }원</th>
+										<th><span class="account"><fmt:formatNumber value="${purchaseDriver}" type="currency"/></span></th>
 									</tr>
 									<tr>
 										<th>Iron</th>
-										<th>${purchaseIron }원</th>
+										<th><span class="account"><fmt:formatNumber value="${purchaseIron}" type="currency"/></span></th>
 									</tr>
 									<tr>
 										<th>Util</th>
-										<th>${purchaseUtil }원</th>
+										<th><span class="account"><fmt:formatNumber value="${purchaseUtil}" type="currency"/></span></th>
 									</tr>
 									<tr>
 										<th>Wedge</th>
-										<th>${purchaseWedge }원</th>
+										<th><span class="account"><fmt:formatNumber value="${purchaseWedge}" type="currency"/></span></th>
 									</tr>
 									<tr>
-										<th>Putte</th>
-										<th>${purchasePutter }원</th>
+										<th>Putter</th>
+										<th><span class="account"><fmt:formatNumber value="${purchasePutter}" type="currency"/></span></th>
 									</tr>
 									<tr>
 										<th>Etc.</th>
-										<th>${purchaseEtc }원</th>
+										<th><span class="account"><fmt:formatNumber value="${purchaseEtc}" type="currency"/></span></th>
 									</tr>
 								</tbody>
 							</table>
@@ -178,7 +228,10 @@
     			plugins:{
     				title:{
         				display:true,
-        				text:'카테고리 별 구매 현황'
+        				text:'카테고리 별 구매 현황',
+        				font:{
+        					size:30
+        				}
         			}
     			},
     			maintainAspectRatio:false

@@ -5,6 +5,34 @@
     
     <script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
 			<script type="text/javascript"> </script>
+			
+	<style>
+	
+		.checkout_area mb-100 {
+			width: 1000px; 
+			margin: 0px auto;
+		
+		}
+		
+		.btn alazea-btn w-120 {
+			width:250pt;
+			height:40pt;
+			margin:auto; 
+			display:block;
+		}
+		
+		@media only screen and (max-width: 767px){
+			
+		.container {
+			width:90%;
+
+		}
+
+}
+	
+	</style>		
+			
+			
     <!-- ##### Breadcrumb Area Start ##### -->
     <div class="breadcrumb-area">
         <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(${pageContext.request.contextPath }/resources/img/bg-img/golf-2704608.jpg);">
@@ -35,7 +63,7 @@
 	<!-- 본문 -->
 
     <!-- ##### Checkout Area Start ##### -->
-    <div class="checkout_area mb-100" style="width: 1000px; margin: 0px auto;">
+    <div class="checkout_area mb-100">
         <div class="container">
 <!--             <div class="row justify-content-between"> -->
 <!--                 <div class="col-12 col-lg-7"> -->
@@ -92,7 +120,7 @@
                                 </div> --%>
       
                                 
-                                <button type="button"	onclick="javascript:btn()" class="btn alazea-btn w-120" style="width:250pt;height:40pt;margin:auto; display:block; ">회원정보 수정하기</button>
+                                <button type="button"	onclick="javascript:btn()" class="btn alazea-btn w-120">회원정보 수정하기</button>
                                 
                             </div>
                         </form>

@@ -87,11 +87,11 @@ public class DealController {
 	
 	
 	//구매자 정보 삭제하기
-	@RequestMapping(value = "deleteDeal",method = RequestMethod.GET)
-	public void deleteDeal(Model model, @RequestParam("deal_num") Integer deal_num) throws Exception{
-		log.info(" 1. DealController - deleteDeal(deal_num) ");
+	@RequestMapping(value = "deleteBuyer",method = RequestMethod.GET)
+	public void deleteBuyer(Model model, @RequestParam("deal_num") Integer deal_num) throws Exception{
+		log.info(" 1. DealController - deleteBuyer(deal_num) ");
 
-//		service.deleteDeal(deal_num);
+		service.deleteBuyer(deal_num);
 		
 	}
 	

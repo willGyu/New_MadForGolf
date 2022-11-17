@@ -13,5 +13,8 @@ public interface DealDAO {
 	// 거래 수정(거래 - 상품번호 입력)
 	public void addProd_num(int prod_num);
 
+	// 구매자 정보 삭제
+	public void deleteBuyer(Integer deal_num);
+
 	
 }

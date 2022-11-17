@@ -32,7 +32,7 @@
 	
 	<update id="updateDeal">
 		update mfg_deal 
-		set buyer_id = #{buyer_id}  
+		set buyer_id = #{buyer_id},state = "거래중" 
 		where deal_num = #{deal_num}
 	</update>
 	
@@ -40,6 +40,13 @@
 		update mfg_deal 
 		set prod_num = #{prod_num}  
 		where deal_num = #{prod_num}
+	</update>
+	
+	
+	<update id="deleteBuyer">
+		update mfg_deal 
+		set buyer_id = null  
+		where deal_num = #{deal_num}
 	</update>
 	
 </mapper>

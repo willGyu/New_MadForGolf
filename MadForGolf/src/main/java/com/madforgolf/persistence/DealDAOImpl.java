@@ -76,6 +76,21 @@ public class DealDAOImpl implements DealDAO{
 		sqlSession.update(NAMESPACE+".addProd_num", prod_num);
 
 	}
+
+
+	//-------------------------------------------------------------------------
+	
+	
+	
+	// 구매자 정보 삭제
+	@Override
+	public void deleteBuyer(Integer deal_num) {
+		log.info(" 3. dao - deleteBuyer(deal_num) ");
+		
+		
+		sqlSession.update(NAMESPACE+".deleteBuyer", deal_num);
+
+	}
 	
 	
 }

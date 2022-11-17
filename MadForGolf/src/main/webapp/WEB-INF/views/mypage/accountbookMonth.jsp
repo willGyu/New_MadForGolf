@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
     
 <%@ include file="../include/header.jsp" %>
 
@@ -26,6 +27,28 @@
 	paddig-left:300px;
 }
 
+.table-box{
+	font-size:18px;
+	text-align:center;
+}
+
+.account{
+	color:#A1C298;
+}
+
+.book{
+	font-weight:bold;
+}
+
+.book:hover{
+	color:#FA7070;
+}
+
+@media only screen and (max-width: 767px){
+	.container {
+	width:90%;
+	}
+}
 </style>
 
 	<!-- ##### Breadcrumb Area Start ##### -->
@@ -88,15 +111,15 @@
 								<tbody>
 								
 									<tr>
-										<th><a href="/mypage/accountbookPurchase">구매</a></th>
-										<th>${purchaseCnt }번</th>
-										<th>${purchaseMonth }원</th>
+										<th><a href="/mypage/accountbookPurchase" style="font-size:18px;" class="book">구매</a></th>
+										<th><span class="account">${purchaseCnt }</span>번</th>
+										<th><span class="account"><fmt:formatNumber value="${purchaseMonth}" type="currency"/></span></th>
 									</tr>
 									
 									<tr>
-										<th><a href="/mypage/accountbookSale">판매</a></th>
-										<th>${saleCnt }번</th>
-										<th>${saleMonth}원</th>
+										<th><a href="/mypage/accountbookSale" style="font-size:18px;" class="book">판매</a></th>
+										<th><span class="account">${saleCnt }</span>번</th>
+										<th><span class="account"><fmt:formatNumber value="${saleMonth}" type="currency"/></span></th>
 									</tr>
 								</tbody>
 							</table>
@@ -141,6 +164,15 @@
 					padding:{
 						top:60,
 						botton:50
+					},
+					font:{
+						size:30,
+						family: 'Trebuchet MS'
+					}
+				},
+				labels:{
+					font:{
+						size:20
 					}
 				}
 			},

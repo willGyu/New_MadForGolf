@@ -10,6 +10,7 @@
 	</c:if>
 	
 <style type="text/css">
+
 .container{
 	display:grid;
 }
@@ -19,6 +20,73 @@
 	border-bottom: 2px solid #91C788;
 }
 
+.manner{
+	color:#91C788;
+}
+
+/* .score{
+	color:#FEFFDE;
+} */
+
+
+/* 	 skill bar style */
+
+    .zt-skill-bar {
+        color: #52734D;
+        font-size: 15px;
+        line-height: 30px;
+        height: 30px;
+        margin-bottom: 5px;
+        background-color: rgba(0,0,0,0.1);
+        -webkit-border-radius: 2px;
+           -moz-border-radius: 2px;
+            -ms-border-radius: 2px;
+                border-radius: 2px;
+    }
+    .zt-skill-bar * {
+        webkit-transition: all 0.5s ease;
+          -moz-transition: all 0.5s ease;
+           -ms-transition: all 0.5s ease;
+            -o-transition: all 0.5s ease;
+               transition: all 0.5s ease;
+    }
+    .zt-skill-bar div {
+        background-color: #91C788;
+        position: relative;
+        padding-left: 7px;
+        width: 0;
+        -webkit-border-radius: 2px;
+           -moz-border-radius: 2px;
+           -ms- border-radius: 2px;
+                border-radius: 2px;
+    }
+    .zt-skill-bar span {
+        display: block;
+        position: absolute;
+        right: 0;
+        top: 0;
+        height: 100%;
+        padding: 0 5px 0 10px;
+        background-color: #FBF2CF;
+        -webkit-border-radius: 0 2px 2px 0;
+           -moz-border-radius: 0 2px 2px 0;
+            -ms-border-radius: 0 2px 2px 0;
+                border-radius: 0 2px 2px 0;
+    }
+    .zt-skill-bar span:before {
+        content: "";
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        top: 50%;
+        left: -3px;
+        margin-top: -3px;
+        background-color: #FBF2CF;
+        -webkit-transform: rotate(45deg);
+           -moz-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+                transform: rotate(45deg);
+    }
 
 </style>
 
@@ -60,7 +128,11 @@
 							<div class="single-cool-fact d-flex align-items-center justify-content-center mb-100">
 								<div class="cf-icon">
 									<img src="/resources/img/core-img/cf3.png" alt=""> 
+								
 								</div>
+								
+								<div class="text">
+								
 								<div class="score1">
 									<c:set var="score" scope="session" value="${loginVO.score }" />
 								  	<c:out value="${user_name }"/>님의 매너 점수는
@@ -81,16 +153,30 @@
 								  		<c:when test="${score <=100 }">
 								  			"홀인원"입니다.
 								  		</c:when>
-								  		<c:otherwise>
-								  			리뷰가 없습니다.
-								  		</c:otherwise>
 								  	</c:choose>
+								  	
 								</div>
+								
+								<!-- 막대 그래프 -->
+	                        <div class="zt-span6 last">
+	                        <br><br>
+								<h4><span class="manner"><strong>매너점수 등급 구분</strong></span></h4>
+									<div class="zt-skill-bar"><div data-width="20" style="">파<span>0~20p</span></div></div>
+									<div class="zt-skill-bar"><div data-width="40" style="">버디<span>21~40p</span></div></div>
+									<div class="zt-skill-bar"><div data-width="60" style=";">이글<span>41~60p</span></div></div>
+									<div class="zt-skill-bar"><div data-width="80" style=";">알바트로스<span>61~80p</span></div></div>
+									<div class="zt-skill-bar"><div data-width="100" style=";">홀인원<span>81~100p</span></div></div>
+							</div>
+								
+<!-- 									<p style="text-align: center;"> 점수구분 : 파 0~20, 버디 21~40, 이글 41~60, 알바트로스 61~80, 홀인원 81~100</p> -->
+								</div>
+								
 			 				</div>
 							<!-- 매너스코어 -->
 						</div>
+						</div>
 					
-                        <br><br><br>
+                        <br>
                     <!-- <button type="button" class="btn alazea-btn w-80" onClick="location.href='#'">채팅목록</button> <br>
                     <button type="button" class="btn alazea-btn w-80" onClick="location.href='#'">지역인증</button> <br>
                     <button type="button" class="btn alazea-btn w-80" onClick="location.href='#'">내가 쓴 리뷰</button> <br>
@@ -129,28 +215,11 @@
                             </div>
 
                             <!-- 거래 목록 -->
-
-                            <div class="col-12 col-sm-12">
-                                <div class="single-benefits-area" onClick="location.href='/product/listProductAll?page=1'">
-                                    <a href="#"><img src="${pageContext.request.contextPath }/resources/img/core-img/b4.png" alt=""></a>
-                                    <a href="#"><h5>거래 목록</h5></a>
-                                    <a href="#"><p>판매내역 및 구매내역을 확인할 수 있는 공간입니다. </p></a>
-                                </div>
-                            </div>
-
-                            <!-- 문의 내역 -->
-                            <div class="col-12 col-sm-12">
-                                <div class="single-benefits-area" onClick="location.href='/mypage/qnaList'">
-                                   <a href="#"><img src="${pageContext.request.contextPath }/resources/img/core-img/b1.png" alt=""></a>
-                                   <a href="#"> <h5>문의 내역</h5></a>
-                                   <a href="#"> <p>나의 문의 내역을 확인할 수 있는 공간입니다. </p></a>
-
                          <div class="col-md-6 mb-4">
                                 <div class="single-benefits-area" onClick="location.href='/product/listProductAll'">
                                     <a href="/product/listProductAll"><img src="${pageContext.request.contextPath }/resources/img/core-img/b4.png" alt=""></a>
                                     <a href="/product/listProductAll"><h5>거래 목록</h5></a>
                                     <a href="/product/listProductAll"><p>판매내역 및 구매내역을 확인할 수 있는 공간입니다. </p></a>
-
                                 </div>
                             </div>
                             
@@ -164,11 +233,7 @@
                             </div>
                             
                             <!-- 채팅 목록 -->
-
-                            <div class="col-12 col-sm-12">
-
                            <div class="col-md-6 mb-4">
-
                                 <div class="single-benefits-area" onClick="location.href='/product/chattingList'">
                                     <a href="/product/chattingList"><img src="${pageContext.request.contextPath }/resources/img/core-img/b3.png" alt=""></a>
                                      <a href="/product/chattingList"><h5>채팅 목록</h5></a>
@@ -317,9 +382,31 @@
        
     <!-- ##### Service Area End ##### -->
     <!-- 서비스 소개 -->
-
-   
     
+    <script>
+
+	(function( $ ) {
+	    "use strict";
+	    $(function() {
+	        function animated_contents() {
+	            $(".zt-skill-bar > div ").each(function (i) {
+	                var $this  = $(this),
+	                    skills = $this.data('width');
+	                $this.css({'width' : skills + '%'});
+	            });
+	        }
+	       
+	        if(jQuery().appear) {
+	            $('.zt-skill-bar').appear().on('appear', function() {
+	                animated_contents();
+	            });
+	        } else {
+	            animated_contents();
+	        }
+	    });
+	}(jQuery));
+   
+    </script>
 
     <!-- ##### All Javascript Files ##### -->
     <!-- jQuery-2.2.4 js -->

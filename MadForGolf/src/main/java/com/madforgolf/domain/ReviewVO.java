@@ -7,7 +7,6 @@ public class ReviewVO {
 	private int review_num;
 	private int prod_num;
 	private String content;
-	private String review_img;
 	private int score;
 	private Timestamp review_date;
 
@@ -30,12 +29,6 @@ public class ReviewVO {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public String getReview_img() {
-		return review_img;
-	}
-	public void setReview_img(String review_img) {
-		this.review_img = review_img;
-	}
 	public int getScore() {
 		return score;
 	}
@@ -49,12 +42,12 @@ public class ReviewVO {
 		this.review_date = review_date;
 	}
 	
-	
 	@Override
 	public String toString() {
-		return "ReviewVO [review_num=" + review_num + ", prod_num=" + prod_num + ", content=" + content
-				+ ", review_img=" + review_img + ", score=" + score + ", review_date=" + review_date + "]";
+		return "ReviewVO [review_num=" + review_num + ", prod_num=" + prod_num + ", content=" + content + ", score="
+				+ score + ", review_date=" + review_date + "]";
 	}
+	
 	
 	
 

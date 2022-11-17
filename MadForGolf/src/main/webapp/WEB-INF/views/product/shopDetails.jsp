@@ -20,6 +20,60 @@
 	cursor: pointer;
 	border: 1px solid;
 }
+/* ==================================미디어쿼리===================================== */
+@media only screen and (max-width: 767px) {
+	#contextBox{
+		margin: 0px auto !important;
+	}
+	
+	#span{
+		margin-right:30px !important; margin-left:65px !important;
+		
+		font-size: 60px !important;
+		color: black !important;
+	}
+	
+	#kakaoImg{
+		margin-left: 60px !important;
+	}
+	
+	#deal{
+		margin-left:55px !important;
+	}
+	
+	#title{
+		text-align:center;
+	}
+	
+	#price{
+		text-align:center;
+	}
+	
+	#short_overview{
+		text-align:center;
+	}
+	
+}
+/* ==================================미디어쿼리===================================== */
+	#p{
+		font-size: 20px !important;
+		color: black !important;
+	}
+
+	
+	#span{
+		font-size: 20px !important;
+		color: black !important;
+	}
+	
+	#deal{
+		background-color: #91C788 !important;
+		color: white !important;
+		font-weight: bold;
+		width: 70px;
+	
+	}
+
 </style>
 <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.0.0/kakao.min.js"
   integrity="sha384-PFHeU/4gvSH8kpvhrigAPfZGBDPs372JceJq3jAXce11bVA6rMvGWzvP4fMQuBGL" crossorigin="anonymous"></script>
@@ -240,8 +294,17 @@ $(document).ready(function(){
 	 		if("${sessionScope.user_id }" == "") {
 				alert("로그인이 필요한 서비스입니다.");
 			} else {
-				var talker1_id = "${sessionScope.user_id }";
-				var talker2_id = "${deal.product.seller_id }";
+				var userid1 = "${sessionScope.user_id }";
+				var text1 = userid1.substring(0, userid1.indexOf('@'));
+				var text2 = userid1.substring(userid1.indexOf("@")+1, userid1.indexOf("."));
+				var text3 = userid1.substring(userid1.lastIndexOf('.') + 1);
+				var talker1_id = text1 + text2 + text3;
+				
+				var userid2 = "${deal.product.seller_id }";
+				var text4 = userid2.substring(0, userid2.indexOf('@'));
+				var text5 = userid2.substring(userid2.indexOf("@")+1, userid2.indexOf("."));
+				var text6 = userid2.substring(userid2.lastIndexOf('.') + 1);
+				var talker2_id = text4 + text5 + text6;
 				var chattingNum = "";
 				if(talker1_id > talker2_id) {
 					chattingNum = "Chatting-" + talker1_id + "-" + talker2_id
@@ -343,7 +406,7 @@ $(document).ready(function(){
                     
                     
                     
-                    <div class="col-12 col-md-6 col-lg-5">
+                    <div class="col-12 col-md-6 col-lg-5" >
                         <div class="single_product_thumb">
                             <div id="product_details_slider" class="carousel slide" data-ride="carousel">
                                 <div class="carousel-inner">
@@ -370,8 +433,8 @@ $(document).ready(function(){
 
 					
                     <div class="col-12 col-md-6">
-                        <div class="single_product_desc" style="width: 410px;">
-                            <h4 class="title">${deal.product.prod_name }
+                        <div class="single_product_desc" style="width: 410px;" id="contextBox">
+                            <h4 class="title" id="title">${deal.product.prod_name }
                             
                             <!-- 상품명 옆에 거래전/거래중 표시 문구 버튼   -->
 							<span id=test2>
@@ -389,11 +452,11 @@ $(document).ready(function(){
 						</h4>
                             <!-- 상품명 옆에 거래전/거래중 표시 문구 버튼   -->
                             
-                            <h4 class="price"><fmt:formatNumber value="${deal.product.price }"/>원</h4>
+                            <h4 class="price" id="price"><fmt:formatNumber value="${deal.product.price }"/>원</h4>
 
-                            <div class="short_overview">
+                            <div class="short_overview" id="short_overview">
                             					<!-- 판매자 아이디 = 세션 로그인 아이디 같을 시에만 거래전버튼 활성화 -->
-                                <p>${deal.product.detail }</p>
+                                <p id="p">${deal.product.detail }</p>
                             </div>
    
 
@@ -482,23 +545,23 @@ $(document).ready(function(){
                             </div>
 
                             <div class="products--meta">
-                                <p><span>Condition:</span> <span>${deal.product.condition }</span></p>
                                 <!--판매자 정보 페이지 연결 -->
-                                <p><span>Seller:</span> <span><a href="${pageContext.request.contextPath }/product/seller?prod_num=${deal.product.prod_num }">${deal.product.seller_id }</a></span></p>
+                                <p id="p"><span id="span">Seller:</span> <span><a href="${pageContext.request.contextPath }/product/seller?prod_num=${deal.product.prod_num } " id="span">${deal.product.seller_id }</a></span></p>
                                 <!--판매자 정보 페이지 연결 -->
-                                <p><span>Gender:</span> <span><c:if test="${deal.product.gender eq 1}">남</c:if><c:if test="${deal.product.gender eq 2}">여</c:if></span></p>
-                                <p><span>Category:</span> <span>${deal.product.category }</span></p>
-                                <p>
-                                    <span>Share on:</span>
+                                <p id="p"><span id="span">Condition:</span> <span id="span">${deal.product.condition }</span></p>
+                                <p id="p"><span id="span">Gender:</span> <span id="span"><c:if test="${deal.product.gender eq 1}">남</c:if><c:if test="${deal.product.gender eq 2}">여</c:if></span></p>
+                                <p id="p"><span id="span">Category:</span> <span id="span">${deal.product.category }</span></p>
+                                <p id="p">
+                                    <span id="span">Share on:</span>
                                     <span>
                                    <!--  <a href="#"><i class="fa fa-facebook" onclick="shareMessage();"></i></a> -->
-                                    <a href="#" onclick="shareMessage();"><img style="width: 24px; height: 24x;" src="${pageContext.request.contextPath }/resources/product_img/kakao.png"></a>
+                                    <a href="#" onclick="shareMessage();"><img id="kakaoImg" style="width: 35px; height: 35x;" src="${pageContext.request.contextPath }/resources/product_img/kakao.png"></a>
                                 </span>
                                 </p>
 
 							<p>
 								<c:if test="${deal.product.seller_id == user_id }">
-									<span> Deal State: </span>
+									<span id="span"> Deal State: </span>
 									<!--나중에 마이페이지에 버튼 옮길 때, 마이페이지에도 productVO값 전달하고 세션 user_id랑 비교하기  -->
 									<span id="test"> <input type="button" id="deal"
 										value="${deal.state }" onclick=""

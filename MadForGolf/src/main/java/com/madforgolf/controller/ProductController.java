@@ -492,8 +492,8 @@ public class ProductController {
 			File file2 = new File(uploadFolder2 + "\\" + uFileName);
 				
 			if(mFile.getSize() != 0) { // 첨부파일이 있을 때				
-				//mFile.transferTo(file1); // 첨부파일로 전달된 정보를 파일로 전달
 				mFile.transferTo(file2); // 첨부파일로 전달된 정보를 파일로 전달
+				//Files.copy(file2.toPath(), file1.toPath(), StandardCopyOption.REPLACE_EXISTING); // file2를 file1으로 복사
 				log.info("파일 업로드 성공");
 			} // if
 			
@@ -1030,9 +1030,45 @@ public class ProductController {
 		@RequestMapping(value = "/address", method = RequestMethod.GET)
 		public void addrGET(@RequestParam("address") String address, HttpSession session) throws Exception {
 			String[] addresses = address.split(" ");
-			String addr = addresses[0] + " " + addresses[1];
+			String addr = "";
+			if(addresses[0].equals("서울")) {
+				addr = addresses[0] + "특별시 " + addresses[1];
+			} else if(addresses[0].equals("부산")) {
+				addr = addresses[0] + "광역시 " + addresses[1];
+			} else if(addresses[0].equals("대구")) {
+				addr = addresses[0] + "광역시 " + addresses[1];
+			} else if(addresses[0].equals("인천")) {
+				addr = addresses[0] + "광역시 " + addresses[1];
+			} else if(addresses[0].equals("광주")) {
+				addr = addresses[0] + "광역시 " + addresses[1];
+			} else if(addresses[0].equals("대전")) {
+				addr = addresses[0] + "광역시 " + addresses[1];
+			} else if(addresses[0].equals("울산")) {
+				addr = addresses[0] + "광역시 " + addresses[1];
+			} else if(addresses[0].equals("경기")) {
+				addr = "경기도 " + addresses[1];
+			} else if(addresses[0].equals("강원")) {
+				addr = "강원도 " + addresses[1];
+			} else if(addresses[0].equals("충북")) {
+				addr = "충청북도 " + addresses[1];
+			} else if(addresses[0].equals("충남")) {
+				addr = "충청남도 " + addresses[1];
+			} else if(addresses[0].equals("전북")) {
+				addr = "전라북도 " + addresses[1];
+			} else if(addresses[0].equals("전남")) {
+				addr = "전라남도 " + addresses[1];
+			} else if(addresses[0].equals("경북")) {
+				addr = "경상북도 " + addresses[1];
+			} else if(addresses[0].equals("경남")) {
+				addr = "경상남도 " + addresses[1];
+			} else {
+				addr = addresses[0] + " " + addresses[1];
+			}
+			
+			log.info(addr);
 			session.setAttribute("addr", addr);
 		}
+
 	
 	
 

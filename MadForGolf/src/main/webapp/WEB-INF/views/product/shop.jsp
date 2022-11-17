@@ -451,10 +451,63 @@ a.button {
 	 }
 	
 	#row1028 {
-		width: 600px; 
+		width: 630px !important; 
+		margin: 0px auto !important;
 	}
 	
+	#writeProduct {
+		margin-left: 500px !important;
+	}
+	
+	#container1{
+		margin: 0px !important;
+	}
+	
+	#container2{
+		margin: 0px auto !important;
+	}
 
+@media only screen and (max-width: 414px) { /* 414*896  */
+	#topMenu #genderNav {
+		width: 59px !important;
+		height: 100%;
+		float: left;
+		margin: auto;
+	}
+ 	#topMenu #genderNav2 {
+		width: 59px !important;
+		height: 100%;
+		float: left;
+		margin: auto;
+	}
+	
+	#row1028 {
+		width: 330px !important; 
+		margin: 0px auto !important;
+	}
+	
+	#writeProduct {
+		margin-left: 200px !important;
+	}
+	
+	#container1{
+		margin: 0px !important;
+	}
+	
+	#container2{
+		margin: 0px auto !important;
+	}
+	#img{
+		margin-left:50px;
+	}
+	#ProductArea{
+		margin-right:28px;
+	}
+	.ProductArea{
+		margin-left:60px;
+	}
+
+}
 
 
 
@@ -470,7 +523,7 @@ a.button {
             <h2>Shop</h2>
         </div>
 
-        <div class="container" style="margin: auto; width: 100%; border: 2px; red; ">
+        <div class="container" style="margin: auto; width: 100%; border: 2px; red; " id="container1">
             <div class="row">
                 <div class="col-12" style="margin: auto; width: 100%; ">
                     <nav aria-label="breadcrumb">
@@ -520,7 +573,7 @@ a.button {
 	<!-- =================================남성용/여성용 성별 구분 상품 카테고리===========================================   -->
 	
 	<!-- ##### Shop Area Start ##### -->
-	<section class="shop-page section-padding-0-100" style="width: 80%; margin: auto;">
+	<section class="shop-page section-padding-0-100" style="width: 80%; margin: auto;" id="container2">
         <div class="container" >
             <div class="row">
                 <!-- Shop Sorting Data -->
@@ -546,10 +599,10 @@ a.button {
 				<!-- for문으로 상품 리스트 반복  -->
 				<c:forEach var="vo" items="${productList }">
 					<div class="col-sm-4 col-lg-4" style="border: 3px red;"> 
-						<div class="single-product-area mb-50">
+						<div class="single-product-area mb-50" style="margin-top: 25px;">
 							<!-- Product Image -->
 							<div class="product-img"> 
-								<a id="ProductArea" href="${pageContext.request.contextPath }/product/productDetail?prod_num=${vo.prod_num}"><img src="${pageContext.request.contextPath }/resources/product_img/${vo.prod_img}"></a>
+								<a id="ProductArea" href="${pageContext.request.contextPath }/product/productDetail?prod_num=${vo.prod_num}"><img src="${pageContext.request.contextPath }/resources/product_img/${vo.prod_img}" id="img"></a>
 								<!-- Product Tag -->
 								<div class="product-tag">
 									<!-- <a href="#">Hot</a> -->
@@ -567,7 +620,7 @@ a.button {
 									${vo.prod_name }
 								</a> 
 								</p>
-								<h6 id="ProductArea">${vo.price }원</h6>
+								<h6 id="ProductArea" class="ProductArea">${vo.price }원</h6>
 							</div>
 						</div>
 					</div>
@@ -575,7 +628,7 @@ a.button {
 				<!-- for문으로 상품 리스트 반복  -->
 				<!-- 상품 올리기 div  -->
 				<c:if test="${user_id != null}">
-                   <div style="float: right; margin-bottom: 60px; width: 100px; margin-left: 835px;">
+                   <div style="float: right; margin-bottom: 60px; width: 100px; margin-left: 835px;" id="writeProduct">
 <%-- 				<input type="button" title="Button fade blue/green" class="button btnFade btnBlueGreen" value="상품올리기" onclick="location.href='${pageContext.request.contextPath }/product/productInsert'"> --%>
 				    <a title="Button fade blue/green" class="button btnFade btnBlueGreen" onclick="location.href='${pageContext.request.contextPath }/product/productInsert'">상품올리기</a>
 					</div>        

@@ -159,14 +159,7 @@ const sellerReview={
                                             <img src="/resources/product_img/${item.prod_img}" alt="">
                                             </a>
 	                                <!-- Product Tag -->
-	                                <div class="product-tag">
-	                                    <a href="#">Hot</a>
-	                                </div>
-	                                <div class="product-meta d-flex">
-	                                    <a href="#" class="wishlist-btn"><i class="icon_heart_alt"></i></a>
-	                                    <a href="cart.html" class="add-to-cart-btn">Add to cart</a>
-	                                    <a href="#" class="compare-btn"><i class="arrow_left-right_alt"></i></a>
-	                                </div>
+	                              
 	                            </div>
 	                            <!-- Product Info -->
 	                            <div class="product-info mt-15 text-center">
